@@ -37,28 +37,32 @@ def load_or_create_menu():
             else:
                 category = "Sides"
                 
+            # Get image column if exists
+            image_val = str(row['image']).strip() if 'image' in df_raw.columns and pd.notna(row['image']) else ""
+                
             menu_items.append({
                 "item_id": f"ITEM_{idx+1:03d}",
                 "name": name,
                 "category": category,
-                "price": float(price) if pd.notna(price) else 0.0
+                "price": float(price) if pd.notna(price) else 0.0,
+                "image": image_val
             })
         df_menu = pd.DataFrame(menu_items)
     else:
         # Fallback default menu items if kfc_menu.csv doesn't exist
         default_items = [
-            {"item_id": "ITEM_001", "name": "Burger Zinger", "category": "Burgers", "price": 56000.0},
-            {"item_id": "ITEM_002", "name": "Burger Shrimp", "category": "Burgers", "price": 45000.0},
-            {"item_id": "ITEM_003", "name": "Roasted Fillet Chicken Burger", "category": "Burgers", "price": 56000.0},
-            {"item_id": "ITEM_004", "name": "Burger Yo (Chicken)", "category": "Burgers", "price": 30000.0},
-            {"item_id": "ITEM_005", "name": "French Fries", "category": "Sides", "price": 20000.0},
-            {"item_id": "ITEM_007", "name": "1 Fried Chicken", "category": "Sides", "price": 37000.0},
-            {"item_id": "ITEM_008", "name": "2 Fried Chicken", "category": "Sides", "price": 74000.0},
-            {"item_id": "ITEM_009", "name": "3 Tenders Chicken", "category": "Sides", "price": 42000.0},
-            {"item_id": "ITEM_010", "name": "Coleslaw", "category": "Sides", "price": 13000.0},
-            {"item_id": "ITEM_011", "name": "Pepsi", "category": "Drinks", "price": 13000.0},
-            {"item_id": "ITEM_012", "name": "7Up", "category": "Drinks", "price": 13000.0},
-            {"item_id": "ITEM_015", "name": "1 Eggtart", "category": "Desserts", "price": 20000.0},
+            {"item_id": "ITEM_001", "name": "Burger Zinger", "category": "Burgers", "price": 56000.0, "image": ""},
+            {"item_id": "ITEM_002", "name": "Burger Shrimp", "category": "Burgers", "price": 45000.0, "image": ""},
+            {"item_id": "ITEM_003", "name": "Roasted Fillet Chicken Burger", "category": "Burgers", "price": 56000.0, "image": ""},
+            {"item_id": "ITEM_004", "name": "Burger Yo (Chicken)", "category": "Burgers", "price": 30000.0, "image": ""},
+            {"item_id": "ITEM_005", "name": "French Fries", "category": "Sides", "price": 20000.0, "image": ""},
+            {"item_id": "ITEM_007", "name": "1 Fried Chicken", "category": "Sides", "price": 37000.0, "image": ""},
+            {"item_id": "ITEM_008", "name": "2 Fried Chicken", "category": "Sides", "price": 74000.0, "image": ""},
+            {"item_id": "ITEM_009", "name": "3 Tenders Chicken", "category": "Sides", "price": 42000.0, "image": ""},
+            {"item_id": "ITEM_010", "name": "Coleslaw", "category": "Sides", "price": 13000.0, "image": ""},
+            {"item_id": "ITEM_011", "name": "Pepsi", "category": "Drinks", "price": 13000.0, "image": ""},
+            {"item_id": "ITEM_012", "name": "7Up", "category": "Drinks", "price": 13000.0, "image": ""},
+            {"item_id": "ITEM_015", "name": "1 Eggtart", "category": "Desserts", "price": 20000.0, "image": ""},
         ]
         df_menu = pd.DataFrame(default_items)
         

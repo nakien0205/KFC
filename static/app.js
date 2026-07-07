@@ -55,14 +55,18 @@
     else if (cat === 'desserts') emoji = '🍦';
     else if (cat === 'drinks') emoji = '🥤';
 
+    var imageHtml = item.image
+      ? '<div class="card-image-wrapper"><img src="/static/images/' + item.image + '" alt="' + escapeHTML(item.name) + '" class="card-item-image"></div>'
+      : '<div class="card-image-placeholder">' + emoji + '</div>';
+
     card.innerHTML =
       '<div class="card-inner">' +
-        '<div class="card-image-placeholder">' + emoji + '</div>' +
+        imageHtml +
         '<h3 class="card-item-title">' + escapeHTML(item.name) + '</h3>' +
         '<div class="card-footer">' +
           '<span class="price-text">' + formatVND(item.price) + '</span>' +
           '<button class="btn-pill add-to-cart-btn" data-name="' + escapeHTML(item.name) + '" data-price="' + item.price + '">' +
-            'Thêm <span class="icon-circle">+</span>' +
+            'Add <span class="icon-circle">+</span>' +
           '</button>' +
         '</div>' +
       '</div>';
@@ -104,7 +108,7 @@
       renderMenu(activeCategory);
     } catch (err) {
       menuContainer.innerHTML =
-        '<div class="recommendation-empty">Không thể tải thực đơn. Vui lòng thử lại.</div>';
+        '<div class="recommendation-empty">Failed to load the menu. Please try again.</div>';
     }
   }
 
@@ -138,7 +142,7 @@
 
     if (cart.length === 0) {
       cartList.innerHTML =
-        '<div class="empty-cart-message">Giỏ hàng của bạn đang trống. Chọn món ăn ưa thích để bắt đầu!</div>';
+        '<div class="empty-cart-message">Your cart is empty. Select your favorite items to start!</div>';
       cartSubtotal.textContent = '0đ';
       cartTotal.textContent = '0đ';
       checkoutBtn.classList.add('disabled');
@@ -185,13 +189,13 @@
 
     if (names.length === 0) {
       recPanel.innerHTML =
-        '<div class="recommendation-empty">Thêm món vào giỏ hàng để nhận gợi ý!</div>';
+        '<div class="recommendation-empty">Add items to your cart to get recommendations!</div>';
       return;
     }
 
     // Show loading
     recPanel.innerHTML =
-      '<div class="loading-indicator"><div class="loading-pulse"></div><span>Đang tải gợi ý...</span></div>';
+      '<div class="loading-indicator"><div class="loading-pulse"></div><span>Loading recommendations...</span></div>';
 
     try {
       var res = await fetch('/api/recommend', {
@@ -208,7 +212,7 @@
       renderRecommendations(recs);
     } catch (err) {
       recPanel.innerHTML =
-        '<div class="recommendation-empty">Không thể tải gợi ý. Vui lòng thử lại.</div>';
+        '<div class="recommendation-empty">Failed to load recommendations. Please try again.</div>';
     }
   }
 
@@ -217,7 +221,7 @@
 
     if (!recs || recs.length === 0) {
       recPanel.innerHTML =
-        '<div class="recommendation-empty">Chưa có gợi ý phù hợp.</div>';
+        '<div class="recommendation-empty">No suitable recommendations found.</div>';
       return;
     }
 
@@ -226,7 +230,7 @@
       tile.style.animationDelay = (i * 60) + 'ms';
 
       var scorePercent = Math.round((rec.score || 0) * 100);
-      var badgeText = scorePercent >= 70 ? 'BÁN CHẠY' : 'GỢI Ý';
+      var badgeText = scorePercent >= 70 ? 'BEST SELLER' : 'SUGGESTED';
 
       var emoji = '🍗';
       var itemObj = menuItems.find(function(m) { return m.name === rec.name; });
@@ -238,24 +242,29 @@
 
       if (i === 0) {
         tile.className = 'double-bezel bento-tile col-span-2 card-enter';
+        
+        var imageHtml = itemObj && itemObj.image
+          ? '<div class="tile-image-wrapper"><img src="/static/images/' + itemObj.image + '" alt="' + escapeHTML(rec.name) + '" class="tile-item-image"></div>'
+          : '<div class="tile-image-placeholder">' + emoji + '</div>';
+
         tile.innerHTML =
           '<div class="card-inner tile-hero-layout">' +
             '<div class="tile-hero-main">' +
-              '<div class="tile-header">' +
-                '<span class="badge badge-hero">⭐ ĐỀ XUẤT LỚN</span>' +
-                '<span class="price-mono">' + formatVND(rec.price) + '</span>' +
-              '</div>' +
-              '<h3 class="tile-item-title">' + escapeHTML(rec.name) + '</h3>' +
-              '<p class="tile-copy">' + escapeHTML(rec.copy || '') + '</p>' +
+               '<div class="tile-header">' +
+                 '<span class="badge badge-hero">⭐ TOP RECOMMENDATION</span>' +
+                 '<span class="price-mono">' + formatVND(rec.price) + '</span>' +
+               '</div>' +
+               '<h3 class="tile-item-title">' + escapeHTML(rec.name) + '</h3>' +
+               '<p class="tile-copy">' + escapeHTML(rec.copy || '') + '</p>' +
             '</div>' +
             '<div class="tile-hero-aside">' +
-              '<div class="tile-image-placeholder">' + emoji + '</div>' +
+               imageHtml +
             '</div>' +
             '<div class="tile-footer">' +
-              '<span class="tile-rationale">' + escapeHTML(rec.rationale || '') + '</span>' +
-              '<button class="add-to-cart-btn-mini" data-name="' + escapeHTML(rec.name) + '" data-price="' + rec.price + '">' +
-                'Thêm <span class="icon-circle">+</span>' +
-              '</button>' +
+               '<span class="tile-rationale">' + escapeHTML(rec.rationale || '') + '</span>' +
+               '<button class="add-to-cart-btn-mini" data-name="' + escapeHTML(rec.name) + '" data-price="' + rec.price + '">' +
+                 'Add <span class="icon-circle">+</span>' +
+               '</button>' +
             '</div>' +
           '</div>';
       } else {
@@ -271,7 +280,7 @@
             '<div class="tile-footer">' +
               '<span class="tile-rationale">' + escapeHTML(rec.rationale || '') + '</span>' +
               '<button class="add-to-cart-btn-mini" data-name="' + escapeHTML(rec.name) + '" data-price="' + rec.price + '">' +
-                'Thêm <span class="icon-circle">+</span>' +
+                'Add <span class="icon-circle">+</span>' +
               '</button>' +
             '</div>' +
           '</div>';
@@ -299,7 +308,7 @@
       first.href = '#';
       first.className = 'category-item active';
       first.setAttribute('data-category', 'all');
-      first.innerHTML = '<span class="category-text">Tất cả</span>';
+      first.innerHTML = '<span class="category-text">All</span>';
       categoryNav.insertBefore(first, categoryNav.firstChild);
 
       // Remove active from others
@@ -363,7 +372,7 @@
 
   async function triggerBacktest() {
     backtestResultsBody.innerHTML =
-      '<div class="loading-indicator"><div class="loading-pulse"></div><span>Đang chạy mô phỏng trên 1.000+ đơn hàng...</span></div>';
+      '<div class="loading-indicator"><div class="loading-pulse"></div><span>Running simulation on 1,000+ orders...</span></div>';
 
     try {
       var res = await fetch('/api/backtest', {
@@ -376,7 +385,7 @@
       renderBacktestResults(results);
     } catch (err) {
       backtestResultsBody.innerHTML =
-        '<div class="recommendation-empty">Không thể chạy thử nghiệm. Vui lòng kiểm tra lại backend.</div>';
+        '<div class="recommendation-empty">Failed to run simulation. Please check the backend.</div>';
     }
   }
 
@@ -389,7 +398,7 @@
     backtestResultsBody.innerHTML =
       '<div class="backtest-grid">' +
         '<div class="backtest-uplift-banner">' +
-          '<span class="backtest-uplift-label">Doanh thu trung bình tăng trưởng (AOV Uplift)</span>' +
+          '<span class="backtest-uplift-label">Average Order Value Uplift (AOV Uplift)</span>' +
           '<span class="backtest-uplift-value">' + percentageUpliftStr + '</span>' +
         '</div>' +
         '<div class="backtest-metric-card">' +
@@ -401,7 +410,7 @@
           '<span class="backtest-metric-value highlight">' + hybridAovStr + '</span>' +
         '</div>' +
         '<div class="backtest-metric-card" style="grid-column: span 2; text-align: center;">' +
-          '<span class="backtest-metric-label">Giá trị tăng thêm trên mỗi đơn hàng</span>' +
+          '<span class="backtest-metric-label">Additional Value Per Order</span>' +
           '<span class="backtest-metric-value" style="color: #2e7d32;">' + upliftStr + '</span>' +
         '</div>' +
       '</div>';

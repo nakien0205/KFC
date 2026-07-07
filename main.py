@@ -107,10 +107,13 @@ def read_index():
 
 @app.get("/api/menu")
 def get_menu():
-    """Return cached menu items as a list of {name, category, price} objects."""
+    """Return cached menu items as a list of {name, category, price, image} objects."""
     if MENU_ITEMS_DF.empty:
         return []
-    return MENU_ITEMS_DF[["name", "category", "price"]].to_dict(orient="records")
+    cols = ["name", "category", "price"]
+    if "image" in MENU_ITEMS_DF.columns:
+        cols.append("image")
+    return MENU_ITEMS_DF[cols].to_dict(orient="records")
 
 class RecommendRequest(BaseModel):
     cart_items: Optional[List[str]] = None

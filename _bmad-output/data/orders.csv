@@ -2,24 +2,24 @@ order_id,item_name
 TXN_0001,1 Eggtart
 TXN_0002,Roasted Fillet Chicken Burger
 TXN_0003,1 Eggtart
-TXN_0004,Pepsi
 TXN_0004,1 Fried Chicken
+TXN_0004,Pepsi
 TXN_0005,French Fries
 TXN_0005,Burger Yo (Chicken)
 TXN_0006,4 Eggtarts
-TXN_0007,Pepsi
 TXN_0007,1 Fried Chicken
-TXN_0008,Burger Zinger
+TXN_0007,Pepsi
 TXN_0008,Pepsi
 TXN_0008,French Fries
-TXN_0009,2 pcs Black Pepper & Lime Fried Chicken
+TXN_0008,Burger Zinger
 TXN_0009,Burger Yo (Chicken)
 TXN_0009,1 pc Black Pepper & Lime Fried Chicken Rice
+TXN_0009,2 pcs Black Pepper & Lime Fried Chicken
 TXN_0010,French Fries
 TXN_0010,Burger Shrimp
 TXN_0011,1 Eggtart
-TXN_0012,Pepsi
 TXN_0012,Burger Shrimp
+TXN_0012,Pepsi
 TXN_0013,7Up
 TXN_0013,Together Combo
 TXN_0014,Roasted Fillet Chicken Burger
@@ -28,138 +28,138 @@ TXN_0016,French Fries
 TXN_0016,Burger Shrimp
 TXN_0016,Pepsi
 TXN_0017,1 Eggtart
-TXN_0018,French Fries
 TXN_0018,Pepsi
+TXN_0018,French Fries
 TXN_0018,Roasted Fillet Chicken Burger
-TXN_0019,Pepsi No Sugar
 TXN_0019,1 Fried Chicken
+TXN_0019,Pepsi No Sugar
 TXN_0020,Combo Rice Flava
-TXN_0021,Burger Zinger
-TXN_0021,Together Combo
 TXN_0021,Combo Group 2
+TXN_0021,Together Combo
+TXN_0021,Burger Zinger
 TXN_0022,French Fries
 TXN_0022,Burger Shrimp
 TXN_0022,Pepsi
-TXN_0023,Garlic Butter Shake Popcorn
+TXN_0023,Combo Burger Zinger
 TXN_0023,1 Garlic Fish Sauce Chicken
 TXN_0023,Combo Burger Flava
-TXN_0023,Combo Burger Zinger
+TXN_0023,Garlic Butter Shake Popcorn
 TXN_0024,4 Eggtarts
-TXN_0025,Pepsi
 TXN_0025,2 Fried Chicken
+TXN_0025,Pepsi
 TXN_0026,Popcorn
 TXN_0026,Coleslaw
 TXN_0027,Pepsi
 TXN_0027,Burger Yo (Chicken)
-TXN_0028,Burger Zinger
 TXN_0028,Pepsi
 TXN_0028,French Fries
-TXN_0029,Pepsi
+TXN_0028,Burger Zinger
 TXN_0029,2 Fried Chicken
+TXN_0029,Pepsi
 TXN_0030,Pepsi No Sugar
 TXN_0031,4 Eggtarts
 TXN_0032,French Fries
 TXN_0032,Burger Shrimp
 TXN_0032,Pepsi
+TXN_0033,1 pc Black Pepper & Lime Fried Chicken Rice
 TXN_0033,Combo 1 Fried Chicken
 TXN_0033,Coleslaw
-TXN_0033,1 pc Black Pepper & Lime Fried Chicken Rice
-TXN_0034,Pepsi
 TXN_0034,7Up
 TXN_0034,Coleslaw
-TXN_0035,Pepsi
+TXN_0034,Pepsi
 TXN_0035,Burger Shrimp
+TXN_0035,Pepsi
 TXN_0036,4 Eggtarts
-TXN_0037,French Fries
 TXN_0037,Pepsi
+TXN_0037,French Fries
 TXN_0037,Burger Yo (Chicken)
-TXN_0038,Combo Rice Nanban
-TXN_0038,Combo Ga Rom Ra 245k
+TXN_0038,Crispy Feast Combo 245k
 TXN_0038,Mashed Potato
+TXN_0038,Combo Rice Nanban
 TXN_0039,Popcorn
-TXN_0040,Lipton
 TXN_0040,Cheese Shake Popcorn
-TXN_0041,Pepsi
+TXN_0040,Lipton
 TXN_0041,1 Fried Chicken
-TXN_0042,French Fries
-TXN_0042,Pepsi No Sugar
+TXN_0041,Pepsi
 TXN_0042,Combo Rice Fried Chicken
+TXN_0042,French Fries
 TXN_0042,Combo Pasta Solo
+TXN_0042,Pepsi No Sugar
 TXN_0043,4 Eggtarts
 TXN_0044,4 Eggtarts
-TXN_0045,Pepsi
 TXN_0045,1 Fried Chicken
-TXN_0046,French Fries
+TXN_0045,Pepsi
 TXN_0046,Pepsi
+TXN_0046,French Fries
 TXN_0046,Roasted Fillet Chicken Burger
 TXN_0047,1 Eggtart
 TXN_0048,Combo Rice Nanban
-TXN_0048,Cheers Combo
 TXN_0048,Coleslaw
-TXN_0049,Burger Zinger
+TXN_0048,Cheers Combo
 TXN_0049,Pepsi
 TXN_0049,French Fries
-TXN_0050,Combo Burger Zinger
+TXN_0049,Burger Zinger
 TXN_0050,4 Chewy Cheese
+TXN_0050,Combo Burger Zinger
 TXN_0050,Combo 2 Fried Chicken
 TXN_0050,Sausage Chicken Pasta
-TXN_0051,Burger Zinger
 TXN_0051,Pepsi
 TXN_0051,French Fries
+TXN_0051,Burger Zinger
 TXN_0052,Pepsi Zero
-TXN_0053,4 Eggtarts
 TXN_0053,1 Eggtart
+TXN_0053,4 Eggtarts
 TXN_0054,Combo Burger Zinger
-TXN_0055,Burger Zinger
 TXN_0055,Pepsi
 TXN_0055,French Fries
-TXN_0056,Pepsi
+TXN_0055,Burger Zinger
 TXN_0056,1 Fried Chicken
-TXN_0057,Combo Ga Rom Ra 245k
+TXN_0056,Pepsi
+TXN_0057,Crispy Feast Combo 245k
 TXN_0058,1 Eggtart
-TXN_0059,Sausage Chicken Pasta
 TXN_0059,1 Garlic Fish Sauce Chicken with rice
+TXN_0059,Sausage Chicken Pasta
 TXN_0060,1 Fried Chicken
-TXN_0061,Burger Yo (Chicken)
 TXN_0061,Crispy Bucket 179k
-TXN_0062,Combo Burger GaYo & Fried Chicken
-TXN_0062,Fried Chicken Pasta
+TXN_0061,Burger Yo (Chicken)
 TXN_0062,Roasted Sesame Salad
+TXN_0062,Fried Chicken Pasta
+TXN_0062,Yo Chicken Burger & Fried Chicken Combo
 TXN_0063,4 Eggtarts
-TXN_0064,French Fries
 TXN_0064,Pepsi
+TXN_0064,French Fries
 TXN_0064,Burger Yo (Chicken)
-TXN_0065,4 Eggtarts
 TXN_0065,1 Eggtart
-TXN_0066,Pepsi
+TXN_0065,4 Eggtarts
 TXN_0066,1 Fried Chicken
-TXN_0067,Pepsi
+TXN_0066,Pepsi
 TXN_0067,1 Fried Chicken
+TXN_0067,Pepsi
 TXN_0068,French Fries
 TXN_0068,Roasted Fillet Chicken Burger
-TXN_0069,Pepsi
 TXN_0069,1 Fried Chicken
+TXN_0069,Pepsi
 TXN_0070,2 Fried Chicken
 TXN_0071,French Fries
 TXN_0071,Burger Shrimp
 TXN_0071,Pepsi
 TXN_0072,4 Eggtarts
 TXN_0073,Happy Bucket 159k
-TXN_0074,Pepsi
 TXN_0074,1 Fried Chicken
+TXN_0074,Pepsi
 TXN_0075,French Fries
 TXN_0075,Burger Shrimp
 TXN_0075,Pepsi
-TXN_0076,French Fries
 TXN_0076,Pepsi
+TXN_0076,French Fries
 TXN_0076,Roasted Fillet Chicken Burger
-TXN_0077,Pepsi
-TXN_0077,Lipton
 TXN_0077,French Fries
-TXN_0078,Pepsi
+TXN_0077,Lipton
+TXN_0077,Pepsi
 TXN_0078,Burger Shrimp
-TXN_0079,Cheese Shake Fries
+TXN_0078,Pepsi
 TXN_0079,Mashed Potato
+TXN_0079,Cheese Shake Fries
 TXN_0079,1 pc Black Pepper & Lime Fried Chicken Rice
 TXN_0080,French Fries
 TXN_0080,Burger Shrimp
@@ -169,35 +169,35 @@ TXN_0081,Pepsi
 TXN_0082,2 pcs Black Pepper & Lime Fried Chicken
 TXN_0083,4 Eggtarts
 TXN_0084,3 Garlic Fish Sauce Chicken
-TXN_0084,Mashed Potato
 TXN_0084,Nanban Popcorn Chicken Rice
+TXN_0084,Mashed Potato
 TXN_0085,1 Eggtart
-TXN_0086,Pepsi
 TXN_0086,2 Fried Chicken
-TXN_0087,French Fries
+TXN_0086,Pepsi
 TXN_0087,Pepsi
+TXN_0087,French Fries
 TXN_0087,Roasted Fillet Chicken Burger
 TXN_0088,1 Roasted Fillet Chicken
-TXN_0089,French Fries
 TXN_0089,Pepsi
+TXN_0089,French Fries
 TXN_0089,Roasted Fillet Chicken Burger
 TXN_0090,2 Fried Chicken
 TXN_0091,1 Eggtart
-TXN_0092,Party Bucket 269k
 TXN_0092,Sausage Chicken Pasta
-TXN_0093,Pepsi
+TXN_0092,Party Bucket 269k
 TXN_0093,Burger Shrimp
+TXN_0093,Pepsi
 TXN_0094,1 Eggtart
 TXN_0095,Burger Yo (Chicken)
 TXN_0096,Combo Rice & Soup
-TXN_0096,6 Fried Chicken
 TXN_0096,Combo Pasta Solo
+TXN_0096,6 Fried Chicken
 TXN_0096,Roasted Sesame Salad
 TXN_0097,French Fries
 TXN_0097,Roasted Fillet Chicken Burger
 TXN_0098,Burger Shrimp
-TXN_0099,Burger Zinger
 TXN_0099,French Fries
+TXN_0099,Burger Zinger
 TXN_0100,French Fries
 TXN_0100,Burger Yo (Chicken)
 TXN_0101,French Fries
@@ -207,96 +207,96 @@ TXN_0102,French Fries
 TXN_0102,Burger Shrimp
 TXN_0103,French Fries
 TXN_0103,Roasted Fillet Chicken Burger
-TXN_0104,French Fries
 TXN_0104,Pepsi
+TXN_0104,French Fries
 TXN_0104,Roasted Fillet Chicken Burger
 TXN_0105,4 Eggtarts
 TXN_0106,1 Eggtart
 TXN_0107,French Fries
 TXN_0107,Burger Shrimp
 TXN_0107,Pepsi
-TXN_0108,4 Eggtarts
 TXN_0108,1 Eggtart
+TXN_0108,4 Eggtarts
 TXN_0109,1 Eggtart
-TXN_0110,French Fries
 TXN_0110,Pepsi
+TXN_0110,French Fries
 TXN_0110,Burger Yo (Chicken)
 TXN_0111,Popcorn Salad
 TXN_0111,Nanban Popcorn Chicken Rice
 TXN_0111,Pepsi Zero
 TXN_0112,Burger Zinger
 TXN_0113,1 Eggtart
-TXN_0114,4 Eggtarts
 TXN_0114,1 Eggtart
+TXN_0114,4 Eggtarts
 TXN_0115,1 Eggtart
-TXN_0116,French Fries
 TXN_0116,Pepsi
+TXN_0116,French Fries
 TXN_0116,Burger Yo (Chicken)
 TXN_0117,Roasted Sesame Salad
-TXN_0118,Pepsi
 TXN_0118,1 Fried Chicken
-TXN_0119,Burger Zinger
+TXN_0118,Pepsi
 TXN_0119,French Fries
+TXN_0119,Burger Zinger
 TXN_0120,Pepsi
 TXN_0120,Burger Yo (Chicken)
-TXN_0121,Combo Ga Rom Ra 245k
-TXN_0121,Garlic Butter Shake Fries
-TXN_0121,Mashed Potato
 TXN_0121,Combo Burger Zinger
-TXN_0122,Pepsi
+TXN_0121,Crispy Feast Combo 245k
+TXN_0121,Mashed Potato
+TXN_0121,Garlic Butter Shake Fries
 TXN_0122,2 Fried Chicken
-TXN_0123,Pepsi
+TXN_0122,Pepsi
 TXN_0123,Nanban Popcorn Chicken Rice
 TXN_0123,Coleslaw
+TXN_0123,Pepsi
 TXN_0124,2 Fried Chicken
 TXN_0125,4 Eggtarts
 TXN_0126,7Up
 TXN_0126,Popcorn
 TXN_0126,Coleslaw
-TXN_0127,Burger Zinger
 TXN_0127,Pepsi
 TXN_0127,French Fries
-TXN_0128,Pepsi
+TXN_0127,Burger Zinger
 TXN_0128,Burger Shrimp
-TXN_0129,Burger Zinger
+TXN_0128,Pepsi
 TXN_0129,French Fries
-TXN_0130,Burger Zinger
+TXN_0129,Burger Zinger
 TXN_0130,Pepsi
 TXN_0130,French Fries
-TXN_0131,Burger Zinger
+TXN_0130,Burger Zinger
 TXN_0131,French Fries
+TXN_0131,Burger Zinger
 TXN_0132,Rice
 TXN_0133,Pepsi
 TXN_0133,Burger Yo (Chicken)
-TXN_0134,Burger Zinger
 TXN_0134,French Fries
-TXN_0135,Popcorn
+TXN_0134,Burger Zinger
 TXN_0135,Combo Rice & Soup
-TXN_0136,Burger Zinger
+TXN_0135,Popcorn
 TXN_0136,Pepsi
 TXN_0136,French Fries
+TXN_0136,Burger Zinger
 TXN_0137,4 Eggtarts
-TXN_0138,Pepsi
 TXN_0138,French Fries
-TXN_0139,Burger Zinger
+TXN_0138,Pepsi
 TXN_0139,French Fries
-TXN_0140,Burger Zinger
+TXN_0139,Burger Zinger
 TXN_0140,Pepsi
 TXN_0140,French Fries
-TXN_0141,Burger Zinger
+TXN_0140,Burger Zinger
 TXN_0141,Pepsi
 TXN_0141,French Fries
-TXN_0142,Burger Zinger
+TXN_0141,Burger Zinger
 TXN_0142,French Fries
-TXN_0143,Pepsi
+TXN_0142,Burger Zinger
 TXN_0143,1 Fried Chicken
+TXN_0143,Pepsi
 TXN_0144,1 Eggtart
 TXN_0145,Burger Yo (Chicken)
-TXN_0146,Couple's Bucket 189k
 TXN_0146,Combo Pasta Solo
+TXN_0146,Couple's Bucket 189k
 TXN_0147,1 Eggtart
-TXN_0148,Pepsi
 TXN_0148,1 Fried Chicken
+TXN_0148,Pepsi
 TXN_0149,French Fries
 TXN_0149,Burger Shrimp
 TXN_0149,Pepsi
@@ -304,201 +304,201 @@ TXN_0150,1 Eggtart
 TXN_0151,French Fries
 TXN_0151,Burger Shrimp
 TXN_0151,Pepsi
-TXN_0152,Burger Zinger
 TXN_0152,French Fries
+TXN_0152,Burger Zinger
 TXN_0153,French Fries
 TXN_0153,Roasted Fillet Chicken Burger
 TXN_0154,Mashed Potato
 TXN_0155,French Fries
-TXN_0155,Lipton
 TXN_0155,Fried Chicken Pasta
+TXN_0155,Lipton
 TXN_0156,French Fries
 TXN_0156,Burger Shrimp
 TXN_0156,Pepsi
 TXN_0157,2 Fried Chicken
 TXN_0158,4 Eggtarts
-TXN_0159,Pepsi
 TXN_0159,2 Fried Chicken
+TXN_0159,Pepsi
 TXN_0160,Popcorn Salad
-TXN_0160,Fried Chicken Rice
-TXN_0160,Combo Group 2
 TXN_0160,1 Eggtart
+TXN_0160,Combo Group 2
+TXN_0160,Fried Chicken Rice
 TXN_0161,Pepsi
 TXN_0161,Roasted Fillet Chicken Burger
-TXN_0162,Mashed Potato
 TXN_0162,Popcorn Salad
+TXN_0162,Mashed Potato
 TXN_0163,4 Eggtarts
-TXN_0164,Pepsi
 TXN_0164,2 Fried Chicken
+TXN_0164,Pepsi
 TXN_0165,French Fries
 TXN_0165,Burger Shrimp
 TXN_0166,4 Eggtarts
-TXN_0167,Pepsi
 TXN_0167,1 Fried Chicken
+TXN_0167,Pepsi
 TXN_0168,4 Eggtarts
-TXN_0169,Burger Zinger
 TXN_0169,Pepsi
 TXN_0169,French Fries
+TXN_0169,Burger Zinger
 TXN_0170,Combo Group 2
-TXN_0171,French Fries
 TXN_0171,Pepsi
+TXN_0171,French Fries
 TXN_0171,Roasted Fillet Chicken Burger
-TXN_0172,Pepsi
 TXN_0172,2 Fried Chicken
+TXN_0172,Pepsi
 TXN_0173,4 Eggtarts
-TXN_0174,Pepsi
 TXN_0174,2 Fried Chicken
+TXN_0174,Pepsi
 TXN_0175,French Fries
 TXN_0175,Roasted Fillet Chicken Burger
-TXN_0176,Combo Rice Fried Chicken
 TXN_0176,Combo 2 Fried Chicken
+TXN_0176,Combo Rice Fried Chicken
 TXN_0177,4 Eggtarts
-TXN_0178,3 pcs Black Pepper & Lime Fried Chicken
-TXN_0178,Combo 2 Fried Chicken
 TXN_0178,Combo Group 2
+TXN_0178,Combo 2 Fried Chicken
+TXN_0178,3 pcs Black Pepper & Lime Fried Chicken
 TXN_0179,French Fries
 TXN_0179,Roasted Fillet Chicken Burger
 TXN_0180,Pepsi
 TXN_0180,Burger Yo (Chicken)
 TXN_0181,1 Eggtart
 TXN_0182,Happy Bucket 159k
-TXN_0183,Pepsi
 TXN_0183,2 Fried Chicken
+TXN_0183,Pepsi
 TXN_0184,French Fries
 TXN_0184,Burger Yo (Chicken)
-TXN_0185,French Fries
 TXN_0185,Pepsi
+TXN_0185,French Fries
 TXN_0185,Burger Yo (Chicken)
-TXN_0186,4 Eggtarts
 TXN_0186,1 Eggtart
+TXN_0186,4 Eggtarts
 TXN_0187,French Fries
 TXN_0187,Roasted Fillet Chicken Burger
 TXN_0188,1 Eggtart
-TXN_0189,Burger Zinger
 TXN_0189,Pepsi
 TXN_0189,French Fries
-TXN_0190,Pepsi
+TXN_0189,Burger Zinger
 TXN_0190,1 Fried Chicken
+TXN_0190,Pepsi
 TXN_0191,1 Eggtart
-TXN_0192,French Fries
 TXN_0192,Pepsi
+TXN_0192,French Fries
 TXN_0192,Burger Yo (Chicken)
 TXN_0193,French Fries
 TXN_0193,Burger Yo (Chicken)
-TXN_0194,Pepsi
 TXN_0194,1 Fried Chicken
-TXN_0195,4 Eggtarts
+TXN_0194,Pepsi
 TXN_0195,1 Eggtart
-TXN_0196,Fried Chicken Pasta
+TXN_0195,4 Eggtarts
 TXN_0196,Cheese Shake Fries
+TXN_0196,Fried Chicken Pasta
 TXN_0197,1 Fried Chicken
-TXN_0198,Combo Ga Rom Ra 245k
+TXN_0198,Crispy Feast Combo 245k
 TXN_0199,French Fries
 TXN_0199,Burger Shrimp
-TXN_0200,Pepsi No Sugar
 TXN_0200,Popcorn Salad
-TXN_0200,Garlic Butter Shake Fries
 TXN_0200,Combo Chill Couple
+TXN_0200,Garlic Butter Shake Fries
+TXN_0200,Pepsi No Sugar
 TXN_0201,4 Eggtarts
-TXN_0202,Pepsi
 TXN_0202,1 Fried Chicken
-TXN_0203,Pepsi
+TXN_0202,Pepsi
 TXN_0203,Combo Burger Shrimp
+TXN_0203,Pepsi
 TXN_0203,Party Bucket 269k
 TXN_0204,Burger Yo (Chicken)
 TXN_0205,Pepsi
 TXN_0205,Burger Yo (Chicken)
 TXN_0206,2 Fried Chicken
-TXN_0207,Burger Zinger
 TXN_0207,Pepsi
 TXN_0207,French Fries
+TXN_0207,Burger Zinger
 TXN_0208,French Fries
 TXN_0208,Burger Shrimp
 TXN_0208,Pepsi
 TXN_0209,French Fries
 TXN_0209,Roasted Fillet Chicken Burger
-TXN_0210,Burger Zinger
 TXN_0210,Pepsi
-TXN_0211,Pepsi
+TXN_0210,Burger Zinger
 TXN_0211,2 Fried Chicken
+TXN_0211,Pepsi
 TXN_0212,Burger Zinger
-TXN_0213,Burger Zinger
 TXN_0213,Pepsi
 TXN_0213,French Fries
-TXN_0214,Burger Zinger
+TXN_0213,Burger Zinger
 TXN_0214,French Fries
+TXN_0214,Burger Zinger
 TXN_0215,Pepsi
 TXN_0215,Roasted Fillet Chicken Burger
 TXN_0216,1 Eggtart
 TXN_0217,4 Eggtarts
-TXN_0218,Pepsi
 TXN_0218,1 Fried Chicken
+TXN_0218,Pepsi
 TXN_0219,Popcorn Salad
-TXN_0220,Pepsi No Sugar
 TXN_0220,Popcorn
+TXN_0220,Pepsi No Sugar
 TXN_0221,French Fries
 TXN_0221,Burger Shrimp
 TXN_0221,Pepsi
-TXN_0222,Pepsi
 TXN_0222,2 Fried Chicken
+TXN_0222,Pepsi
 TXN_0223,Pepsi
 TXN_0223,Roasted Fillet Chicken Burger
-TXN_0224,Crispy Bucket 179k
-TXN_0224,3 Fried Chicken
-TXN_0224,Coleslaw
 TXN_0224,Combo Group 2
-TXN_0225,Pepsi
+TXN_0224,3 Fried Chicken
+TXN_0224,Crispy Bucket 179k
+TXN_0224,Coleslaw
 TXN_0225,Burger Shrimp
+TXN_0225,Pepsi
 TXN_0226,1 Eggtart
-TXN_0227,Pepsi
 TXN_0227,2 Fried Chicken
+TXN_0227,Pepsi
 TXN_0228,2 Fried Chicken
 TXN_0229,Rice
 TXN_0229,Roasted Fillet Chicken Burger
-TXN_0230,Burger Zinger
 TXN_0230,French Fries
+TXN_0230,Burger Zinger
 TXN_0231,4 Eggtarts
 TXN_0232,1 Eggtart
 TXN_0233,Burger Shrimp
-TXN_0234,Pepsi
 TXN_0234,2 Fried Chicken
+TXN_0234,Pepsi
 TXN_0235,French Fries
 TXN_0235,Roasted Fillet Chicken Burger
-TXN_0236,Burger Zinger
 TXN_0236,French Fries
-TXN_0237,Big Combo 279k
+TXN_0236,Burger Zinger
 TXN_0237,7Up
-TXN_0237,Pepsi No Sugar
 TXN_0237,Popcorn
+TXN_0237,Pepsi No Sugar
+TXN_0237,Big Combo 279k
 TXN_0238,Pepsi
 TXN_0239,Burger Shrimp
-TXN_0240,Pepsi
 TXN_0240,1 Fried Chicken
+TXN_0240,Pepsi
 TXN_0241,1 Eggtart
 TXN_0242,1 Eggtart
 TXN_0243,French Fries
 TXN_0243,Burger Shrimp
 TXN_0243,Pepsi
-TXN_0244,Pepsi
 TXN_0244,1 Fried Chicken
-TXN_0245,Burger Zinger
+TXN_0244,Pepsi
 TXN_0245,Pepsi
 TXN_0245,French Fries
-TXN_0246,Combo Rice Flava
+TXN_0245,Burger Zinger
 TXN_0246,Popcorn Salad
+TXN_0246,Combo Rice Flava
 TXN_0247,4 Eggtarts
 TXN_0248,Burger Zinger
 TXN_0249,Burger Zinger
-TXN_0250,Burger Zinger
 TXN_0250,Pepsi
 TXN_0250,French Fries
-TXN_0251,Burger Zinger
+TXN_0250,Burger Zinger
 TXN_0251,Pepsi
+TXN_0251,Burger Zinger
 TXN_0252,French Fries
 TXN_0252,Burger Shrimp
-TXN_0253,Burger Zinger
 TXN_0253,Pepsi
 TXN_0253,French Fries
+TXN_0253,Burger Zinger
 TXN_0254,1 Eggtart
 TXN_0255,4 Eggtarts
 TXN_0256,French Fries
@@ -507,23 +507,23 @@ TXN_0256,Pepsi
 TXN_0257,French Fries
 TXN_0257,Roasted Fillet Chicken Burger
 TXN_0258,4 Eggtarts
-TXN_0259,Pepsi
 TXN_0259,Burger Shrimp
-TXN_0260,Burger Zinger
+TXN_0259,Pepsi
 TXN_0260,Pepsi
 TXN_0260,French Fries
-TXN_0261,Pepsi
+TXN_0260,Burger Zinger
 TXN_0261,2 Fried Chicken
-TXN_0262,Combo Burger Shrimp
+TXN_0261,Pepsi
 TXN_0262,6 Chewy Cheese
-TXN_0263,Cheese Shake Fries
+TXN_0262,Combo Burger Shrimp
 TXN_0263,Popcorn Salad
 TXN_0263,3 Fried Chicken
+TXN_0263,Cheese Shake Fries
 TXN_0264,Combo Rice & Soup
 TXN_0264,Pepsi Zero
 TXN_0265,4 Eggtarts
-TXN_0266,2 pcs Black Pepper & Lime Fried Chicken
 TXN_0266,Burger Shrimp
+TXN_0266,2 pcs Black Pepper & Lime Fried Chicken
 TXN_0266,Happy Bucket 159k
 TXN_0267,French Fries
 TXN_0267,Burger Yo (Chicken)
@@ -531,183 +531,183 @@ TXN_0268,4 Eggtarts
 TXN_0269,Pepsi Zero
 TXN_0270,French Fries
 TXN_0270,Burger Yo (Chicken)
-TXN_0271,French Fries
 TXN_0271,Pepsi
+TXN_0271,French Fries
 TXN_0271,Roasted Fillet Chicken Burger
-TXN_0272,Pepsi
 TXN_0272,2 Fried Chicken
+TXN_0272,Pepsi
 TXN_0273,Pepsi
 TXN_0273,Burger Yo (Chicken)
-TXN_0274,Pepsi
 TXN_0274,1 Fried Chicken
-TXN_0275,Pepsi
+TXN_0274,Pepsi
 TXN_0275,2 Fried Chicken
+TXN_0275,Pepsi
 TXN_0276,4 Eggtarts
 TXN_0277,4 Eggtarts
-TXN_0278,5 Tenders Chicken
 TXN_0278,Combo Group 3
+TXN_0278,5 Tenders Chicken
 TXN_0278,Pepsi No Sugar
-TXN_0278,Combo Tieu Tung Chill 85k
+TXN_0278,Chill Party combo 85K
 TXN_0279,Burger Zinger
 TXN_0280,French Fries
 TXN_0280,Burger Shrimp
-TXN_0281,Burger Zinger
 TXN_0281,French Fries
+TXN_0281,Burger Zinger
+TXN_0282,Combo Rice Fried Chicken
 TXN_0282,Lipton
 TXN_0282,7Up
 TXN_0282,2 pcs Black Pepper & Lime Fried Chicken
-TXN_0282,Combo Rice Fried Chicken
-TXN_0283,4 Eggtarts
 TXN_0283,1 Eggtart
+TXN_0283,4 Eggtarts
 TXN_0284,Pepsi
 TXN_0284,Roasted Fillet Chicken Burger
 TXN_0285,Combo Rice Fried Chicken
 TXN_0285,1 Eggtart
-TXN_0286,1 Garlic Fish Sauce Chicken
 TXN_0286,2 Fried Chicken
+TXN_0286,1 Garlic Fish Sauce Chicken
 TXN_0287,Combo Group 3
-TXN_0288,French Fries
 TXN_0288,Cheese Shake Popcorn
+TXN_0288,French Fries
 TXN_0289,French Fries
 TXN_0289,Roasted Fillet Chicken Burger
-TXN_0290,Pepsi
 TXN_0290,Burger Shrimp
-TXN_0291,French Fries
+TXN_0290,Pepsi
 TXN_0291,Pepsi
+TXN_0291,French Fries
 TXN_0291,Roasted Fillet Chicken Burger
-TXN_0292,Pepsi
 TXN_0292,1 Fried Chicken
-TXN_0293,Pepsi
+TXN_0292,Pepsi
 TXN_0293,2 Fried Chicken
+TXN_0293,Pepsi
 TXN_0294,Pepsi
 TXN_0294,Roasted Fillet Chicken Burger
-TXN_0295,7Up
 TXN_0295,Roasted Sesame Salad
+TXN_0295,7Up
 TXN_0295,Party Bucket 269k
-TXN_0296,Burger Zinger
 TXN_0296,Pepsi
-TXN_0297,Burger Zinger
+TXN_0296,Burger Zinger
 TXN_0297,Pepsi
 TXN_0297,French Fries
-TXN_0298,4 Eggtarts
+TXN_0297,Burger Zinger
 TXN_0298,1 Eggtart
+TXN_0298,4 Eggtarts
 TXN_0299,French Fries
 TXN_0299,Burger Shrimp
 TXN_0299,Pepsi
 TXN_0300,Burger Yo (Chicken)
-TXN_0301,Fried Chicken Rice
 TXN_0301,Roasted Fillet Chicken Rice
-TXN_0302,Burger Zinger
+TXN_0301,Fried Chicken Rice
 TXN_0302,Roasted Sesame Salad
 TXN_0302,3 Fried Chicken
 TXN_0302,Popcorn Chicken Pasta
+TXN_0302,Burger Zinger
 TXN_0303,4 Eggtarts
 TXN_0304,4 Eggtarts
-TXN_0305,4 Eggtarts
 TXN_0305,1 Eggtart
+TXN_0305,4 Eggtarts
 TXN_0306,Pepsi
 TXN_0306,Burger Yo (Chicken)
-TXN_0307,French Fries
 TXN_0307,Pepsi
+TXN_0307,French Fries
 TXN_0307,Burger Yo (Chicken)
 TXN_0308,French Fries
 TXN_0308,Burger Yo (Chicken)
-TXN_0309,Combo Burger GaYo & Fried Chicken
-TXN_0309,Combo Ga Rom Ra 245k
-TXN_0309,4 Eggtarts
 TXN_0309,Big Combo 199k
-TXN_0310,French Fries
+TXN_0309,Crispy Feast Combo 245k
+TXN_0309,4 Eggtarts
+TXN_0309,Yo Chicken Burger & Fried Chicken Combo
 TXN_0310,Pepsi
+TXN_0310,French Fries
 TXN_0310,Roasted Fillet Chicken Burger
-TXN_0311,5 Tenders Chicken
-TXN_0311,Mashed Potato
 TXN_0311,Cheese Shake Fries
-TXN_0312,Fried Chicken Pasta
+TXN_0311,Mashed Potato
+TXN_0311,5 Tenders Chicken
 TXN_0312,Mashed Potato
+TXN_0312,Fried Chicken Pasta
 TXN_0313,Pepsi
+TXN_0314,Combo Group 2
 TXN_0314,Party Bucket 269k
 TXN_0314,Combo Chill Single
-TXN_0314,Combo Group 2
 TXN_0315,4 Eggtarts
 TXN_0316,Pepsi
 TXN_0316,Roasted Fillet Chicken Burger
-TXN_0317,Pepsi
 TXN_0317,1 Fried Chicken
+TXN_0317,Pepsi
 TXN_0318,French Fries
-TXN_0319,Burger Zinger
 TXN_0319,Pepsi
 TXN_0319,French Fries
-TXN_0320,Pepsi
+TXN_0319,Burger Zinger
 TXN_0320,Burger Shrimp
+TXN_0320,Pepsi
 TXN_0321,French Fries
 TXN_0321,Burger Yo (Chicken)
 TXN_0322,French Fries
 TXN_0322,Burger Yo (Chicken)
-TXN_0323,Pepsi
 TXN_0323,2 Fried Chicken
-TXN_0324,French Fries
+TXN_0323,Pepsi
 TXN_0324,Pepsi
+TXN_0324,French Fries
 TXN_0324,Burger Yo (Chicken)
 TXN_0325,4 Eggtarts
-TXN_0326,French Fries
 TXN_0326,Pepsi
+TXN_0326,French Fries
 TXN_0326,Roasted Fillet Chicken Burger
 TXN_0327,Burger Shrimp
-TXN_0328,Garlic Butter Shake Fries
 TXN_0328,1 Fried Chicken
 TXN_0328,Crispy Bucket 179k
-TXN_0329,Pepsi
+TXN_0328,Garlic Butter Shake Fries
 TXN_0329,2 Fried Chicken
+TXN_0329,Pepsi
 TXN_0330,French Fries
 TXN_0330,Roasted Fillet Chicken Burger
 TXN_0331,Burger Shrimp
 TXN_0332,Fried Chicken Rice
 TXN_0333,Pepsi
 TXN_0333,Burger Yo (Chicken)
-TXN_0334,Pepsi
 TXN_0334,2 Fried Chicken
-TXN_0335,Pepsi
+TXN_0334,Pepsi
 TXN_0335,2 Fried Chicken
+TXN_0335,Pepsi
 TXN_0336,3 Tenders Chicken
-TXN_0336,Pepsi No Sugar
 TXN_0336,2 pcs Black Pepper & Lime Fried Chicken
 TXN_0336,Fried Chicken Rice
-TXN_0337,Fried Chicken Rice
+TXN_0336,Pepsi No Sugar
 TXN_0337,1 Eggtart
-TXN_0338,Pepsi
+TXN_0337,Fried Chicken Rice
 TXN_0338,1 Fried Chicken
+TXN_0338,Pepsi
 TXN_0339,French Fries
 TXN_0339,Burger Shrimp
-TXN_0340,French Fries
 TXN_0340,Pepsi
+TXN_0340,French Fries
 TXN_0340,Burger Yo (Chicken)
-TXN_0341,Combo Rice Nanban
 TXN_0341,7Up
 TXN_0341,1 Garlic Fish Sauce Chicken
+TXN_0341,Combo Rice Nanban
 TXN_0342,French Fries
 TXN_0342,Burger Shrimp
 TXN_0342,Pepsi
 TXN_0343,Combo 1 Fried Chicken
-TXN_0344,Mashed Potato
 TXN_0344,Popcorn Salad
-TXN_0344,Seaweed Soup
 TXN_0344,Roasted Fillet Chicken Rice
+TXN_0344,Mashed Potato
+TXN_0344,Seaweed Soup
 TXN_0345,4 Eggtarts
 TXN_0346,1 Eggtart
-TXN_0347,Pepsi
 TXN_0347,2 Fried Chicken
-TXN_0348,Pepsi
+TXN_0347,Pepsi
 TXN_0348,2 Fried Chicken
-TXN_0349,Burger Zinger
+TXN_0348,Pepsi
 TXN_0349,Pepsi
 TXN_0349,French Fries
-TXN_0350,French Fries
+TXN_0349,Burger Zinger
 TXN_0350,Pepsi
+TXN_0350,French Fries
 TXN_0350,Burger Yo (Chicken)
-TXN_0351,Pepsi
 TXN_0351,1 Fried Chicken
-TXN_0352,Pepsi
+TXN_0351,Pepsi
 TXN_0352,1 Fried Chicken
+TXN_0352,Pepsi
 TXN_0353,1 Fried Chicken
 TXN_0354,2 Fried Chicken
 TXN_0355,French Fries
@@ -716,92 +716,92 @@ TXN_0356,3 Tenders Chicken
 TXN_0356,5 Tenders Chicken
 TXN_0357,3 Fried Chicken
 TXN_0357,4 Eggtarts
-TXN_0357,Sausage Chicken Pasta
 TXN_0357,Pepsi Zero
+TXN_0357,Sausage Chicken Pasta
 TXN_0358,French Fries
 TXN_0358,Burger Shrimp
 TXN_0358,Pepsi
 TXN_0359,4 Eggtarts
-TXN_0360,1 pc Black Pepper & Lime Fried Chicken
 TXN_0360,2 Fried Chicken
+TXN_0360,1 pc Black Pepper & Lime Fried Chicken
 TXN_0361,1 Fried Chicken
-TXN_0362,Burger Zinger
 TXN_0362,French Fries
-TXN_0363,Burger Zinger
+TXN_0362,Burger Zinger
 TXN_0363,Pepsi
 TXN_0363,French Fries
-TXN_0364,French Fries
+TXN_0363,Burger Zinger
 TXN_0364,Pepsi
+TXN_0364,French Fries
 TXN_0364,Burger Yo (Chicken)
 TXN_0365,French Fries
 TXN_0365,Burger Shrimp
-TXN_0366,Burger Zinger
 TXN_0366,French Fries
-TXN_0367,Pepsi
+TXN_0366,Burger Zinger
 TXN_0367,Burger Shrimp
+TXN_0367,Pepsi
 TXN_0368,Lipton
-TXN_0369,French Fries
 TXN_0369,Pepsi
+TXN_0369,French Fries
 TXN_0369,Roasted Fillet Chicken Burger
 TXN_0370,Pepsi
 TXN_0370,Roasted Fillet Chicken Burger
 TXN_0371,Pepsi
 TXN_0371,Roasted Fillet Chicken Burger
-TXN_0372,French Fries
-TXN_0372,Combo Rice Flava
-TXN_0372,Combo Rice Nanban
 TXN_0372,Big Combo 199k
-TXN_0373,5 Tenders Chicken
+TXN_0372,French Fries
+TXN_0372,Combo Rice Nanban
+TXN_0372,Combo Rice Flava
 TXN_0373,Rice
 TXN_0373,Combo 2 Fried Chicken
 TXN_0373,Pepsi Zero
-TXN_0374,Combo Burger GaYo & Fried Chicken
-TXN_0374,Coleslaw
+TXN_0373,5 Tenders Chicken
 TXN_0374,Burger Yo (Chicken)
 TXN_0374,French Fries
+TXN_0374,Coleslaw
+TXN_0374,Yo Chicken Burger & Fried Chicken Combo
 TXN_0375,1 Fried Chicken
+TXN_0376,Crispy Feast Combo 245k
 TXN_0376,Combo Burger Shrimp
-TXN_0376,Combo Ga Rom Ra 245k
 TXN_0377,4 Eggtarts
 TXN_0378,French Fries
 TXN_0378,Burger Yo (Chicken)
 TXN_0379,Pepsi
 TXN_0379,Roasted Fillet Chicken Burger
-TXN_0380,Party Bucket 269k
-TXN_0380,Combo Ga Rom Ra 245k
-TXN_0380,6 Fried Chicken
+TXN_0380,Crispy Feast Combo 245k
 TXN_0380,Popcorn Chicken Pasta
+TXN_0380,6 Fried Chicken
+TXN_0380,Party Bucket 269k
 TXN_0381,French Fries
 TXN_0381,Burger Shrimp
-TXN_0382,French Fries
 TXN_0382,Pepsi
+TXN_0382,French Fries
 TXN_0382,Burger Yo (Chicken)
 TXN_0383,4 Eggtarts
-TXN_0384,Pepsi
 TXN_0384,Burger Shrimp
+TXN_0384,Pepsi
+TXN_0385,Roasted Fillet Chicken Rice
+TXN_0385,Crispy Bucket 179k
 TXN_0385,Pepsi
 TXN_0385,1 pc Black Pepper & Lime Fried Chicken
-TXN_0385,Crispy Bucket 179k
-TXN_0385,Roasted Fillet Chicken Rice
 TXN_0386,Pepsi
 TXN_0386,Roasted Fillet Chicken Burger
 TXN_0387,4 Eggtarts
-TXN_0388,French Fries
 TXN_0388,Pepsi
+TXN_0388,French Fries
 TXN_0388,Burger Yo (Chicken)
 TXN_0389,Cheese Shake Fries
 TXN_0389,Popcorn
 TXN_0389,Together Combo
 TXN_0389,4 Eggtarts
-TXN_0390,Pepsi
 TXN_0390,1 Fried Chicken
-TXN_0391,French Fries
+TXN_0390,Pepsi
 TXN_0391,Pepsi
+TXN_0391,French Fries
 TXN_0391,Burger Yo (Chicken)
-TXN_0392,Pepsi
 TXN_0392,1 Fried Chicken
-TXN_0393,French Fries
+TXN_0392,Pepsi
 TXN_0393,Pepsi
+TXN_0393,French Fries
 TXN_0393,Burger Yo (Chicken)
 TXN_0394,4 Eggtarts
 TXN_0395,French Fries
@@ -810,225 +810,225 @@ TXN_0396,4 Eggtarts
 TXN_0397,1 Fried Chicken
 TXN_0398,4 Eggtarts
 TXN_0399,Pepsi No Sugar
-TXN_0400,Combo Chanh Sang Chanh 140k
-TXN_0400,Combo Pasta Solo
 TXN_0400,Combo Group 2
-TXN_0400,Combo Tieu Tung Chill 85k
+TXN_0400,Lime Zest Combo 140k
+TXN_0400,Combo Pasta Solo
+TXN_0400,Chill Party combo 85K
 TXN_0401,Big Combo 279k
-TXN_0402,French Fries
 TXN_0402,4 Chewy Cheese
+TXN_0402,French Fries
 TXN_0402,Combo Burger Shrimp
-TXN_0402,Combo Tieu Tung Chill 85k
-TXN_0403,Combo Burger GaYo & Fried Chicken
+TXN_0402,Chill Party combo 85K
 TXN_0403,1 Roasted Fillet Chicken
+TXN_0403,Yo Chicken Burger & Fried Chicken Combo
 TXN_0404,Lipton
 TXN_0405,Pepsi
 TXN_0405,Burger Yo (Chicken)
 TXN_0406,2 Fried Chicken
-TXN_0407,French Fries
 TXN_0407,Pepsi
+TXN_0407,French Fries
 TXN_0407,Roasted Fillet Chicken Burger
-TXN_0408,1 pc Black Pepper & Lime Fried Chicken
-TXN_0408,Fried Chicken Pasta
 TXN_0408,Fried Chicken Rice
+TXN_0408,Fried Chicken Pasta
+TXN_0408,1 pc Black Pepper & Lime Fried Chicken
 TXN_0409,1 Eggtart
-TXN_0410,French Fries
 TXN_0410,Pepsi
+TXN_0410,French Fries
 TXN_0410,Burger Yo (Chicken)
-TXN_0411,Pepsi
 TXN_0411,2 Fried Chicken
-TXN_0412,Pepsi
+TXN_0411,Pepsi
 TXN_0412,2 Fried Chicken
-TXN_0413,Pepsi
+TXN_0412,Pepsi
 TXN_0413,Combo Group 3
+TXN_0413,Pepsi
 TXN_0413,Fried Chicken Rice
-TXN_0414,4 Eggtarts
 TXN_0414,1 Eggtart
+TXN_0414,4 Eggtarts
 TXN_0415,Pepsi
 TXN_0415,Roasted Fillet Chicken Burger
-TXN_0416,4 Eggtarts
 TXN_0416,1 Eggtart
+TXN_0416,4 Eggtarts
 TXN_0417,French Fries
 TXN_0417,Burger Shrimp
 TXN_0418,French Fries
 TXN_0418,Roasted Fillet Chicken Burger
-TXN_0419,French Fries
 TXN_0419,Pepsi
+TXN_0419,French Fries
 TXN_0419,Burger Yo (Chicken)
 TXN_0420,French Fries
 TXN_0420,Burger Shrimp
 TXN_0420,Pepsi
 TXN_0421,4 Eggtarts
 TXN_0422,Combo Burger Flava
+TXN_0423,Yo Chicken Burger & Fried Chicken Combo
+TXN_0423,Combo Rice Fried Chicken
 TXN_0423,Pepsi
 TXN_0423,Pepsi No Sugar
-TXN_0423,Combo Rice Fried Chicken
-TXN_0423,Combo Burger GaYo & Fried Chicken
-TXN_0424,Garlic Butter Shake Popcorn
-TXN_0424,Garlic Butter Shake Fries
-TXN_0424,Cheers Combo
 TXN_0424,Combo Pasta Solo
+TXN_0424,Cheers Combo
+TXN_0424,Garlic Butter Shake Fries
+TXN_0424,Garlic Butter Shake Popcorn
 TXN_0425,2 Fried Chicken
-TXN_0426,Lipton
 TXN_0426,7Up
+TXN_0426,Lipton
 TXN_0426,6 Fried Chicken
 TXN_0427,Burger Shrimp
 TXN_0428,1 Eggtart
 TXN_0429,1 Fried Chicken
-TXN_0430,Party Bucket 269k
 TXN_0430,Popcorn
+TXN_0430,Party Bucket 269k
 TXN_0431,French Fries
 TXN_0431,Burger Shrimp
-TXN_0432,French Fries
 TXN_0432,Pepsi
+TXN_0432,French Fries
 TXN_0432,Burger Yo (Chicken)
 TXN_0433,4 Eggtarts
 TXN_0434,Cheese Shake Popcorn
 TXN_0435,Roasted Fillet Chicken Rice
-TXN_0436,Pepsi
 TXN_0436,2 Fried Chicken
+TXN_0436,Pepsi
 TXN_0437,Cheese Shake Popcorn
 TXN_0437,Fried Chicken Rice
 TXN_0438,1 Fried Chicken
-TXN_0439,Pepsi
 TXN_0439,2 Fried Chicken
+TXN_0439,Pepsi
 TXN_0440,French Fries
 TXN_0440,Roasted Fillet Chicken Burger
 TXN_0441,Combo Burger Shrimp
 TXN_0442,French Fries
 TXN_0442,Burger Shrimp
 TXN_0442,Pepsi
-TXN_0443,Pepsi
 TXN_0443,1 Fried Chicken
-TXN_0444,Pepsi
+TXN_0443,Pepsi
 TXN_0444,1 Fried Chicken
+TXN_0444,Pepsi
 TXN_0445,4 Eggtarts
-TXN_0446,Pepsi
 TXN_0446,1 Fried Chicken
-TXN_0447,Lipton
+TXN_0446,Pepsi
 TXN_0447,Rice
+TXN_0447,Lipton
 TXN_0447,Combo Pasta & Tenders
-TXN_0448,Pepsi
 TXN_0448,1 Fried Chicken
+TXN_0448,Pepsi
 TXN_0449,4 Eggtarts
 TXN_0450,Roasted Fillet Chicken Burger
-TXN_0451,French Fries
 TXN_0451,Pepsi
+TXN_0451,French Fries
 TXN_0451,Burger Yo (Chicken)
-TXN_0452,Pepsi
 TXN_0452,2 Fried Chicken
+TXN_0452,Pepsi
 TXN_0453,4 Eggtarts
-TXN_0454,Pepsi
 TXN_0454,Burger Shrimp
-TXN_0455,French Fries
+TXN_0454,Pepsi
 TXN_0455,Pepsi
+TXN_0455,French Fries
 TXN_0455,Burger Yo (Chicken)
-TXN_0456,French Fries
 TXN_0456,Pepsi
+TXN_0456,French Fries
 TXN_0456,Roasted Fillet Chicken Burger
-TXN_0457,3 Garlic Fish Sauce Chicken
-TXN_0457,Combo Burger Zinger
 TXN_0457,Rice
+TXN_0457,Combo Burger Zinger
+TXN_0457,3 Garlic Fish Sauce Chicken
 TXN_0457,1 Fried Chicken
 TXN_0458,1 Eggtart
-TXN_0459,Pepsi
 TXN_0459,2 Fried Chicken
-TXN_0460,French Fries
+TXN_0459,Pepsi
 TXN_0460,Pepsi
+TXN_0460,French Fries
 TXN_0460,Burger Yo (Chicken)
-TXN_0461,Pepsi
 TXN_0461,1 Fried Chicken
-TXN_0462,French Fries
+TXN_0461,Pepsi
 TXN_0462,Pepsi
+TXN_0462,French Fries
 TXN_0462,Burger Yo (Chicken)
-TXN_0463,Combo Burger GaYo & Fried Chicken
+TXN_0463,French Fries
 TXN_0463,1 pc Black Pepper & Lime Fried Chicken Rice
 TXN_0463,Happy Bucket 159k
-TXN_0463,French Fries
-TXN_0464,Pepsi
+TXN_0463,Yo Chicken Burger & Fried Chicken Combo
 TXN_0464,2 Fried Chicken
+TXN_0464,Pepsi
+TXN_0465,Lime Zest Combo 140k
+TXN_0465,Crispy Feast Combo 245k
 TXN_0465,Burger Zinger
-TXN_0465,Combo Ga Rom Ra 245k
-TXN_0465,Combo Chanh Sang Chanh 140k
-TXN_0466,Pepsi
 TXN_0466,1 Fried Chicken
-TXN_0467,Burger Zinger
+TXN_0466,Pepsi
 TXN_0467,French Fries
-TXN_0468,French Fries
+TXN_0467,Burger Zinger
 TXN_0468,Pepsi
+TXN_0468,French Fries
 TXN_0468,Burger Yo (Chicken)
 TXN_0469,French Fries
 TXN_0469,Burger Shrimp
 TXN_0469,Pepsi
-TXN_0470,Burger Zinger
 TXN_0470,Pepsi
 TXN_0470,French Fries
-TXN_0471,Pepsi
+TXN_0470,Burger Zinger
 TXN_0471,Burger Shrimp
-TXN_0472,French Fries
+TXN_0471,Pepsi
 TXN_0472,Pepsi
+TXN_0472,French Fries
 TXN_0472,Roasted Fillet Chicken Burger
 TXN_0473,French Fries
 TXN_0473,Burger Shrimp
 TXN_0473,Pepsi
-TXN_0474,Pepsi
 TXN_0474,2 Fried Chicken
+TXN_0474,Pepsi
 TXN_0475,French Fries
 TXN_0475,Burger Yo (Chicken)
-TXN_0476,Pepsi No Sugar
 TXN_0476,7Up
 TXN_0476,Party Bucket 269k
+TXN_0476,Pepsi No Sugar
 TXN_0477,2 Fried Chicken
-TXN_0478,Combo Ga Rom Ra 245k
+TXN_0478,Crispy Feast Combo 245k
 TXN_0478,Seaweed Soup
-TXN_0479,Pepsi
 TXN_0479,2 Fried Chicken
+TXN_0479,Pepsi
 TXN_0480,1 Eggtart
-TXN_0481,4 Eggtarts
 TXN_0481,1 Eggtart
-TXN_0482,Pepsi
+TXN_0481,4 Eggtarts
 TXN_0482,2 Fried Chicken
+TXN_0482,Pepsi
 TXN_0483,2 Fried Chicken
 TXN_0484,1 Eggtart
 TXN_0485,2 Fried Chicken
-TXN_0486,Pepsi
 TXN_0486,2 Fried Chicken
+TXN_0486,Pepsi
 TXN_0487,French Fries
 TXN_0487,Burger Shrimp
-TXN_0488,Pepsi
-TXN_0488,6 Chewy Cheese
 TXN_0488,Combo 2 Fried Chicken
+TXN_0488,6 Chewy Cheese
+TXN_0488,Pepsi
+TXN_0489,Combo Rice & Soup
 TXN_0489,Mashed Potato
 TXN_0489,Combo Chill Couple
-TXN_0489,Combo Rice & Soup
-TXN_0490,Combo Burger GaYo & Fried Chicken
 TXN_0490,7Up
+TXN_0490,Yo Chicken Burger & Fried Chicken Combo
 TXN_0490,Combo Pasta & Tenders
 TXN_0491,4 Eggtarts
 TXN_0492,French Fries
 TXN_0492,Burger Shrimp
 TXN_0492,Pepsi
 TXN_0493,2 Fried Chicken
-TXN_0494,Combo Chanh Sang Chanh 140k
 TXN_0494,Combo Group 2
-TXN_0495,French Fries
+TXN_0494,Lime Zest Combo 140k
 TXN_0495,Pepsi
+TXN_0495,French Fries
 TXN_0495,Burger Yo (Chicken)
-TXN_0496,Burger Zinger
 TXN_0496,French Fries
+TXN_0496,Burger Zinger
 TXN_0497,French Fries
 TXN_0497,Burger Shrimp
 TXN_0497,Pepsi
-TXN_0498,Pepsi
 TXN_0498,1 Fried Chicken
+TXN_0498,Pepsi
 TXN_0499,7Up
 TXN_0499,Combo Rice Flava
-TXN_0500,Burger Zinger
 TXN_0500,Pepsi
 TXN_0500,French Fries
+TXN_0500,Burger Zinger
 TXN_0501,1 Eggtart
-TXN_0502,Pepsi
 TXN_0502,2 Fried Chicken
+TXN_0502,Pepsi
 TXN_0503,French Fries
 TXN_0503,Burger Shrimp
 TXN_0503,Pepsi
@@ -1036,146 +1036,146 @@ TXN_0504,Lipton
 TXN_0505,1 Fried Chicken
 TXN_0506,Pepsi
 TXN_0506,Roasted Fillet Chicken Burger
-TXN_0507,Combo Chill Single
-TXN_0507,Happy Bucket 159k
 TXN_0507,Combo Group 2
-TXN_0507,Combo Tieu Tung Chill 85k
+TXN_0507,Happy Bucket 159k
+TXN_0507,Chill Party combo 85K
+TXN_0507,Combo Chill Single
 TXN_0508,Pepsi
 TXN_0508,Burger Yo (Chicken)
 TXN_0509,2 Fried Chicken
-TXN_0510,Burger Zinger
 TXN_0510,French Fries
-TXN_0511,Burger Zinger
+TXN_0510,Burger Zinger
 TXN_0511,French Fries
-TXN_0512,Pepsi
+TXN_0511,Burger Zinger
 TXN_0512,Burger Shrimp
-TXN_0513,Pepsi
+TXN_0512,Pepsi
 TXN_0513,7Up
+TXN_0513,Pepsi
 TXN_0514,Burger Zinger
 TXN_0514,1 Fried Chicken
-TXN_0514,2 pcs Black Pepper & Lime Fried Chicken
 TXN_0514,Coleslaw
+TXN_0514,2 pcs Black Pepper & Lime Fried Chicken
 TXN_0515,1 Eggtart
-TXN_0516,Pepsi
 TXN_0516,1 Fried Chicken
+TXN_0516,Pepsi
 TXN_0517,Burger Zinger
-TXN_0518,French Fries
 TXN_0518,Pepsi
+TXN_0518,French Fries
 TXN_0518,Burger Yo (Chicken)
-TXN_0519,French Fries
 TXN_0519,Pepsi
+TXN_0519,French Fries
 TXN_0519,Burger Yo (Chicken)
 TXN_0520,4 Eggtarts
 TXN_0521,4 Eggtarts
-TXN_0522,French Fries
 TXN_0522,Pepsi
+TXN_0522,French Fries
 TXN_0522,Roasted Fillet Chicken Burger
-TXN_0523,Pepsi
-TXN_0523,Mashed Potato
 TXN_0523,Popcorn Chicken Pasta
+TXN_0523,Mashed Potato
+TXN_0523,Pepsi
 TXN_0524,Combo Burger Zinger
 TXN_0524,Pepsi No Sugar
 TXN_0525,French Fries
-TXN_0526,Pepsi
 TXN_0526,2 Fried Chicken
+TXN_0526,Pepsi
 TXN_0527,1 Fried Chicken
-TXN_0528,French Fries
 TXN_0528,Rice
-TXN_0529,Pepsi
+TXN_0528,French Fries
 TXN_0529,Burger Shrimp
+TXN_0529,Pepsi
 TXN_0530,4 Eggtarts
 TXN_0531,Cheese Shake Popcorn
 TXN_0531,Popcorn Chicken Pasta
-TXN_0531,Roasted Sesame Salad
 TXN_0531,Coleslaw
-TXN_0532,Pepsi
+TXN_0531,Roasted Sesame Salad
 TXN_0532,2 Fried Chicken
+TXN_0532,Pepsi
 TXN_0533,French Fries
 TXN_0533,Burger Yo (Chicken)
-TXN_0534,4 Eggtarts
 TXN_0534,1 Eggtart
+TXN_0534,4 Eggtarts
 TXN_0535,1 Eggtart
-TXN_0536,Burger Zinger
 TXN_0536,Pepsi
 TXN_0536,French Fries
-TXN_0537,5 Tenders Chicken
+TXN_0536,Burger Zinger
+TXN_0537,Roasted Fillet Chicken Rice
 TXN_0537,Burger Yo (Chicken)
 TXN_0537,1 pc Black Pepper & Lime Fried Chicken
-TXN_0537,Roasted Fillet Chicken Rice
+TXN_0537,5 Tenders Chicken
 TXN_0538,1 Eggtart
 TXN_0539,Pepsi
 TXN_0539,Roasted Fillet Chicken Burger
 TXN_0540,Roasted Fillet Chicken Burger
 TXN_0541,French Fries
-TXN_0541,Fried Chicken Pasta
 TXN_0541,Pepsi Zero
-TXN_0542,French Fries
+TXN_0541,Fried Chicken Pasta
 TXN_0542,Pepsi
+TXN_0542,French Fries
 TXN_0542,Roasted Fillet Chicken Burger
 TXN_0543,French Fries
 TXN_0543,Burger Yo (Chicken)
 TXN_0544,1 Eggtart
 TXN_0545,French Fries
 TXN_0545,Burger Yo (Chicken)
+TXN_0546,Lime Zest Combo 140k
 TXN_0546,Burger Zinger
-TXN_0546,Combo Chanh Sang Chanh 140k
-TXN_0547,Pepsi
 TXN_0547,1 Fried Chicken
-TXN_0548,Coleslaw
+TXN_0547,Pepsi
 TXN_0548,Combo Group 2
+TXN_0548,Coleslaw
 TXN_0549,French Fries
 TXN_0549,Burger Shrimp
 TXN_0550,Combo Chill Couple
 TXN_0550,1 Garlic Fish Sauce Chicken
 TXN_0551,Combo Chill Couple
 TXN_0551,Sausage Chicken Pasta
-TXN_0552,French Fries
 TXN_0552,Pepsi
+TXN_0552,French Fries
 TXN_0552,Roasted Fillet Chicken Burger
 TXN_0553,2 Fried Chicken
 TXN_0554,4 Eggtarts
-TXN_0555,Pepsi
 TXN_0555,2 Fried Chicken
-TXN_0556,Combo Rice Nanban
-TXN_0556,7Up
+TXN_0555,Pepsi
 TXN_0556,Combo Rice & Soup
+TXN_0556,7Up
 TXN_0556,Combo Chill Couple
-TXN_0557,Burger Zinger
+TXN_0556,Combo Rice Nanban
 TXN_0557,Pepsi
+TXN_0557,Burger Zinger
 TXN_0558,Combo Burger Zinger
 TXN_0558,Roasted Fillet Chicken Burger
 TXN_0559,French Fries
 TXN_0559,Burger Shrimp
 TXN_0560,French Fries
-TXN_0561,4 Eggtarts
 TXN_0561,1 Eggtart
+TXN_0561,4 Eggtarts
 TXN_0562,1 Eggtart
 TXN_0563,French Fries
 TXN_0563,Roasted Fillet Chicken Burger
-TXN_0564,French Fries
 TXN_0564,Pepsi
+TXN_0564,French Fries
 TXN_0564,Burger Yo (Chicken)
 TXN_0565,4 Eggtarts
 TXN_0566,1 Eggtart
-TXN_0567,Pepsi
 TXN_0567,Burger Shrimp
-TXN_0568,Pepsi
+TXN_0567,Pepsi
 TXN_0568,2 Fried Chicken
-TXN_0569,Burger Zinger
+TXN_0568,Pepsi
 TXN_0569,French Fries
+TXN_0569,Burger Zinger
 TXN_0570,4 Eggtarts
-TXN_0571,Burger Zinger
 TXN_0571,French Fries
+TXN_0571,Burger Zinger
 TXN_0572,1 Eggtart
-TXN_0573,2 Garlic Fish Sauce Chicken
-TXN_0573,Combo Pasta Solo
 TXN_0573,Combo Group 2
 TXN_0573,2 Fried Chicken
+TXN_0573,Combo Pasta Solo
+TXN_0573,2 Garlic Fish Sauce Chicken
 TXN_0574,French Fries
 TXN_0574,Roasted Fillet Chicken Burger
 TXN_0575,4 Eggtarts
-TXN_0576,Pepsi
 TXN_0576,2 Fried Chicken
+TXN_0576,Pepsi
 TXN_0577,4 Eggtarts
 TXN_0578,French Fries
 TXN_0578,Burger Yo (Chicken)
@@ -1183,59 +1183,59 @@ TXN_0579,Pepsi
 TXN_0579,Burger Yo (Chicken)
 TXN_0580,7Up
 TXN_0580,Together Combo
-TXN_0581,French Fries
 TXN_0581,Pepsi
+TXN_0581,French Fries
 TXN_0581,Roasted Fillet Chicken Burger
 TXN_0582,4 Eggtarts
-TXN_0583,Burger Zinger
 TXN_0583,Pepsi
 TXN_0583,French Fries
+TXN_0583,Burger Zinger
 TXN_0584,French Fries
 TXN_0584,Burger Shrimp
 TXN_0585,1 Eggtart
-TXN_0586,Pepsi
 TXN_0586,1 Fried Chicken
-TXN_0587,Pepsi
+TXN_0586,Pepsi
 TXN_0587,2 Fried Chicken
-TXN_0588,Pepsi
+TXN_0587,Pepsi
 TXN_0588,Burger Shrimp
+TXN_0588,Pepsi
 TXN_0589,French Fries
 TXN_0589,Roasted Fillet Chicken Burger
-TXN_0590,French Fries
 TXN_0590,Pepsi
+TXN_0590,French Fries
 TXN_0590,Burger Yo (Chicken)
-TXN_0591,Pepsi
 TXN_0591,1 Fried Chicken
+TXN_0591,Pepsi
 TXN_0592,1 Eggtart
-TXN_0593,Pepsi
 TXN_0593,2 Fried Chicken
+TXN_0593,Pepsi
 TXN_0594,French Fries
-TXN_0595,Pepsi No Sugar
 TXN_0595,Combo Rice Fried Chicken
-TXN_0596,Pepsi No Sugar
-TXN_0596,Combo Chanh Sang Chanh 140k
-TXN_0596,Cheers Combo
+TXN_0595,Pepsi No Sugar
 TXN_0596,Combo Group 2
+TXN_0596,Lime Zest Combo 140k
+TXN_0596,Pepsi No Sugar
+TXN_0596,Cheers Combo
 TXN_0597,Combo 1 Fried Chicken
-TXN_0598,Couple's Bucket 189k
 TXN_0598,1 Eggtart
+TXN_0598,Couple's Bucket 189k
 TXN_0598,Combo Pasta & Tenders
-TXN_0599,Burger Zinger
 TXN_0599,Pepsi
-TXN_0600,Pepsi
+TXN_0599,Burger Zinger
 TXN_0600,2 Fried Chicken
-TXN_0601,Pepsi
+TXN_0600,Pepsi
 TXN_0601,2 Fried Chicken
+TXN_0601,Pepsi
 TXN_0602,French Fries
 TXN_0602,Burger Yo (Chicken)
-TXN_0603,Burger Zinger
 TXN_0603,Pepsi
 TXN_0603,French Fries
+TXN_0603,Burger Zinger
 TXN_0604,4 Eggtarts
-TXN_0605,Pepsi
 TXN_0605,Burger Shrimp
-TXN_0606,Burger Zinger
+TXN_0605,Pepsi
 TXN_0606,French Fries
+TXN_0606,Burger Zinger
 TXN_0607,1 Eggtart
 TXN_0608,Pepsi
 TXN_0608,Roasted Fillet Chicken Burger
@@ -1244,169 +1244,169 @@ TXN_0609,Roasted Fillet Chicken Burger
 TXN_0610,Pepsi
 TXN_0610,Burger Yo (Chicken)
 TXN_0611,Cheese Shake Popcorn
-TXN_0612,Burger Zinger
 TXN_0612,Pepsi
 TXN_0612,French Fries
-TXN_0613,Pepsi
+TXN_0612,Burger Zinger
 TXN_0613,1 Fried Chicken
+TXN_0613,Pepsi
 TXN_0614,2 Fried Chicken
-TXN_0615,Burger Zinger
 TXN_0615,Pepsi
 TXN_0615,French Fries
+TXN_0615,Burger Zinger
 TXN_0616,Rice
 TXN_0616,Coleslaw
-TXN_0617,Burger Zinger
 TXN_0617,Pepsi
 TXN_0617,French Fries
-TXN_0618,French Fries
+TXN_0617,Burger Zinger
 TXN_0618,Pepsi
+TXN_0618,French Fries
 TXN_0618,Roasted Fillet Chicken Burger
-TXN_0619,Pepsi
 TXN_0619,2 Fried Chicken
+TXN_0619,Pepsi
 TXN_0620,Pepsi
 TXN_0620,Roasted Fillet Chicken Burger
 TXN_0621,4 Eggtarts
-TXN_0622,Burger Zinger
 TXN_0622,Pepsi
 TXN_0622,French Fries
+TXN_0622,Burger Zinger
+TXN_0623,2 Fried Chicken
 TXN_0623,Nanban Popcorn Chicken Rice
 TXN_0623,Fried Chicken Rice
-TXN_0623,2 Fried Chicken
-TXN_0624,Combo Chill Couple
 TXN_0624,1 Fried Chicken
+TXN_0624,Combo Chill Couple
 TXN_0625,1 Eggtart
-TXN_0626,Burger Zinger
 TXN_0626,Pepsi
+TXN_0626,Burger Zinger
 TXN_0627,4 Eggtarts
 TXN_0628,Combo Group 3
 TXN_0628,Burger Shrimp
 TXN_0628,Burger Yo (Chicken)
-TXN_0629,French Fries
 TXN_0629,Pepsi
+TXN_0629,French Fries
 TXN_0629,Roasted Fillet Chicken Burger
 TXN_0630,1 Eggtart
-TXN_0631,Pepsi
 TXN_0631,1 Fried Chicken
+TXN_0631,Pepsi
 TXN_0632,Burger Yo (Chicken)
-TXN_0633,Pepsi
 TXN_0633,2 Fried Chicken
+TXN_0633,Pepsi
 TXN_0634,French Fries
 TXN_0634,Burger Shrimp
 TXN_0635,Roasted Fillet Chicken Rice
-TXN_0636,Burger Zinger
-TXN_0636,Seaweed Soup
-TXN_0636,Coleslaw
 TXN_0636,French Fries
-TXN_0637,French Fries
+TXN_0636,Coleslaw
+TXN_0636,Seaweed Soup
+TXN_0636,Burger Zinger
 TXN_0637,3 Tenders Chicken
+TXN_0637,French Fries
 TXN_0637,Pepsi
-TXN_0637,Combo Tieu Tung Chill 85k
+TXN_0637,Chill Party combo 85K
 TXN_0638,1 pc Black Pepper & Lime Fried Chicken Rice
-TXN_0639,Pepsi
-TXN_0639,7Up
 TXN_0639,1 Garlic Fish Sauce Chicken with rice
-TXN_0640,Burger Zinger
+TXN_0639,7Up
+TXN_0639,Pepsi
 TXN_0640,Pepsi
+TXN_0640,Burger Zinger
 TXN_0641,Happy Bucket 159k
-TXN_0642,French Fries
 TXN_0642,Pepsi
+TXN_0642,French Fries
 TXN_0642,Roasted Fillet Chicken Burger
-TXN_0643,Pepsi
 TXN_0643,1 Fried Chicken
-TXN_0644,French Fries
+TXN_0643,Pepsi
 TXN_0644,Pepsi
+TXN_0644,French Fries
 TXN_0644,Roasted Fillet Chicken Burger
-TXN_0645,Burger Zinger
 TXN_0645,Pepsi
-TXN_0646,6 Fried Chicken
+TXN_0645,Burger Zinger
 TXN_0646,Big Combo 199k
-TXN_0647,French Fries
+TXN_0646,6 Fried Chicken
 TXN_0647,Pepsi
+TXN_0647,French Fries
 TXN_0647,Roasted Fillet Chicken Burger
-TXN_0648,Burger Zinger
 TXN_0648,Pepsi
 TXN_0648,French Fries
+TXN_0648,Burger Zinger
 TXN_0649,Couple's Bucket 189k
 TXN_0650,Pepsi Zero
 TXN_0651,Combo 1 Fried Chicken
 TXN_0651,Coleslaw
-TXN_0652,Pepsi
 TXN_0652,2 Fried Chicken
-TXN_0653,Burger Zinger
+TXN_0652,Pepsi
 TXN_0653,7Up
-TXN_0654,Burger Zinger
+TXN_0653,Burger Zinger
 TXN_0654,French Fries
+TXN_0654,Burger Zinger
+TXN_0655,1 Eggtart
 TXN_0655,Fried Chicken Pasta
 TXN_0655,Crispy Bucket 179k
 TXN_0655,Roasted Fillet Chicken Burger
-TXN_0655,1 Eggtart
 TXN_0656,1 Eggtart
 TXN_0657,1 Eggtart
 TXN_0658,3 Tenders Chicken
 TXN_0658,1 Fried Chicken
 TXN_0659,French Fries
 TXN_0659,Burger Yo (Chicken)
-TXN_0660,Pepsi
 TXN_0660,2 Fried Chicken
+TXN_0660,Pepsi
 TXN_0661,1 Eggtart
 TXN_0662,7Up
 TXN_0662,Pepsi Zero
 TXN_0663,Pepsi Zero
-TXN_0664,French Fries
 TXN_0664,Pepsi
+TXN_0664,French Fries
 TXN_0664,Burger Yo (Chicken)
-TXN_0665,French Fries
 TXN_0665,Pepsi
+TXN_0665,French Fries
 TXN_0665,Roasted Fillet Chicken Burger
-TXN_0666,Burger Zinger
 TXN_0666,Pepsi
 TXN_0666,French Fries
-TXN_0667,Pepsi
+TXN_0666,Burger Zinger
 TXN_0667,1 Fried Chicken
-TXN_0668,Pepsi
+TXN_0667,Pepsi
 TXN_0668,1 Fried Chicken
+TXN_0668,Pepsi
 TXN_0669,1 Roasted Fillet Chicken
-TXN_0670,Garlic Butter Shake Popcorn
 TXN_0670,Combo 2 Fried Chicken
 TXN_0670,Mashed Potato
 TXN_0670,Roasted Fillet Chicken Burger
-TXN_0671,Pepsi
+TXN_0670,Garlic Butter Shake Popcorn
 TXN_0671,2 Fried Chicken
-TXN_0672,Pepsi
+TXN_0671,Pepsi
 TXN_0672,2 Fried Chicken
+TXN_0672,Pepsi
 TXN_0673,Pepsi
 TXN_0673,Burger Yo (Chicken)
-TXN_0674,French Fries
 TXN_0674,Pepsi
+TXN_0674,French Fries
 TXN_0674,Roasted Fillet Chicken Burger
-TXN_0675,Pepsi
 TXN_0675,2 Fried Chicken
-TXN_0676,French Fries
+TXN_0675,Pepsi
 TXN_0676,Pepsi
+TXN_0676,French Fries
 TXN_0676,Burger Yo (Chicken)
 TXN_0677,Nanban Popcorn Chicken Rice
-TXN_0678,Pepsi
 TXN_0678,2 Fried Chicken
+TXN_0678,Pepsi
 TXN_0679,Combo Chill Couple
-TXN_0679,Combo Tieu Tung Chill 85k
+TXN_0679,Chill Party combo 85K
 TXN_0680,2 Fried Chicken
 TXN_0681,Pepsi
 TXN_0681,Burger Yo (Chicken)
-TXN_0682,Pepsi
 TXN_0682,7Up
-TXN_0683,Pepsi
+TXN_0682,Pepsi
 TXN_0683,1 Fried Chicken
+TXN_0683,Pepsi
 TXN_0684,Mashed Potato
 TXN_0685,French Fries
 TXN_0685,Burger Shrimp
 TXN_0685,Pepsi
-TXN_0686,Rice
 TXN_0686,Combo Group 2
+TXN_0686,Rice
 TXN_0687,Garlic Butter Shake Popcorn
-TXN_0688,Lipton
-TXN_0688,Combo Ga Rom Ra 245k
-TXN_0688,Cheese Shake Popcorn
 TXN_0688,Combo Group 3
+TXN_0688,Cheese Shake Popcorn
+TXN_0688,Crispy Feast Combo 245k
+TXN_0688,Lipton
 TXN_0689,1 Eggtart
 TXN_0690,1 Eggtart
 TXN_0691,4 Eggtarts
@@ -1416,117 +1416,117 @@ TXN_0694,4 Eggtarts
 TXN_0695,1 Fried Chicken
 TXN_0696,Roasted Sesame Salad
 TXN_0697,4 Eggtarts
-TXN_0698,Fried Chicken Pasta
+TXN_0698,Combo Group 2
 TXN_0698,Combo Rice Fried Chicken
 TXN_0698,Popcorn
-TXN_0698,Combo Group 2
+TXN_0698,Fried Chicken Pasta
 TXN_0699,French Fries
 TXN_0699,Burger Shrimp
 TXN_0699,Pepsi
-TXN_0700,Pepsi
 TXN_0700,2 Fried Chicken
-TXN_0701,Combo Chanh Sang Chanh 140k
-TXN_0702,Burger Zinger
+TXN_0700,Pepsi
+TXN_0701,Lime Zest Combo 140k
 TXN_0702,French Fries
-TXN_0703,Burger Zinger
+TXN_0702,Burger Zinger
 TXN_0703,French Fries
+TXN_0703,Burger Zinger
 TXN_0704,Pepsi
 TXN_0704,Roasted Fillet Chicken Burger
+TXN_0705,3 Tenders Chicken
 TXN_0705,Lipton
 TXN_0705,2 pcs Black Pepper & Lime Fried Chicken
-TXN_0705,3 Tenders Chicken
 TXN_0706,French Fries
 TXN_0706,Burger Shrimp
 TXN_0706,Pepsi
 TXN_0707,Burger Shrimp
-TXN_0708,Pepsi
 TXN_0708,1 Fried Chicken
-TXN_0709,Burger Zinger
+TXN_0708,Pepsi
 TXN_0709,Pepsi
 TXN_0709,French Fries
-TXN_0710,Pepsi
+TXN_0709,Burger Zinger
 TXN_0710,2 Fried Chicken
+TXN_0710,Pepsi
 TXN_0711,1 Eggtart
-TXN_0712,Pepsi
 TXN_0712,1 Fried Chicken
+TXN_0712,Pepsi
 TXN_0713,Pepsi
 TXN_0713,Burger Yo (Chicken)
 TXN_0714,French Fries
 TXN_0714,Burger Shrimp
 TXN_0715,7Up
 TXN_0715,Pepsi Zero
-TXN_0716,French Fries
 TXN_0716,Pepsi
+TXN_0716,French Fries
 TXN_0716,Burger Yo (Chicken)
-TXN_0717,French Fries
 TXN_0717,Pepsi
+TXN_0717,French Fries
 TXN_0717,Roasted Fillet Chicken Burger
 TXN_0718,2 Fried Chicken
-TXN_0719,French Fries
 TXN_0719,Pepsi
+TXN_0719,French Fries
 TXN_0719,Burger Yo (Chicken)
 TXN_0720,4 Eggtarts
-TXN_0721,French Fries
 TXN_0721,Pepsi
+TXN_0721,French Fries
 TXN_0721,Roasted Fillet Chicken Burger
 TXN_0722,Burger Shrimp
 TXN_0723,Pepsi
 TXN_0723,Coleslaw
 TXN_0723,Combo Pasta & Tenders
-TXN_0724,Pepsi
 TXN_0724,2 Fried Chicken
-TXN_0725,French Fries
+TXN_0724,Pepsi
 TXN_0725,Pepsi
+TXN_0725,French Fries
 TXN_0725,Roasted Fillet Chicken Burger
-TXN_0726,Pepsi
 TXN_0726,1 Fried Chicken
-TXN_0727,Big Combo 279k
-TXN_0727,Roasted Fillet Chicken Burger
+TXN_0726,Pepsi
 TXN_0727,Cheese Shake Popcorn
+TXN_0727,Roasted Fillet Chicken Burger
+TXN_0727,Big Combo 279k
 TXN_0728,3 Tenders Chicken
-TXN_0728,Pepsi No Sugar
-TXN_0728,Combo 1 Fried Chicken
 TXN_0728,French Fries
+TXN_0728,Combo 1 Fried Chicken
+TXN_0728,Pepsi No Sugar
 TXN_0729,Couple's Bucket 189k
-TXN_0730,Pepsi
 TXN_0730,1 Fried Chicken
+TXN_0730,Pepsi
 TXN_0731,Pepsi
 TXN_0731,Burger Yo (Chicken)
-TXN_0732,Burger Zinger
 TXN_0732,Pepsi
 TXN_0732,French Fries
+TXN_0732,Burger Zinger
 TXN_0733,1 Eggtart
 TXN_0734,Pepsi
 TXN_0734,Roasted Fillet Chicken Burger
-TXN_0735,French Fries
 TXN_0735,Pepsi
+TXN_0735,French Fries
 TXN_0735,Burger Yo (Chicken)
-TXN_0736,Combo Ga Rom Ra 245k
 TXN_0736,Combo Burger Zinger
-TXN_0737,Burger Zinger
+TXN_0736,Crispy Feast Combo 245k
 TXN_0737,Pepsi
 TXN_0737,French Fries
+TXN_0737,Burger Zinger
 TXN_0738,French Fries
 TXN_0738,Roasted Fillet Chicken Burger
 TXN_0739,1 Eggtart
 TXN_0740,French Fries
 TXN_0740,Burger Shrimp
 TXN_0740,Pepsi
-TXN_0741,Party Bucket 269k
-TXN_0741,Garlic Butter Shake Fries
 TXN_0741,2 Fried Chicken
+TXN_0741,Garlic Butter Shake Fries
+TXN_0741,Party Bucket 269k
 TXN_0742,French Fries
-TXN_0742,Combo Burger Flava
 TXN_0742,Together Combo
+TXN_0742,Combo Burger Flava
 TXN_0743,1 Eggtart
-TXN_0744,Pepsi
 TXN_0744,1 Fried Chicken
-TXN_0745,Pepsi
+TXN_0744,Pepsi
 TXN_0745,2 Fried Chicken
+TXN_0745,Pepsi
 TXN_0746,Combo Rice Flava
 TXN_0747,1 Eggtart
-TXN_0748,Burger Zinger
 TXN_0748,French Fries
+TXN_0748,Burger Zinger
 TXN_0749,French Fries
 TXN_0749,Burger Yo (Chicken)
 TXN_0750,4 Eggtarts
@@ -1535,46 +1535,46 @@ TXN_0751,Burger Shrimp
 TXN_0751,Pepsi
 TXN_0752,French Fries
 TXN_0752,Burger Yo (Chicken)
-TXN_0753,Combo Burger GaYo & Fried Chicken
 TXN_0753,Popcorn Salad
-TXN_0753,Together Combo
 TXN_0753,Big Combo 199k
-TXN_0754,Burger Zinger
+TXN_0753,Together Combo
+TXN_0753,Yo Chicken Burger & Fried Chicken Combo
 TXN_0754,Pepsi
 TXN_0754,French Fries
-TXN_0755,Pepsi
+TXN_0754,Burger Zinger
 TXN_0755,2 Fried Chicken
+TXN_0755,Pepsi
 TXN_0756,French Fries
 TXN_0756,Burger Shrimp
 TXN_0756,Pepsi
-TXN_0757,French Fries
 TXN_0757,Combo Burger Zinger
-TXN_0758,Burger Zinger
+TXN_0757,French Fries
 TXN_0758,Pepsi
 TXN_0758,French Fries
+TXN_0758,Burger Zinger
 TXN_0759,1 Eggtart
 TXN_0760,Burger Zinger
 TXN_0761,French Fries
 TXN_0761,Roasted Fillet Chicken Burger
-TXN_0762,Pepsi No Sugar
 TXN_0762,Combo Group 3
+TXN_0762,Pepsi No Sugar
 TXN_0763,Pepsi
 TXN_0763,Roasted Fillet Chicken Burger
 TXN_0764,4 Eggtarts
 TXN_0765,1 Eggtart
-TXN_0766,4 Eggtarts
 TXN_0766,1 Eggtart
-TXN_0767,Pepsi
+TXN_0766,4 Eggtarts
 TXN_0767,1 Fried Chicken
-TXN_0768,Pepsi
+TXN_0767,Pepsi
 TXN_0768,Burger Shrimp
-TXN_0769,Big Combo 279k
+TXN_0768,Pepsi
 TXN_0769,Combo Group 2
 TXN_0769,Roasted Fillet Chicken Rice
+TXN_0769,Big Combo 279k
 TXN_0770,French Fries
 TXN_0770,Roasted Fillet Chicken Burger
-TXN_0771,French Fries
 TXN_0771,Pepsi
+TXN_0771,French Fries
 TXN_0771,Burger Yo (Chicken)
 TXN_0772,2 Fried Chicken
 TXN_0773,French Fries
@@ -1582,54 +1582,54 @@ TXN_0773,Burger Shrimp
 TXN_0774,Burger Shrimp
 TXN_0775,French Fries
 TXN_0775,Burger Shrimp
-TXN_0776,Combo Ga Rom Ra 245k
-TXN_0776,Combo Chill Couple
-TXN_0776,Coleslaw
+TXN_0776,Crispy Feast Combo 245k
 TXN_0776,Pepsi Zero
-TXN_0777,French Fries
+TXN_0776,Coleslaw
+TXN_0776,Combo Chill Couple
 TXN_0777,Pepsi
+TXN_0777,French Fries
 TXN_0777,Roasted Fillet Chicken Burger
-TXN_0778,Pepsi
 TXN_0778,1 Fried Chicken
-TXN_0779,French Fries
+TXN_0778,Pepsi
 TXN_0779,Pepsi
+TXN_0779,French Fries
 TXN_0779,Roasted Fillet Chicken Burger
 TXN_0780,Cheese Shake Popcorn
 TXN_0780,Combo Pasta Solo
-TXN_0781,Pepsi No Sugar
 TXN_0781,7Up
-TXN_0782,Pepsi
+TXN_0781,Pepsi No Sugar
 TXN_0782,Burger Shrimp
+TXN_0782,Pepsi
 TXN_0783,7Up
 TXN_0783,Nanban Popcorn Chicken Rice
 TXN_0784,2 Fried Chicken
-TXN_0785,Burger Zinger
 TXN_0785,French Fries
-TXN_0786,Pepsi
+TXN_0785,Burger Zinger
 TXN_0786,2 Fried Chicken
-TXN_0787,Burger Zinger
+TXN_0786,Pepsi
 TXN_0787,Pepsi
 TXN_0787,French Fries
+TXN_0787,Burger Zinger
 TXN_0788,French Fries
 TXN_0788,Burger Shrimp
 TXN_0788,Pepsi
 TXN_0789,1 Eggtart
-TXN_0790,Pepsi
 TXN_0790,2 Fried Chicken
-TXN_0791,French Fries
+TXN_0790,Pepsi
 TXN_0791,Pepsi
+TXN_0791,French Fries
 TXN_0791,Roasted Fillet Chicken Burger
-TXN_0792,French Fries
 TXN_0792,7Up
+TXN_0792,French Fries
 TXN_0793,French Fries
-TXN_0793,Pepsi No Sugar
 TXN_0793,6 Chewy Cheese
 TXN_0793,1 Roasted Fillet Chicken
-TXN_0794,Mashed Potato
+TXN_0793,Pepsi No Sugar
 TXN_0794,1 Fried Chicken
+TXN_0794,Mashed Potato
 TXN_0794,Coleslaw
-TXN_0795,French Fries
 TXN_0795,Pepsi
+TXN_0795,French Fries
 TXN_0795,Roasted Fillet Chicken Burger
 TXN_0796,French Fries
 TXN_0796,Burger Shrimp
@@ -1637,51 +1637,51 @@ TXN_0797,1 Fried Chicken
 TXN_0798,French Fries
 TXN_0798,Roasted Fillet Chicken Burger
 TXN_0799,Combo Rice & Soup
-TXN_0800,Pepsi
 TXN_0800,2 Fried Chicken
-TXN_0801,Combo Rice Nanban
+TXN_0800,Pepsi
 TXN_0801,Combo 1 Fried Chicken
+TXN_0801,Combo Rice Nanban
 TXN_0802,2 Fried Chicken
-TXN_0803,Pepsi
 TXN_0803,Burger Shrimp
+TXN_0803,Pepsi
 TXN_0804,1 Fried Chicken
-TXN_0805,French Fries
-TXN_0805,Combo 1 Fried Chicken
-TXN_0805,Popcorn
 TXN_0805,Big Combo 199k
-TXN_0806,French Fries
+TXN_0805,French Fries
+TXN_0805,Popcorn
+TXN_0805,Combo 1 Fried Chicken
 TXN_0806,Pepsi
+TXN_0806,French Fries
 TXN_0806,Burger Yo (Chicken)
-TXN_0807,Pepsi
 TXN_0807,1 Fried Chicken
+TXN_0807,Pepsi
 TXN_0808,1 Eggtart
 TXN_0809,French Fries
 TXN_0809,Burger Shrimp
 TXN_0809,Pepsi
 TXN_0810,1 Eggtart
-TXN_0811,5 Tenders Chicken
 TXN_0811,7Up
+TXN_0811,5 Tenders Chicken
 TXN_0811,Cheers Combo
-TXN_0812,3 pcs Black Pepper & Lime Fried Chicken
-TXN_0812,Combo Chill Couple
 TXN_0812,3 Fried Chicken
 TXN_0812,1 Eggtart
+TXN_0812,3 pcs Black Pepper & Lime Fried Chicken
+TXN_0812,Combo Chill Couple
 TXN_0813,Pepsi
 TXN_0813,Roasted Fillet Chicken Burger
 TXN_0814,4 Eggtarts
 TXN_0815,French Fries
 TXN_0815,Burger Shrimp
 TXN_0815,Pepsi
-TXN_0816,Pepsi
 TXN_0816,Burger Shrimp
+TXN_0816,Pepsi
 TXN_0817,Burger Yo (Chicken)
-TXN_0818,French Fries
 TXN_0818,Pepsi
+TXN_0818,French Fries
 TXN_0818,Burger Yo (Chicken)
 TXN_0819,7Up
 TXN_0819,Mashed Potato
-TXN_0820,Burger Zinger
 TXN_0820,French Fries
+TXN_0820,Burger Zinger
 TXN_0821,French Fries
 TXN_0821,Burger Shrimp
 TXN_0822,French Fries
@@ -1691,167 +1691,167 @@ TXN_0823,French Fries
 TXN_0823,Burger Yo (Chicken)
 TXN_0824,1 Eggtart
 TXN_0825,1 Eggtart
-TXN_0826,Pepsi
 TXN_0826,2 Fried Chicken
-TXN_0827,Burger Zinger
+TXN_0826,Pepsi
 TXN_0827,Pepsi
+TXN_0827,Burger Zinger
 TXN_0828,3 Garlic Fish Sauce Chicken
 TXN_0828,Roasted Fillet Chicken Rice
-TXN_0829,French Fries
 TXN_0829,Pepsi
+TXN_0829,French Fries
 TXN_0829,Burger Yo (Chicken)
 TXN_0830,3 Fried Chicken
-TXN_0831,Burger Zinger
 TXN_0831,Pepsi
 TXN_0831,French Fries
+TXN_0831,Burger Zinger
 TXN_0832,3 Fried Chicken
-TXN_0833,Pepsi
 TXN_0833,2 Fried Chicken
-TXN_0834,Pepsi
+TXN_0833,Pepsi
 TXN_0834,1 Fried Chicken
-TXN_0835,Pepsi
+TXN_0834,Pepsi
 TXN_0835,1 Fried Chicken
-TXN_0836,French Fries
+TXN_0835,Pepsi
 TXN_0836,Pepsi
+TXN_0836,French Fries
 TXN_0836,Roasted Fillet Chicken Burger
 TXN_0837,Lipton
-TXN_0837,Combo Burger GaYo & Fried Chicken
+TXN_0837,Yo Chicken Burger & Fried Chicken Combo
 TXN_0837,Combo Chill Couple
-TXN_0838,French Fries
 TXN_0838,Pepsi
+TXN_0838,French Fries
 TXN_0838,Burger Yo (Chicken)
-TXN_0839,Pepsi
 TXN_0839,1 Fried Chicken
+TXN_0839,Pepsi
 TXN_0840,2 Fried Chicken
-TXN_0841,4 Eggtarts
 TXN_0841,1 Eggtart
-TXN_0842,Pepsi
+TXN_0841,4 Eggtarts
 TXN_0842,Burger Shrimp
-TXN_0843,Burger Zinger
+TXN_0842,Pepsi
 TXN_0843,French Fries
-TXN_0844,Burger Zinger
+TXN_0843,Burger Zinger
 TXN_0844,French Fries
-TXN_0845,Burger Zinger
+TXN_0844,Burger Zinger
 TXN_0845,Pepsi
 TXN_0845,French Fries
+TXN_0845,Burger Zinger
 TXN_0846,French Fries
 TXN_0846,Burger Shrimp
 TXN_0846,Pepsi
-TXN_0847,4 Eggtarts
 TXN_0847,1 Eggtart
-TXN_0848,Combo Rice Flava
-TXN_0848,Combo Ga Rom Ra 245k
-TXN_0848,Mashed Potato
+TXN_0847,4 Eggtarts
 TXN_0848,1 Eggtart
-TXN_0849,French Fries
-TXN_0849,Pepsi No Sugar
+TXN_0848,Mashed Potato
+TXN_0848,Crispy Feast Combo 245k
+TXN_0848,Combo Rice Flava
 TXN_0849,4 Chewy Cheese
+TXN_0849,French Fries
 TXN_0849,Rice
+TXN_0849,Pepsi No Sugar
+TXN_0850,Combo Chill Couple
+TXN_0850,Burger Shrimp
 TXN_0850,1 pc Black Pepper & Lime Fried Chicken
 TXN_0850,Pepsi No Sugar
-TXN_0850,Burger Shrimp
-TXN_0850,Combo Chill Couple
 TXN_0851,French Fries
 TXN_0851,Roasted Fillet Chicken Burger
 TXN_0852,Roasted Fillet Chicken Burger
-TXN_0853,Burger Zinger
 TXN_0853,French Fries
+TXN_0853,Burger Zinger
 TXN_0854,Pepsi
 TXN_0854,Roasted Fillet Chicken Burger
 TXN_0855,2 pcs Black Pepper & Lime Fried Chicken
-TXN_0856,Burger Zinger
 TXN_0856,French Fries
-TXN_0857,Pepsi
+TXN_0856,Burger Zinger
 TXN_0857,1 Fried Chicken
-TXN_0858,4 Eggtarts
+TXN_0857,Pepsi
 TXN_0858,1 Eggtart
+TXN_0858,4 Eggtarts
 TXN_0859,Pepsi
 TXN_0859,Burger Yo (Chicken)
 TXN_0860,Burger Shrimp
-TXN_0861,Lipton
 TXN_0861,Popcorn
+TXN_0861,Lipton
 TXN_0861,Roasted Fillet Chicken Burger
-TXN_0862,Pepsi
 TXN_0862,2 Fried Chicken
+TXN_0862,Pepsi
 TXN_0863,French Fries
 TXN_0863,Roasted Fillet Chicken Burger
 TXN_0864,2 Fried Chicken
-TXN_0865,French Fries
 TXN_0865,Pepsi
+TXN_0865,French Fries
 TXN_0865,Roasted Fillet Chicken Burger
 TXN_0866,French Fries
 TXN_0866,Burger Shrimp
 TXN_0867,Burger Shrimp
-TXN_0868,4 Eggtarts
 TXN_0868,1 Eggtart
-TXN_0869,Pepsi
-TXN_0869,Popcorn Chicken Pasta
+TXN_0868,4 Eggtarts
 TXN_0869,Combo Group 2
+TXN_0869,Popcorn Chicken Pasta
+TXN_0869,Pepsi
 TXN_0870,1 Eggtart
-TXN_0871,5 Tenders Chicken
-TXN_0871,Combo Ga Rom Ra 245k
+TXN_0871,Crispy Feast Combo 245k
 TXN_0871,Popcorn
 TXN_0871,Coleslaw
-TXN_0872,Pepsi
+TXN_0871,5 Tenders Chicken
 TXN_0872,1 Fried Chicken
-TXN_0873,4 Eggtarts
+TXN_0872,Pepsi
 TXN_0873,1 Eggtart
+TXN_0873,4 Eggtarts
 TXN_0874,Pepsi
 TXN_0874,Roasted Fillet Chicken Burger
-TXN_0875,Pepsi
 TXN_0875,2 Fried Chicken
-TXN_0876,Burger Zinger
+TXN_0875,Pepsi
 TXN_0876,Pepsi
 TXN_0876,French Fries
-TXN_0877,French Fries
+TXN_0876,Burger Zinger
 TXN_0877,Pepsi
+TXN_0877,French Fries
 TXN_0877,Burger Yo (Chicken)
-TXN_0878,Pepsi
 TXN_0878,2 Fried Chicken
+TXN_0878,Pepsi
 TXN_0879,Pepsi
 TXN_0879,Roasted Fillet Chicken Burger
-TXN_0880,Combo Burger GaYo & Fried Chicken
-TXN_0881,French Fries
+TXN_0880,Yo Chicken Burger & Fried Chicken Combo
 TXN_0881,Pepsi
+TXN_0881,French Fries
 TXN_0881,Burger Yo (Chicken)
-TXN_0882,7Up
 TXN_0882,Combo Rice & Soup
+TXN_0882,7Up
 TXN_0883,4 Eggtarts
-TXN_0884,Pepsi
 TXN_0884,1 Fried Chicken
-TXN_0885,French Fries
+TXN_0884,Pepsi
 TXN_0885,Pepsi
+TXN_0885,French Fries
 TXN_0885,Roasted Fillet Chicken Burger
 TXN_0886,Burger Shrimp
-TXN_0887,Burger Zinger
 TXN_0887,Pepsi
+TXN_0887,Burger Zinger
 TXN_0888,French Fries
 TXN_0888,Burger Shrimp
 TXN_0889,French Fries
 TXN_0889,Burger Yo (Chicken)
-TXN_0890,Mashed Potato
 TXN_0890,7Up
 TXN_0890,4 Eggtarts
+TXN_0890,Mashed Potato
 TXN_0891,4 Eggtarts
 TXN_0892,2 Fried Chicken
 TXN_0893,4 Eggtarts
-TXN_0894,4 Eggtarts
 TXN_0894,1 Eggtart
-TXN_0895,Lipton
-TXN_0895,Big Combo 279k
-TXN_0895,Pepsi No Sugar
+TXN_0894,4 Eggtarts
 TXN_0895,Garlic Butter Shake Popcorn
+TXN_0895,Lipton
+TXN_0895,Pepsi No Sugar
+TXN_0895,Big Combo 279k
 TXN_0896,4 Eggtarts
-TXN_0897,Burger Zinger
 TXN_0897,French Fries
-TXN_0898,Pepsi
+TXN_0897,Burger Zinger
 TXN_0898,1 Fried Chicken
+TXN_0898,Pepsi
 TXN_0899,4 Eggtarts
 TXN_0900,4 Eggtarts
-TXN_0901,3 pcs Black Pepper & Lime Fried Chicken
 TXN_0901,Combo Group 2
-TXN_0902,Pepsi
+TXN_0901,3 pcs Black Pepper & Lime Fried Chicken
 TXN_0902,2 Fried Chicken
+TXN_0902,Pepsi
 TXN_0903,1 Fried Chicken
 TXN_0904,Combo Rice & Soup
 TXN_0905,French Fries
@@ -1859,199 +1859,199 @@ TXN_0905,Burger Shrimp
 TXN_0906,French Fries
 TXN_0906,Burger Shrimp
 TXN_0906,Pepsi
-TXN_0907,French Fries
 TXN_0907,Pepsi
+TXN_0907,French Fries
 TXN_0907,Burger Yo (Chicken)
-TXN_0908,Burger Zinger
 TXN_0908,Pepsi
 TXN_0908,French Fries
-TXN_0909,Garlic Butter Shake Popcorn
+TXN_0908,Burger Zinger
 TXN_0909,Combo Pasta Solo
-TXN_0910,Burger Zinger
+TXN_0909,Garlic Butter Shake Popcorn
 TXN_0910,French Fries
-TXN_0911,French Fries
+TXN_0910,Burger Zinger
 TXN_0911,Pepsi
+TXN_0911,French Fries
 TXN_0911,Burger Yo (Chicken)
-TXN_0912,French Fries
 TXN_0912,Pepsi
+TXN_0912,French Fries
 TXN_0912,Burger Yo (Chicken)
-TXN_0913,3 Garlic Fish Sauce Chicken
 TXN_0913,Rice
-TXN_0914,Pepsi
+TXN_0913,3 Garlic Fish Sauce Chicken
 TXN_0914,1 Fried Chicken
-TXN_0915,Pepsi
+TXN_0914,Pepsi
 TXN_0915,2 Fried Chicken
+TXN_0915,Pepsi
 TXN_0916,French Fries
-TXN_0916,Combo Tieu Tung Chill 85k
 TXN_0916,Combo Pasta Solo
 TXN_0916,Crispy Bucket 179k
+TXN_0916,Chill Party combo 85K
 TXN_0917,1 Eggtart
 TXN_0918,Couple's Bucket 189k
 TXN_0918,Pepsi Zero
 TXN_0919,French Fries
 TXN_0919,Roasted Fillet Chicken Burger
-TXN_0920,French Fries
 TXN_0920,Pepsi
+TXN_0920,French Fries
 TXN_0920,Burger Yo (Chicken)
-TXN_0921,French Fries
 TXN_0921,Pepsi
+TXN_0921,French Fries
 TXN_0921,Burger Yo (Chicken)
 TXN_0922,4 Eggtarts
 TXN_0923,1 Eggtart
-TXN_0924,Burger Zinger
-TXN_0924,Combo 2 Fried Chicken
 TXN_0924,1 Garlic Fish Sauce Chicken with rice
+TXN_0924,Combo 2 Fried Chicken
+TXN_0924,Burger Zinger
 TXN_0925,Pepsi
 TXN_0925,Roasted Fillet Chicken Burger
 TXN_0926,1 Eggtart
-TXN_0927,Pepsi
 TXN_0927,Burger Shrimp
-TXN_0928,Pepsi
+TXN_0927,Pepsi
 TXN_0928,1 Fried Chicken
+TXN_0928,Pepsi
 TXN_0929,1 Eggtart
-TXN_0930,Pepsi
 TXN_0930,2 Fried Chicken
+TXN_0930,Pepsi
 TXN_0931,French Fries
 TXN_0931,Roasted Fillet Chicken Burger
-TXN_0932,Burger Zinger
 TXN_0932,French Fries
+TXN_0932,Burger Zinger
 TXN_0933,French Fries
 TXN_0933,Roasted Fillet Chicken Burger
-TXN_0934,Pepsi
 TXN_0934,1 Fried Chicken
-TXN_0935,Pepsi
+TXN_0934,Pepsi
+TXN_0935,Combo Pasta Solo
 TXN_0935,Coleslaw
 TXN_0935,Combo Burger Flava
-TXN_0935,Combo Pasta Solo
+TXN_0935,Pepsi
+TXN_0936,Combo Group 2
 TXN_0936,7Up
 TXN_0936,Sausage Chicken Pasta
-TXN_0936,Combo Group 2
 TXN_0937,Burger Zinger
-TXN_0938,Pepsi
 TXN_0938,1 Fried Chicken
+TXN_0938,Pepsi
 TXN_0939,1 Eggtart
 TXN_0940,1 Eggtart
 TXN_0941,3 pcs Black Pepper & Lime Fried Chicken
 TXN_0942,Roasted Sesame Salad
 TXN_0942,Combo Group 2
-TXN_0943,French Fries
 TXN_0943,Pepsi
+TXN_0943,French Fries
 TXN_0943,Burger Yo (Chicken)
 TXN_0944,French Fries
 TXN_0944,Burger Shrimp
-TXN_0945,Pepsi
 TXN_0945,1 Fried Chicken
+TXN_0945,Pepsi
 TXN_0946,Happy Bucket 159k
-TXN_0947,1 Roasted Fillet Chicken
 TXN_0947,2 Fried Chicken
-TXN_0948,5 Tenders Chicken
-TXN_0948,2 pcs Black Pepper & Lime Fried Chicken
+TXN_0947,1 Roasted Fillet Chicken
 TXN_0948,3 Fried Chicken
-TXN_0949,Burger Zinger
+TXN_0948,2 pcs Black Pepper & Lime Fried Chicken
+TXN_0948,5 Tenders Chicken
 TXN_0949,Pepsi
 TXN_0949,French Fries
-TXN_0950,Lipton
+TXN_0949,Burger Zinger
+TXN_0950,1 Garlic Fish Sauce Chicken with rice
 TXN_0950,Cheese Shake Fries
 TXN_0950,Popcorn Chicken Pasta
-TXN_0950,1 Garlic Fish Sauce Chicken with rice
+TXN_0950,Lipton
 TXN_0951,Burger Yo (Chicken)
 TXN_0952,Burger Zinger
-TXN_0953,Burger Zinger
 TXN_0953,Pepsi
-TXN_0954,6 Chewy Cheese
+TXN_0953,Burger Zinger
 TXN_0954,Popcorn
-TXN_0955,Burger Zinger
+TXN_0954,6 Chewy Cheese
 TXN_0955,Pepsi
 TXN_0955,French Fries
+TXN_0955,Burger Zinger
 TXN_0956,1 Eggtart
 TXN_0957,1 Eggtart
 TXN_0958,4 Eggtarts
 TXN_0959,1 Eggtart
 TXN_0960,4 Eggtarts
-TXN_0961,4 Eggtarts
 TXN_0961,1 Eggtart
-TXN_0962,French Fries
+TXN_0961,4 Eggtarts
 TXN_0962,Pepsi
+TXN_0962,French Fries
 TXN_0962,Roasted Fillet Chicken Burger
-TXN_0963,Pepsi
 TXN_0963,1 Fried Chicken
-TXN_0964,Pepsi
+TXN_0963,Pepsi
 TXN_0964,1 Fried Chicken
-TXN_0965,French Fries
+TXN_0964,Pepsi
 TXN_0965,Pepsi
+TXN_0965,French Fries
 TXN_0965,Roasted Fillet Chicken Burger
 TXN_0966,Roasted Sesame Salad
-TXN_0967,Pepsi
 TXN_0967,2 Fried Chicken
-TXN_0968,Pepsi
+TXN_0967,Pepsi
 TXN_0968,2 Fried Chicken
-TXN_0969,Pepsi
+TXN_0968,Pepsi
 TXN_0969,1 Fried Chicken
+TXN_0969,Pepsi
 TXN_0970,1 Fried Chicken
 TXN_0971,Mashed Potato
 TXN_0971,Coleslaw
 TXN_0971,Combo Pasta & Tenders
 TXN_0972,4 Eggtarts
 TXN_0973,Burger Yo (Chicken)
-TXN_0974,Burger Zinger
 TXN_0974,Pepsi
-TXN_0975,Pepsi
+TXN_0974,Burger Zinger
 TXN_0975,1 Fried Chicken
+TXN_0975,Pepsi
 TXN_0976,French Fries
 TXN_0976,Burger Shrimp
 TXN_0976,Pepsi
-TXN_0977,Pepsi
-TXN_0977,Combo Chanh Sang Chanh 140k
+TXN_0977,Lime Zest Combo 140k
 TXN_0977,1 pc Black Pepper & Lime Fried Chicken Rice
-TXN_0978,Garlic Butter Shake Popcorn
+TXN_0977,Pepsi
+TXN_0978,1 pc Black Pepper & Lime Fried Chicken Rice
 TXN_0978,Sausage Chicken Pasta
 TXN_0978,Pepsi No Sugar
-TXN_0978,1 pc Black Pepper & Lime Fried Chicken Rice
+TXN_0978,Garlic Butter Shake Popcorn
 TXN_0979,French Fries
 TXN_0979,Roasted Fillet Chicken Burger
-TXN_0980,Burger Zinger
 TXN_0980,Pepsi
-TXN_0981,Burger Zinger
+TXN_0980,Burger Zinger
 TXN_0981,Pepsi
 TXN_0981,French Fries
+TXN_0981,Burger Zinger
 TXN_0982,1 Eggtart
 TXN_0983,1 Fried Chicken
-TXN_0984,French Fries
 TXN_0984,Pepsi
+TXN_0984,French Fries
 TXN_0984,Burger Yo (Chicken)
-TXN_0985,Pepsi
 TXN_0985,1 Fried Chicken
+TXN_0985,Pepsi
 TXN_0986,French Fries
 TXN_0986,Roasted Fillet Chicken Burger
 TXN_0987,4 Eggtarts
 TXN_0988,French Fries
 TXN_0988,Roasted Fillet Chicken Burger
+TXN_0989,Sausage Chicken Pasta
 TXN_0989,Pepsi
 TXN_0989,Garlic Butter Shake Popcorn
-TXN_0989,Sausage Chicken Pasta
-TXN_0990,Pepsi
 TXN_0990,Mashed Potato
+TXN_0990,Pepsi
 TXN_0990,Big Combo 279k
 TXN_0991,1 Eggtart
 TXN_0992,4 Eggtarts
-TXN_0993,Lipton
 TXN_0993,7Up
+TXN_0993,Lipton
 TXN_0994,French Fries
 TXN_0994,Coleslaw
 TXN_0995,4 Eggtarts
-TXN_0996,Lipton
-TXN_0996,7Up
 TXN_0996,Rice
+TXN_0996,7Up
+TXN_0996,Lipton
 TXN_0996,Seaweed Soup
 TXN_0997,2 Fried Chicken
-TXN_0998,Pepsi
 TXN_0998,1 Fried Chicken
-TXN_0999,French Fries
+TXN_0998,Pepsi
 TXN_0999,Pepsi
+TXN_0999,French Fries
 TXN_0999,Roasted Fillet Chicken Burger
 TXN_1000,Roasted Fillet Chicken Burger
-TXN_1001,French Fries
 TXN_1001,Pepsi
+TXN_1001,French Fries
 TXN_1001,Burger Yo (Chicken)
 TXN_1002,1 Roasted Fillet Chicken
 TXN_1003,Pepsi
@@ -2061,36 +2061,36 @@ TXN_1005,French Fries
 TXN_1005,Burger Shrimp
 TXN_1005,Pepsi
 TXN_1006,Burger Zinger
-TXN_1007,French Fries
 TXN_1007,Pepsi
+TXN_1007,French Fries
 TXN_1007,Burger Yo (Chicken)
 TXN_1008,4 Eggtarts
 TXN_1009,French Fries
-TXN_1009,Pepsi
 TXN_1009,1 Eggtart
-TXN_1010,French Fries
+TXN_1009,Pepsi
 TXN_1010,Pepsi
+TXN_1010,French Fries
 TXN_1010,Roasted Fillet Chicken Burger
 TXN_1011,1 Eggtart
 TXN_1012,1 Eggtart
-TXN_1013,Pepsi
 TXN_1013,2 Fried Chicken
-TXN_1014,Pepsi
+TXN_1013,Pepsi
 TXN_1014,2 Fried Chicken
-TXN_1015,Pepsi
+TXN_1014,Pepsi
 TXN_1015,1 Fried Chicken
+TXN_1015,Pepsi
 TXN_1016,7Up
 TXN_1017,4 Eggtarts
-TXN_1018,Pepsi
 TXN_1018,2 Fried Chicken
+TXN_1018,Pepsi
 TXN_1019,1 Eggtart
-TXN_1020,Pepsi
 TXN_1020,1 Fried Chicken
-TXN_1021,Pepsi
+TXN_1020,Pepsi
 TXN_1021,1 Fried Chicken
+TXN_1021,Pepsi
 TXN_1022,3 Tenders Chicken
-TXN_1022,Combo Group 2
 TXN_1022,2 Fried Chicken
+TXN_1022,Combo Group 2
 TXN_1023,Burger Zinger
 TXN_1024,Cheese Shake Fries
 TXN_1025,4 Eggtarts
@@ -2100,50 +2100,50 @@ TXN_1028,Roasted Fillet Chicken Burger
 TXN_1029,French Fries
 TXN_1029,Burger Shrimp
 TXN_1029,Pepsi
-TXN_1030,Lipton
-TXN_1030,Combo Chanh Sang Chanh 140k
+TXN_1030,Lime Zest Combo 140k
 TXN_1030,Popcorn
+TXN_1030,Lipton
 TXN_1030,Combo Group 2
 TXN_1031,Pepsi
 TXN_1031,Burger Yo (Chicken)
 TXN_1032,7Up
 TXN_1033,Pepsi
 TXN_1033,Roasted Fillet Chicken Burger
-TXN_1034,Burger Zinger
 TXN_1034,French Fries
-TXN_1035,4 Eggtarts
+TXN_1034,Burger Zinger
 TXN_1035,1 Eggtart
+TXN_1035,4 Eggtarts
 TXN_1036,French Fries
 TXN_1036,Burger Yo (Chicken)
 TXN_1037,1 Fried Chicken
-TXN_1038,Pepsi
 TXN_1038,2 Fried Chicken
-TXN_1039,Pepsi
+TXN_1038,Pepsi
 TXN_1039,1 Fried Chicken
-TXN_1040,French Fries
+TXN_1039,Pepsi
 TXN_1040,Pepsi
+TXN_1040,French Fries
 TXN_1040,Burger Yo (Chicken)
 TXN_1041,Pepsi
-TXN_1042,Coleslaw
 TXN_1042,Combo Group 2
 TXN_1042,1 pc Black Pepper & Lime Fried Chicken Rice
+TXN_1042,Coleslaw
+TXN_1043,Yo Chicken Burger & Fried Chicken Combo
 TXN_1043,Pepsi
 TXN_1043,2 pcs Black Pepper & Lime Fried Chicken
-TXN_1043,Combo Burger GaYo & Fried Chicken
 TXN_1044,Lipton
-TXN_1044,Party Bucket 269k
 TXN_1044,Burger Shrimp
 TXN_1044,Burger Yo (Chicken)
-TXN_1045,Pepsi
+TXN_1044,Party Bucket 269k
 TXN_1045,1 Fried Chicken
-TXN_1046,Pepsi
+TXN_1045,Pepsi
 TXN_1046,Burger Shrimp
+TXN_1046,Pepsi
 TXN_1047,4 Eggtarts
-TXN_1048,French Fries
 TXN_1048,Pepsi
+TXN_1048,French Fries
 TXN_1048,Roasted Fillet Chicken Burger
-TXN_1049,Pepsi
 TXN_1049,1 Fried Chicken
+TXN_1049,Pepsi
 TXN_1050,4 Eggtarts
 TXN_1051,3 Garlic Fish Sauce Chicken
 TXN_1051,Combo Chill Single
@@ -2151,213 +2151,213 @@ TXN_1052,French Fries
 TXN_1052,Burger Shrimp
 TXN_1052,Pepsi
 TXN_1053,Mashed Potato
-TXN_1054,Pepsi
 TXN_1054,1 Fried Chicken
-TXN_1055,French Fries
+TXN_1054,Pepsi
 TXN_1055,Pepsi
+TXN_1055,French Fries
 TXN_1055,Burger Yo (Chicken)
-TXN_1056,Lipton
 TXN_1056,Cheese Shake Popcorn
+TXN_1056,Lipton
 TXN_1057,French Fries
 TXN_1057,Burger Shrimp
-TXN_1058,Burger Zinger
 TXN_1058,French Fries
+TXN_1058,Burger Zinger
 TXN_1059,1 Eggtart
-TXN_1060,Pepsi
 TXN_1060,Burger Shrimp
+TXN_1060,Pepsi
 TXN_1061,Pepsi
 TXN_1061,Roasted Fillet Chicken Burger
 TXN_1062,French Fries
 TXN_1062,Burger Shrimp
-TXN_1063,Popcorn
-TXN_1063,1 Roasted Fillet Chicken
-TXN_1063,Big Combo 199k
 TXN_1063,Roasted Fillet Chicken Rice
-TXN_1064,Pepsi
+TXN_1063,Popcorn
+TXN_1063,Big Combo 199k
+TXN_1063,1 Roasted Fillet Chicken
 TXN_1064,1 Fried Chicken
-TXN_1065,Pepsi
+TXN_1064,Pepsi
 TXN_1065,Burger Shrimp
-TXN_1066,Pepsi
+TXN_1065,Pepsi
 TXN_1066,2 Fried Chicken
+TXN_1066,Pepsi
 TXN_1067,1 Eggtart
 TXN_1068,Seaweed Soup
 TXN_1069,1 Fried Chicken
-TXN_1070,Pepsi
 TXN_1070,2 Fried Chicken
-TXN_1071,Burger Zinger
+TXN_1070,Pepsi
 TXN_1071,French Fries
-TXN_1072,4 Eggtarts
+TXN_1071,Burger Zinger
 TXN_1072,1 Eggtart
+TXN_1072,4 Eggtarts
 TXN_1073,French Fries
 TXN_1073,Burger Yo (Chicken)
-TXN_1074,Garlic Butter Shake Popcorn
 TXN_1074,Coleslaw
-TXN_1075,Pepsi
+TXN_1074,Garlic Butter Shake Popcorn
 TXN_1075,1 Fried Chicken
-TXN_1076,Pepsi
+TXN_1075,Pepsi
 TXN_1076,1 Fried Chicken
-TXN_1077,Pepsi
+TXN_1076,Pepsi
 TXN_1077,2 Fried Chicken
-TXN_1078,Combo Burger Flava
+TXN_1077,Pepsi
 TXN_1078,Together Combo
-TXN_1079,French Fries
+TXN_1078,Combo Burger Flava
 TXN_1079,Pepsi
+TXN_1079,French Fries
 TXN_1079,Burger Yo (Chicken)
-TXN_1080,Lipton
 TXN_1080,4 Chewy Cheese
-TXN_1080,Combo Chanh Sang Chanh 140k
+TXN_1080,Lime Zest Combo 140k
+TXN_1080,Lipton
 TXN_1080,Roasted Sesame Salad
-TXN_1081,Pepsi
 TXN_1081,Burger Shrimp
-TXN_1082,Pepsi
+TXN_1081,Pepsi
 TXN_1082,1 Fried Chicken
-TXN_1083,French Fries
+TXN_1082,Pepsi
 TXN_1083,Pepsi
+TXN_1083,French Fries
 TXN_1083,Burger Yo (Chicken)
 TXN_1084,6 Chewy Cheese
 TXN_1084,Popcorn
 TXN_1084,1 Roasted Fillet Chicken
 TXN_1084,6 Fried Chicken
 TXN_1085,Coleslaw
-TXN_1086,Combo Rice Flava
+TXN_1086,1 Garlic Fish Sauce Chicken with rice
 TXN_1086,Cheers Combo
 TXN_1086,Coleslaw
-TXN_1086,1 Garlic Fish Sauce Chicken with rice
+TXN_1086,Combo Rice Flava
 TXN_1087,1 Eggtart
-TXN_1088,French Fries
 TXN_1088,Pepsi
+TXN_1088,French Fries
 TXN_1088,Burger Yo (Chicken)
-TXN_1089,French Fries
 TXN_1089,Pepsi
+TXN_1089,French Fries
 TXN_1089,Burger Yo (Chicken)
-TXN_1090,French Fries
 TXN_1090,Pepsi
+TXN_1090,French Fries
 TXN_1090,Roasted Fillet Chicken Burger
-TXN_1091,French Fries
 TXN_1091,Pepsi
+TXN_1091,French Fries
 TXN_1091,Roasted Fillet Chicken Burger
 TXN_1092,1 Eggtart
-TXN_1093,French Fries
 TXN_1093,Pepsi
+TXN_1093,French Fries
 TXN_1093,Roasted Fillet Chicken Burger
 TXN_1094,Lipton
 TXN_1095,Combo Rice Fried Chicken
 TXN_1096,2 Fried Chicken
-TXN_1097,Burger Zinger
 TXN_1097,French Fries
-TXN_1098,Pepsi
+TXN_1097,Burger Zinger
 TXN_1098,Lipton
-TXN_1099,Pepsi
+TXN_1098,Pepsi
 TXN_1099,1 Fried Chicken
-TXN_1100,Burger Zinger
+TXN_1099,Pepsi
 TXN_1100,Pepsi
 TXN_1100,French Fries
-TXN_1101,French Fries
+TXN_1100,Burger Zinger
 TXN_1101,Pepsi
+TXN_1101,French Fries
 TXN_1101,Roasted Fillet Chicken Burger
-TXN_1102,Pepsi
-TXN_1102,2 Garlic Fish Sauce Chicken
 TXN_1102,3 pcs Black Pepper & Lime Fried Chicken
 TXN_1102,Combo 1 Fried Chicken
+TXN_1102,Pepsi
+TXN_1102,2 Garlic Fish Sauce Chicken
 TXN_1103,1 Fried Chicken
-TXN_1104,Pepsi
 TXN_1104,1 Fried Chicken
+TXN_1104,Pepsi
 TXN_1105,1 Eggtart
-TXN_1106,5 Tenders Chicken
+TXN_1106,Lime Zest Combo 140k
 TXN_1106,Popcorn Chicken Pasta
 TXN_1106,Coleslaw
-TXN_1106,Combo Chanh Sang Chanh 140k
+TXN_1106,5 Tenders Chicken
 TXN_1107,4 Eggtarts
-TXN_1108,Pepsi
 TXN_1108,Rice
-TXN_1108,6 Fried Chicken
+TXN_1108,Pepsi
 TXN_1108,1 Eggtart
+TXN_1108,6 Fried Chicken
 TXN_1109,French Fries
 TXN_1109,Roasted Fillet Chicken Burger
-TXN_1110,Combo Burger GaYo & Fried Chicken
-TXN_1111,Pepsi
+TXN_1110,Yo Chicken Burger & Fried Chicken Combo
 TXN_1111,2 Fried Chicken
-TXN_1112,French Fries
+TXN_1111,Pepsi
 TXN_1112,Pepsi
+TXN_1112,French Fries
 TXN_1112,Burger Yo (Chicken)
-TXN_1113,French Fries
 TXN_1113,Pepsi
+TXN_1113,French Fries
 TXN_1113,Roasted Fillet Chicken Burger
-TXN_1114,French Fries
 TXN_1114,Pepsi
+TXN_1114,French Fries
 TXN_1114,Roasted Fillet Chicken Burger
-TXN_1115,Burger Zinger
 TXN_1115,Pepsi
 TXN_1115,French Fries
+TXN_1115,Burger Zinger
 TXN_1116,Mashed Potato
 TXN_1116,Sausage Chicken Pasta
 TXN_1116,Combo Pasta & Tenders
-TXN_1117,Pepsi
 TXN_1117,2 Fried Chicken
-TXN_1118,Pepsi
+TXN_1117,Pepsi
 TXN_1118,2 Fried Chicken
-TXN_1119,Lipton
-TXN_1119,Garlic Butter Shake Popcorn
+TXN_1118,Pepsi
 TXN_1119,Combo Rice Flava
+TXN_1119,Lipton
 TXN_1119,Garlic Butter Shake Fries
-TXN_1120,Pepsi
+TXN_1119,Garlic Butter Shake Popcorn
 TXN_1120,1 Fried Chicken
+TXN_1120,Pepsi
 TXN_1121,2 Fried Chicken
 TXN_1122,1 Eggtart
 TXN_1123,4 Chewy Cheese
 TXN_1123,4 Eggtarts
-TXN_1124,Pepsi
 TXN_1124,1 Fried Chicken
+TXN_1124,Pepsi
 TXN_1125,Burger Yo (Chicken)
-TXN_1126,Pepsi
 TXN_1126,2 Fried Chicken
-TXN_1127,Pepsi
+TXN_1126,Pepsi
 TXN_1127,1 Fried Chicken
+TXN_1127,Pepsi
 TXN_1128,1 Fried Chicken
-TXN_1129,4 Eggtarts
 TXN_1129,Combo 2 Fried Chicken
-TXN_1129,Combo Tieu Tung Chill 85k
-TXN_1130,Pepsi
+TXN_1129,4 Eggtarts
+TXN_1129,Chill Party combo 85K
 TXN_1130,1 Fried Chicken
+TXN_1130,Pepsi
 TXN_1131,4 Eggtarts
-TXN_1132,French Fries
 TXN_1132,Pepsi
+TXN_1132,French Fries
 TXN_1132,Roasted Fillet Chicken Burger
-TXN_1133,Burger Zinger
 TXN_1133,Pepsi
 TXN_1133,French Fries
+TXN_1133,Burger Zinger
 TXN_1134,Pepsi
 TXN_1134,Burger Yo (Chicken)
 TXN_1135,4 Eggtarts
-TXN_1136,Pepsi
 TXN_1136,Combo 2 Fried Chicken
-TXN_1137,Pepsi
+TXN_1136,Pepsi
 TXN_1137,2 Fried Chicken
-TXN_1138,Burger Zinger
+TXN_1137,Pepsi
 TXN_1138,Pepsi
 TXN_1138,French Fries
+TXN_1138,Burger Zinger
 TXN_1139,2 Fried Chicken
+TXN_1140,Rice
 TXN_1140,French Fries
 TXN_1140,Combo Burger Shrimp
-TXN_1140,Rice
 TXN_1141,4 Eggtarts
-TXN_1142,Pepsi No Sugar
 TXN_1142,Roasted Sesame Salad
 TXN_1142,1 Eggtart
+TXN_1142,Pepsi No Sugar
+TXN_1143,Together Combo
 TXN_1143,Cheese Shake Fries
 TXN_1143,Combo Burger Flava
-TXN_1143,Together Combo
 TXN_1143,Burger Yo (Chicken)
 TXN_1144,1 Eggtart
 TXN_1145,French Fries
 TXN_1145,Burger Shrimp
 TXN_1145,Pepsi
-TXN_1146,Pepsi
 TXN_1146,2 Fried Chicken
+TXN_1146,Pepsi
 TXN_1147,French Fries
 TXN_1147,Burger Shrimp
-TXN_1148,Pepsi
 TXN_1148,2 Fried Chicken
+TXN_1148,Pepsi
 TXN_1149,1 Fried Chicken
 TXN_1150,1 Eggtart
 TXN_1151,Pepsi
@@ -2370,18 +2370,18 @@ TXN_1155,6 Chewy Cheese
 TXN_1156,French Fries
 TXN_1156,Burger Shrimp
 TXN_1157,Popcorn
-TXN_1157,Combo Chill Single
 TXN_1157,Coleslaw
+TXN_1157,Combo Chill Single
 TXN_1158,Pepsi
 TXN_1158,Roasted Fillet Chicken Burger
-TXN_1159,Pepsi
 TXN_1159,2 Fried Chicken
-TXN_1160,Pepsi
+TXN_1159,Pepsi
 TXN_1160,2 Fried Chicken
+TXN_1160,Pepsi
 TXN_1161,1 Eggtart
-TXN_1162,Burger Zinger
 TXN_1162,Pepsi
 TXN_1162,French Fries
+TXN_1162,Burger Zinger
 TXN_1163,4 Eggtarts
 TXN_1164,French Fries
 TXN_1164,Burger Shrimp
@@ -2394,74 +2394,74 @@ TXN_1166,Burger Shrimp
 TXN_1166,Pepsi
 TXN_1167,1 Fried Chicken
 TXN_1168,1 Eggtart
-TXN_1169,2 Garlic Fish Sauce Chicken
 TXN_1169,Combo Pasta Solo
-TXN_1169,Burger Yo (Chicken)
 TXN_1169,1 Garlic Fish Sauce Chicken
-TXN_1170,Pepsi
+TXN_1169,Burger Yo (Chicken)
+TXN_1169,2 Garlic Fish Sauce Chicken
 TXN_1170,1 Fried Chicken
-TXN_1171,Pepsi
+TXN_1170,Pepsi
 TXN_1171,2 Fried Chicken
+TXN_1171,Pepsi
 TXN_1172,French Fries
 TXN_1172,Burger Yo (Chicken)
 TXN_1173,French Fries
 TXN_1173,Burger Shrimp
 TXN_1173,Pepsi
-TXN_1174,Pepsi
 TXN_1174,2 Fried Chicken
+TXN_1174,Pepsi
 TXN_1175,French Fries
 TXN_1175,Burger Shrimp
 TXN_1175,Pepsi
-TXN_1176,French Fries
 TXN_1176,Pepsi
+TXN_1176,French Fries
 TXN_1176,Roasted Fillet Chicken Burger
-TXN_1177,Pepsi
 TXN_1177,2 Fried Chicken
+TXN_1177,Pepsi
 TXN_1178,4 Eggtarts
-TXN_1179,Pepsi
 TXN_1179,1 Fried Chicken
+TXN_1179,Pepsi
 TXN_1180,Pepsi
 TXN_1180,Roasted Fillet Chicken Burger
-TXN_1181,Pepsi
-TXN_1181,7Up
 TXN_1181,Rice
+TXN_1181,7Up
+TXN_1181,Pepsi
 TXN_1181,Burger Zinger
 TXN_1182,1 pc Black Pepper & Lime Fried Chicken
 TXN_1183,French Fries
 TXN_1183,Roasted Fillet Chicken Burger
 TXN_1184,4 Eggtarts
-TXN_1185,Pepsi
 TXN_1185,2 Fried Chicken
-TXN_1186,Pepsi
+TXN_1185,Pepsi
 TXN_1186,2 Fried Chicken
-TXN_1187,French Fries
+TXN_1186,Pepsi
 TXN_1187,Pepsi
+TXN_1187,French Fries
 TXN_1187,Burger Yo (Chicken)
-TXN_1188,French Fries
 TXN_1188,Pepsi
+TXN_1188,French Fries
 TXN_1188,Burger Yo (Chicken)
-TXN_1189,Burger Zinger
 TXN_1189,Pepsi
 TXN_1189,French Fries
-TXN_1190,French Fries
+TXN_1189,Burger Zinger
 TXN_1190,Pepsi
+TXN_1190,French Fries
 TXN_1190,Burger Yo (Chicken)
-TXN_1191,Burger Zinger
 TXN_1191,Pepsi
 TXN_1191,French Fries
+TXN_1191,Burger Zinger
 TXN_1192,French Fries
 TXN_1192,Roasted Fillet Chicken Burger
-TXN_1193,Pepsi
 TXN_1193,Burger Shrimp
-TXN_1194,Pepsi
+TXN_1193,Pepsi
 TXN_1194,2 Fried Chicken
-TXN_1195,French Fries
+TXN_1194,Pepsi
 TXN_1195,Pepsi
+TXN_1195,French Fries
 TXN_1195,Roasted Fillet Chicken Burger
 TXN_1196,4 Eggtarts
 TXN_1197,4 Eggtarts
 TXN_1198,1 Fried Chicken
-TXN_1199,Pepsi
 TXN_1199,2 Fried Chicken
+TXN_1199,Pepsi
 TXN_1200,French Fries
 TXN_1200,Burger Yo (Chicken)
