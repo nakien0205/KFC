@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KFC Recommender Specs Review - Party Keepsake</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #0b0c10;
+            color: #c5c6c7;
+        }
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
+        }
+        .kfc-red {
+            color: #e4002b;
+        }
+        .kfc-bg-red {
+            background-color: #e4002b;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 1.5rem;
+            backdrop-filter: blur(12px);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(228, 0, 43, 0.4);
+            box-shadow: 0 10px 30px -15px rgba(228, 0, 43, 0.2);
+        }
+    </style>
+</head>
+<body class="min-h-screen py-12 px-4 md:px-8">
+    <div class="max-w-4xl mx-auto">
+        <!-- Header -->
+        <div class="text-center mb-16">
+            <span class="px-3 py-1 rounded-full text-xs font-semibold tracking-wider kfc-bg-red text-white uppercase">Party Keepsake</span>
+            <h1 class="text-4xl md:text-5xl font-extrabold mt-4 text-white tracking-tight">Specs Review Roundtable</h1>
+            <p class="text-gray-400 mt-2">KFC Kiosk Recommendation System — July 6, 2026</p>
+        </div>
+
+        <!-- Roster Grid -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+            <div class="glass-card p-4 text-center">
+                <div class="text-3xl mb-1">🛠️</div>
+                <div class="font-bold text-white">Winston</div>
+                <div class="text-xs text-gray-400">Architect</div>
+            </div>
+            <div class="glass-card p-4 text-center">
+                <div class="text-3xl mb-1">💻</div>
+                <div class="font-bold text-white">Amelia</div>
+                <div class="text-xs text-gray-400">Senior Developer</div>
+            </div>
+            <div class="glass-card p-4 text-center">
+                <div class="text-3xl mb-1">🎨</div>
+                <div class="font-bold text-white">Sally</div>
+                <div class="text-xs text-gray-400">UX/UI Designer</div>
+            </div>
+            <div class="glass-card p-4 text-center">
+                <div class="text-3xl mb-1">🧪</div>
+                <div class="font-bold text-white">Murat</div>
+                <div class="text-xs text-gray-400">Test Architect</div>
+            </div>
+        </div>
+
+        <!-- Transcript Section -->
+        <div class="space-y-6">
+            <h2 class="text-2xl font-bold text-white border-b border-gray-800 pb-3 mb-6">Key Decisions & Dialogue</h2>
+
+            <!-- Message 1 -->
+            <div class="flex gap-4">
+                <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-xl shrink-0">🛠️</div>
+                <div class="glass-card p-5 w-full">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-bold text-white">Winston</span>
+                        <span class="text-xs text-gray-500">Architect</span>
+                    </div>
+                    <p class="text-gray-300">Offline data mining first (Epic 1) is solid. It establishes a dependency-free data layer before we touch FastAPI. Let's make sure we keep clear boundaries on the online rerankers.</p>
+                </div>
+            </div>
+
+            <!-- Message 2 -->
+            <div class="flex gap-4">
+                <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-xl shrink-0">🎨</div>
+                <div class="glass-card p-5 w-full">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-bold text-white">Sally</span>
+                        <span class="text-xs text-gray-500">UX/UI Designer</span>
+                    </div>
+                    <p class="text-gray-300">Using the original KFC red and white colors is the right call! It keeps the interface recognizable and brand-aligned, rather than a generic dark developer-style dashboard. Let's apply a subtle paper texture to cards to make it feel tangible.</p>
+                </div>
+            </div>
+
+            <!-- Message 3 -->
+            <div class="flex gap-4">
+                <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-xl shrink-0">🧪</div>
+                <div class="glass-card p-5 w-full">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-bold text-white">Murat</span>
+                        <span class="text-xs text-gray-500">Test Architect</span>
+                    </div>
+                    <p class="text-gray-300">We've tightened the backtest simulator math. The customer acceptance probability is now directly tied to the mined rule's confidence score and current context: <code class="mono text-xs text-red-400 bg-red-950/20 px-1 py-0.5 rounded">P(Accept) = Confidence * (1 + Promo_Boost) * (1 + Time_Boost)</code>. It makes the simulation outcomes mathematically explainable to hackathon judges.</p>
+                </div>
+            </div>
+
+            <!-- Message 4 -->
+            <div class="flex gap-4">
+                <div class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center text-xl shrink-0">💻</div>
+                <div class="glass-card p-5 w-full">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="font-bold text-white">Amelia</span>
+                        <span class="text-xs text-gray-500">Senior Developer</span>
+                    </div>
+                    <p class="text-gray-300">And by bypassing the GenAI copywriting filter during the backtest replay (since text copy doesn't affect transaction totals), we save thousands of API calls, stay within budget, and run the simulator in milliseconds instead of minutes!</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Takeaways -->
+        <div class="mt-16 bg-red-950/10 border border-red-900/30 rounded-2xl p-6">
+            <h3 class="font-bold text-white text-lg mb-4 flex items-center gap-2">
+                <span class="text-xl">🏆</span> Major Specs Takeaways
+            </h3>
+            <ul class="space-y-3 text-sm text-gray-300">
+                <li class="flex items-start gap-2">
+                    <span class="kfc-red mt-1">✓</span>
+                    <div><strong>Original KFC Branding:</strong> The UI matches the original red and white brand colors, using a premium white paper layout and clean red brand accents.</div>
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="kfc-red mt-1">✓</span>
+                    <div><strong>Explainable Backtest Math:</strong> Customer simulation acceptance logic is formally bound to association confidence scores, promotions, and time of day.</div>
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="kfc-red mt-1">✓</span>
+                    <div><strong>Cost Optimization:</strong> Backtest harness bypasses LLM text generation to enable offline, zero-cost, high-speed simulation.</div>
+                </li>
+                <li class="flex items-start gap-2">
+                    <span class="kfc-red mt-1">✓</span>
+                    <div><strong>Simplified Scope:</strong> Security constraints (CORS, route authorization, rate-limiting) are intentionally skipped to optimize development speed.</div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Footer -->
+        <div class="text-center text-xs text-gray-600 mt-16 border-t border-gray-900 pt-6">
+            Generated by Antigravity Roster Review &bull; Project KFC Kiosk Recommender
+        </div>
+    </div>
+</body>
+</html>

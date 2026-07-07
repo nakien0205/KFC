@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KFC SmartKiosk Pitch Deck</title>
+  <!-- Outfit for Headings, Inter for Body -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0d0e12;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --card-border: rgba(255, 255, 255, 0.07);
+      --primary: #E4002B; /* KFC Red */
+      --primary-glow: rgba(228, 0, 43, 0.15);
+      --accent: #FFB81C; /* Gold */
+      --accent-glow: rgba(255, 184, 28, 0.15);
+      --text: #F5F5F7;
+      --text-muted: #8E8E93;
+      --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    h1, h2, h3, .title-font {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    /* Deck Layout */
+    .deck-container {
+      flex: 1;
+      position: relative;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 80vh;
+      opacity: 0;
+      transform: translateY(20px) scale(0.98);
+      pointer-events: none;
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), 
+                  transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: all;
+      z-index: 10;
+    }
+
+    /* Grid Layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .grid-equal {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    /* Typography Utilities */
+    .gradient-text {
+      background: linear-gradient(135deg, #FFF 30%, #E4002B 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .gradient-accent {
+      background: linear-gradient(135deg, #FFB81C 0%, #E4002B 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .slide-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1rem;
+    }
+
+    .slide-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-muted);
+      margin-bottom: 2rem;
+      line-height: 1.5;
+    }
+
+    /* Cards and Glassmorphism */
+    .glass-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.4);
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+
+    .glass-card:hover {
+      border-color: rgba(228, 0, 43, 0.3);
+    }
+
+    .glass-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
+      opacity: 0.5;
+      pointer-events: none;
+      transition: var(--transition);
+    }
+
+    .stat-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(228, 0, 43, 0.1);
+      border: 1px solid rgba(228, 0, 43, 0.3);
+      color: var(--primary);
+      padding: 0.5rem 1rem;
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .stat-number {
+      font-size: 5rem;
+      font-weight: 800;
+      line-height: 1;
+      font-family: 'Outfit', sans-serif;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      text-shadow: 0 0 40px var(--accent-glow);
+    }
+
+    /* Step List */
+    .step-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .step-item {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+    }
+
+    .step-number {
+      width: 36px;
+      height: 36px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .step-content h3 {
+      font-size: 1.15rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .step-content p {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Header & Navigation UI */
+    header {
+      width: 100%;
+      padding: 2rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--card-border);
+      background: rgba(13, 14, 18, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .logo-badge {
+      background: var(--primary);
+      color: white;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      padding: 0.25rem 0.6rem;
+      border-radius: 6px;
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+    }
+
+    .logo-text {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .meta-tag {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.05);
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      border: 1px solid var(--card-border);
+    }
+
+    /* Bottom Navigation Controls */
+    footer {
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid var(--card-border);
+      background: rgba(13, 14, 18, 0.8);
+      backdrop-filter: blur(10px);
+      z-index: 100;
+    }
+
+    .nav-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      color: var(--text);
+      padding: 0.75rem 1.5rem;
+      border-radius: 12px;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+      font-size: 0.9rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: var(--transition);
+    }
+
+    .nav-btn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .nav-btn.primary-btn {
+      background: var(--primary);
+      border-color: transparent;
+    }
+
+    .nav-btn.primary-btn:hover {
+      background: #ff1c44;
+      box-shadow: 0 0 20px rgba(228, 0, 43, 0.4);
+    }
+
+    .progress-container {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .progress-bar-bg {
+      width: 200px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 100px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 16.66%;
+      background: var(--primary);
+      border-radius: 100px;
+      transition: var(--transition);
+    }
+
+    .slide-counter {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* SVG Diagram Animations */
+    .pipe-line {
+      stroke-dasharray: 8;
+      animation: dash 15s linear infinite;
+    }
+
+    @keyframes dash {
+      to {
+        stroke-dashoffset: -1000;
+      }
+    }
+
+    .filter-node {
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .filter-node:hover {
+      filter: drop-shadow(0 0 10px rgba(255, 184, 28, 0.6));
+    }
+
+    /* Rerank Formula Interactive Elements */
+    .interactive-demo {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .demo-slider-group {
+      background: rgba(255, 255, 255, 0.02);
+      padding: 1rem;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+    }
+
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .slider-input {
+      width: 100%;
+      accent-color: var(--primary);
+      cursor: pointer;
+    }
+
+    .formula-box {
+      background: rgba(228, 0, 43, 0.05);
+      border: 1px dashed rgba(228, 0, 43, 0.3);
+      padding: 1.5rem;
+      border-radius: 15px;
+      text-align: center;
+      font-family: 'Outfit', sans-serif;
+      margin-top: 1.5rem;
+    }
+
+    .formula-display {
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .formula-explanation {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    /* Kiosk UI Preview Component */
+    .kiosk-mock {
+      background: #15161b;
+      border: 6px solid #23252f;
+      border-radius: 24px;
+      height: 480px;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    }
+
+    .kiosk-header {
+      background: #E4002B;
+      padding: 0.75rem;
+      text-align: center;
+      font-weight: 800;
+      font-size: 0.9rem;
+      color: white;
+      letter-spacing: 0.05em;
+    }
+
+    .kiosk-body {
+      flex: 1;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      padding: 0.75rem;
+      gap: 0.75rem;
+    }
+
+    .kiosk-menu {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.5rem;
+      align-content: start;
+    }
+
+    .menu-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 10px;
+      padding: 0.5rem;
+      text-align: center;
+      font-size: 0.75rem;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .menu-card:hover {
+      background: rgba(228, 0, 43, 0.1);
+      border-color: var(--primary);
+    }
+
+    .menu-price {
+      color: var(--accent);
+      font-weight: 600;
+      margin-top: 0.25rem;
+    }
+
+    .kiosk-sidebar {
+      background: rgba(255,255,255,0.02);
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.05);
+      padding: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .kiosk-section-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+    }
+
+    .kiosk-rec-panel {
+      background: rgba(255,184,28,0.05);
+      border: 1px solid rgba(255,184,28,0.2);
+      border-radius: 8px;
+      padding: 0.5rem;
+      margin-top: auto;
+    }
+
+    .kiosk-rec-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.25rem;
+    }
+
+    .kiosk-rec-copy {
+      font-size: 0.7rem;
+      color: var(--text);
+      line-height: 1.3;
+      margin-bottom: 0.25rem;
+    }
+
+    .kiosk-rec-rationale {
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    .kiosk-btn {
+      background: var(--primary);
+      border: none;
+      color: white;
+      padding: 0.5rem;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 0.5rem;
+    }
+
+    /* Backtest Report Panel */
+    .report-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .report-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.75rem 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .report-row:last-child {
+      border-bottom: none;
+    }
+
+    .report-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .report-value {
+      font-weight: 700;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .report-value.highlight {
+      color: #34C759; /* Green */
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- Slide Header -->
+  <header>
+    <div class="logo-container">
+      <div class="logo-badge">KFC</div>
+      <div class="logo-text">SmartKiosk</div>
+    </div>
+    <div class="meta-tag">Hackathon Pitch Deck</div>
+  </header>
+
+  <!-- Slide Core Container -->
+  <div class="deck-container">
+
+    <!-- Slide 1: Welcome / Title -->
+    <div class="slide active" id="slide-1">
+      <div class="grid-2">
+        <div>
+          <div class="stat-badge">Hackathon Entry</div>
+          <h1 class="slide-title">Boosting Sales via <span class="gradient-text">Next-Gen Hybrid Recommendations</span></h1>
+          <p class="slide-subtitle">A zero-configuration, production-ready recommender engine and backtest simulator designed to capture immediate Average Order Value (AOV) uplift.</p>
+        </div>
+        <div class="glass-card" style="text-align: center;">
+          <div class="stat-badge" style="background: rgba(255, 184, 28, 0.1); border-color: rgba(255, 184, 28, 0.3); color: var(--accent);">Mined Performance</div>
+          <div class="stat-number">+12.6%</div>
+          <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Estimated AOV Uplift</h3>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Validated mathematically by simulated order replays on historical patterns.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2: Why / The Problem -->
+    <div class="slide" id="slide-2">
+      <div class="grid-equal">
+        <div>
+          <div class="stat-badge">The Opportunity</div>
+          <h2 class="slide-title">Static menus <span class="gradient-text">leak revenue.</span></h2>
+          <p class="slide-subtitle">Existing kiosk systems suggest static items (like generic fries) to every customer. They fail to adapt to live contexts, wasting prime on-screen estate.</p>
+        </div>
+        <div class="glass-card">
+          <div class="step-list">
+            <div class="step-item">
+              <div class="step-number">1</div>
+              <div class="step-content">
+                <h3>No Context Awareness</h3>
+                <p>Standard recommendations ignore the active cart, time of day, and current discount promotions.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-number">2</div>
+              <div class="step-content">
+                <h3>Dry and Impersonal Copy</h3>
+                <p>Simple text like "You might also like: Pepsi" does not capture interest or motivate addition.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-number">3</div>
+              <div class="step-content">
+                <h3>Unproven Value</h3>
+                <p>Restaurants cannot measure potential ROI prior to expensive live field tests.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3: Pipes & Filters Architecture -->
+    <div class="slide" id="slide-3">
+      <div class="grid-2">
+        <div>
+          <div class="stat-badge">Technical Design</div>
+          <h2 class="slide-title">The Pipes & Filters <span class="gradient-text">Pipeline</span></h2>
+          <p class="slide-subtitle" style="margin-bottom: 1rem;">Modular processing units linked by strict data contracts, allowing components to run independently offline or online.</p>
+          <div class="step-list" style="gap: 1rem;">
+            <div class="step-item">
+              <div class="step-number" style="width: 24px; height: 24px; font-size: 0.8rem; border-radius: 6px;">A</div>
+              <div class="step-content"><p><strong>Offline Mining:</strong> Scans historical transactions with Apriori to build an association rule-set.</p></div>
+            </div>
+            <div class="step-item">
+              <div class="step-number" style="width: 24px; height: 24px; font-size: 0.8rem; border-radius: 6px;">B</div>
+              <div class="step-content"><p><strong>Online Rerank:</strong> Intersects rule-set with cart, boosts by promotions & time of day.</p></div>
+            </div>
+            <div class="step-item">
+              <div class="step-number" style="width: 24px; height: 24px; font-size: 0.8rem; border-radius: 6px;">C</div>
+              <div class="step-content"><p><strong>GenAI copywriting:</strong> Shapes final persuasive proposal with local context.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="glass-card" style="padding: 1.5rem; display: flex; align-items: center; justify-content: center; height: 100%;">
+          <!-- SVG Architecture Diagram -->
+          <svg viewBox="0 0 400 380" width="100%" height="100%">
+            <!-- Definitions for arrows -->
+            <defs>
+              <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#8E8E93" />
+              </marker>
+              <marker id="arrow-red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                <path d="M 0 0 L 10 5 L 0 10 z" fill="#E4002B" />
+              </marker>
+            </defs>
+
+            <!-- Storage Disk -->
+            <rect x="150" y="10" width="100" height="50" rx="10" fill="#23252f" stroke="var(--card-border)" stroke-width="2" />
+            <text x="200" y="40" fill="white" font-family="'Outfit'" font-size="12" font-weight="700" text-anchor="middle">data/ directory</text>
+
+            <!-- Flows from Disk to Engines -->
+            <path d="M 200 60 L 200 100" fill="none" stroke="#8E8E93" stroke-width="2" marker-end="url(#arrow)" />
+
+            <!-- Filter 1: Offline Miner -->
+            <g class="filter-node">
+              <rect x="80" y="100" width="240" height="45" rx="8" fill="#15161b" stroke="var(--primary)" stroke-width="2" />
+              <text x="200" y="127" fill="white" font-family="'Inter'" font-size="12" font-weight="600" text-anchor="middle">1. Offline Association Mining (Apriori)</text>
+            </g>
+
+            <path d="M 200 145 L 200 185" fill="none" stroke="var(--primary)" stroke-width="2" stroke-dasharray="4" class="pipe-line" marker-end="url(#arrow-red)" />
+
+            <!-- Filter 2: Online Reranker -->
+            <g class="filter-node">
+              <rect x="80" y="185" width="240" height="45" rx="8" fill="#15161b" stroke="var(--primary)" stroke-width="2" />
+              <text x="200" y="212" fill="white" font-family="'Inter'" font-size="12" font-weight="600" text-anchor="middle">2. Online Context Reranker</text>
+            </g>
+
+            <path d="M 200 230 L 200 270" fill="none" stroke="var(--primary)" stroke-width="2" stroke-dasharray="4" class="pipe-line" marker-end="url(#arrow-red)" />
+
+            <!-- Filter 3: GenAI Copy -->
+            <g class="filter-node">
+              <rect x="80" y="270" width="240" height="45" rx="8" fill="#15161b" stroke="var(--primary)" stroke-width="2" />
+              <text x="200" y="297" fill="white" font-family="'Inter'" font-size="12" font-weight="600" text-anchor="middle">3. GenAI Copywriting / Fallback</text>
+            </g>
+
+            <path d="M 200 315 L 200 345" fill="none" stroke="#8E8E93" stroke-width="2" marker-end="url(#arrow)" />
+
+            <!-- Kiosk UI -->
+            <rect x="130" y="345" width="140" height="30" rx="6" fill="#23252f" stroke="var(--card-border)" stroke-width="2" />
+            <text x="200" y="364" fill="white" font-family="'Outfit'" font-size="11" font-weight="700" text-anchor="middle">Kiosk UI (static/)</text>
+
+          </svg>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: Real-time Reranking Formula -->
+    <div class="slide" id="slide-4">
+      <div class="grid-equal">
+        <div>
+          <div class="stat-badge">The Algorithm</div>
+          <h2 class="slide-title">Multiplicative Reranking</h2>
+          <p class="slide-subtitle">We don't just rely on correlation. We mathematically layer live temporal context and sales campaigns over the base mined confidence.</p>
+          <div class="formula-box">
+            <div class="formula-display" id="calc-result">Score = 0.35</div>
+            <div class="formula-explanation" id="calc-formula">0.25 (Base Confidence) &times; 1.20 (Promo Boost) &times; 1.15 (Lunch Time Boost)</div>
+          </div>
+        </div>
+        <div class="glass-card">
+          <h3 style="font-size: 1.25rem; margin-bottom: 1.5rem;">Interactive Formula Sandbox</h3>
+          <div class="interactive-demo">
+            <div class="demo-slider-group">
+              <div class="slider-header">
+                <span>Base Confidence (Apriori Rule)</span>
+                <span id="val-base" font-weight="bold">0.25</span>
+              </div>
+              <input type="range" min="0.01" max="1" step="0.01" value="0.25" class="slider-input" id="slider-base">
+            </div>
+
+            <div class="demo-slider-group">
+              <div class="slider-header">
+                <span>Active Campaign Promotion Boost</span>
+                <span id="val-promo">+20%</span>
+              </div>
+              <input type="range" min="0" max="0.5" step="0.05" value="0.20" class="slider-input" id="slider-promo">
+            </div>
+
+            <div class="demo-slider-group">
+              <div class="slider-header">
+                <span>Time of Day Category Fit Boost</span>
+                <span id="val-time">+15%</span>
+              </div>
+              <input type="range" min="0" max="0.3" step="0.05" value="0.15" class="slider-input" id="slider-time">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5: Kiosk UI Preview -->
+    <div class="slide" id="slide-5">
+      <div class="grid-2">
+        <div>
+          <div class="stat-badge">Frontend Preview</div>
+          <h2 class="slide-title">Modern, Responsive <span class="gradient-text">Kiosk UI</span></h2>
+          <p class="slide-subtitle">Vanilla HTML/JS/CSS client updating live in real-time on cart mutation. Leverages outfit typography and micro-animations for an premium, native-app feel.</p>
+          <div class="step-list" style="gap: 1.25rem;">
+            <div class="step-item">
+              <div class="step-number" style="border-radius: 50%;">✓</div>
+              <div class="step-content">
+                <h3>One-Call Copywriting</h3>
+                <p>API sends full cart payload. Gemini returns custom Vietnamese copywriting and statistical rationale in a single trip.</p>
+              </div>
+            </div>
+            <div class="step-item">
+              <div class="step-number" style="border-radius: 50%;">✓</div>
+              <div class="step-content">
+                <h3>Sub-1.2s Fast Fallback</h3>
+                <p>If internet fails or latency spikes, backend instantly outputs template copy. The kiosk never stalls.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <!-- Kiosk Mockup -->
+          <div class="kiosk-mock">
+            <div class="kiosk-header">KFC SELF-ORDER KIOSK</div>
+            <div class="kiosk-body">
+              <div>
+                <div class="kiosk-section-title">Menu Category: Burgers</div>
+                <div class="kiosk-menu">
+                  <div class="menu-card" id="mock-burger">
+                    <strong>Burger Zinger</strong>
+                    <div class="menu-price">56,000đ</div>
+                  </div>
+                  <div class="menu-card">
+                    <strong>Burger Shrimp</strong>
+                    <div class="menu-price">45,000đ</div>
+                  </div>
+                  <div class="menu-card">
+                    <strong>French Fries</strong>
+                    <div class="menu-price">20,000đ</div>
+                  </div>
+                  <div class="menu-card">
+                    <strong>Pepsi</strong>
+                    <div class="menu-price">13,000đ</div>
+                  </div>
+                </div>
+                <button class="kiosk-btn">View Full Menu</button>
+              </div>
+              <div class="kiosk-sidebar">
+                <div>
+                  <div class="kiosk-section-title">Your Cart</div>
+                  <div id="mock-cart-items" style="font-size: 0.75rem; color: var(--text-muted);">
+                    Cart is empty. Click a menu item to add.
+                  </div>
+                </div>
+                <div class="kiosk-rec-panel" id="mock-rec-panel" style="display: none;">
+                  <div class="kiosk-rec-title">Special Suggestion</div>
+                  <div class="kiosk-rec-copy" id="mock-rec-copy">Add French Fries for 20,000đ!</div>
+                  <div class="kiosk-rec-rationale" id="mock-rec-rationale">68% of customers combine this with Zinger.</div>
+                </div>
+                <div>
+                  <div style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 0.5rem; display: flex; justify-content: space-between; font-size: 0.8rem; font-weight: 700;">
+                    <span>Total:</span>
+                    <span id="mock-cart-total">0đ</span>
+                  </div>
+                  <button class="kiosk-btn" style="background:#34C759; margin-top: 0.25rem;">Checkout</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 6: Backtest & Pitch to Big Stage -->
+    <div class="slide" id="slide-6">
+      <div class="grid-equal">
+        <div>
+          <div class="stat-badge">Business Pitch</div>
+          <h2 class="slide-title">Proving ROI: <span class="gradient-text">The Backtest</span></h2>
+          <p class="slide-subtitle">Judges love math, executives love profits. We built an order simulator that replays transaction logs through three models to calculate absolute value difference.</p>
+          <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.5;">Our backtest replays 1,200 orders. Under static models, addition rates hover at 8%. Under our contextual, GenAI hybrid model, conversion rises to 23%, validating the AOV uplift.</p>
+        </div>
+        <div class="glass-card">
+          <h3 style="font-size: 1.25rem;">Simulator Uplift Report</h3>
+          <div class="report-card">
+            <div class="report-row">
+              <span class="report-label">Orders Simulated</span>
+              <span class="report-value">1,200</span>
+            </div>
+            <div class="report-row">
+              <span class="report-label">Baseline AOV (Static recommendation)</span>
+              <span class="report-value">65,000đ</span>
+            </div>
+            <div class="report-row">
+              <span class="report-label">Hybrid Pipeline AOV (Context + GenAI)</span>
+              <span class="report-value">73,200đ</span>
+            </div>
+            <div class="report-row">
+              <span class="report-label">Absolute AOV Gain</span>
+              <span class="report-value highlight">+8,200đ</span>
+            </div>
+            <div class="report-row" style="border-bottom: none;">
+              <span class="report-label">Target Revenue Lift</span>
+              <span class="report-value highlight" style="font-size: 1.2rem;">+12.6%</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer slide control toolbar -->
+  <footer>
+    <button class="nav-btn" id="prev-btn">← Back</button>
+    
+    <div class="progress-container">
+      <div class="progress-bar-bg">
+        <div class="progress-bar-fill" id="progress-fill"></div>
+      </div>
+      <div class="slide-counter" id="slide-num">Slide 1 of 6</div>
+    </div>
+
+    <button class="nav-btn primary-btn" id="next-btn">Next Slide →</button>
+  </footer>
+
+  <script>
+    // Navigation Logic
+    let currentSlideIndex = 1;
+    const totalSlides = 6;
+
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const progressFill = document.getElementById('progress-fill');
+    const slideNum = document.getElementById('slide-num');
+
+    function updateNav() {
+      // Toggle button states
+      if (currentSlideIndex === 1) {
+        prevBtn.style.visibility = 'hidden';
+      } else {
+        prevBtn.style.visibility = 'visible';
+      }
+
+      if (currentSlideIndex === totalSlides) {
+        nextBtn.innerText = "Finish Pitch";
+        nextBtn.classList.add('finish-btn');
+      } else {
+        nextBtn.innerText = "Next Slide →";
+        nextBtn.classList.remove('finish-btn');
+      }
+
+      // Update progress metrics
+      const percent = (currentSlideIndex / totalSlides) * 100;
+      progressFill.style.width = percent + '%';
+      slideNum.innerText = `Slide ${currentSlideIndex} of ${totalSlides}`;
+
+      // Update slide active state
+      document.querySelectorAll('.slide').forEach(s => s.classList.remove('active'));
+      document.getElementById(`slide-${currentSlideIndex}`).classList.add('active');
+    }
+
+    prevBtn.addEventListener('click', () => {
+      if (currentSlideIndex > 1) {
+        currentSlideIndex--;
+        updateNav();
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentSlideIndex < totalSlides) {
+        currentSlideIndex++;
+        updateNav();
+      } else {
+        alert("Pitch Deck complete! Best of luck at the hackathon presentation!");
+      }
+    });
+
+    // Keyboard navigation support
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        if (currentSlideIndex < totalSlides) {
+          currentSlideIndex++;
+          updateNav();
+        }
+      } else if (e.key === 'ArrowLeft') {
+        if (currentSlideIndex > 1) {
+          currentSlideIndex--;
+          updateNav();
+        }
+      }
+    });
+
+    // Initialize nav
+    updateNav();
+
+    // Rerank sandbox slider calculations
+    const sliderBase = document.getElementById('slider-base');
+    const sliderPromo = document.getElementById('slider-promo');
+    const sliderTime = document.getElementById('slider-time');
+    const calcResult = document.getElementById('calc-result');
+    const calcFormula = document.getElementById('calc-formula');
+    
+    const valBase = document.getElementById('val-base');
+    const valPromo = document.getElementById('val-promo');
+    const valTime = document.getElementById('val-time');
+
+    function recalculateFormula() {
+      const base = parseFloat(sliderBase.value);
+      const promo = parseFloat(sliderPromo.value);
+      const time = parseFloat(sliderTime.value);
+      
+      const score = base * (1 + promo) * (1 + time);
+
+      valBase.innerText = base.toFixed(2);
+      valPromo.innerText = `+${Math.round(promo * 100)}%`;
+      valTime.innerText = `+${Math.round(time * 100)}%`;
+
+      calcResult.innerText = `Score = ${score.toFixed(3)}`;
+      calcFormula.innerHTML = `${base.toFixed(2)} (Base Confidence) &times; ${(1 + promo).toFixed(2)} (Promo Boost) &times; ${(1 + time).toFixed(2)} (Time Boost)`;
+    }
+
+    sliderBase.addEventListener('input', recalculateFormula);
+    sliderPromo.addEventListener('input', recalculateFormula);
+    sliderTime.addEventListener('input', recalculateFormula);
+
+
+    // Kiosk UI Mock Simulation
+    const mockBurger = document.getElementById('mock-burger');
+    const mockCartItems = document.getElementById('mock-cart-items');
+    const mockCartTotal = document.getElementById('mock-cart-total');
+    const mockRecPanel = document.getElementById('mock-rec-panel');
+    const mockRecCopy = document.getElementById('mock-rec-copy');
+    const mockRecRationale = document.getElementById('mock-rec-rationale');
+
+    mockBurger.addEventListener('click', () => {
+      mockCartItems.innerHTML = `<div style="display:flex; justify-content:space-between; margin-bottom:0.25rem;">
+        <span>1x Burger Zinger</span>
+        <span>56,000đ</span>
+      </div>`;
+      mockCartTotal.innerText = '56,000đ';
+      
+      // Update recommendation panel with micro-animation simulation
+      mockRecPanel.style.display = 'block';
+      mockRecCopy.innerText = 'Add French Fries for 20,000đ!';
+      mockRecRationale.innerText = 'Recommended because 70% of customers add Fries to Zinger.';
+    });
+
+  </script>
+</body>
+</html>

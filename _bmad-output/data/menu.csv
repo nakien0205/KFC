@@ -1,0 +1,93 @@
+item_id,name,category,price
+ITEM_001,Crispy Bucket 179k,Combos,179000.0
+ITEM_002,Happy Bucket 159k,Combos,159000.0
+ITEM_003,Couple's Bucket 189k,Combos,189000.0
+ITEM_004,Party Bucket 269k,Combos,269000.0
+ITEM_005,Combo Tieu Tung Chill 85k,Combos,85000.0
+ITEM_006,Combo Chanh Sang Chanh 140k,Combos,140000.0
+ITEM_007,Combo Ga Rom Ra 245k,Combos,245000.0
+ITEM_008,Combo Ga Rom Ra 245k,Combos,245000.0
+ITEM_009,Together Combo,Combos,199000.0
+ITEM_010,Cheers Combo,Combos,369000.0
+ITEM_011,1 pc Black Pepper & Lime Fried Chicken,Sides,40000.0
+ITEM_012,2 pcs Black Pepper & Lime Fried Chicken,Sides,79000.0
+ITEM_013,3 pcs Black Pepper & Lime Fried Chicken,Sides,116000.0
+ITEM_014,1 pc Black Pepper & Lime Fried Chicken Rice,Sides,52000.0
+ITEM_015,Cheese Shake Fries,Sides,32000.0
+ITEM_016,Garlic Butter Shake Fries,Sides,32000.0
+ITEM_017,Cheese Shake Popcorn,Sides,42000.0
+ITEM_018,Garlic Butter Shake Popcorn,Sides,42000.0
+ITEM_019,1 Garlic Fish Sauce Chicken,Sides,40000.0
+ITEM_020,2 Garlic Fish Sauce Chicken,Sides,79000.0
+ITEM_021,3 Garlic Fish Sauce Chicken,Sides,116000.0
+ITEM_022,1 Garlic Fish Sauce Chicken with rice,Sides,52000.0
+ITEM_023,Combo 1 Fried Chicken,Combos,59000.0
+ITEM_024,Combo Chill Single,Combos,91000.0
+ITEM_025,Combo 2 Fried Chicken,Combos,91000.0
+ITEM_026,Combo Pasta Solo,Combos,71000.0
+ITEM_027,Combo Pasta & Tenders,Combos,79000.0
+ITEM_028,Combo Rice Fried Chicken,Combos,56000.0
+ITEM_029,Combo Rice & Soup,Combos,69000.0
+ITEM_030,Combo Rice Flava,Combos,59000.0
+ITEM_031,Combo Rice Nanban,Combos,46000.0
+ITEM_032,Combo Burger Zinger,Combos,79000.0
+ITEM_033,Combo Burger Shrimp,Combos,69000.0
+ITEM_034,Combo Burger Flava,Combos,79000.0
+ITEM_035,Combo Group 2,Combos,169000.0
+ITEM_036,Combo Group 3,Combos,239000.0
+ITEM_037,Combo Burger GaYo & Fried Chicken,Combos,129000.0
+ITEM_038,Combo Group 2,Combos,159000.0
+ITEM_039,Combo Chill Couple,Combos,146000.0
+ITEM_040,Big Combo 199k,Combos,199000.0
+ITEM_041,Big Combo 279k,Combos,279000.0
+ITEM_042,1 Fried Chicken,Sides,37000.0
+ITEM_043,2 Fried Chicken,Sides,74000.0
+ITEM_044,3 Fried Chicken,Sides,105000.0
+ITEM_045,6 Fried Chicken,Sides,210000.0
+ITEM_046,1 Roasted Fillet Chicken,Sides,43000.0
+ITEM_047,3 Tenders Chicken,Sides,42000.0
+ITEM_048,5 Tenders Chicken,Sides,68000.0
+ITEM_049,Burger Yo (Chicken),Burgers,30000.0
+ITEM_050,Roasted Fillet Chicken Burger,Burgers,56000.0
+ITEM_051,Burger Shrimp,Burgers,45000.0
+ITEM_052,Burger Zinger,Burgers,56000.0
+ITEM_053,Sausage Chicken Pasta,Sides,38000.0
+ITEM_054,Popcorn Chicken Pasta,Sides,43000.0
+ITEM_055,Fried Chicken Pasta,Sides,68000.0
+ITEM_056,Fried Chicken Rice,Sides,49000.0
+ITEM_057,Nanban Popcorn Chicken Rice,Sides,40000.0
+ITEM_058,Roasted Fillet Chicken Rice,Sides,54000.0
+ITEM_059,Roasted Sesame Salad,Sides,22000.0
+ITEM_060,Popcorn Salad,Sides,37000.0
+ITEM_061,4 Chewy Cheese,Sides,38000.0
+ITEM_062,6 Chewy Cheese,Sides,53000.0
+ITEM_063,Popcorn,Sides,67000.0
+ITEM_064,Popcorn,Sides,40000.0
+ITEM_065,Coleslaw,Sides,32000.0
+ITEM_066,Coleslaw,Sides,23000.0
+ITEM_067,Coleslaw,Sides,13000.0
+ITEM_068,French Fries,Sides,40000.0
+ITEM_069,French Fries,Sides,30000.0
+ITEM_070,French Fries,Sides,20000.0
+ITEM_071,Mashed Potato,Sides,32000.0
+ITEM_072,Mashed Potato,Sides,23000.0
+ITEM_073,Mashed Potato,Sides,13000.0
+ITEM_074,Rice,Sides,12000.0
+ITEM_075,Seaweed Soup,Sides,20000.0
+ITEM_076,1 Eggtart,Desserts,20000.0
+ITEM_077,4 Eggtarts,Desserts,72000.0
+ITEM_078,Pepsi,Drinks,13000.0
+ITEM_079,Pepsi,Drinks,17000.0
+ITEM_080,Pepsi,Drinks,20000.0
+ITEM_081,7Up,Drinks,13000.0
+ITEM_082,7Up,Drinks,17000.0
+ITEM_083,7Up,Drinks,20000.0
+ITEM_084,Lipton,Drinks,13000.0
+ITEM_085,Lipton,Drinks,17000.0
+ITEM_086,Lipton,Drinks,20000.0
+ITEM_087,Pepsi Zero,Drinks,13000.0
+ITEM_088,Pepsi No Sugar,Drinks,17000.0
+ITEM_089,Pepsi No Sugar,Drinks,20000.0
+ITEM_090,Pepsi,Drinks,20000.0
+ITEM_091,7Up,Drinks,20000.0
+ITEM_092,Pepsi No Sugar,Drinks,20000.0
