@@ -129,6 +129,5 @@ active/
 # BMad Output / runtime configs
 .env
 
-_bmad
 .agents
 .agent
