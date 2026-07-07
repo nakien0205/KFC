@@ -5,7 +5,7 @@ import threading
 
 # Default path for weights
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-WEIGHTS_PATH = os.path.join(BASE_DIR, "_bmad-output", "data", "bandit_weights.json")
+WEIGHTS_PATH = os.environ.get("BANDIT_WEIGHTS_PATH", os.path.join(BASE_DIR, "_bmad-output", "data", "bandit_weights.json"))
 
 # Default priors: yields mean boosts of 0.20 for promo and 0.15 for time
 DEFAULT_WEIGHTS = {
