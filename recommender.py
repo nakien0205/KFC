@@ -215,17 +215,109 @@ def generate_ollama_recommendation_copy(item_name: str, item_price: float, cart_
         
     return generate_local_fallback(item_name, item_price)
 
+def generate_openrouter_recommendation_copy(item_name: str, item_price: float, cart_items: list, api_key: str = None, timeout: float = 1.2) -> dict:
+    if not api_key:
+        api_key = os.environ.get("OPENROUTER_API_KEY")
+    if not api_key:
+        return generate_local_fallback(item_name, item_price)
+        
+    url = "https://openrouter.ai/api/v1/chat/completions"
+    headers = {
+        "Authorization": f"Bearer {api_key}",
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://github.com/nakien0205/KFC",
+        "X-Title": "KFC Kiosk Recommendation System"
+    }
+    
+    model = os.environ.get("OPENROUTER_MODEL", "google/gemini-2.5-flash")
+    
+    try:
+        cart_str = ', '.join(map(str, cart_items)) if cart_items else 'Trống'
+        prompt = (
+            "You are a sales-driven copywriter for a premium KFC kiosk in Vietnam.\n"
+            "Generate a localized, highly engaging promotional copy (in Vietnamese) and a brief statistical rationale (in Vietnamese) "
+            "for recommending a candidate item based on the customer's current cart items.\n\n"
+            f"Candidate Item: {item_name}\n"
+            f"Price: {format_price_vnd(item_price)}đ\n"
+            f"Current Cart: {cart_str}\n\n"
+            "Rules:\n"
+            "1. Promotional copy must be appetizing, concise, and encourage adding the item (maximum 2 sentences).\n"
+            "2. Rationale must provide a simple reason why the item was suggested. Keep it short and natural.\n"
+            "3. Output MUST be in Vietnamese.\n"
+            "4. Follow the JSON schema exactly: {\"copy\": \"...\", \"rationale\": \"...\"}"
+        )
+        
+        payload = {
+            "model": model,
+            "messages": [
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            "response_format": {
+                "type": "json_object"
+            }
+        }
+        
+        response = requests.post(url, headers=headers, json=payload, timeout=timeout)
+        if response.status_code == 200:
+            data = response.json()
+            content = data['choices'][0]['message']['content']
+            parsed = json.loads(content)
+            if "copy" in parsed and "rationale" in parsed:
+                return {
+                    "copy": parsed["copy"],
+                    "rationale": parsed["rationale"]
+                }
+            else:
+                logger.warning(f"OpenRouter response JSON missing 'copy' or 'rationale'. Parsed: {parsed}")
+        else:
+            logger.warning(f"OpenRouter server returned error status code: {response.status_code}")
+    except Exception as e:
+        logger.warning(f"OpenRouter connection or error: {e}")
+        
+    return generate_local_fallback(item_name, item_price)
+
 def generate_recommendation_copy(item_name: str, item_price: float, cart_items: list, api_key: str = None, timeout: float = 1.2) -> dict:
     use_ollama = os.environ.get("USE_OLLAMA", "false").lower() in ("true", "1", "yes")
     
-    if not api_key:
-        api_key = os.environ.get("GEMINI_API_KEY")
-        
-    if use_ollama or not api_key:
+    if use_ollama:
         ollama_timeout = 5.0 if timeout == 1.2 else timeout
         return generate_ollama_recommendation_copy(item_name, item_price, cart_items, timeout=ollama_timeout)
         
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
+    # Check if we should use OpenRouter
+    openrouter_api_key = os.environ.get("OPENROUTER_API_KEY")
+    is_openrouter = False
+    
+    if api_key:
+        if api_key.startswith("sk-or-") or "openrouter" in api_key.lower():
+            is_openrouter = True
+            effective_key = api_key
+        else:
+            effective_key = api_key
+    elif openrouter_api_key:
+        is_openrouter = True
+        effective_key = openrouter_api_key
+    else:
+        effective_key = os.environ.get("GEMINI_API_KEY")
+        
+    if not effective_key:
+        # If no API key is provided, fall back to Ollama copy generator (which internally falls back to local template on failure)
+        ollama_timeout = 5.0 if timeout == 1.2 else timeout
+        return generate_ollama_recommendation_copy(item_name, item_price, cart_items, timeout=ollama_timeout)
+        
+    if is_openrouter:
+        return generate_openrouter_recommendation_copy(
+            item_name=item_name,
+            item_price=item_price,
+            cart_items=cart_items,
+            api_key=effective_key,
+            timeout=timeout
+        )
+        
+    # Gemini API Call
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={effective_key}"
     headers = {"Content-Type": "application/json"}
     
     try:

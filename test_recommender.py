@@ -374,5 +374,59 @@ class TestRecommender(unittest.TestCase):
             call_url = mock_post.call_args[0][0]
             self.assertIn("/api/chat", call_url)
 
+    @patch('requests.post')
+    def test_openrouter_success_path(self, mock_post):
+        from recommender import generate_recommendation_copy
+        
+        mock_response = MagicMock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = {
+            "choices": [
+                {
+                    "message": {
+                        "content": '{"copy": "Ăn kèm Khoai tây chiên giòn rụm!", "rationale": "Được gợi ý vì bạn thích Burger"}'
+                    }
+                }
+            ]
+        }
+        mock_post.return_value = mock_response
+        
+        with patch.dict('os.environ', {"OPENROUTER_API_KEY": "sk-or-v1-testkey"}):
+            res = generate_recommendation_copy("French Fries", 20000.0, ["Burger Zinger"])
+            self.assertEqual(res["copy"], "Ăn kèm Khoai tây chiên giòn rụm!")
+            self.assertEqual(res["rationale"], "Được gợi ý vì bạn thích Burger")
+            
+            # Verify it hits OpenRouter endpoint
+            call_url = mock_post.call_args[0][0]
+            self.assertEqual(call_url, "https://openrouter.ai/api/v1/chat/completions")
+            
+            # Verify headers
+            headers = mock_post.call_args[1]["headers"]
+            self.assertEqual(headers["Authorization"], "Bearer sk-or-v1-testkey")
+
+    @patch('requests.post')
+    def test_openrouter_timeout_fallback(self, mock_post):
+        from recommender import generate_recommendation_copy
+        import requests
+        
+        mock_post.side_effect = requests.exceptions.Timeout("OpenRouter timed out")
+        
+        with patch.dict('os.environ', {"OPENROUTER_API_KEY": "sk-or-v1-testkey"}):
+            res = generate_recommendation_copy("French Fries", 20000.0, ["Burger Zinger"])
+            self.assertEqual(res["copy"], "Hoàn thành bữa ăn! Thêm French Fries chỉ với 20.000đ")
+            self.assertEqual(res["rationale"], "Thường được mua kèm với các sản phẩm trong giỏ hàng.")
+
+    @patch('requests.post')
+    def test_openrouter_error_status_fallback(self, mock_post):
+        from recommender import generate_recommendation_copy
+        
+        mock_response = MagicMock()
+        mock_response.status_code = 502
+        mock_post.return_value = mock_response
+        
+        with patch.dict('os.environ', {"OPENROUTER_API_KEY": "sk-or-v1-testkey"}):
+            res = generate_recommendation_copy("French Fries", 20000.0, ["Burger Zinger"])
+            self.assertEqual(res["copy"], "Hoàn thành bữa ăn! Thêm French Fries chỉ với 20.000đ")
+
 if __name__ == "__main__":
     unittest.main()
