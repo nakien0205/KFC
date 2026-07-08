@@ -250,7 +250,7 @@ class TestRecommender(unittest.TestCase):
         import os
         import pandas as pd
 
-        base_dir = os.path.dirname(os.path.abspath(__file__))
+        base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
         menu = pd.read_csv(os.path.join(base_dir, "_bmad-output", "data", "menu.csv"))
         promos = pd.read_csv(os.path.join(base_dir, "_bmad-output", "data", "promotions.csv")).to_dict("records")
         with open(os.path.join(base_dir, "_bmad-output", "data", "affinity_rules.json"), "r", encoding="utf-8") as f:

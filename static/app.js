@@ -21,6 +21,11 @@
   const checkoutBtn = document.getElementById('checkout-btn-action');
   const recPanel = document.getElementById('recommendation-bento-panel');
   const categoryNav = document.querySelector('.category-nav');
+  const kioskContainer = document.querySelector('.kiosk-container');
+  const leftSidebar = document.getElementById('left-sidebar');
+  const rightSidebar = document.getElementById('right-sidebar');
+  const toggleLeftSidebarBtn = document.getElementById('toggle-left-sidebar-btn');
+  const toggleRightSidebarBtn = document.getElementById('toggle-right-sidebar-btn');
 
   // ── Helpers ──
 
@@ -333,6 +338,48 @@
     });
   }
 
+  // ── Retractable Sidebars ──
+
+  function setSidebarToggleState(button, expanded, collapseLabel, expandLabel, collapseTitle, expandTitle) {
+    if (!button) return;
+    button.textContent = expanded ? collapseLabel : expandLabel;
+    button.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+    button.setAttribute('aria-label', expanded ? collapseTitle : expandTitle);
+    button.setAttribute('title', expanded ? collapseTitle : expandTitle);
+  }
+
+  function setupSidebarToggles() {
+    if (toggleLeftSidebarBtn && leftSidebar && kioskContainer) {
+      toggleLeftSidebarBtn.addEventListener('click', function () {
+        var expanded = toggleLeftSidebarBtn.getAttribute('aria-expanded') !== 'true';
+        kioskContainer.classList.toggle('left-sidebar-collapsed', !expanded);
+        setSidebarToggleState(
+          toggleLeftSidebarBtn,
+          expanded,
+          '<',
+          '>',
+          'Collapse menu sidebar',
+          'Expand menu sidebar'
+        );
+      });
+    }
+
+    if (toggleRightSidebarBtn && rightSidebar && kioskContainer) {
+      toggleRightSidebarBtn.addEventListener('click', function () {
+        var expanded = toggleRightSidebarBtn.getAttribute('aria-expanded') !== 'true';
+        kioskContainer.classList.toggle('right-sidebar-collapsed', !expanded);
+        setSidebarToggleState(
+          toggleRightSidebarBtn,
+          expanded,
+          '>',
+          '<',
+          'Collapse cart sidebar',
+          'Expand cart sidebar'
+        );
+      });
+    }
+  }
+
   // ── Backtest Simulator ──
 
   const backtestModal = document.getElementById('backtest-modal');
@@ -433,7 +480,10 @@
 
   document.addEventListener('DOMContentLoaded', function () {
     setupCategoryFiltering();
+    setupSidebarToggles();
     fetchMenu();
     renderCart();
   });
 })();
+
+

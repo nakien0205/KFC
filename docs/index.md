@@ -20,7 +20,7 @@ Generated: 2026-07-07
 - **Synthetic data generator:** [`generate_data.py`](../generate_data.py)
 - **Affinity miner:** [`affinity_engine.py`](../affinity_engine.py)
 - **Backtest harness:** [`backtest.py`](../backtest.py)
-- **Tests:** [`test_main.py`](../test_main.py), [`test_recommender.py`](../test_recommender.py), [`test_bandit.py`](../test_bandit.py), [`test_backtest.py`](../test_backtest.py)
+- **Tests:** [`test_main.py`](../tests/test_main.py), [`test_recommender.py`](../tests/test_recommender.py), [`test_bandit.py`](../tests/test_bandit.py), [`test_backtest.py`](../tests/test_backtest.py)
 
 ## Generated Documentation
 
@@ -48,13 +48,12 @@ KFC/
 |-- generate_data.py                # Synthetic menu, promotion, and order data
 |-- affinity_engine.py              # Association rule mining
 |-- backtest.py                     # AOV uplift simulation
-|-- static/                         # Plain frontend assets
-|-- images/                         # Menu image assets
+|-- static/                         # Plain frontend assets and served images
 |-- _bmad-output/data/              # Generated runtime CSV/JSON files
 |-- _bmad-output/specs/             # Product spec and stack context
 |-- _bmad-output/implementation-artifacts/
 |-- docs/                           # Documentation index and future docs
-`-- test_*.py                       # unittest coverage
+`-- tests/                          # unittest coverage
 ```
 
 ## Getting Started
@@ -75,7 +74,7 @@ python affinity_engine.py
 Run tests:
 
 ```powershell
-python -m unittest discover -p "test_*.py"
+python -m unittest discover -s tests -p "test_*.py"
 ```
 
 Run the app:

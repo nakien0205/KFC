@@ -16,7 +16,8 @@
 
     <div class="kiosk-container">
         <!-- Sidebar Navigation -->
-        <aside class="sidebar">
+        <aside class="sidebar" id="left-sidebar">
+            <button class="sidebar-collapse-btn left-sidebar-toggle" id="toggle-left-sidebar-btn" type="button" aria-expanded="true" aria-label="Collapse menu sidebar" title="Collapse menu sidebar">&lt;</button>
             <div class="brand-header">
                 <div class="brand-stripes">
                     <span></span>
@@ -56,10 +57,12 @@
         </aside>
 
         <!-- Main Content Area -->
-        <main class="main-content">
+        <main class="main-content" id="menu-panel">
             <header class="kiosk-header">
-                <h1 class="headline-title">Today's Menu</h1>
-                <p class="subtitle-text">Fresh, crispy, and delicious in every moment.</p>
+                <div>
+                    <h1 class="headline-title">Today's Menu</h1>
+                    <p class="subtitle-text">Fresh, crispy, and delicious in every moment.</p>
+                </div>
             </header>
 
             <!-- Menu Grid -->
@@ -69,7 +72,8 @@
         </main>
 
         <!-- Sidebar Right: Cart & Checkout & Recommendations -->
-        <aside class="checkout-sidebar">
+        <aside class="checkout-sidebar" id="right-sidebar">
+            <button class="sidebar-collapse-btn right-sidebar-toggle" id="toggle-right-sidebar-btn" type="button" aria-expanded="true" aria-label="Collapse cart sidebar" title="Collapse cart sidebar">&gt;</button>
             <!-- Cart Section (Double Bezel) -->
             <div class="double-bezel cart-container">
                 <div class="card-inner">
@@ -102,6 +106,7 @@
                     <div class="recommendation-empty">Add items to your cart to get recommendations!</div>
                 </div>
             </div>
+        </aside>
     </div>
     
     <!-- Backtest Modal Overlay -->
@@ -122,3 +127,6 @@
     <script src="/static/app.js"></script>
 </body>
 </html>
+
+
+

@@ -35,7 +35,7 @@ Use these from the repo root:
 python generate_data.py
 python affinity_engine.py
 python backtest.py
-python -m unittest discover -p "test_*.py"
+python -m unittest discover -s tests -p "test_*.py"
 uvicorn main:app --reload
 ```
 
@@ -60,9 +60,9 @@ The app serves the UI at `/` and static assets from `/static`.
 - Do not let tests make real network calls. Mock `requests.post` for Gemini, OpenRouter, and Ollama paths.
 - Do not let tests write production bandit weights. Patch `bandit.WEIGHTS_PATH` or pass a temp path.
 - `bandit.py` uses `threading.RLock` and atomic `os.replace` writes. Preserve that race-safety when editing persistence.
-- If changing recommendation scoring, update `test_recommender.py` and run the full unittest suite.
+- If changing recommendation scoring, update `tests/test_recommender.py` and run the full unittest suite.
 - If changing synthetic data, menu parsing, or affinity mining, run `python generate_data.py`, `python affinity_engine.py`, and the tests.
-- If changing API response shapes, update `test_main.py`, the static frontend, and this file.
+- If changing API response shapes, update `tests/test_main.py`, the static frontend, and this file.
 - `generate_data.py` imports `numpy`, but `requirements.txt` does not currently list it directly. Add it if you touch dependency setup.
 - SQLite is described as a future/deferred direction in project docs, but the current runtime uses CSV and JSON files. Do not introduce a database unless the user asks for it.
 

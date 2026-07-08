@@ -126,8 +126,14 @@ ENV/
 env/
 active/
 
-# BMad Output / runtime configs
+# Project-local runtime/config noise
 .env
+.env.*
 
-.agents
-.agent
+.agents/
+.agent/
+.codex/
+_bmad/
+
+# Duplicate local image source; served assets live in static/images/
+images/
