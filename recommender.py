@@ -7,6 +7,18 @@ from bandit import load_bandit_weights, get_bandit_boosts
 
 logger = logging.getLogger("recommender")
 
+DRINK_KEYWORDS = ("pepsi", "7up", "lipton")
+DESSERT_KEYWORDS = ("eggtart", "tart", "dessert")
+SIDE_KEYWORDS = (
+    "fries",
+    "popcorn",
+    "coleslaw",
+    "mashed",
+    "potato",
+    "soup",
+    "salad",
+    "cheese",
+)
 def is_item_in_promotion(item_name: str, item_category: str, promo_name: str) -> bool:
     if not (item_name and item_category and promo_name):
         return False
@@ -33,6 +45,157 @@ def is_item_in_promotion(item_name: str, item_category: str, promo_name: str) ->
     elif "sides" in promo_name_lower:
         return item_category_lower == "sides" or "fries" in item_name_lower or "popcorn" in item_name_lower
     return False
+
+def _safe_lower(value) -> str:
+    return str(value or "").strip().lower()
+
+def _build_menu_records(menu_items):
+    records = []
+    if menu_items is None:
+        return records
+
+    if isinstance(menu_items, list):
+        source_rows = menu_items
+    else:
+        try:
+            source_rows = menu_items.to_dict(orient="records")
+        except AttributeError:
+            return records
+
+    seen = set()
+    for row in source_rows:
+        if not isinstance(row, dict):
+            continue
+        name = str(row.get("name", "")).strip()
+        if not name or name in seen:
+            continue
+        seen.add(name)
+        records.append({
+            "name": name,
+            "category": str(row.get("category", "") or ""),
+            "price": row.get("price", 0.0),
+        })
+    return records
+
+def _item_role(item_name: str, item_category: str) -> str:
+    name = _safe_lower(item_name)
+    category = _safe_lower(item_category)
+
+    if category == "drinks" or any(word in name for word in DRINK_KEYWORDS):
+        return "drink"
+    if category == "desserts" or any(word in name for word in DESSERT_KEYWORDS):
+        return "dessert"
+    if category in ("burgers", "combos") or any(word in name for word in ("burger", "combo", "bucket")):
+        return "main"
+    if any(word in name for word in ("rice", "pasta")) and "fries" not in name:
+        return "main"
+    if any(word in name for word in ("chicken", "tender", "fish", "fillet")):
+        return "main"
+    if category == "sides" or any(word in name for word in SIDE_KEYWORDS):
+        return "side"
+    return "side"
+
+def _cart_profile(cart_items, menu_lookup):
+    profile = {
+        "has_main": False,
+        "has_drink": False,
+        "has_side": False,
+        "has_dessert": False,
+        "has_combo": False,
+        "has_single_main": False,
+    }
+
+    for item in cart_items or []:
+        category = menu_lookup.get(item, "")
+        role = _item_role(item, category)
+        item_lower = _safe_lower(item)
+        profile[f"has_{role}"] = True
+        if role == "main" and not any(word in item_lower for word in ("combo", "bucket")):
+            profile["has_single_main"] = True
+        if any(word in item_lower for word in ("combo", "bucket")):
+            profile["has_combo"] = True
+    return profile
+
+def _fallback_base_score(item_name, item_category, cart_profile):
+    role = _item_role(item_name, item_category)
+    item_lower = _safe_lower(item_name)
+
+    if role == "drink":
+        if not cart_profile["has_drink"]:
+            return 0.34 if cart_profile["has_main"] else 0.26
+        return 0.0
+
+    if role == "side":
+        if not cart_profile["has_side"] and cart_profile["has_main"]:
+            if any(word in item_lower for word in ("fries", "coleslaw", "mashed", "popcorn")):
+                return 0.31
+            return 0.24
+        if cart_profile["has_drink"] and not cart_profile["has_main"]:
+            return 0.22
+        return 0.0
+
+    if role == "dessert":
+        if not cart_profile["has_dessert"]:
+            return 0.25 if cart_profile["has_main"] else 0.18
+        return 0.0
+
+    if role == "main":
+        if not cart_profile["has_main"]:
+            if cart_profile["has_dessert"] and not cart_profile["has_drink"]:
+                return 0.20
+            if any(word in item_lower for word in ("combo", "bucket")):
+                return 0.32
+            return 0.28
+        if cart_profile["has_single_main"] and any(word in item_lower for word in ("combo", "bucket")):
+            return 0.23
+        return 0.0
+
+    return 0.0
+
+def _apply_context_boosts(base_score, item_name, item_category, active_promos, is_lunch, is_dinner, promo_boost_val, time_boost_val):
+    promo_boost = 0.0
+    for promo in active_promos:
+        if is_item_in_promotion(item_name, item_category, promo.get('name', '')):
+            promo_boost = promo_boost_val
+            break
+
+    time_boost = 0.0
+    item_category_lower = _safe_lower(item_category)
+    role = _item_role(item_name, item_category)
+    if is_lunch and (item_category_lower in ["burgers", "combos"] or role == "main"):
+        time_boost = time_boost_val
+    elif is_dinner and (item_category_lower in ["combos", "sides"] or role in ("main", "side")):
+        time_boost = time_boost_val
+
+    return base_score * (1.0 + promo_boost) * (1.0 + time_boost)
+
+def _fallback_recommendations(cart_items, menu_records, menu_lookup, active_promos, is_lunch, is_dinner, promo_boost_val, time_boost_val, limit=5):
+    cart_set = set(cart_items or [])
+    profile = _cart_profile(cart_items, menu_lookup)
+    candidates = []
+
+    for row in menu_records:
+        name = row["name"]
+        if name in cart_set:
+            continue
+        category = row.get("category", "")
+        base_score = _fallback_base_score(name, category, profile)
+        if base_score <= 0:
+            continue
+        score = _apply_context_boosts(
+            base_score,
+            name,
+            category,
+            active_promos,
+            is_lunch,
+            is_dinner,
+            promo_boost_val,
+            time_boost_val,
+        )
+        candidates.append((name, score))
+
+    candidates.sort(key=lambda x: x[1], reverse=True)
+    return [{"name": name, "score": score} for name, score in candidates[:limit]]
 
 def rerank_recommendations(cart_items, active_promotions, affinity_rules, menu_items, timestamp, bandit_weights=None, bandit_mode="expected"):
     if not timestamp:
@@ -80,15 +243,8 @@ def rerank_recommendations(cart_items, active_promotions, affinity_rules, menu_i
             continue
             
     # 2. Build menu category lookup table for O(1) searches
-    menu_lookup = {}
-    if menu_items is not None:
-        if isinstance(menu_items, list):
-            for i in menu_items:
-                if isinstance(i, dict) and 'name' in i:
-                    menu_lookup[i['name']] = i.get('category', '')
-        else: # pandas DataFrame
-            for idx, row in menu_items.iterrows():
-                menu_lookup[row['name']] = row['category']
+    menu_records = _build_menu_records(menu_items)
+    menu_lookup = {row["name"]: row.get("category", "") for row in menu_records}
                 
     # 3. Find matching rules and calculate scores
     cart_set = set(cart_items or [])
@@ -111,24 +267,16 @@ def rerank_recommendations(cart_items, active_promotions, affinity_rules, menu_i
                     # Look up category from lookup table
                     item_category = menu_lookup.get(item, "")
                     
-                    # Promo Boost
-                    promo_boost = 0.0
-                    for promo in active_promos:
-                        if is_item_in_promotion(item, item_category, promo.get('name', '')):
-                            promo_boost = promo_boost_val
-                            break # Only apply one promo boost
-                            
-                    # Time Boost
-                    time_boost = 0.0
-                    # Standardize category strings check in case-insensitive way
-                    item_category_lower = item_category.lower()
-                    if is_lunch and item_category_lower in ["burgers", "combos"]:
-                        time_boost = time_boost_val
-                    elif is_dinner and item_category_lower in ["combos", "sides"]:
-                        time_boost = time_boost_val
-                        
-                    # Calculate Score
-                    score = base_confidence * (1.0 + promo_boost) * (1.0 + time_boost)
+                    score = _apply_context_boosts(
+                        base_confidence,
+                        item,
+                        item_category,
+                        active_promos,
+                        is_lunch,
+                        is_dinner,
+                        promo_boost_val,
+                        time_boost_val,
+                    )
                     
                     # Keep highest score if item is suggested multiple times
                     if item not in candidates or score > candidates[item]:
@@ -138,7 +286,19 @@ def rerank_recommendations(cart_items, active_promotions, affinity_rules, menu_i
             
     # Sort and format output
     sorted_recs = sorted(candidates.items(), key=lambda x: x[1], reverse=True)
-    return [{"name": name, "score": score} for name, score in sorted_recs]
+    if sorted_recs:
+        return [{"name": name, "score": score} for name, score in sorted_recs]
+
+    return _fallback_recommendations(
+        cart_items=cart_items,
+        menu_records=menu_records,
+        menu_lookup=menu_lookup,
+        active_promos=active_promos,
+        is_lunch=is_lunch,
+        is_dinner=is_dinner,
+        promo_boost_val=promo_boost_val,
+        time_boost_val=time_boost_val,
+    )
 
 def format_price_vnd(price: float) -> str:
     try:

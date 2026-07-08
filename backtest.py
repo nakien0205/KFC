@@ -6,8 +6,11 @@ from datetime import datetime
 from recommender import rerank_recommendations, is_item_in_promotion, format_price_vnd
 
 def run_backtest_simulation(seed=42):
-    # Set random seed for reproducibility
-    random.seed(seed)
+    # Seeded runs are useful for tests; seed=None gives the web demo a fresh
+    # Monte Carlo replay instead of the same fixed result on every click.
+    if seed is not None:
+        random.seed(seed)
+    rng = random.Random(seed)
     
     # 1. Resolve paths
     base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -120,7 +123,7 @@ def run_backtest_simulation(seed=42):
         baseline_val = original_value
         if default_baseline_item not in original_items:
             # Customer accepts default item based on its baseline support
-            if random.random() < default_baseline_support:
+            if rng.random() < default_baseline_support:
                 baseline_val += default_baseline_price
         baseline_totals.append(baseline_val)
         
@@ -159,7 +162,7 @@ def run_backtest_simulation(seed=42):
         if rec_item:
             # Cap probability at 1.0
             p_accept = min(1.0, max(0.0, p_accept))
-            if random.random() < p_accept:
+            if rng.random() < p_accept:
                 hybrid_val += menu_price_lookup.get(rec_item, 0.0)
                 accepted = True
                 

@@ -389,11 +389,24 @@
     }
   }
 
+  function formatSignedVND(value) {
+    var numericValue = Number(value) || 0;
+    var sign = numericValue > 0 ? '+' : '';
+    return sign + formatVND(numericValue);
+  }
+
+  function formatSignedPercent(value) {
+    var numericValue = Number(value) || 0;
+    var sign = numericValue > 0 ? '+' : '';
+    return sign + numericValue.toFixed(2) + '%';
+  }
+
   function renderBacktestResults(results) {
     var baselineAovStr = formatVND(results.baseline_aov);
     var hybridAovStr = formatVND(results.hybrid_aov);
-    var upliftStr = '+' + formatVND(results.absolute_change);
-    var percentageUpliftStr = '+' + results.percentage_uplift.toFixed(2) + '%';
+    var upliftStr = formatSignedVND(results.absolute_change);
+    var percentageUpliftStr = formatSignedPercent(results.percentage_uplift);
+    var upliftColor = Number(results.absolute_change) < 0 ? '#c62828' : '#2e7d32';
 
     backtestResultsBody.innerHTML =
       '<div class="backtest-grid">' +
@@ -411,7 +424,7 @@
         '</div>' +
         '<div class="backtest-metric-card" style="grid-column: span 2; text-align: center;">' +
           '<span class="backtest-metric-label">Additional Value Per Order</span>' +
-          '<span class="backtest-metric-value" style="color: #2e7d32;">' + upliftStr + '</span>' +
+          '<span class="backtest-metric-value" style="color: ' + upliftColor + ';">' + upliftStr + '</span>' +
         '</div>' +
       '</div>';
   }

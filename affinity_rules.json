@@ -1,42 +1,596 @@
 [
     {
         "antecedents": [
+            "2 pcs Black Pepper & Lime Fried Chicken"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.005,
+        "confidence": 0.42372881355932207,
+        "lift": 2.025472340149723,
+        "leverage": 0.0025314400000000003,
+        "conviction": 1.372270588235294
+    },
+    {
+        "antecedents": [
+            "Pepsi No Sugar",
+            "Burger Yo (Chicken)"
+        ],
+        "consequents": [
+            "Cheese Shake Fries"
+        ],
+        "support": 0.0032,
+        "confidence": 0.4,
+        "lift": 5.194805194805195,
+        "leverage": 0.0025840000000000004,
+        "conviction": 1.5383333333333336
+    },
+    {
+        "antecedents": [
+            "Garlic Butter Shake Fries",
+            "Burger Shrimp"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0034,
+        "confidence": 0.3953488372093023,
+        "lift": 1.8952485005239803,
+        "leverage": 0.0016060399999999998,
+        "conviction": 1.3088538461538461
+    },
+    {
+        "antecedents": [
+            "Cheese Shake Fries",
+            "Burger Yo (Chicken)"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0032,
+        "confidence": 0.36363636363636365,
+        "lift": 1.7432232197332869,
+        "leverage": 0.00136432,
+        "conviction": 1.2436285714285715
+    },
+    {
+        "antecedents": [
+            "Burger Zinger",
+            "Pepsi"
+        ],
+        "consequents": [
+            "Garlic Butter Shake Fries"
+        ],
+        "support": 0.003,
+        "confidence": 0.3488372093023256,
+        "lift": 4.997667755047645,
+        "leverage": 0.00239972,
+        "conviction": 1.4285214285714285
+    },
+    {
+        "antecedents": [
+            "1 Garlic Fish Sauce Chicken"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0032,
+        "confidence": 0.3478260869565218,
+        "lift": 1.6626485992185553,
+        "leverage": 0.0012753600000000001,
+        "conviction": 1.2125599999999999
+    },
+    {
+        "antecedents": [
+            "3 pcs Black Pepper & Lime Fried Chicken"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0038,
+        "confidence": 0.32758620689655177,
+        "lift": 1.6730654080518477,
+        "leverage": 0.0015287200000000003,
+        "conviction": 1.1959897435897437
+    },
+    {
+        "antecedents": [
+            "3 Tenders Chicken"
+        ],
+        "consequents": [
+            "Coleslaw"
+        ],
+        "support": 0.0034,
+        "confidence": 0.3269230769230769,
+        "lift": 5.394770246255395,
+        "leverage": 0.0027697599999999996,
+        "conviction": 1.3956799999999998
+    },
+    {
+        "antecedents": [
+            "Pepsi Zero",
+            "Roasted Fillet Chicken Burger"
+        ],
+        "consequents": [
+            "Cheese Shake Fries"
+        ],
+        "support": 0.0032,
+        "confidence": 0.326530612244898,
+        "lift": 4.240657301881792,
+        "leverage": 0.0024454000000000004,
+        "conviction": 1.3705151515151517
+    },
+    {
+        "antecedents": [
+            "Cheese Shake Fries",
+            "Roasted Fillet Chicken Burger"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0032,
+        "confidence": 0.326530612244898,
+        "lift": 1.560853787021501,
+        "leverage": 0.00114984,
+        "conviction": 1.1742181818181818
+    },
+    {
+        "antecedents": [
+            "Garlic Butter Shake Fries",
             "Burger Zinger"
         ],
         "consequents": [
-            "French Fries"
+            "Pepsi"
         ],
-        "support": 0.07666666666666666,
-        "confidence": 0.7419354838709676,
-        "lift": 2.4459411556185744,
-        "leverage": 0.045322222222222215,
-        "conviction": 2.699583333333332
+        "support": 0.003,
+        "confidence": 0.32608695652173914,
+        "lift": 1.6654083581294132,
+        "leverage": 0.0011986400000000002,
+        "conviction": 1.1933290322580645
+    },
+    {
+        "antecedents": [
+            "1 pc Black Pepper & Lime Fried Chicken"
+        ],
+        "consequents": [
+            "Coleslaw"
+        ],
+        "support": 0.0036,
+        "confidence": 0.3157894736842105,
+        "lift": 5.211047420531527,
+        "leverage": 0.00290916,
+        "conviction": 1.3729692307692307
+    },
+    {
+        "antecedents": [
+            "1 pc Black Pepper & Lime Fried Chicken"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0036,
+        "confidence": 0.3157894736842105,
+        "lift": 1.513851743452591,
+        "leverage": 0.0012219599999999998,
+        "conviction": 1.1566615384615384
+    },
+    {
+        "antecedents": [
+            "1 pc Black Pepper & Lime Fried Chicken"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0036,
+        "confidence": 0.3157894736842105,
+        "lift": 1.509509912448425,
+        "leverage": 0.0012151199999999997,
+        "conviction": 1.1557846153846152
+    },
+    {
+        "antecedents": [
+            "Pepsi No Sugar",
+            "Burger Shrimp"
+        ],
+        "consequents": [
+            "Garlic Butter Shake Fries"
+        ],
+        "support": 0.0034,
+        "confidence": 0.31481481481481477,
+        "lift": 4.510240899925713,
+        "leverage": 0.00264616,
+        "conviction": 1.3575891891891891
+    },
+    {
+        "antecedents": [
+            "3 Garlic Fish Sauce Chicken"
+        ],
+        "consequents": [
+            "Coleslaw"
+        ],
+        "support": 0.004,
+        "confidence": 0.3125,
+        "lift": 5.156765676567657,
+        "leverage": 0.00322432,
+        "conviction": 1.3664
+    },
+    {
+        "antecedents": [
+            "1 Roasted Fillet Chicken"
+        ],
+        "consequents": [
+            "Coleslaw"
+        ],
+        "support": 0.0036,
+        "confidence": 0.3103448275862069,
+        "lift": 5.121201775349949,
+        "leverage": 0.00289704,
+        "conviction": 1.3621299999999998
+    },
+    {
+        "antecedents": [
+            "3 pcs Black Pepper & Lime Fried Chicken"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0036,
+        "confidence": 0.3103448275862069,
+        "lift": 1.4877508513240982,
+        "leverage": 0.00118024,
+        "conviction": 1.14753
+    },
+    {
+        "antecedents": [
+            "3 Tenders Chicken"
+        ],
+        "consequents": [
+            "Mashed Potato"
+        ],
+        "support": 0.0032,
+        "confidence": 0.3076923076923077,
+        "lift": 5.514199062586159,
+        "leverage": 0.00261968,
+        "conviction": 1.3638444444444446
+    },
+    {
+        "antecedents": [
+            "Crispy Bucket 179k"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0046,
+        "confidence": 0.3066666666666667,
+        "lift": 1.4659018483110262,
+        "leverage": 0.0014620000000000002,
+        "conviction": 1.140576923076923
+    },
+    {
+        "antecedents": [
+            "3 Fried Chicken"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0042,
+        "confidence": 0.3043478260869565,
+        "lift": 1.554381134254119,
+        "leverage": 0.0014979599999999996,
+        "conviction": 1.1560375
+    },
+    {
+        "antecedents": [
+            "Burger Shrimp"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0108,
+        "confidence": 0.2983425414364641,
+        "lift": 1.4302135255822823,
+        "leverage": 0.0032486799999999995,
+        "conviction": 1.1279007874015747
+    },
+    {
+        "antecedents": [
+            "6 Fried Chicken"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.004,
+        "confidence": 0.2857142857142857,
+        "lift": 1.3696753869332967,
+        "leverage": 0.0010796,
+        "conviction": 1.10796
+    },
+    {
+        "antecedents": [
+            "5 Tenders Chicken"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0034,
+        "confidence": 0.2833333333333333,
+        "lift": 1.4470548178413347,
+        "leverage": 0.0010504,
+        "conviction": 1.1221395348837209
+    },
+    {
+        "antecedents": [
+            "1 Fried Chicken"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0036,
+        "confidence": 0.28125,
+        "lift": 1.348274209012464,
+        "leverage": 0.0009299199999999999,
+        "conviction": 1.1010782608695653
+    },
+    {
+        "antecedents": [
+            "Combo Rice Fried Chicken"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0042,
+        "confidence": 0.27999999999999997,
+        "lift": 1.3422818791946307,
+        "leverage": 0.001071,
+        "conviction": 1.0991666666666666
+    },
+    {
+        "antecedents": [
+            "Couple's Bucket 189k"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0044,
+        "confidence": 0.27848101265822783,
+        "lift": 1.4222727919214904,
+        "leverage": 0.00130636,
+        "conviction": 1.1145929824561402
+    },
+    {
+        "antecedents": [
+            "3 pcs Black Pepper & Lime Fried Chicken"
+        ],
+        "consequents": [
+            "Coleslaw"
+        ],
+        "support": 0.0032,
+        "confidence": 0.2758620689655173,
+        "lift": 4.552179355866622,
+        "leverage": 0.0024970400000000003,
+        "conviction": 1.2972666666666668
+    },
+    {
+        "antecedents": [
+            "1 Roasted Fillet Chicken"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0032,
+        "confidence": 0.2758620689655173,
+        "lift": 1.4088971857278718,
+        "leverage": 0.0009287200000000005,
+        "conviction": 1.1105619047619049
+    },
+    {
+        "antecedents": [
+            "Fried Chicken Rice"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.005,
+        "confidence": 0.2747252747252747,
+        "lift": 1.316995564358939,
+        "leverage": 0.0012034799999999998,
+        "conviction": 1.0911727272727272
+    },
+    {
+        "antecedents": [
+            "2 Garlic Fish Sauce Chicken"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0036,
+        "confidence": 0.2727272727272727,
+        "lift": 1.3928869904355092,
+        "leverage": 0.0010154399999999998,
+        "conviction": 1.105775
     },
     {
         "antecedents": [
             "Burger Yo (Chicken)"
         ],
         "consequents": [
-            "French Fries"
+            "Cheese Shake Fries"
         ],
-        "support": 0.07166666666666667,
-        "confidence": 0.7049180327868853,
-        "lift": 2.323905602594127,
-        "leverage": 0.04082777777777778,
-        "conviction": 2.360925925925926
+        "support": 0.0088,
+        "confidence": 0.26666666666666666,
+        "lift": 3.463203463203463,
+        "leverage": 0.006259000000000001,
+        "conviction": 1.2586363636363636
+    },
+    {
+        "antecedents": [
+            "5 Tenders Chicken"
+        ],
+        "consequents": [
+            "Coleslaw"
+        ],
+        "support": 0.0032,
+        "confidence": 0.26666666666666666,
+        "lift": 4.400440044004401,
+        "leverage": 0.0024728000000000003,
+        "conviction": 1.281
+    },
+    {
+        "antecedents": [
+            "3 Garlic Fish Sauce Chicken"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0034,
+        "confidence": 0.265625,
+        "lift": 1.2697179732313575,
+        "leverage": 0.0007222399999999999,
+        "conviction": 1.0768340425531915
     },
     {
         "antecedents": [
             "Roasted Fillet Chicken Burger"
         ],
         "consequents": [
+            "Garlic Butter Shake Fries"
+        ],
+        "support": 0.0104,
+        "confidence": 0.2653061224489796,
+        "lift": 3.8009473130226303,
+        "leverage": 0.00766384,
+        "conviction": 1.2661055555555558
+    },
+    {
+        "antecedents": [
+            "3 Fried Chicken"
+        ],
+        "consequents": [
+            "Mashed Potato"
+        ],
+        "support": 0.0036,
+        "confidence": 0.2608695652173913,
+        "lift": 4.675081813931744,
+        "leverage": 0.00282996,
+        "conviction": 1.2774470588235296
+    },
+    {
+        "antecedents": [
+            "Fried Chicken Pasta"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0062,
+        "confidence": 0.26050420168067223,
+        "lift": 1.2488216763215352,
+        "leverage": 0.001235319999999999,
+        "conviction": 1.0701886363636364
+    },
+    {
+        "antecedents": [
+            "Burger Shrimp"
+        ],
+        "consequents": [
+            "Cheese Shake Fries"
+        ],
+        "support": 0.0094,
+        "confidence": 0.2596685082872928,
+        "lift": 3.3723182894453614,
+        "leverage": 0.0066126,
+        "conviction": 1.2467388059701494
+    },
+    {
+        "antecedents": [
+            "Party Bucket 269k"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0044,
+        "confidence": 0.25882352941176473,
+        "lift": 1.2372061635361602,
+        "leverage": 0.0008435999999999999,
+        "conviction": 1.0669523809523809
+    },
+    {
+        "antecedents": [
+            "Burger Zinger"
+        ],
+        "consequents": [
             "French Fries"
         ],
-        "support": 0.06916666666666667,
-        "confidence": 0.6587301587301587,
-        "lift": 2.1716378859236003,
-        "leverage": 0.037316666666666665,
-        "conviction": 2.0413953488372094
+        "support": 0.0096,
+        "confidence": 0.25806451612903225,
+        "lift": 3.3866734400135465,
+        "leverage": 0.00676536,
+        "conviction": 1.2451217391304348
+    },
+    {
+        "antecedents": [
+            "2 Garlic Fish Sauce Chicken"
+        ],
+        "consequents": [
+            "Coleslaw"
+        ],
+        "support": 0.0034,
+        "confidence": 0.25757575757575757,
+        "lift": 4.25042504250425,
+        "leverage": 0.00260008,
+        "conviction": 1.2653142857142856
+    },
+    {
+        "antecedents": [
+            "6 Fried Chicken"
+        ],
+        "consequents": [
+            "Mashed Potato"
+        ],
+        "support": 0.0036,
+        "confidence": 0.2571428571428571,
+        "lift": 4.608294930875576,
+        "leverage": 0.0028187999999999998,
+        "conviction": 1.2710384615384616
+    },
+    {
+        "antecedents": [
+            "1 Garlic Fish Sauce Chicken with rice"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0038,
+        "confidence": 0.25675675675675674,
+        "lift": 1.3113215360406372,
+        "leverage": 0.0009021599999999999,
+        "conviction": 1.0820145454545456
+    },
+    {
+        "antecedents": [
+            "Seaweed Soup"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0038,
+        "confidence": 0.25675675675675674,
+        "lift": 1.3113215360406372,
+        "leverage": 0.0009021599999999999,
+        "conviction": 1.0820145454545456
+    },
+    {
+        "antecedents": [
+            "Roasted Fillet Chicken Burger"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.01,
+        "confidence": 0.25510204081632654,
+        "lift": 1.222924452619015,
+        "leverage": 0.0018228800000000007,
+        "conviction": 1.0624273972602738
     },
     {
         "antecedents": [
@@ -45,24 +599,362 @@
         "consequents": [
             "French Fries"
         ],
-        "support": 0.06416666666666666,
-        "confidence": 0.6311475409836065,
-        "lift": 2.0807061790668344,
-        "leverage": 0.033327777777777776,
-        "conviction": 1.8887407407407404
+        "support": 0.0092,
+        "confidence": 0.25414364640883974,
+        "lift": 3.3352184568089203,
+        "leverage": 0.006441559999999999,
+        "conviction": 1.2385762962962963
+    },
+    {
+        "antecedents": [
+            "Burger Zinger"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0094,
+        "confidence": 0.2526881720430108,
+        "lift": 1.2078784514484264,
+        "leverage": 0.001617760000000001,
+        "conviction": 1.0581928057553955
+    },
+    {
+        "antecedents": [
+            "Roasted Fillet Chicken Burger"
+        ],
+        "consequents": [
+            "Cheese Shake Fries"
+        ],
+        "support": 0.0098,
+        "confidence": 0.25,
+        "lift": 3.2467532467532467,
+        "leverage": 0.0067816,
+        "conviction": 1.2306666666666668
+    },
+    {
+        "antecedents": [
+            "Roasted Fillet Chicken Burger"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0098,
+        "confidence": 0.25,
+        "lift": 1.1950286806883366,
+        "leverage": 0.0015993599999999993,
+        "conviction": 1.0544
+    },
+    {
+        "antecedents": [
+            "Popcorn"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0082,
+        "confidence": 0.25,
+        "lift": 1.1984659635666346,
+        "leverage": 0.0013579199999999994,
+        "conviction": 1.0552
     },
     {
         "antecedents": [
             "1 Fried Chicken"
         ],
         "consequents": [
+            "Mashed Potato"
+        ],
+        "support": 0.0032,
+        "confidence": 0.25,
+        "lift": 4.480286738351254,
+        "leverage": 0.00248576,
+        "conviction": 1.2589333333333335
+    },
+    {
+        "antecedents": [
+            "Burger Zinger"
+        ],
+        "consequents": [
+            "Garlic Butter Shake Fries"
+        ],
+        "support": 0.0092,
+        "confidence": 0.24731182795698925,
+        "lift": 3.5431493976646022,
+        "leverage": 0.00660344,
+        "conviction": 1.2358371428571429
+    },
+    {
+        "antecedents": [
+            "Combo Rice Nanban"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0038,
+        "confidence": 0.24675324675324675,
+        "lift": 1.1795088276923842,
+        "leverage": 0.0005783199999999998,
+        "conviction": 1.049855172413793
+    },
+    {
+        "antecedents": [
+            "2 Fried Chicken"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0034,
+        "confidence": 0.24637681159420288,
+        "lift": 1.1810968916308862,
+        "leverage": 0.0005213199999999996,
+        "conviction": 1.050126923076923
+    },
+    {
+        "antecedents": [
+            "3 Fried Chicken"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0034,
+        "confidence": 0.24637681159420288,
+        "lift": 1.1777094244464765,
+        "leverage": 0.0005130399999999998,
+        "conviction": 1.0493307692307692
+    },
+    {
+        "antecedents": [
+            "1 Garlic Fish Sauce Chicken with rice"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0036,
+        "confidence": 0.24324324324324323,
+        "lift": 1.1660749915783473,
+        "leverage": 0.0005127199999999995,
+        "conviction": 1.0457785714285714
+    },
+    {
+        "antecedents": [
+            "Popcorn Chicken Pasta"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0142,
+        "confidence": 0.24315068493150685,
+        "lift": 1.1656312796333022,
+        "leverage": 0.0020177600000000004,
+        "conviction": 1.0456506787330315
+    },
+    {
+        "antecedents": [
+            "Burger Yo (Chicken)"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.008,
+        "confidence": 0.24242424242424243,
+        "lift": 1.1621488131555247,
+        "leverage": 0.0011161999999999995,
+        "conviction": 1.044648
+    },
+    {
+        "antecedents": [
+            "2 Garlic Fish Sauce Chicken"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0032,
+        "confidence": 0.24242424242424243,
+        "lift": 1.1621488131555247,
+        "leverage": 0.00044647999999999997,
+        "conviction": 1.044648
+    },
+    {
+        "antecedents": [
+            "2 Garlic Fish Sauce Chicken"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0032,
+        "confidence": 0.24242424242424243,
+        "lift": 1.1588156903644475,
+        "leverage": 0.00043856000000000016,
+        "conviction": 1.043856
+    },
+    {
+        "antecedents": [
+            "Burger Zinger"
+        ],
+        "consequents": [
+            "Cheese Shake Fries"
+        ],
+        "support": 0.009,
+        "confidence": 0.24193548387096775,
+        "lift": 3.142019271051529,
+        "leverage": 0.0061356,
+        "conviction": 1.2175744680851064
+    },
+    {
+        "antecedents": [
+            "Cheese Shake Fries"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0186,
+        "confidence": 0.24155844155844156,
+        "lift": 1.157998281679969,
+        "leverage": 0.0025377999999999998,
+        "conviction": 1.0434554794520547
+    },
+    {
+        "antecedents": [
+            "Coleslaw"
+        ],
+        "consequents": [
             "Pepsi"
         ],
-        "support": 0.07416666666666667,
-        "confidence": 0.7478991596638656,
-        "lift": 1.7494717185119661,
-        "leverage": 0.03177291666666667,
-        "conviction": 2.270916666666667
+        "support": 0.0144,
+        "confidence": 0.2376237623762376,
+        "lift": 1.2136045065180674,
+        "leverage": 0.0025345199999999984,
+        "conviction": 1.0548597402597404
+    },
+    {
+        "antecedents": [
+            "Coleslaw"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0144,
+        "confidence": 0.2376237623762376,
+        "lift": 1.1391359653702666,
+        "leverage": 0.0017588399999999994,
+        "conviction": 1.0380701298701298
+    },
+    {
+        "antecedents": [
+            "Burger Shrimp"
+        ],
+        "consequents": [
+            "Garlic Butter Shake Fries"
+        ],
+        "support": 0.0086,
+        "confidence": 0.23756906077348064,
+        "lift": 3.4035682059237913,
+        "leverage": 0.00607324,
+        "conviction": 1.2200449275362317
+    },
+    {
+        "antecedents": [
+            "6 Chewy Cheese"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.008,
+        "confidence": 0.2366863905325444,
+        "lift": 1.1313881000599637,
+        "leverage": 0.0009290400000000008,
+        "conviction": 1.0360093023255814
+    },
+    {
+        "antecedents": [
+            "Nanban Popcorn Chicken Rice"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0114,
+        "confidence": 0.23651452282157678,
+        "lift": 1.207939340253201,
+        "leverage": 0.001962440000000001,
+        "conviction": 1.0533271739130436
+    },
+    {
+        "antecedents": [
+            "Burger Yo (Chicken)"
+        ],
+        "consequents": [
+            "French Fries"
+        ],
+        "support": 0.0078,
+        "confidence": 0.23636363636363633,
+        "lift": 3.1018849916487707,
+        "leverage": 0.005285399999999999,
+        "conviction": 1.2097380952380952
+    },
+    {
+        "antecedents": [
+            "Burger Yo (Chicken)"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0078,
+        "confidence": 0.23636363636363633,
+        "lift": 1.1298452981053362,
+        "leverage": 0.0008963999999999995,
+        "conviction": 1.0355714285714284
+    },
+    {
+        "antecedents": [
+            "Happy Bucket 159k"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0038,
+        "confidence": 0.23456790123456792,
+        "lift": 1.1979974526791006,
+        "leverage": 0.0006280400000000003,
+        "conviction": 1.0506483870967742
+    },
+    {
+        "antecedents": [
+            "3 Garlic Fish Sauce Chicken"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.003,
+        "confidence": 0.234375,
+        "lift": 1.1970122574055158,
+        "leverage": 0.0004937599999999998,
+        "conviction": 1.0503836734693879
+    },
+    {
+        "antecedents": [
+            "2 Fried Chicken"
+        ],
+        "consequents": [
+            "Mashed Potato"
+        ],
+        "support": 0.0032,
+        "confidence": 0.2318840579710145,
+        "lift": 4.155628279050439,
+        "leverage": 0.00242996,
+        "conviction": 1.2292415094339624
+    },
+    {
+        "antecedents": [
+            "3 Fried Chicken"
+        ],
+        "consequents": [
+            "Coleslaw"
+        ],
+        "support": 0.0032,
+        "confidence": 0.2318840579710145,
+        "lift": 3.8264696034820873,
+        "leverage": 0.00236372,
+        "conviction": 1.2229924528301888
     },
     {
         "antecedents": [
@@ -71,63 +963,11 @@
         "consequents": [
             "Pepsi"
         ],
-        "support": 0.0775,
-        "confidence": 0.7265625,
-        "lift": 1.699561403508772,
-        "leverage": 0.0319,
-        "conviction": 2.093714285714286
-    },
-    {
-        "antecedents": [
-            "Burger Yo (Chicken)"
-        ],
-        "consequents": [
-            "Pepsi"
-        ],
-        "support": 0.065,
-        "confidence": 0.639344262295082,
-        "lift": 1.4955421340235837,
-        "leverage": 0.0215375,
-        "conviction": 1.5873863636363639
-    },
-    {
-        "antecedents": [
-            "Roasted Fillet Chicken Burger"
-        ],
-        "consequents": [
-            "Pepsi"
-        ],
-        "support": 0.06666666666666667,
-        "confidence": 0.6349206349206349,
-        "lift": 1.485194467650608,
-        "leverage": 0.02177916666666667,
-        "conviction": 1.5681521739130433
-    },
-    {
-        "antecedents": [
-            "Burger Shrimp"
-        ],
-        "consequents": [
-            "Pepsi"
-        ],
-        "support": 0.06333333333333334,
-        "confidence": 0.6229508196721312,
-        "lift": 1.4571948998178508,
-        "leverage": 0.019870833333333338,
-        "conviction": 1.5183695652173914
-    },
-    {
-        "antecedents": [
-            "French Fries"
-        ],
-        "consequents": [
-            "Pepsi"
-        ],
-        "support": 0.1775,
-        "confidence": 0.5851648351648351,
-        "lift": 1.3688066319645265,
-        "leverage": 0.04782499999999998,
-        "conviction": 1.3800662251655627
+        "support": 0.0032,
+        "confidence": 0.2318840579710145,
+        "lift": 1.1842903880031384,
+        "leverage": 0.00049796,
+        "conviction": 1.0469773584905662
     },
     {
         "antecedents": [
@@ -136,10 +976,2354 @@
         "consequents": [
             "Pepsi"
         ],
-        "support": 0.05583333333333333,
-        "confidence": 0.5403225806451613,
-        "lift": 1.2639124693454065,
-        "leverage": 0.011658333333333333,
-        "conviction": 1.245438596491228
+        "support": 0.0086,
+        "confidence": 0.23118279569892475,
+        "lift": 1.1807088646523225,
+        "leverage": 0.0013162400000000006,
+        "conviction": 1.0460223776223776
+    },
+    {
+        "antecedents": [
+            "6 Chewy Cheese"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0078,
+        "confidence": 0.23076923076923078,
+        "lift": 1.106276274061509,
+        "leverage": 0.0007493200000000004,
+        "conviction": 1.02882
+    },
+    {
+        "antecedents": [
+            "Garlic Butter Shake Popcorn"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0078,
+        "confidence": 0.22941176470588232,
+        "lift": 1.0966145540434145,
+        "leverage": 0.0006871999999999989,
+        "conviction": 1.0262290076335876
+    },
+    {
+        "antecedents": [
+            "Roasted Sesame Salad"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0032,
+        "confidence": 0.22857142857142856,
+        "lift": 1.1673719538888079,
+        "leverage": 0.0004588000000000001,
+        "conviction": 1.0424814814814816
+    },
+    {
+        "antecedents": [
+            "6 Fried Chicken"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0032,
+        "confidence": 0.22857142857142856,
+        "lift": 1.0925976509150506,
+        "leverage": 0.0002712000000000001,
+        "conviction": 1.025111111111111
+    },
+    {
+        "antecedents": [
+            "2 Garlic Fish Sauce Chicken"
+        ],
+        "consequents": [
+            "Mashed Potato"
+        ],
+        "support": 0.003,
+        "confidence": 0.22727272727272727,
+        "lift": 4.0729879439556855,
+        "leverage": 0.0022634400000000002,
+        "conviction": 1.2219058823529412
+    },
+    {
+        "antecedents": [
+            "Rice"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0038,
+        "confidence": 0.2261904761904762,
+        "lift": 1.1552118293691327,
+        "leverage": 0.0005105600000000002,
+        "conviction": 1.0392738461538462
+    },
+    {
+        "antecedents": [
+            "Burger Zinger"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0084,
+        "confidence": 0.22580645161290322,
+        "lift": 1.082485386447283,
+        "leverage": 0.0006400799999999995,
+        "conviction": 1.022225
+    },
+    {
+        "antecedents": [
+            "French Fries"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0172,
+        "confidence": 0.22572178477690288,
+        "lift": 1.152818104069984,
+        "leverage": 0.002280039999999999,
+        "conviction": 1.038644745762712
+    },
+    {
+        "antecedents": [
+            "Garlic Butter Shake Fries",
+            "Pepsi No Sugar"
+        ],
+        "consequents": [
+            "Burger Shrimp"
+        ],
+        "support": 0.0034,
+        "confidence": 0.2236842105263158,
+        "lift": 6.17912183774353,
+        "leverage": 0.00284976,
+        "conviction": 1.2415050847457627
+    },
+    {
+        "antecedents": [
+            "1 pc Black Pepper & Lime Fried Chicken Rice"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0036,
+        "confidence": 0.22222222222222224,
+        "lift": 1.1349449551696744,
+        "leverage": 0.0004280400000000002,
+        "conviction": 1.0339714285714285
+    },
+    {
+        "antecedents": [
+            "Happy Bucket 159k"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0036,
+        "confidence": 0.22222222222222224,
+        "lift": 1.0653030787258975,
+        "leverage": 0.00022068,
+        "conviction": 1.0175142857142856
+    },
+    {
+        "antecedents": [
+            "Mashed Potato"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0124,
+        "confidence": 0.2222222222222222,
+        "lift": 1.0622477161674102,
+        "leverage": 0.0007266399999999989,
+        "conviction": 1.016742857142857
+    },
+    {
+        "antecedents": [
+            "Sausage Chicken Pasta"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0062,
+        "confidence": 0.22142857142857142,
+        "lift": 1.061498424873305,
+        "leverage": 0.0003591999999999996,
+        "conviction": 1.0164770642201835
+    },
+    {
+        "antecedents": [
+            "Coleslaw"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0134,
+        "confidence": 0.22112211221122113,
+        "lift": 1.0569890641071755,
+        "leverage": 0.000722480000000001,
+        "conviction": 1.015306779661017
+    },
+    {
+        "antecedents": [
+            "Garlic Butter Shake Fries"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0154,
+        "confidence": 0.22063037249283668,
+        "lift": 1.0546384918395635,
+        "leverage": 0.000797840000000001,
+        "conviction": 1.0146661764705882
+    },
+    {
+        "antecedents": [
+            "Roasted Fillet Chicken Burger"
+        ],
+        "consequents": [
+            "French Fries"
+        ],
+        "support": 0.0086,
+        "confidence": 0.2193877551020408,
+        "lift": 2.8791043976645776,
+        "leverage": 0.00561296,
+        "conviction": 1.183430065359477
+    },
+    {
+        "antecedents": [
+            "Combo Rice & Soup"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0068,
+        "confidence": 0.2193548387096774,
+        "lift": 1.1203005041352267,
+        "leverage": 0.0007301999999999994,
+        "conviction": 1.0301735537190082
+    },
+    {
+        "antecedents": [
+            "Cheese Shake Popcorn"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0066,
+        "confidence": 0.21854304635761587,
+        "lift": 1.0446608334494067,
+        "leverage": 0.00028216000000000005,
+        "conviction": 1.0119559322033898
+    },
+    {
+        "antecedents": [
+            "Garlic Butter Shake Fries"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0152,
+        "confidence": 0.2177650429799427,
+        "lift": 1.0439359682643465,
+        "leverage": 0.0006397199999999999,
+        "conviction": 1.0117164835164836
+    },
+    {
+        "antecedents": [
+            "3 Fried Chicken"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.003,
+        "confidence": 0.2173913043478261,
+        "lift": 1.0421443161448998,
+        "leverage": 0.00012131999999999985,
+        "conviction": 1.0112333333333334
+    },
+    {
+        "antecedents": [
+            "Nanban Popcorn Chicken Rice"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0104,
+        "confidence": 0.21576763485477177,
+        "lift": 1.0313940480629626,
+        "leverage": 0.00031656000000000045,
+        "conviction": 1.008374603174603
+    },
+    {
+        "antecedents": [
+            "Cheese Shake Fries"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0166,
+        "confidence": 0.2155844155844156,
+        "lift": 1.0305182389312408,
+        "leverage": 0.0004916000000000018,
+        "conviction": 1.008139072847682
+    },
+    {
+        "antecedents": [
+            "French Fries"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0164,
+        "confidence": 0.2152230971128609,
+        "lift": 1.0287910951857595,
+        "leverage": 0.0004589600000000013,
+        "conviction": 1.00767491638796
+    },
+    {
+        "antecedents": [
+            "1 Eggtart"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.028,
+        "confidence": 0.21374045801526717,
+        "lift": 1.024642655873764,
+        "leverage": 0.0006733999999999976,
+        "conviction": 1.0065378640776699
+    },
+    {
+        "antecedents": [
+            "Roasted Fillet Chicken Rice"
+        ],
+        "consequents": [
+            "Popcorn Salad"
+        ],
+        "support": 0.0032,
+        "confidence": 0.21333333333333335,
+        "lift": 4.500703234880451,
+        "leverage": 0.0024890000000000003,
+        "conviction": 1.2109322033898307
+    },
+    {
+        "antecedents": [
+            "Roasted Fillet Chicken Rice"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0032,
+        "confidence": 0.21333333333333335,
+        "lift": 1.0895471569628874,
+        "leverage": 0.0002630000000000002,
+        "conviction": 1.0222881355932205
+    },
+    {
+        "antecedents": [
+            "4 Eggtarts"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0266,
+        "confidence": 0.21178343949044587,
+        "lift": 1.015260975505493,
+        "leverage": 0.00039983999999999853,
+        "conviction": 1.004038787878788
+    },
+    {
+        "antecedents": [
+            "Party Bucket 269k"
+        ],
+        "consequents": [
+            "Coleslaw"
+        ],
+        "support": 0.0036,
+        "confidence": 0.2117647058823529,
+        "lift": 3.4944670937681996,
+        "leverage": 0.0025697999999999997,
+        "conviction": 1.191776119402985
+    },
+    {
+        "antecedents": [
+            "Garlic Butter Shake Fries",
+            "Pepsi"
+        ],
+        "consequents": [
+            "Burger Zinger"
+        ],
+        "support": 0.003,
+        "confidence": 0.2112676056338028,
+        "lift": 5.679236710586098,
+        "leverage": 0.00247176,
+        "conviction": 1.220692857142857
+    },
+    {
+        "antecedents": [
+            "Combo Pasta & Tenders"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0052,
+        "confidence": 0.20967741935483872,
+        "lift": 1.002282119286992,
+        "leverage": 1.1839999999999941e-05,
+        "conviction": 1.0006040816326531
+    },
+    {
+        "antecedents": [
+            "Fried Chicken Rice"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0038,
+        "confidence": 0.20879120879120877,
+        "lift": 1.0663493809561224,
+        "leverage": 0.00023643999999999965,
+        "conviction": 1.0164194444444443
+    },
+    {
+        "antecedents": [
+            "Combo Rice Nanban"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0032,
+        "confidence": 0.2077922077922078,
+        "lift": 0.9961275541333068,
+        "leverage": -1.244000000000028e-05,
+        "conviction": 0.9989803278688525
+    },
+    {
+        "antecedents": [
+            "French Fries"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0156,
+        "confidence": 0.20472440944881887,
+        "lift": 0.9814209465427558,
+        "leverage": -0.0002953200000000017,
+        "conviction": 0.9951267326732672
+    },
+    {
+        "antecedents": [
+            "Burger Shrimp"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0074,
+        "confidence": 0.20441988950276244,
+        "lift": 0.9771505234357669,
+        "leverage": -0.00017304000000000017,
+        "conviction": 0.9939916666666666
+    },
+    {
+        "antecedents": [
+            "Garlic Butter Shake Fries"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0142,
+        "confidence": 0.2034383954154728,
+        "lift": 1.039011212540719,
+        "leverage": 0.0005331600000000013,
+        "conviction": 1.0095892086330935
+    },
+    {
+        "antecedents": [
+            "Popcorn Salad"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0096,
+        "confidence": 0.20253164556962025,
+        "lift": 1.0343802123065386,
+        "leverage": 0.00031907999999999936,
+        "conviction": 1.00844126984127
+    },
+    {
+        "antecedents": [
+            "Couple's Bucket 189k"
+        ],
+        "consequents": [
+            "1 Eggtart"
+        ],
+        "support": 0.0032,
+        "confidence": 0.20253164556962025,
+        "lift": 1.5460430959512996,
+        "leverage": 0.0011302,
+        "conviction": 1.0896984126984126
+    },
+    {
+        "antecedents": [
+            "Fried Chicken Pasta"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0048,
+        "confidence": 0.20168067226890754,
+        "lift": 0.9640567508073974,
+        "leverage": -0.00017896000000000058,
+        "conviction": 0.9905810526315788
+    },
+    {
+        "antecedents": [
+            "Combo Pasta & Tenders"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.005,
+        "confidence": 0.20161290322580647,
+        "lift": 0.9665048093279313,
+        "leverage": -0.00017327999999999961,
+        "conviction": 0.9912484848484849
+    },
+    {
+        "antecedents": [
+            "Mashed Potato"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0112,
+        "confidence": 0.20071684587813618,
+        "lift": 0.9622092323975847,
+        "leverage": -0.00043988000000000187,
+        "conviction": 0.9901372197309417
+    },
+    {
+        "antecedents": [
+            "1 Eggtart"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0262,
+        "confidence": 0.2,
+        "lift": 0.9560229445506693,
+        "leverage": -0.0012052,
+        "conviction": 0.9884999999999999
+    },
+    {
+        "antecedents": [
+            "Burger Yo (Chicken)"
+        ],
+        "consequents": [
+            "Garlic Butter Shake Fries"
+        ],
+        "support": 0.0066,
+        "confidence": 0.19999999999999998,
+        "lift": 2.8653295128939824,
+        "leverage": 0.004296599999999999,
+        "conviction": 1.16275
+    },
+    {
+        "antecedents": [
+            "Sausage Chicken Pasta"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0056,
+        "confidence": 0.19999999999999998,
+        "lift": 0.9560229445506692,
+        "leverage": -0.0002576000000000002,
+        "conviction": 0.9884999999999999
+    },
+    {
+        "antecedents": [
+            "Combo Pasta Solo"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0048,
+        "confidence": 0.19999999999999998,
+        "lift": 1.0214504596527068,
+        "leverage": 0.00010079999999999985,
+        "conviction": 1.00525
+    },
+    {
+        "antecedents": [
+            "Combo Pasta Solo"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0048,
+        "confidence": 0.19999999999999998,
+        "lift": 0.9560229445506692,
+        "leverage": -0.00022080000000000016,
+        "conviction": 0.9884999999999999
+    },
+    {
+        "antecedents": [
+            "Popcorn Salad"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0094,
+        "confidence": 0.19831223628691985,
+        "lift": 0.9506818613946302,
+        "leverage": -0.00048763999999999925,
+        "conviction": 0.9871673684210527
+    },
+    {
+        "antecedents": [
+            "Combo Group 3"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0038,
+        "confidence": 0.19791666666666669,
+        "lift": 0.9487855544902525,
+        "leverage": -0.00020512000000000004,
+        "conviction": 0.9866805194805196
+    },
+    {
+        "antecedents": [
+            "Popcorn"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0064,
+        "confidence": 0.1951219512195122,
+        "lift": 0.9327053117567505,
+        "leverage": -0.0004617600000000003,
+        "conviction": 0.9825090909090908
+    },
+    {
+        "antecedents": [
+            "4 Chewy Cheese"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0062,
+        "confidence": 0.19496855345911948,
+        "lift": 0.9319720528638599,
+        "leverage": -0.0004525600000000003,
+        "conviction": 0.9823218749999999
+    },
+    {
+        "antecedents": [
+            "Cheese Shake Fries"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.015,
+        "confidence": 0.1948051948051948,
+        "lift": 0.9949192788825065,
+        "leverage": -7.660000000000132e-05,
+        "conviction": 0.9987645161290323
+    },
+    {
+        "antecedents": [
+            "4 Eggtarts"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0244,
+        "confidence": 0.19426751592356692,
+        "lift": 0.9286210130189624,
+        "leverage": -0.001875519999999995,
+        "conviction": 0.9814671936758893
+    },
+    {
+        "antecedents": [
+            "Combo Rice & Soup"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.006,
+        "confidence": 0.1935483870967742,
+        "lift": 0.9251834947264541,
+        "leverage": -0.00048519999999999987,
+        "conviction": 0.980592
+    },
+    {
+        "antecedents": [
+            "Combo Pasta & Tenders"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0048,
+        "confidence": 0.1935483870967742,
+        "lift": 0.9885004448252002,
+        "leverage": -5.584000000000058e-05,
+        "conviction": 0.9972080000000001
+    },
+    {
+        "antecedents": [
+            "Fried Chicken Pasta"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0046,
+        "confidence": 0.19327731092436973,
+        "lift": 0.987115990420683,
+        "leverage": -6.004000000000079e-05,
+        "conviction": 0.9968729166666667
+    },
+    {
+        "antecedents": [
+            "Pepsi Zero",
+            "Cheese Shake Fries"
+        ],
+        "consequents": [
+            "Roasted Fillet Chicken Burger"
+        ],
+        "support": 0.0032,
+        "confidence": 0.1927710843373494,
+        "lift": 4.917629702483404,
+        "leverage": 0.00254928,
+        "conviction": 1.1902447761194028
+    },
+    {
+        "antecedents": [
+            "Burger Yo (Chicken)"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0062,
+        "confidence": 0.18787878787878787,
+        "lift": 0.9595443711889063,
+        "leverage": -0.0002614000000000002,
+        "conviction": 0.9902462686567164
+    },
+    {
+        "antecedents": [
+            "1 Eggtart"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0246,
+        "confidence": 0.18778625954198472,
+        "lift": 0.959071805628114,
+        "leverage": -0.0010498,
+        "conviction": 0.9901334586466165
+    },
+    {
+        "antecedents": [
+            "Popcorn Salad"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0088,
+        "confidence": 0.18565400843881857,
+        "lift": 0.8874474590765706,
+        "leverage": -0.0011160799999999985,
+        "conviction": 0.9710860103626942
+    },
+    {
+        "antecedents": [
+            "1 pc Black Pepper & Lime Fried Chicken Rice"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.003,
+        "confidence": 0.1851851851851852,
+        "lift": 0.8852064301395086,
+        "leverage": -0.0003890399999999998,
+        "conviction": 0.9705272727272727
+    },
+    {
+        "antecedents": [
+            "4 Chewy Cheese"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0058,
+        "confidence": 0.18238993710691823,
+        "lift": 0.8743525268788026,
+        "leverage": -0.000833480000000001,
+        "conviction": 0.9679430769230769
+    },
+    {
+        "antecedents": [
+            "Garlic Butter Shake Popcorn"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0062,
+        "confidence": 0.18235294117647058,
+        "lift": 0.8741751734250747,
+        "leverage": -0.0008924000000000007,
+        "conviction": 0.9678992805755395
+    },
+    {
+        "antecedents": [
+            "Cheese Shake Popcorn"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0054,
+        "confidence": 0.17880794701986755,
+        "lift": 0.9132172983650028,
+        "leverage": -0.0005131600000000004,
+        "conviction": 0.9793080645161291
+    },
+    {
+        "antecedents": [
+            "Garlic Butter Shake Popcorn"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.006,
+        "confidence": 0.1764705882352941,
+        "lift": 0.9012798173406236,
+        "leverage": -0.0006572000000000001,
+        "conviction": 0.9765285714285715
+    },
+    {
+        "antecedents": [
+            "Fried Chicken Rice"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0032,
+        "confidence": 0.1758241758241758,
+        "lift": 0.8404597314731157,
+        "leverage": -0.0006074399999999999,
+        "conviction": 0.959504
+    },
+    {
+        "antecedents": [
+            "Mashed Potato"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0098,
+        "confidence": 0.17562724014336917,
+        "lift": 0.8969726258599038,
+        "leverage": -0.0011256400000000007,
+        "conviction": 0.9755295652173913
+    },
+    {
+        "antecedents": [
+            "Popcorn Chicken Pasta"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0102,
+        "confidence": 0.17465753424657535,
+        "lift": 0.8920200931898639,
+        "leverage": -0.00123472,
+        "conviction": 0.9743834024896266
+    },
+    {
+        "antecedents": [
+            "Nanban Popcorn Chicken Rice"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0084,
+        "confidence": 0.17427385892116182,
+        "lift": 0.8354451530257038,
+        "leverage": -0.0016545200000000013,
+        "conviction": 0.9584291457286432
+    },
+    {
+        "antecedents": [
+            "Pepsi No Sugar",
+            "Cheese Shake Fries"
+        ],
+        "consequents": [
+            "Burger Yo (Chicken)"
+        ],
+        "support": 0.0032,
+        "confidence": 0.17204301075268819,
+        "lift": 5.213424568263278,
+        "leverage": 0.0025862000000000003,
+        "conviction": 1.167935064935065
+    },
+    {
+        "antecedents": [
+            "Burger Shrimp"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0062,
+        "confidence": 0.17127071823204418,
+        "lift": 0.8747227693158538,
+        "leverage": -0.000887960000000001,
+        "conviction": 0.9704013333333333
+    },
+    {
+        "antecedents": [
+            "Roasted Fillet Chicken Burger"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0066,
+        "confidence": 0.1683673469387755,
+        "lift": 0.859894519605595,
+        "leverage": -0.00107536,
+        "conviction": 0.9670134969325154
+    },
+    {
+        "antecedents": [
+            "Combo Rice & Soup"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0052,
+        "confidence": 0.16774193548387095,
+        "lift": 0.8041320013608386,
+        "leverage": -0.0012666000000000005,
+        "conviction": 0.950906976744186
+    },
+    {
+        "antecedents": [
+            "6 Chewy Cheese"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0056,
+        "confidence": 0.16568047337278108,
+        "lift": 0.8461719784105265,
+        "leverage": -0.0010180399999999996,
+        "conviction": 0.9638992907801418
+    },
+    {
+        "antecedents": [
+            "Popcorn Chicken Pasta"
+        ],
+        "consequents": [
+            "Pepsi Zero"
+        ],
+        "support": 0.0096,
+        "confidence": 0.1643835616438356,
+        "lift": 0.7857722831923308,
+        "leverage": -0.0026172800000000013,
+        "conviction": 0.946367213114754
+    },
+    {
+        "antecedents": [
+            "4 Chewy Cheese"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0052,
+        "confidence": 0.16352201257861634,
+        "lift": 0.8351481745588168,
+        "leverage": -0.0010264400000000009,
+        "conviction": 0.9614120300751879
+    },
+    {
+        "antecedents": [
+            "4 Eggtarts"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0204,
+        "confidence": 0.16242038216560511,
+        "lift": 0.8295218701001282,
+        "leverage": -0.004192479999999995,
+        "conviction": 0.9601475285171104
+    },
+    {
+        "antecedents": [
+            "Popcorn"
+        ],
+        "consequents": [
+            "1 Eggtart"
+        ],
+        "support": 0.005,
+        "confidence": 0.1524390243902439,
+        "lift": 1.1636566747346861,
+        "leverage": 0.0007031999999999993,
+        "conviction": 1.025294964028777
+    },
+    {
+        "antecedents": [
+            "Garlic Butter Shake Fries"
+        ],
+        "consequents": [
+            "Roasted Fillet Chicken Burger"
+        ],
+        "support": 0.0104,
+        "confidence": 0.14899713467048709,
+        "lift": 3.80094731302263,
+        "leverage": 0.00766384,
+        "conviction": 1.1290208754208753
+    },
+    {
+        "antecedents": [
+            "Popcorn"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0048,
+        "confidence": 0.1463414634146341,
+        "lift": 0.7474027753556389,
+        "leverage": -0.0016222400000000014,
+        "conviction": 0.9420628571428571
+    },
+    {
+        "antecedents": [
+            "Cheese Shake Popcorn"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0044,
+        "confidence": 0.1456953642384106,
+        "lift": 0.6984437403567142,
+        "leverage": -0.0018997200000000006,
+        "conviction": 0.926367441860465
+    },
+    {
+        "antecedents": [
+            "Burger Shrimp"
+        ],
+        "consequents": [
+            "1 Eggtart"
+        ],
+        "support": 0.0052,
+        "confidence": 0.143646408839779,
+        "lift": 1.0965374720593817,
+        "leverage": 0.0004577999999999995,
+        "conviction": 1.014767741935484
+    },
+    {
+        "antecedents": [
+            "6 Chewy Cheese"
+        ],
+        "consequents": [
+            "4 Eggtarts"
+        ],
+        "support": 0.0048,
+        "confidence": 0.14201183431952663,
+        "lift": 1.1306674706968682,
+        "leverage": 0.0005547200000000007,
+        "conviction": 1.0191282758620692
+    },
+    {
+        "antecedents": [
+            "Coleslaw"
+        ],
+        "consequents": [
+            "1 Eggtart"
+        ],
+        "support": 0.0086,
+        "confidence": 0.1419141914191419,
+        "lift": 1.0833144383140603,
+        "leverage": 0.0006613999999999995,
+        "conviction": 1.0127192307692308
+    },
+    {
+        "antecedents": [
+            "Combo Pasta Solo"
+        ],
+        "consequents": [
+            "Pepsi No Sugar"
+        ],
+        "support": 0.0034,
+        "confidence": 0.14166666666666666,
+        "lift": 0.6791307126877596,
+        "leverage": -0.0016064000000000004,
+        "conviction": 0.9220194174757281
+    },
+    {
+        "antecedents": [
+            "Sausage Chicken Pasta"
+        ],
+        "consequents": [
+            "Pepsi"
+        ],
+        "support": 0.0038,
+        "confidence": 0.1357142857142857,
+        "lift": 0.6931270976214796,
+        "leverage": -0.0016824000000000001,
+        "conviction": 0.9304793388429752
+    },
+    {
+        "antecedents": [
+            "Pepsi No Sugar"
+        ],
+        "consequents": [
+            "1 Eggtart"
+        ],
+        "support": 0.028,
+        "confidence": 0.1342281879194631,
+        "lift": 1.024642655873764,
+        "leverage": 0.0006733999999999976,
+        "conviction": 1.0037286821705427
+    },
+    {
+        "antecedents": [
+            "Garlic Butter Shake Fries"
+        ],
+        "consequents": [
+            "Burger Zinger"
+        ],
+        "support": 0.0092,
+        "confidence": 0.1318051575931232,
+        "lift": 3.5431493976646022,
+        "leverage": 0.00660344,
+        "conviction": 1.1089676567656765
+    },
+    {
+        "antecedents": [
+            "Popcorn Salad"
+        ],
+        "consequents": [
+            "1 Eggtart"
+        ],
+        "support": 0.0062,
+        "confidence": 0.1308016877637131,
+        "lift": 0.9984861661352145,
+        "leverage": -9.400000000000554e-06,
+        "conviction": 0.9997718446601941
+    },
+    {
+        "antecedents": [
+            "Pepsi No Sugar"
+        ],
+        "consequents": [
+            "4 Eggtarts"
+        ],
+        "support": 0.0266,
+        "confidence": 0.12751677852348992,
+        "lift": 1.015260975505493,
+        "leverage": 0.00039983999999999853,
+        "conviction": 1.002196923076923
+    },
+    {
+        "antecedents": [
+            "Cheese Shake Fries"
+        ],
+        "consequents": [
+            "Roasted Fillet Chicken Burger"
+        ],
+        "support": 0.0098,
+        "confidence": 0.12727272727272726,
+        "lift": 3.2467532467532467,
+        "leverage": 0.0067816,
+        "conviction": 1.1009166666666665
+    },
+    {
+        "antecedents": [
+            "Fried Chicken Pasta"
+        ],
+        "consequents": [
+            "1 Eggtart"
+        ],
+        "support": 0.003,
+        "confidence": 0.12605042016806722,
+        "lift": 0.9622169478478414,
+        "leverage": -0.00011780000000000037,
+        "conviction": 0.9943365384615385
+    },
+    {
+        "antecedents": [
+            "French Fries"
+        ],
+        "consequents": [
+            "Burger Zinger"
+        ],
+        "support": 0.0096,
+        "confidence": 0.1259842519685039,
+        "lift": 3.386673440013546,
+        "leverage": 0.00676536,
+        "conviction": 1.1015819819819819
+    },
+    {
+        "antecedents": [
+            "Pepsi"
+        ],
+        "consequents": [
+            "1 Eggtart"
+        ],
+        "support": 0.0246,
+        "confidence": 0.12563840653728295,
+        "lift": 0.9590718056281141,
+        "leverage": -0.0010498,
+        "conviction": 0.9938679906542056
+    },
+    {
+        "antecedents": [
+            "Pepsi Zero"
+        ],
+        "consequents": [
+            "1 Eggtart"
+        ],
+        "support": 0.0262,
+        "confidence": 0.12523900573613767,
+        "lift": 0.9560229445506692,
+        "leverage": -0.0012052,
+        "conviction": 0.9934142076502732
+    },
+    {
+        "antecedents": [
+            "Garlic Butter Shake Fries"
+        ],
+        "consequents": [
+            "Burger Shrimp"
+        ],
+        "support": 0.0086,
+        "confidence": 0.12320916905444126,
+        "lift": 3.4035682059237917,
+        "leverage": 0.00607324,
+        "conviction": 1.0992359477124183
+    },
+    {
+        "antecedents": [
+            "Cheese Shake Fries"
+        ],
+        "consequents": [
+            "Burger Shrimp"
+        ],
+        "support": 0.0094,
+        "confidence": 0.12207792207792209,
+        "lift": 3.3723182894453614,
+        "leverage": 0.0066126,
+        "conviction": 1.097819526627219
+    },
+    {
+        "antecedents": [
+            "Cheese Shake Fries"
+        ],
+        "consequents": [
+            "1 Eggtart"
+        ],
+        "support": 0.0094,
+        "confidence": 0.12207792207792209,
+        "lift": 0.9318925349459701,
+        "leverage": -0.0006870000000000001,
+        "conviction": 0.9898372781065089
+    },
+    {
+        "antecedents": [
+            "French Fries"
+        ],
+        "consequents": [
+            "Burger Shrimp"
+        ],
+        "support": 0.0092,
+        "confidence": 0.12073490813648294,
+        "lift": 3.3352184568089207,
+        "leverage": 0.006441559999999999,
+        "conviction": 1.0961426865671642
+    },
+    {
+        "antecedents": [
+            "4 Chewy Cheese"
+        ],
+        "consequents": [
+            "1 Eggtart"
+        ],
+        "support": 0.0038,
+        "confidence": 0.11949685534591194,
+        "lift": 0.9121897354649766,
+        "leverage": -0.00036580000000000076,
+        "conviction": 0.9869357142857142
+    },
+    {
+        "antecedents": [
+            "Burger Zinger"
+        ],
+        "consequents": [
+            "4 Eggtarts"
+        ],
+        "support": 0.0044,
+        "confidence": 0.11827956989247314,
+        "lift": 0.9417163207999455,
+        "leverage": -0.00027231999999999864,
+        "conviction": 0.9916975609756098
+    },
+    {
+        "antecedents": [
+            "Cheese Shake Fries"
+        ],
+        "consequents": [
+            "Burger Zinger"
+        ],
+        "support": 0.009,
+        "confidence": 0.11688311688311688,
+        "lift": 3.142019271051529,
+        "leverage": 0.0061356,
+        "conviction": 1.090229411764706
+    },
+    {
+        "antecedents": [
+            "Pepsi Zero"
+        ],
+        "consequents": [
+            "4 Eggtarts"
+        ],
+        "support": 0.0244,
+        "confidence": 0.11663479923518165,
+        "lift": 0.9286210130189623,
+        "leverage": -0.001875519999999995,
+        "conviction": 0.9898510822510823
+    },
+    {
+        "antecedents": [
+            "Mashed Potato"
+        ],
+        "consequents": [
+            "4 Eggtarts"
+        ],
+        "support": 0.0064,
+        "confidence": 0.11469534050179211,
+        "lift": 0.9131794625938864,
+        "leverage": -0.0006084799999999998,
+        "conviction": 0.9876825910931174
+    },
+    {
+        "antecedents": [
+            "Cheese Shake Fries"
+        ],
+        "consequents": [
+            "Burger Yo (Chicken)"
+        ],
+        "support": 0.0088,
+        "confidence": 0.1142857142857143,
+        "lift": 3.463203463203463,
+        "leverage": 0.006259000000000001,
+        "conviction": 1.0917741935483871
+    },
+    {
+        "antecedents": [
+            "French Fries"
+        ],
+        "consequents": [
+            "Roasted Fillet Chicken Burger"
+        ],
+        "support": 0.0086,
+        "confidence": 0.11286089238845144,
+        "lift": 2.8791043976645776,
+        "leverage": 0.00561296,
+        "conviction": 1.083031952662722
+    },
+    {
+        "antecedents": [
+            "Cheese Shake Popcorn"
+        ],
+        "consequents": [
+            "French Fries"
+        ],
+        "support": 0.0034,
+        "confidence": 0.11258278145695363,
+        "lift": 1.4774643235820686,
+        "leverage": 0.0010987599999999994,
+        "conviction": 1.0409985074626866
+    },
+    {
+        "antecedents": [
+            "Cheese Shake Popcorn"
+        ],
+        "consequents": [
+            "Cheese Shake Fries"
+        ],
+        "support": 0.0034,
+        "confidence": 0.11258278145695363,
+        "lift": 1.4621140448955017,
+        "leverage": 0.0010745999999999998,
+        "conviction": 1.0400970149253732
+    },
+    {
+        "antecedents": [
+            "Cheese Shake Popcorn"
+        ],
+        "consequents": [
+            "1 Eggtart"
+        ],
+        "support": 0.0034,
+        "confidence": 0.11258278145695363,
+        "lift": 0.8594105454729285,
+        "leverage": -0.0005562000000000002,
+        "conviction": 0.9792462686567164
+    },
+    {
+        "antecedents": [
+            "Roasted Fillet Chicken Burger"
+        ],
+        "consequents": [
+            "4 Eggtarts"
+        ],
+        "support": 0.0044,
+        "confidence": 0.11224489795918369,
+        "lift": 0.8936695697387237,
+        "leverage": -0.0005235199999999995,
+        "conviction": 0.9849563218390806
+    },
+    {
+        "antecedents": [
+            "Garlic Butter Shake Popcorn"
+        ],
+        "consequents": [
+            "Garlic Butter Shake Fries"
+        ],
+        "support": 0.0038,
+        "confidence": 0.11176470588235293,
+        "lift": 1.6012135513231078,
+        "leverage": 0.0014267999999999998,
+        "conviction": 1.0472450331125829
+    },
+    {
+        "antecedents": [
+            "Coleslaw"
+        ],
+        "consequents": [
+            "4 Eggtarts"
+        ],
+        "support": 0.0066,
+        "confidence": 0.10891089108910891,
+        "lift": 0.867124929053415,
+        "leverage": -0.0010113599999999993,
+        "conviction": 0.9812711111111112
+    },
+    {
+        "antecedents": [
+            "Mashed Potato"
+        ],
+        "consequents": [
+            "1 Eggtart"
+        ],
+        "support": 0.006,
+        "confidence": 0.10752688172043011,
+        "lift": 0.8208158909956497,
+        "leverage": -0.0013098000000000007,
+        "conviction": 0.9736987951807229
+    },
+    {
+        "antecedents": [
+            "Garlic Butter Shake Fries"
+        ],
+        "consequents": [
+            "4 Eggtarts"
+        ],
+        "support": 0.0074,
+        "confidence": 0.10601719197707737,
+        "lift": 0.844085923384374,
+        "leverage": -0.0013668799999999991,
+        "conviction": 0.9780948717948719
+    },
+    {
+        "antecedents": [
+            "Pepsi"
+        ],
+        "consequents": [
+            "4 Eggtarts"
+        ],
+        "support": 0.0204,
+        "confidence": 0.10418794688457611,
+        "lift": 0.8295218701001283,
+        "leverage": -0.004192479999999995,
+        "conviction": 0.9760976054732042
+    },
+    {
+        "antecedents": [
+            "Popcorn"
+        ],
+        "consequents": [
+            "French Fries"
+        ],
+        "support": 0.0034,
+        "confidence": 0.10365853658536583,
+        "lift": 1.3603482491517824,
+        "leverage": 0.0009006399999999994,
+        "conviction": 1.0306340136054422
+    },
+    {
+        "antecedents": [
+            "Combo Rice & Soup"
+        ],
+        "consequents": [
+            "4 Eggtarts"
+        ],
+        "support": 0.0032,
+        "confidence": 0.1032258064516129,
+        "lift": 0.8218615163344977,
+        "leverage": -0.0006935999999999995,
+        "conviction": 0.9750503597122303
+    },
+    {
+        "antecedents": [
+            "Garlic Butter Shake Fries"
+        ],
+        "consequents": [
+            "1 Eggtart"
+        ],
+        "support": 0.0072,
+        "confidence": 0.10315186246418338,
+        "lift": 0.7874187974365143,
+        "leverage": -0.0019438000000000007,
+        "conviction": 0.9689488817891374
+    },
+    {
+        "antecedents": [
+            "Burger Yo (Chicken)"
+        ],
+        "consequents": [
+            "4 Eggtarts"
+        ],
+        "support": 0.0034,
+        "confidence": 0.10303030303030301,
+        "lift": 0.8203049604323489,
+        "leverage": -0.0007447999999999999,
+        "conviction": 0.974837837837838
+    },
+    {
+        "antecedents": [
+            "French Fries"
+        ],
+        "consequents": [
+            "Burger Yo (Chicken)"
+        ],
+        "support": 0.0078,
+        "confidence": 0.10236220472440943,
+        "lift": 3.1018849916487707,
+        "leverage": 0.005285399999999999,
+        "conviction": 1.0772719298245614
+    },
+    {
+        "antecedents": [
+            "French Fries"
+        ],
+        "consequents": [
+            "4 Eggtarts"
+        ],
+        "support": 0.0078,
+        "confidence": 0.10236220472440943,
+        "lift": 0.8149857064045338,
+        "leverage": -0.00177072,
+        "conviction": 0.9741122807017545
+    },
+    {
+        "antecedents": [
+            "Burger Zinger"
+        ],
+        "consequents": [
+            "1 Eggtart"
+        ],
+        "support": 0.0038,
+        "confidence": 0.10215053763440861,
+        "lift": 0.7797750964458672,
+        "leverage": -0.0010731999999999994,
+        "conviction": 0.9678682634730539
+    },
+    {
+        "antecedents": [
+            "Popcorn Salad"
+        ],
+        "consequents": [
+            "4 Eggtarts"
+        ],
+        "support": 0.0048,
+        "confidence": 0.10126582278481013,
+        "lift": 0.8062565508344756,
+        "leverage": -0.0011534399999999995,
+        "conviction": 0.9729239436619719
+    },
+    {
+        "antecedents": [
+            "Nanban Popcorn Chicken Rice"
+        ],
+        "consequents": [
+            "1 Eggtart"
+        ],
+        "support": 0.0048,
+        "confidence": 0.0995850622406639,
+        "lift": 0.7601913148142282,
+        "leverage": -0.0015142000000000003,
+        "conviction": 0.965110599078341
+    },
+    {
+        "antecedents": [
+            "Cheese Shake Fries"
+        ],
+        "consequents": [
+            "4 Eggtarts"
+        ],
+        "support": 0.0076,
+        "confidence": 0.0987012987012987,
+        "lift": 0.7858383654562,
+        "leverage": -0.0020711999999999996,
+        "conviction": 0.9701556195965418
+    },
+    {
+        "antecedents": [
+            "Burger Yo (Chicken)"
+        ],
+        "consequents": [
+            "1 Eggtart"
+        ],
+        "support": 0.0032,
+        "confidence": 0.09696969696969697,
+        "lift": 0.7402266944251676,
+        "leverage": -0.0011230000000000003,
+        "conviction": 0.9623154362416106
+    },
+    {
+        "antecedents": [
+            "Popcorn Chicken Pasta"
+        ],
+        "consequents": [
+            "4 Eggtarts"
+        ],
+        "support": 0.0056,
+        "confidence": 0.0958904109589041,
+        "lift": 0.763458685978536,
+        "leverage": -0.0017350399999999993,
+        "conviction": 0.967139393939394
+    },
+    {
+        "antecedents": [
+            "Garlic Butter Shake Fries"
+        ],
+        "consequents": [
+            "Burger Yo (Chicken)"
+        ],
+        "support": 0.0066,
+        "confidence": 0.09455587392550142,
+        "lift": 2.8653295128939824,
+        "leverage": 0.004296599999999999,
+        "conviction": 1.06798417721519
+    },
+    {
+        "antecedents": [
+            "4 Chewy Cheese"
+        ],
+        "consequents": [
+            "Cheese Shake Fries"
+        ],
+        "support": 0.003,
+        "confidence": 0.09433962264150943,
+        "lift": 1.2251899044351873,
+        "leverage": 0.0005514000000000001,
+        "conviction": 1.0191458333333334
+    },
+    {
+        "antecedents": [
+            "Roasted Fillet Chicken Burger"
+        ],
+        "consequents": [
+            "1 Eggtart"
+        ],
+        "support": 0.0036,
+        "confidence": 0.09183673469387756,
+        "lift": 0.7010437762891416,
+        "leverage": -0.0015352000000000005,
+        "conviction": 0.956876404494382
+    },
+    {
+        "antecedents": [
+            "Popcorn"
+        ],
+        "consequents": [
+            "4 Eggtarts"
+        ],
+        "support": 0.003,
+        "confidence": 0.09146341463414634,
+        "lift": 0.7282118999533945,
+        "leverage": -0.0011196799999999996,
+        "conviction": 0.962426845637584
+    },
+    {
+        "antecedents": [
+            "Nanban Popcorn Chicken Rice"
+        ],
+        "consequents": [
+            "4 Eggtarts"
+        ],
+        "support": 0.0044,
+        "confidence": 0.09128630705394192,
+        "lift": 0.7268018077543147,
+        "leverage": -0.0016539199999999988,
+        "conviction": 0.9622392694063928
+    },
+    {
+        "antecedents": [
+            "Pepsi No Sugar"
+        ],
+        "consequents": [
+            "Cheese Shake Fries"
+        ],
+        "support": 0.0186,
+        "confidence": 0.08916586768935761,
+        "lift": 1.157998281679969,
+        "leverage": 0.0025377999999999998,
+        "conviction": 1.0133568421052632
+    },
+    {
+        "antecedents": [
+            "Garlic Butter Shake Popcorn"
+        ],
+        "consequents": [
+            "French Fries"
+        ],
+        "support": 0.003,
+        "confidence": 0.08823529411764705,
+        "lift": 1.1579434923575729,
+        "leverage": 0.00040919999999999975,
+        "conviction": 1.0131999999999999
+    },
+    {
+        "antecedents": [
+            "Garlic Butter Shake Popcorn"
+        ],
+        "consequents": [
+            "4 Eggtarts"
+        ],
+        "support": 0.003,
+        "confidence": 0.08823529411764705,
+        "lift": 0.7025103034844511,
+        "leverage": -0.0012703999999999997,
+        "conviction": 0.9590193548387098
+    },
+    {
+        "antecedents": [
+            "Pepsi"
+        ],
+        "consequents": [
+            "French Fries"
+        ],
+        "support": 0.0172,
+        "confidence": 0.08784473953013279,
+        "lift": 1.152818104069984,
+        "leverage": 0.002280039999999999,
+        "conviction": 1.0127661814109743
+    },
+    {
+        "antecedents": [
+            "French Fries"
+        ],
+        "consequents": [
+            "1 Eggtart"
+        ],
+        "support": 0.0062,
+        "confidence": 0.08136482939632546,
+        "lift": 0.6211055679108813,
+        "leverage": -0.0037822000000000003,
+        "conviction": 0.9459685714285715
+    },
+    {
+        "antecedents": [
+            "Pepsi Zero"
+        ],
+        "consequents": [
+            "Cheese Shake Fries"
+        ],
+        "support": 0.0166,
+        "confidence": 0.07934990439770555,
+        "lift": 1.0305182389312408,
+        "leverage": 0.0004916000000000018,
+        "conviction": 1.002552440290758
+    },
+    {
+        "antecedents": [
+            "Pepsi Zero"
+        ],
+        "consequents": [
+            "French Fries"
+        ],
+        "support": 0.0164,
+        "confidence": 0.07839388145315489,
+        "lift": 1.0287910951857597,
+        "leverage": 0.0004589600000000013,
+        "conviction": 1.002380497925311
+    },
+    {
+        "antecedents": [
+            "Pepsi"
+        ],
+        "consequents": [
+            "Cheese Shake Fries"
+        ],
+        "support": 0.015,
+        "confidence": 0.07660878447395301,
+        "lift": 0.9949192788825068,
+        "leverage": -7.660000000000132e-05,
+        "conviction": 0.9995763274336283
+    },
+    {
+        "antecedents": [
+            "Pepsi No Sugar"
+        ],
+        "consequents": [
+            "French Fries"
+        ],
+        "support": 0.0156,
+        "confidence": 0.074784276126558,
+        "lift": 0.9814209465427558,
+        "leverage": -0.0002953200000000017,
+        "conviction": 0.9984698445595854
+    },
+    {
+        "antecedents": [
+            "Nanban Popcorn Chicken Rice"
+        ],
+        "consequents": [
+            "Cheese Shake Fries"
+        ],
+        "support": 0.0036,
+        "confidence": 0.07468879668049792,
+        "lift": 0.969984372473999,
+        "leverage": -0.00011140000000000021,
+        "conviction": 0.9975022421524664
+    },
+    {
+        "antecedents": [
+            "Pepsi Zero"
+        ],
+        "consequents": [
+            "Garlic Butter Shake Fries"
+        ],
+        "support": 0.0154,
+        "confidence": 0.07361376673040153,
+        "lift": 1.0546384918395635,
+        "leverage": 0.000797840000000001,
+        "conviction": 1.0041168214654284
+    },
+    {
+        "antecedents": [
+            "Pepsi"
+        ],
+        "consequents": [
+            "Coleslaw"
+        ],
+        "support": 0.0144,
+        "confidence": 0.0735444330949949,
+        "lift": 1.2136045065180676,
+        "leverage": 0.0025345199999999984,
+        "conviction": 1.0139719955898567
+    },
+    {
+        "antecedents": [
+            "Pepsi No Sugar"
+        ],
+        "consequents": [
+            "Garlic Butter Shake Fries"
+        ],
+        "support": 0.0152,
+        "confidence": 0.0728667305848514,
+        "lift": 1.0439359682643465,
+        "leverage": 0.0006397199999999999,
+        "conviction": 1.0033077559462256
+    },
+    {
+        "antecedents": [
+            "Pepsi"
+        ],
+        "consequents": [
+            "Garlic Butter Shake Fries"
+        ],
+        "support": 0.0142,
+        "confidence": 0.0725229826353422,
+        "lift": 1.0390112125407192,
+        "leverage": 0.0005331600000000013,
+        "conviction": 1.0029359030837004
+    },
+    {
+        "antecedents": [
+            "Popcorn Chicken Pasta"
+        ],
+        "consequents": [
+            "1 Eggtart"
+        ],
+        "support": 0.0042,
+        "confidence": 0.07191780821917808,
+        "lift": 0.5489909024364739,
+        "leverage": -0.003450400000000001,
+        "conviction": 0.9363394833948339
+    },
+    {
+        "antecedents": [
+            "1 Eggtart"
+        ],
+        "consequents": [
+            "Cheese Shake Fries"
+        ],
+        "support": 0.0094,
+        "confidence": 0.0717557251908397,
+        "lift": 0.9318925349459701,
+        "leverage": -0.0006870000000000001,
+        "conviction": 0.9943503289473685
+    },
+    {
+        "antecedents": [
+            "Pepsi No Sugar"
+        ],
+        "consequents": [
+            "Coleslaw"
+        ],
+        "support": 0.0144,
+        "confidence": 0.06903163950143816,
+        "lift": 1.1391359653702666,
+        "leverage": 0.0017588399999999994,
+        "conviction": 1.0090568486096807
+    },
+    {
+        "antecedents": [
+            "Pepsi No Sugar"
+        ],
+        "consequents": [
+            "Popcorn Chicken Pasta"
+        ],
+        "support": 0.0142,
+        "confidence": 0.06807286673058485,
+        "lift": 1.1656312796333022,
+        "leverage": 0.0020177600000000004,
+        "conviction": 1.0103794238683128
+    },
+    {
+        "antecedents": [
+            "Popcorn Salad"
+        ],
+        "consequents": [
+            "Roasted Fillet Chicken Rice"
+        ],
+        "support": 0.0032,
+        "confidence": 0.06751054852320676,
+        "lift": 4.500703234880451,
+        "leverage": 0.0024890000000000003,
+        "conviction": 1.0563122171945702
+    },
+    {
+        "antecedents": [
+            "Coleslaw"
+        ],
+        "consequents": [
+            "3 Garlic Fish Sauce Chicken"
+        ],
+        "support": 0.004,
+        "confidence": 0.066006600660066,
+        "lift": 5.156765676567656,
+        "leverage": 0.00322432,
+        "conviction": 1.0569667844522967
+    },
+    {
+        "antecedents": [
+            "1 Eggtart"
+        ],
+        "consequents": [
+            "Coleslaw"
+        ],
+        "support": 0.0086,
+        "confidence": 0.06564885496183206,
+        "lift": 1.0833144383140605,
+        "leverage": 0.0006613999999999995,
+        "conviction": 1.0054035947712419
+    },
+    {
+        "antecedents": [
+            "Mashed Potato"
+        ],
+        "consequents": [
+            "3 Fried Chicken"
+        ],
+        "support": 0.0036,
+        "confidence": 0.06451612903225806,
+        "lift": 4.675081813931744,
+        "leverage": 0.00282996,
+        "conviction": 1.054213793103448
+    },
+    {
+        "antecedents": [
+            "Mashed Potato"
+        ],
+        "consequents": [
+            "6 Fried Chicken"
+        ],
+        "support": 0.0036,
+        "confidence": 0.06451612903225806,
+        "lift": 4.608294930875576,
+        "leverage": 0.0028187999999999998,
+        "conviction": 1.0539999999999998
+    },
+    {
+        "antecedents": [
+            "Pepsi Zero"
+        ],
+        "consequents": [
+            "Coleslaw"
+        ],
+        "support": 0.0134,
+        "confidence": 0.06405353728489484,
+        "lift": 1.0569890641071755,
+        "leverage": 0.000722480000000001,
+        "conviction": 1.0036898876404494
+    },
+    {
+        "antecedents": [
+            "4 Eggtarts"
+        ],
+        "consequents": [
+            "French Fries"
+        ],
+        "support": 0.0078,
+        "confidence": 0.06210191082802548,
+        "lift": 0.8149857064045338,
+        "leverage": -0.00177072,
+        "conviction": 0.9849684210526316
+    },
+    {
+        "antecedents": [
+            "4 Eggtarts"
+        ],
+        "consequents": [
+            "Cheese Shake Fries"
+        ],
+        "support": 0.0076,
+        "confidence": 0.060509554140127396,
+        "lift": 0.7858383654562,
+        "leverage": -0.0020711999999999996,
+        "conviction": 0.9824474576271187
+    },
+    {
+        "antecedents": [
+            "Coleslaw"
+        ],
+        "consequents": [
+            "1 pc Black Pepper & Lime Fried Chicken"
+        ],
+        "support": 0.0036,
+        "confidence": 0.0594059405940594,
+        "lift": 5.211047420531527,
+        "leverage": 0.00290916,
+        "conviction": 1.0510378947368422
+    },
+    {
+        "antecedents": [
+            "Coleslaw"
+        ],
+        "consequents": [
+            "1 Roasted Fillet Chicken"
+        ],
+        "support": 0.0036,
+        "confidence": 0.0594059405940594,
+        "lift": 5.121201775349949,
+        "leverage": 0.00289704,
+        "conviction": 1.0508252631578947
+    },
+    {
+        "antecedents": [
+            "Coleslaw"
+        ],
+        "consequents": [
+            "Party Bucket 269k"
+        ],
+        "support": 0.0036,
+        "confidence": 0.0594059405940594,
+        "lift": 3.4944670937682,
+        "leverage": 0.0025697999999999997,
+        "conviction": 1.0450842105263158
+    },
+    {
+        "antecedents": [
+            "Pepsi Zero"
+        ],
+        "consequents": [
+            "Mashed Potato"
+        ],
+        "support": 0.0124,
+        "confidence": 0.05927342256214149,
+        "lift": 1.0622477161674102,
+        "leverage": 0.0007266399999999989,
+        "conviction": 1.0036922764227643
+    },
+    {
+        "antecedents": [
+            "4 Eggtarts"
+        ],
+        "consequents": [
+            "Garlic Butter Shake Fries"
+        ],
+        "support": 0.0074,
+        "confidence": 0.05891719745222931,
+        "lift": 0.844085923384374,
+        "leverage": -0.0013668799999999991,
+        "conviction": 0.9884358714043994
+    },
+    {
+        "antecedents": [
+            "Pepsi"
+        ],
+        "consequents": [
+            "Nanban Popcorn Chicken Rice"
+        ],
+        "support": 0.0114,
+        "confidence": 0.05822267620020429,
+        "lift": 1.207939340253201,
+        "leverage": 0.001962440000000001,
+        "conviction": 1.0106422993492408
+    },
+    {
+        "antecedents": [
+            "Mashed Potato"
+        ],
+        "consequents": [
+            "3 Tenders Chicken"
+        ],
+        "support": 0.0032,
+        "confidence": 0.05734767025089606,
+        "lift": 5.51419906258616,
+        "leverage": 0.00261968,
+        "conviction": 1.049803802281369
+    },
+    {
+        "antecedents": [
+            "Mashed Potato"
+        ],
+        "consequents": [
+            "1 Fried Chicken"
+        ],
+        "support": 0.0032,
+        "confidence": 0.05734767025089606,
+        "lift": 4.480286738351254,
+        "leverage": 0.00248576,
+        "conviction": 1.047257794676806
+    },
+    {
+        "antecedents": [
+            "Mashed Potato"
+        ],
+        "consequents": [
+            "2 Fried Chicken"
+        ],
+        "support": 0.0032,
+        "confidence": 0.05734767025089606,
+        "lift": 4.155628279050439,
+        "leverage": 0.00242996,
+        "conviction": 1.0461969581749049
+    },
+    {
+        "antecedents": [
+            "Coleslaw"
+        ],
+        "consequents": [
+            "3 Tenders Chicken"
+        ],
+        "support": 0.0034,
+        "confidence": 0.056105610561056105,
+        "lift": 5.394770246255395,
+        "leverage": 0.0027697599999999996,
+        "conviction": 1.0484223776223778
+    },
+    {
+        "antecedents": [
+            "Coleslaw"
+        ],
+        "consequents": [
+            "2 Garlic Fish Sauce Chicken"
+        ],
+        "support": 0.0034,
+        "confidence": 0.056105610561056105,
+        "lift": 4.250425042504251,
+        "leverage": 0.00260008,
+        "conviction": 1.045455944055944
+    },
+    {
+        "antecedents": [
+            "1 Eggtart"
+        ],
+        "consequents": [
+            "Garlic Butter Shake Fries"
+        ],
+        "support": 0.0072,
+        "confidence": 0.0549618320610687,
+        "lift": 0.7874187974365143,
+        "leverage": -0.0019438000000000007,
+        "conviction": 0.9842988691437804
+    },
+    {
+        "antecedents": [
+            "Popcorn Chicken Pasta"
+        ],
+        "consequents": [
+            "French Fries"
+        ],
+        "support": 0.0032,
+        "confidence": 0.05479452054794521,
+        "lift": 0.7190881961672599,
+        "leverage": -0.0012500800000000002,
+        "conviction": 0.9773536231884058
+    },
+    {
+        "antecedents": [
+            "Garlic Butter Shake Fries"
+        ],
+        "consequents": [
+            "Garlic Butter Shake Popcorn"
+        ],
+        "support": 0.0038,
+        "confidence": 0.054441260744985676,
+        "lift": 1.601213551323108,
+        "leverage": 0.0014267999999999998,
+        "conviction": 1.0216181818181818
+    },
+    {
+        "antecedents": [
+            "Mashed Potato"
+        ],
+        "consequents": [
+            "2 Garlic Fish Sauce Chicken"
+        ],
+        "support": 0.003,
+        "confidence": 0.053763440860215055,
+        "lift": 4.072987943955686,
+        "leverage": 0.0022634400000000002,
+        "conviction": 1.0428681818181817
+    },
+    {
+        "antecedents": [
+            "Pepsi No Sugar"
+        ],
+        "consequents": [
+            "Mashed Potato"
+        ],
+        "support": 0.0112,
+        "confidence": 0.053691275167785234,
+        "lift": 0.9622092323975848,
+        "leverage": -0.00043988000000000187,
+        "conviction": 0.9977716312056738
+    },
+    {
+        "antecedents": [
+            "Coleslaw"
+        ],
+        "consequents": [
+            "3 pcs Black Pepper & Lime Fried Chicken"
+        ],
+        "support": 0.0032,
+        "confidence": 0.052805280528052806,
+        "lift": 4.552179355866621,
+        "leverage": 0.0024970400000000003,
+        "conviction": 1.04350243902439
+    },
+    {
+        "antecedents": [
+            "Coleslaw"
+        ],
+        "consequents": [
+            "5 Tenders Chicken"
+        ],
+        "support": 0.0032,
+        "confidence": 0.052805280528052806,
+        "lift": 4.400440044004401,
+        "leverage": 0.0024728000000000003,
+        "conviction": 1.0430801393728222
+    },
+    {
+        "antecedents": [
+            "Coleslaw"
+        ],
+        "consequents": [
+            "3 Fried Chicken"
+        ],
+        "support": 0.0032,
+        "confidence": 0.052805280528052806,
+        "lift": 3.8264696034820873,
+        "leverage": 0.00236372,
+        "conviction": 1.0411797909407665
+    },
+    {
+        "antecedents": [
+            "4 Eggtarts"
+        ],
+        "consequents": [
+            "Coleslaw"
+        ],
+        "support": 0.0066,
+        "confidence": 0.052547770700636945,
+        "lift": 0.8671249290534149,
+        "leverage": -0.0010113599999999993,
+        "conviction": 0.9915011764705883
+    },
+    {
+        "antecedents": [
+            "Pepsi"
+        ],
+        "consequents": [
+            "Popcorn Chicken Pasta"
+        ],
+        "support": 0.0102,
+        "confidence": 0.052093973442288055,
+        "lift": 0.892020093189864,
+        "leverage": -0.00123472,
+        "conviction": 0.9933474137931034
+    },
+    {
+        "antecedents": [
+            "Pepsi No Sugar"
+        ],
+        "consequents": [
+            "Burger Shrimp"
+        ],
+        "support": 0.0108,
+        "confidence": 0.05177372962607862,
+        "lift": 1.430213525582282,
+        "leverage": 0.0032486799999999995,
+        "conviction": 1.01642406471183
+    },
+    {
+        "antecedents": [
+            "4 Eggtarts"
+        ],
+        "consequents": [
+            "Mashed Potato"
+        ],
+        "support": 0.0064,
+        "confidence": 0.05095541401273886,
+        "lift": 0.9131794625938864,
+        "leverage": -0.0006084799999999998,
+        "conviction": 0.9948953020134228
+    },
+    {
+        "antecedents": [
+            "Pepsi"
+        ],
+        "consequents": [
+            "Mashed Potato"
+        ],
+        "support": 0.0098,
+        "confidence": 0.05005107252298263,
+        "lift": 0.8969726258599038,
+        "leverage": -0.0011256400000000007,
+        "conviction": 0.9939481720430108
     }
 ]

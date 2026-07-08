@@ -2,7 +2,7 @@
 
 ## Elevator Pitch
 
-An intelligent, edge-compatible hybrid recommendation engine for self-service kiosks that pairs offline transaction mining with real-time, context-aware Multi-Armed Bandits and LLM copy personalization to deliver a mathematically validated $5.83\%$ Average Order Value (AOV) uplift.
+An intelligent, edge-compatible hybrid recommendation engine for self-service kiosks that pairs offline transaction mining with context-aware Multi-Armed Bandits and LLM copy personalization. In the current synthetic scenario benchmark, a fixed-seed replay over $5{,}000$ generated transactions estimates a $3.00\%$ Average Order Value (AOV) uplift.
 
 ---
 
@@ -18,10 +18,10 @@ The **KFC Kiosk Recommendation System** is an end-to-end recommender engine and 
 
 1. **Offline Affinity Miner**: Analyzes historical transactions using association rule mining to extract frequent itemsets.
 2. **Context-Aware Online Reranker**: Adjusts base confidence scores using active store promotions and time-of-day category boosts.
-3. **Thompson Sampling Multi-Armed Bandit**: Dynamically learns optimal context weights in real time based on customer interaction feedback, replacing static parameters.
+3. **Thompson Sampling Multi-Armed Bandit**: Updates context weights when feedback events are sent, replacing static parameters during live use and simulated backtest replays.
 4. **GenAI Personalized Copywriter**: Generate specific promotional copy and logical rationales using Gemini 2.5 Flash, with local Ollama support. Includes an **Offline Fallback Guardrail** that guarantees zero kiosk latency and continuous offline operations using a template-based copy generator if the LLM exceeds a $1.2\text{s}$ timeout limit.
 5. **Kiosk UI Terminal**: A responsive, single-page application that updates recommendations in real time as users add items to their carts.
-6. **Backtest Simulator**: Replays historical transactions to mathematically validate recommender effectiveness against a static baseline.
+6. **Backtest Simulator**: Replays synthetic transactions to estimate recommender effectiveness against a static baseline.
 
 ## How we built it
 
@@ -44,10 +44,20 @@ graph TD
 
 #### 1. Data Generation & Offline Association Mining
 
-- `generate_data.py` creates a transaction log of $1{,}200$ orders, capturing realistic item affinities (e.g., Combos and Pepsi, Burgers and Fries).
+- `generate_data.py` creates a stratified transaction log of $5{,}000$ synthetic orders with explicit co-occurrence assumptions across burgers, fried chicken, rice meals, pasta meals, popcorn/snack meals, group buckets, dessert-led baskets, and drink-led snack baskets.
 - `affinity_engine.py` runs Apriori/FP-Growth algorithms via `mlxtend` to generate support, confidence, and lift metrics, persisting the results to `affinity_rules.json`.
+- The UI returns recommendations for all tested cart states by combining mined association rules with a rule-based fallback. The latest mining run expanded unique rule consequents from 15 to 31 menu items; `_bmad-output/data/rule_coverage_report.md` records the before/after coverage.
 
-#### 2. Context-Aware Rerank Formula
+#### 2. Dataset Assumptions
+
+The dataset is synthetic and generated with explicit co-occurrence assumptions. This is a synthetic scenario benchmark for demonstrating recommender mechanics, not real production sales proof.
+
+- $5{,}000$ synthetic orders are generated with a fixed random seed and explicit scenario strata.
+- Burger orders are biased toward fries and Pepsi.
+- Rice meals, pasta meals, popcorn/snack meals, buckets/group meals, dessert-led baskets, and drink-led snack baskets have hand-coded attachment probabilities.
+- The backtest uses simulated acceptance probabilities, not real customer purchases.
+
+#### 3. Context-Aware Rerank Formula
 
 The reranking filter ingests active cart items, active promotions, and the transaction timestamp to compute a dynamic multiplicative score:
 $$\text{Score} = \text{Base\_Confidence} \times (1 + \text{Promo\_Boost}) \times (1 + \text{Time\_Boost})$$
@@ -57,7 +67,7 @@ $$\text{Score} = \text{Base\_Confidence} \times (1 + \text{Promo\_Boost}) \times
   - **Lunch ($11\text{:}00 - 14\text{:}00$)**: Boosts `Burgers` and `Combos`.
   - **Dinner ($17\text{:}00 - 21\text{:}00$)**: Boosts `Combos` and `Sides`.
 
-#### 3. Thompson Sampling Multi-Armed Bandit
+#### 4. Thompson Sampling Multi-Armed Bandit
 
 Instead of hardcoding static coefficients, we model the probability of a customer accepting a time or promotional recommendation as Beta distributions:
 $$\theta_{\text{promo}} \sim \text{Beta}(\alpha_{\text{promo}}, \beta_{\text{promo}})$$
@@ -71,7 +81,7 @@ During online operations and backtest replays:
   $$\beta_c \leftarrow \beta_c + 1 \quad \text{if rejected}$$
   where $c \in \{\text{promo}, \text{time}\}$ is the active context.
 
-#### 4. GenAI Copy & Fallback
+#### 5. GenAI Copy & Fallback
 
 Recommendations are enriched with localized, appetizing Vietnamese copy and statistical justifications (e.g., *"Được gợi ý vì 68% khách hàng mua kèm sản phẩm này"*).
 
@@ -80,7 +90,7 @@ Recommendations are enriched with localized, appetizing Vietnamese copy and stat
   - Copy: *"Hoàn thành bữa ăn! Thêm [item\_name] chỉ với [price]đ"*
   - Rationale: *"Thường được mua kèm với các sản phẩm trong giỏ hàng."*
 
-#### 5. Kiosk UI & FastAPI Backend
+#### 6. Kiosk UI & FastAPI Backend
 
 - Single-page application built with responsive HTML5/CSS3/JavaScript featuring micro-interactions, dark-mode KFC accent branding, and real-time API integrations.
 - High-performance, asynchronous endpoints built with FastAPI.
@@ -97,7 +107,7 @@ Recommendations are enriched with localized, appetizing Vietnamese copy and stat
 
 ## Accomplishments that we're proud of
 
-- **Proven Revenue Uplift**: Replaying $1{,}200$ transactions through the backtest simulator successfully demonstrated a **$5.83\%$ Average Order Value (AOV) uplift**, generating an incremental **$+5{,}748\text{ VND}$ per transaction** compared to the static baseline model.
+- **Synthetic Scenario Benchmark**: A fixed-seed Monte Carlo replay over $5{,}000$ synthetic transactions estimates a simulated **$3.00\%$ Average Order Value (AOV) uplift**, or **$+3{,}529\text{ VND}$ per transaction**, compared to the static baseline model. This is not real production sales proof.
 - **Robust Offline Capability**: Demonstrated 100% system availability by integrating local Ollama LLM support and rule-based fallbacks to handle internet outages.
 - **Decoupled Architecture**: Strictly adhered to the Pipes and Filters architecture, keeping data generation, model training, online recommendation logic, and visual presentation fully modular.
 

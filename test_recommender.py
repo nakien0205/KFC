@@ -232,6 +232,38 @@ class TestRecommender(unittest.TestCase):
         recs = rerank_recommendations(None, None, None, None, None)
         self.assertEqual(recs, [])
 
+    def test_fallback_recommendations_when_no_rule_matches(self):
+        # A cart item with no mined association rule should still get KFC-style complements.
+        timestamp = "2026-07-06T12:00:00+07:00"
+        cart = ["1 Eggtart"]
+
+        recs = rerank_recommendations(cart, self.promotions, [], self.menu, timestamp)
+
+        self.assertGreater(len(recs), 0)
+        self.assertNotIn(recs[0]["name"], cart)
+        self.assertEqual(recs[0]["name"], "Pepsi")
+
+    def test_project_menu_items_have_recommendation_coverage(self):
+        # Regression coverage for the hackathon demo: every loaded menu item should
+        # produce at least one recommendation, even when mined rules are sparse.
+        import json
+        import os
+        import pandas as pd
+
+        base_dir = os.path.dirname(os.path.abspath(__file__))
+        menu = pd.read_csv(os.path.join(base_dir, "_bmad-output", "data", "menu.csv"))
+        promos = pd.read_csv(os.path.join(base_dir, "_bmad-output", "data", "promotions.csv")).to_dict("records")
+        with open(os.path.join(base_dir, "_bmad-output", "data", "affinity_rules.json"), "r", encoding="utf-8") as f:
+            rules = json.load(f)
+
+        missing = []
+        for name in menu["name"].dropna().unique():
+            recs = rerank_recommendations([name], promos, rules, menu, "2026-07-07T12:00:00+07:00")
+            if not recs:
+                missing.append(name)
+
+        self.assertEqual(missing, [])
+
     def test_local_fallback_generator(self):
         from recommender import generate_local_fallback
         res = generate_local_fallback("French Fries", 20000.0)

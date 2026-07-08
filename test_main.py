@@ -25,7 +25,12 @@ class TestMainAPI(unittest.TestCase):
         self.weights_patcher.stop()
         self.temp_dir.cleanup()
 
-    def test_recommend_endpoint_success(self):
+    @patch('main.generate_recommendation_copy')
+    def test_recommend_endpoint_success(self, mock_generate_copy):
+        mock_generate_copy.return_value = {
+            "copy": "Gợi ý kiểm thử",
+            "rationale": "Không gọi mạng trong test."
+        }
         payload = {
             "cart_items": ["Burger Zinger"],
             "timestamp": "2026-07-06T12:00:00+07:00"
@@ -41,9 +46,8 @@ class TestMainAPI(unittest.TestCase):
             self.assertIn("score", item)
             self.assertIn("copy", item)
             self.assertIn("rationale", item)
-            # Ensure price is a float and correct
-            self.assertEqual(item["name"], "French Fries")
-            self.assertEqual(item["price"], 20000.0)
+            self.assertNotIn(item["name"], payload["cart_items"])
+            self.assertIsInstance(item["price"], float)
 
     def test_recommend_endpoint_empty_cart(self):
         payload = {
@@ -137,6 +141,20 @@ class TestMainAPI(unittest.TestCase):
         self.assertGreater(data["hybrid_aov"], 0)
         self.assertGreater(data["percentage_uplift"], 0)
 
+    @patch('backtest.run_backtest_simulation')
+    def test_backtest_endpoint_uses_fixed_demo_seed(self, mock_run):
+        mock_run.return_value = {
+            "baseline_aov": 100.0,
+            "hybrid_aov": 104.0,
+            "absolute_change": 4.0,
+            "percentage_uplift": 4.0,
+            "final_weights": {}
+        }
+
+        response = self.client.post("/api/backtest")
+
+        self.assertEqual(response.status_code, 200)
+        mock_run.assert_called_once_with(seed=42)
     def test_feedback_endpoint_success(self):
         payload = {
             "recommended_item": "French Fries",

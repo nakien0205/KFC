@@ -19,6 +19,7 @@ from bandit import update_bandit_weights
 # Setup logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("kfc_api")
+DEMO_BACKTEST_SEED = 42
 
 # Global in-memory cache
 MENU_ITEMS_DF = pd.DataFrame(columns=['name', 'category', 'price'])
@@ -195,7 +196,7 @@ class BacktestResponse(BaseModel):
 def run_backtest():
     try:
         from backtest import run_backtest_simulation
-        results = run_backtest_simulation(seed=42)
+        results = run_backtest_simulation(seed=DEMO_BACKTEST_SEED)
         return BacktestResponse(
             baseline_aov=results["baseline_aov"],
             hybrid_aov=results["hybrid_aov"],
@@ -228,4 +229,3 @@ def receive_feedback(request: FeedbackRequest):
     except Exception as e:
         logger.exception("Error processing feedback")
         raise HTTPException(status_code=500, detail=f"Feedback processing error: {str(e)}")
-
