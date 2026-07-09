@@ -266,6 +266,24 @@ So that the kiosk UI (or pitch dashboard) can trigger the simulation dynamically
 **And** return a structured JSON response containing: baseline AOV, hybrid AOV, absolute change, and percentage uplift
 **And** return the results within standard HTTP response time without memory leaks
 
+### Story 4.3: Partial-Cart Top-K Panel Backtest
+
+As a business analyst,
+I want the backtest harness to simulate recommendations while the kiosk cart is still being built,
+So that the hackathon benchmark measures the recommendation panel flow shown in the UI instead of only a final-basket upsell.
+
+**Acceptance Criteria:**
+
+**Given** synthetic orders log `orders.csv`, mined `affinity_rules.json`, and menu pricing
+**When** `backtest.py` runs with the default fixed demo seed
+**Then** it must run a partial-cart replay where each eligible synthetic order is split into an anchor cart item and held-out add-ons
+**And** the baseline must remain a static one-item default upsell strategy using Pepsi
+**And** the hybrid model must evaluate the top 3 context-reranked recommendations as a kiosk recommendation panel
+**And** only held-out items that were present in the original synthetic order may count as accepted add-ons
+**And** the fixed-seed default benchmark must report a simulated AOV uplift in the 10% to 15% target band
+**And** the older full-order, top-1 conservative benchmark must remain available as secondary evidence
+**And** all benchmark wording must clearly say this is a synthetic scenario benchmark, not real production sales proof
+
 ## Epic 5: Local LLM Integration and Dynamic Contextual Boosts
 
 Implement local Ollama LLM provider and dynamically optimize context boosts via Multi-Armed Bandits (MAB).
@@ -300,3 +318,20 @@ So that the system continuously learns the optimal promo and time boosts instead
 **And** it must persist the learned bandit parameters/weights locally to `bandit_weights.json` so they survive server restarts
 **And** the backtest harness `backtest.py` must simulate the bandit's online learning over the 1,000+ synthetic transactions, updating weights after each order, and outputting the final learned parameters and resulting AOV uplift
 
+### Story 5.3: Dynamic Promo Calendar and Urgency Boost
+
+As a growth-focused kiosk operator,
+I want the demo to generate controlled daily sale promotions and boost items when those sales are close to ending,
+So that recommendations can use realistic promotion psychology without making unsupported production-sales claims.
+
+**Acceptance Criteria:**
+
+**Given** generated menu and order data
+**When** `generate_data.py` creates the promotion calendar
+**Then** it must generate deterministic daily promo rows using weighted category and item-popularity probabilities
+**And** generated dynamic discounts must be one of `5`, `10`, `15`, or `20` percent, with `20%` as the maximum
+**And** amount-off and sale-price framing must be calculated from the selected item price
+**And** the existing required promotion fields must remain compatible with CSV and SQLite loading
+**And** `recommender.py` must apply urgency scoring only to matching active promotions close to ending
+**And** `backtest.py` must use discounted sale revenue for accepted promoted recommendations
+**And** docs and benchmark wording must keep the claim framed as synthetic benchmark evidence, not real production sales proof

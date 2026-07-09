@@ -4,6 +4,12 @@ import json
 import requests
 import logging
 from bandit import load_bandit_weights, get_bandit_boosts
+from promo_engine import (
+    URGENCY_BOOST_CAP,
+    build_discount_view,
+    calculate_promotion_urgency,
+    promotion_targets_item,
+)
 
 logger = logging.getLogger("recommender")
 
@@ -20,6 +26,11 @@ SIDE_KEYWORDS = (
     "cheese",
 )
 def is_item_in_promotion(item_name: str, item_category: str, promo_name: str) -> bool:
+    if isinstance(promo_name, dict):
+        if promotion_targets_item(promo_name, item_name, item_category):
+            return True
+        promo_name = promo_name.get("name", "")
+
     if not (item_name and item_category and promo_name):
         return False
         
@@ -48,6 +59,27 @@ def is_item_in_promotion(item_name: str, item_category: str, promo_name: str) ->
 
 def _safe_lower(value) -> str:
     return str(value or "").strip().lower()
+
+def _clean_optional(value):
+    if value is None:
+        return None
+    try:
+        if value != value:
+            return None
+    except Exception:
+        pass
+    if str(value).strip() == "" or str(value).strip().lower() == "nan":
+        return None
+    return value
+
+def _safe_float(value, default=0.0):
+    value = _clean_optional(value)
+    if value is None:
+        return default
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return default
 
 def _build_menu_records(menu_items):
     records = []
@@ -152,12 +184,76 @@ def _fallback_base_score(item_name, item_category, cart_profile):
 
     return 0.0
 
-def _apply_context_boosts(base_score, item_name, item_category, active_promos, is_lunch, is_dinner, promo_boost_val, time_boost_val):
-    promo_boost = 0.0
+def _promotion_context_for_item(item_name, item_category, item_price, active_promos, timestamp_dt):
+    best_context = None
+    best_rank = (-1.0, -1.0)
+
     for promo in active_promos:
-        if is_item_in_promotion(item_name, item_category, promo.get('name', '')):
-            promo_boost = promo_boost_val
-            break
+        if not isinstance(promo, dict):
+            continue
+        if not is_item_in_promotion(item_name, item_category, promo):
+            continue
+
+        urgency = calculate_promotion_urgency(promo, timestamp_dt)
+        discount_pct = _safe_float(promo.get("discount_pct"), 0.0)
+        context = {
+            "promo_id": promo.get("promo_id"),
+            "promotion_name": promo.get("name", ""),
+            "urgency": urgency,
+            "discount_pct": discount_pct,
+        }
+
+        display_text = _clean_optional(promo.get("display_text"))
+        sale_price = _clean_optional(promo.get("sale_price"))
+        amount_off = _clean_optional(promo.get("amount_off_vnd"))
+        is_dynamic = str(promo.get("is_dynamic", "")).strip().lower() in ("1", "true", "yes")
+        has_precise_target = bool(_clean_optional(promo.get("target_item")) or _clean_optional(promo.get("target_category")))
+
+        if display_text:
+            context["discount_label"] = str(display_text)
+        if sale_price is not None:
+            context["sale_price"] = max(0.0, _safe_float(sale_price, item_price))
+        if amount_off is not None:
+            context["amount_off_vnd"] = max(0.0, _safe_float(amount_off, 0.0))
+
+        if (is_dynamic or has_precise_target) and "sale_price" not in context:
+            discount_view = build_discount_view(item_price, discount_pct)
+            context.update({
+                "discount_pct": discount_view["discount_pct"],
+                "amount_off_vnd": discount_view["amount_off_vnd"],
+                "sale_price": discount_view["sale_price"],
+                "discount_label": discount_view["display_text"],
+            })
+
+        rank = (urgency, discount_pct)
+        if best_context is None or rank > best_rank:
+            best_context = context
+            best_rank = rank
+
+    return best_context
+
+def _candidate_record(item_name, score, promo_context):
+    record = {"name": item_name, "score": score}
+    if promo_context:
+        for key in (
+            "promo_id",
+            "promotion_name",
+            "discount_pct",
+            "discount_label",
+            "amount_off_vnd",
+            "sale_price",
+            "urgency",
+        ):
+            value = promo_context.get(key)
+            if value is not None:
+                record[key] = value
+    return record
+
+def _apply_context_boosts(base_score, item_name, item_category, item_price, active_promos, is_lunch, is_dinner, promo_boost_val, time_boost_val, timestamp_dt):
+    promo_boost = 0.0
+    promo_context = _promotion_context_for_item(item_name, item_category, item_price, active_promos, timestamp_dt)
+    if promo_context:
+        promo_boost = promo_boost_val
 
     time_boost = 0.0
     item_category_lower = _safe_lower(item_category)
@@ -167,9 +263,11 @@ def _apply_context_boosts(base_score, item_name, item_category, active_promos, i
     elif is_dinner and (item_category_lower in ["combos", "sides"] or role in ("main", "side")):
         time_boost = time_boost_val
 
-    return base_score * (1.0 + promo_boost) * (1.0 + time_boost)
+    urgency = promo_context.get("urgency", 0.0) if promo_context else 0.0
+    score = base_score * (1.0 + promo_boost) * (1.0 + time_boost) * (1.0 + (URGENCY_BOOST_CAP * urgency))
+    return score, promo_context
 
-def _fallback_recommendations(cart_items, menu_records, menu_lookup, active_promos, is_lunch, is_dinner, promo_boost_val, time_boost_val, limit=5):
+def _fallback_recommendations(cart_items, menu_records, menu_lookup, active_promos, is_lunch, is_dinner, promo_boost_val, time_boost_val, timestamp_dt=None, limit=5):
     cart_set = set(cart_items or [])
     profile = _cart_profile(cart_items, menu_lookup)
     candidates = []
@@ -182,20 +280,23 @@ def _fallback_recommendations(cart_items, menu_records, menu_lookup, active_prom
         base_score = _fallback_base_score(name, category, profile)
         if base_score <= 0:
             continue
-        score = _apply_context_boosts(
+        item_price = _safe_float(row.get("price"), 0.0)
+        score, promo_context = _apply_context_boosts(
             base_score,
             name,
             category,
+            item_price,
             active_promos,
             is_lunch,
             is_dinner,
             promo_boost_val,
             time_boost_val,
+            timestamp_dt,
         )
-        candidates.append((name, score))
+        candidates.append(_candidate_record(name, score, promo_context))
 
-    candidates.sort(key=lambda x: x[1], reverse=True)
-    return [{"name": name, "score": score} for name, score in candidates[:limit]]
+    candidates.sort(key=lambda x: x["score"], reverse=True)
+    return candidates[:limit]
 
 def rerank_recommendations(cart_items, active_promotions, affinity_rules, menu_items, timestamp, bandit_weights=None, bandit_mode="expected"):
     if not timestamp:
@@ -245,6 +346,7 @@ def rerank_recommendations(cart_items, active_promotions, affinity_rules, menu_i
     # 2. Build menu category lookup table for O(1) searches
     menu_records = _build_menu_records(menu_items)
     menu_lookup = {row["name"]: row.get("category", "") for row in menu_records}
+    menu_price_lookup = {row["name"]: _safe_float(row.get("price"), 0.0) for row in menu_records}
                 
     # 3. Find matching rules and calculate scores
     cart_set = set(cart_items or [])
@@ -267,27 +369,30 @@ def rerank_recommendations(cart_items, active_promotions, affinity_rules, menu_i
                     # Look up category from lookup table
                     item_category = menu_lookup.get(item, "")
                     
-                    score = _apply_context_boosts(
+                    item_price = menu_price_lookup.get(item, 0.0)
+                    score, promo_context = _apply_context_boosts(
                         base_confidence,
                         item,
                         item_category,
+                        item_price,
                         active_promos,
                         is_lunch,
                         is_dinner,
                         promo_boost_val,
                         time_boost_val,
+                        timestamp_dt,
                     )
                     
                     # Keep highest score if item is suggested multiple times
-                    if item not in candidates or score > candidates[item]:
-                        candidates[item] = score
+                    if item not in candidates or score > candidates[item]["score"]:
+                        candidates[item] = _candidate_record(item, score, promo_context)
         except (AttributeError, TypeError):
             continue
             
     # Sort and format output
-    sorted_recs = sorted(candidates.items(), key=lambda x: x[1], reverse=True)
+    sorted_recs = sorted(candidates.values(), key=lambda x: x["score"], reverse=True)
     if sorted_recs:
-        return [{"name": name, "score": score} for name, score in sorted_recs]
+        return sorted_recs
 
     return _fallback_recommendations(
         cart_items=cart_items,
@@ -298,6 +403,7 @@ def rerank_recommendations(cart_items, active_promotions, affinity_rules, menu_i
         is_dinner=is_dinner,
         promo_boost_val=promo_boost_val,
         time_boost_val=time_boost_val,
+        timestamp_dt=timestamp_dt,
     )
 
 def format_price_vnd(price: float) -> str:
@@ -307,13 +413,29 @@ def format_price_vnd(price: float) -> str:
     except (ValueError, TypeError):
         return str(price)
 
-def generate_local_fallback(item_name: str, item_price: float) -> dict:
+def generate_local_fallback(item_name: str, item_price: float, promotion_context: dict = None) -> dict:
+    if isinstance(promotion_context, dict) and promotion_context.get("discount_label"):
+        urgency = _safe_float(promotion_context.get("urgency"), 0.0)
+        prefix = "Ưu đãi sắp kết thúc" if urgency >= 0.5 else "Đang có ưu đãi"
+        return {
+            "copy": f"{prefix}: {promotion_context['discount_label']} cho {item_name}, chỉ còn {format_price_vnd(item_price)}đ",
+            "rationale": "Được ưu tiên vì sản phẩm đang trong khuyến mãi phù hợp với giỏ hàng."
+        }
     return {
         "copy": f"Hoàn thành bữa ăn! Thêm {item_name} chỉ với {format_price_vnd(item_price)}đ",
         "rationale": "Thường được mua kèm với các sản phẩm trong giỏ hàng."
     }
 
-def generate_ollama_recommendation_copy(item_name: str, item_price: float, cart_items: list, host: str = None, model: str = None, timeout: float = 5.0) -> dict:
+def _promotion_prompt_context(promotion_context):
+    if not isinstance(promotion_context, dict) or not promotion_context.get("discount_label"):
+        return ""
+    urgency_note = "Sale is ending soon." if _safe_float(promotion_context.get("urgency"), 0.0) >= 0.5 else "Sale is active."
+    return (
+        f"Promotion: {promotion_context.get('discount_label')}.\n"
+        f"Promotion urgency: {urgency_note}\n"
+    )
+
+def generate_ollama_recommendation_copy(item_name: str, item_price: float, cart_items: list, host: str = None, model: str = None, timeout: float = 5.0, promotion_context: dict = None) -> dict:
     if not host:
         host = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
     if not model:
@@ -333,6 +455,7 @@ def generate_ollama_recommendation_copy(item_name: str, item_price: float, cart_
             f"Candidate Item: {item_name}\n"
             f"Price: {format_price_vnd(item_price)}đ\n"
             f"Current Cart: {cart_str}\n\n"
+            f"{_promotion_prompt_context(promotion_context)}"
             "Rules:\n"
             "1. Promotional copy must be appetizing, concise, and encourage adding the item (maximum 2 sentences).\n"
             "2. Rationale must provide a simple reason why the item was suggested. Keep it short and natural.\n"
@@ -373,13 +496,13 @@ def generate_ollama_recommendation_copy(item_name: str, item_price: float, cart_
     except Exception as e:
         logger.exception(f"Unexpected error in Ollama copy generation: {e}")
         
-    return generate_local_fallback(item_name, item_price)
+    return generate_local_fallback(item_name, item_price, promotion_context=promotion_context)
 
-def generate_openrouter_recommendation_copy(item_name: str, item_price: float, cart_items: list, api_key: str = None, timeout: float = 1.2) -> dict:
+def generate_openrouter_recommendation_copy(item_name: str, item_price: float, cart_items: list, api_key: str = None, timeout: float = 1.2, promotion_context: dict = None) -> dict:
     if not api_key:
         api_key = os.environ.get("OPENROUTER_API_KEY")
     if not api_key:
-        return generate_local_fallback(item_name, item_price)
+        return generate_local_fallback(item_name, item_price, promotion_context=promotion_context)
         
     url = "https://openrouter.ai/api/v1/chat/completions"
     headers = {
@@ -400,6 +523,7 @@ def generate_openrouter_recommendation_copy(item_name: str, item_price: float, c
             f"Candidate Item: {item_name}\n"
             f"Price: {format_price_vnd(item_price)}đ\n"
             f"Current Cart: {cart_str}\n\n"
+            f"{_promotion_prompt_context(promotion_context)}"
             "Rules:\n"
             "1. Promotional copy must be appetizing, concise, and encourage adding the item (maximum 2 sentences).\n"
             "2. Rationale must provide a simple reason why the item was suggested. Keep it short and natural.\n"
@@ -437,14 +561,14 @@ def generate_openrouter_recommendation_copy(item_name: str, item_price: float, c
     except Exception as e:
         logger.warning(f"OpenRouter connection or error: {e}")
         
-    return generate_local_fallback(item_name, item_price)
+    return generate_local_fallback(item_name, item_price, promotion_context=promotion_context)
 
-def generate_recommendation_copy(item_name: str, item_price: float, cart_items: list, api_key: str = None, timeout: float = 1.2) -> dict:
+def generate_recommendation_copy(item_name: str, item_price: float, cart_items: list, api_key: str = None, timeout: float = 1.2, promotion_context: dict = None) -> dict:
     use_ollama = os.environ.get("USE_OLLAMA", "false").lower() in ("true", "1", "yes")
     
     if use_ollama:
         ollama_timeout = 5.0 if timeout == 1.2 else timeout
-        return generate_ollama_recommendation_copy(item_name, item_price, cart_items, timeout=ollama_timeout)
+        return generate_ollama_recommendation_copy(item_name, item_price, cart_items, timeout=ollama_timeout, promotion_context=promotion_context)
         
     # Check if we should use OpenRouter
     openrouter_api_key = os.environ.get("OPENROUTER_API_KEY")
@@ -465,7 +589,7 @@ def generate_recommendation_copy(item_name: str, item_price: float, cart_items: 
     if not effective_key:
         # If no API key is provided, fall back to Ollama copy generator (which internally falls back to local template on failure)
         ollama_timeout = 5.0 if timeout == 1.2 else timeout
-        return generate_ollama_recommendation_copy(item_name, item_price, cart_items, timeout=ollama_timeout)
+        return generate_ollama_recommendation_copy(item_name, item_price, cart_items, timeout=ollama_timeout, promotion_context=promotion_context)
         
     if is_openrouter:
         return generate_openrouter_recommendation_copy(
@@ -473,7 +597,8 @@ def generate_recommendation_copy(item_name: str, item_price: float, cart_items: 
             item_price=item_price,
             cart_items=cart_items,
             api_key=effective_key,
-            timeout=timeout
+            timeout=timeout,
+            promotion_context=promotion_context
         )
         
     # Gemini API Call
@@ -489,6 +614,7 @@ def generate_recommendation_copy(item_name: str, item_price: float, cart_items: 
             f"Candidate Item: {item_name}\n"
             f"Price: {format_price_vnd(item_price)}đ\n"
             f"Current Cart: {cart_str}\n\n"
+            f"{_promotion_prompt_context(promotion_context)}"
             "Rules:\n"
             "1. Promotional copy must be appetizing, concise, and encourage adding the item (maximum 2 sentences).\n"
             "2. Rationale must provide a simple reason why the item was suggested. Keep it short and natural.\n"
@@ -532,4 +658,4 @@ def generate_recommendation_copy(item_name: str, item_price: float, cart_items: 
     except Exception:
         pass
         
-    return generate_local_fallback(item_name, item_price)
+    return generate_local_fallback(item_name, item_price, promotion_context=promotion_context)

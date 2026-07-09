@@ -91,7 +91,7 @@ graph TD
 | FastAPI | latest |
 | pandas | latest |
 | mlxtend | latest |
-| SQLite | 3 (For deferred database migration) |
+| SQLite | 3 (Local database store) |
 | HTML/JS/CSS | Vanilla (Premium aesthetics, Outfit/Inter typography, vibrant gradients, micro-animations) |
 | Gemini API | gemini-2.5-flash |
 
@@ -103,6 +103,7 @@ graph TD
 {root}/
   generate_data.py        # Generates menu.csv, promotions.csv, and orders.csv (Existing)
   affinity_engine.py      # Mines rules and outputs affinity_rules.json (Existing)
+  init_db.py              # SQLite database initialization (New)
   backtest.py             # Replays synthetic orders for AOV calculation (New)
   main.py                 # FastAPI backend app, endpoint routing (New)
   static/                 # Kiosk UI folder (New)
@@ -110,7 +111,7 @@ graph TD
     style.css             # Vibrant modern styling
     app.js                # Frontend API calls and live panels
   _bmad-output/
-    data/                 # Mined rules and generated catalog CSVs
+    data/                 # Mined rules, generated catalog CSVs, and kiosk.db (Updated)
 ```
 
 ---
@@ -130,6 +131,5 @@ graph TD
 
 ## Deferred
 
-* **SQLite Database Migration**: Migrate menu catalog, active promotion tables, and association rules from flat JSON/CSV files into a queryable local SQLite file once MVP flow is fully verified.
 * **Ollama Local LLM Support**: Implement local Llama 3.2 Ollama driver as an alternative LLM provider to ensure 100% offline demonstration capability if internet speed test fails.
 * **Reranker Scoring Optimization**: Tune and evaluate alternative scoring formula variations (e.g., incorporating Lift metrics, linear scoring models) during backtesting iterations.

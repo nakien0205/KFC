@@ -458,21 +458,22 @@
     backtestResultsBody.innerHTML =
       '<div class="backtest-grid">' +
         '<div class="backtest-uplift-banner">' +
-          '<span class="backtest-uplift-label">Average Order Value Uplift (AOV Uplift)</span>' +
+          '<span class="backtest-uplift-label">Synthetic Partial-Cart AOV Uplift</span>' +
           '<span class="backtest-uplift-value">' + percentageUpliftStr + '</span>' +
         '</div>' +
         '<div class="backtest-metric-card">' +
-          '<span class="backtest-metric-label">Baseline AOV (Pepsi)</span>' +
+          '<span class="backtest-metric-label">Baseline AOV (Static Pepsi)</span>' +
           '<span class="backtest-metric-value">' + baselineAovStr + '</span>' +
         '</div>' +
         '<div class="backtest-metric-card">' +
-          '<span class="backtest-metric-label">Hybrid Recommender AOV</span>' +
+          '<span class="backtest-metric-label">Hybrid Top-3 Panel AOV</span>' +
           '<span class="backtest-metric-value highlight">' + hybridAovStr + '</span>' +
         '</div>' +
         '<div class="backtest-metric-card" style="grid-column: span 2; text-align: center;">' +
-          '<span class="backtest-metric-label">Additional Value Per Order</span>' +
+          '<span class="backtest-metric-label">Additional Value Per Eligible Cart</span>' +
           '<span class="backtest-metric-value" style="color: ' + upliftColor + ';">' + upliftStr + '</span>' +
         '</div>' +
+        '<div class="recommendation-empty" style="grid-column: span 2; margin-top: 0.75rem;">Synthetic benchmark only; single-item baskets are skipped, and this is not production sales proof.</div>' +
       '</div>';
   }
 

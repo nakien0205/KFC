@@ -45,3 +45,9 @@ This file tracks technical debt and deferred items from development and reviews.
 
 - Sync HTTP request blocks FastAPI event loop (recommender.py:180-210)
 - OLLAMA_HOST environment variable blank or invalid (recommender.py:150-160)
+
+## Deferred from: code review of 1-2-store-orders-and-affinity-rules-in-sqlite.md (2026-07-08)
+
+- SQLite PRAGMA foreign_keys is enabled but no foreign keys are defined in the schema (init_db.py:165)
+- Orders table composite primary key (order_id, item_name) constrains items to be unique per order (init_db.py:206)
+

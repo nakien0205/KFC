@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import patch, MagicMock
 from datetime import datetime
-from recommender import rerank_recommendations
+from recommender import generate_local_fallback, rerank_recommendations
 
 class TestRecommender(unittest.TestCase):
     def setUp(self):
@@ -148,6 +148,54 @@ class TestRecommender(unittest.TestCase):
         # Expected: 0.70 * (1 + 0.20) * (1 + 0.15) = 0.70 * 1.20 * 1.15 = 0.966
         self.assertAlmostEqual(fries_rec["score"], 0.966)
 
+    def test_targeted_dynamic_promo_and_urgency_boost(self):
+        local_promotions = [
+            {
+                "promo_id": "DYN_20260706_BURGERS",
+                "name": "Giam 10.000d Burger Zinger hom nay",
+                "discount_pct": 20,
+                "start_date": "2026-07-06",
+                "end_date": "2026-07-06",
+                "target_item": "Burger Zinger",
+                "target_category": "Burgers",
+                "discount_type": "amount",
+                "amount_off_vnd": 10000,
+                "sale_price": 46000,
+                "display_text": "Giảm 10.000đ",
+                "is_dynamic": 1,
+            }
+        ]
+        local_rules = [
+            {"antecedents": ["Pepsi"], "consequents": ["Burger Zinger"], "confidence": 0.50},
+            {"antecedents": ["Pepsi"], "consequents": ["French Fries"], "confidence": 0.50},
+        ]
+
+        midday_recs = rerank_recommendations(["Pepsi"], local_promotions, local_rules, self.menu, "2026-07-06T12:00:00+07:00")
+        evening_recs = rerank_recommendations(["Pepsi"], local_promotions, local_rules, self.menu, "2026-07-06T21:00:00+07:00")
+
+        midday_burger = next(r for r in midday_recs if r["name"] == "Burger Zinger")
+        evening_burger = next(r for r in evening_recs if r["name"] == "Burger Zinger")
+        fries_rec = next(r for r in evening_recs if r["name"] == "French Fries")
+
+        self.assertEqual(evening_burger["sale_price"], 46000)
+        self.assertEqual(evening_burger["discount_label"], "Giảm 10.000đ")
+        self.assertGreater(evening_burger["urgency"], midday_burger["urgency"])
+        self.assertGreater(evening_burger["score"], fries_rec["score"])
+
+    def test_local_fallback_mentions_dynamic_sale_context(self):
+        res = generate_local_fallback(
+            "Burger Zinger",
+            46000,
+            promotion_context={
+                "discount_label": "Giảm 10.000đ",
+                "urgency": 0.75,
+            },
+        )
+
+        self.assertIn("Ưu đãi sắp kết thúc", res["copy"])
+        self.assertIn("Giảm 10.000đ", res["copy"])
+        self.assertIn("46.000đ", res["copy"])
+
     def test_deduplication_highest_score(self):
         # If multiple rules point to the same consequents:
         # Rule 1: A -> C (confidence 0.50)
@@ -265,7 +313,6 @@ class TestRecommender(unittest.TestCase):
         self.assertEqual(missing, [])
 
     def test_local_fallback_generator(self):
-        from recommender import generate_local_fallback
         res = generate_local_fallback("French Fries", 20000.0)
         self.assertEqual(res["copy"], "Hoàn thành bữa ăn! Thêm French Fries chỉ với 20.000đ")
         self.assertEqual(res["rationale"], "Thường được mua kèm với các sản phẩm trong giỏ hàng.")
@@ -459,6 +506,23 @@ class TestRecommender(unittest.TestCase):
         with patch.dict('os.environ', {"OPENROUTER_API_KEY": "sk-or-v1-testkey"}):
             res = generate_recommendation_copy("French Fries", 20000.0, ["Burger Zinger"])
             self.assertEqual(res["copy"], "Hoàn thành bữa ăn! Thêm French Fries chỉ với 20.000đ")
+
+    def test_openrouter_no_key_preserves_sale_fallback_context(self):
+        from recommender import generate_openrouter_recommendation_copy
+
+        with patch.dict('os.environ', {}, clear=True):
+            res = generate_openrouter_recommendation_copy(
+                "Burger Zinger",
+                46000,
+                ["Pepsi"],
+                promotion_context={
+                    "discount_label": "Giảm 10.000đ",
+                    "urgency": 0.8,
+                },
+            )
+
+        self.assertIn("Ưu đãi sắp kết thúc", res["copy"])
+        self.assertIn("Giảm 10.000đ", res["copy"])
 
 if __name__ == "__main__":
     unittest.main()

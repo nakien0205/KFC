@@ -21,7 +21,7 @@ Winning a hackathon requires demonstrating a high-uplift recommendation system w
   - **success:** Generates a CSV containing at least 1,000 orders with verifiable associations (e.g. burger orders containing fries/drinks above 50% frequency).
 - **CAP-2**
   - **intent:** Offline affinity engine runs association rule mining over the synthetic order history to output item affinity confidence and lift metrics.
-  - **success:** Outputs a queryable SQLite database or JSON structure containing mined rule associations (e.g., "burger -> fries" with confidence and lift scores).
+  - **success:** Outputs a queryable SQLite database (`_bmad-output/data/kiosk.db`) and JSON structure containing mined rule associations (e.g., "burger -> fries" with confidence and lift scores).
 - **CAP-3**
   - **intent:** Online context reranker filters and adjusts affinity scores in real-time based on active cart contents, active promos, and time of day.
   - **success:** API endpoint accepts current cart, promo calendar, and timestamp, returning a sorted list of context-adjusted item recommendations.

@@ -2,7 +2,7 @@
 
 ## Elevator Pitch
 
-An intelligent, edge-compatible hybrid recommendation engine for self-service kiosks that pairs offline transaction mining with context-aware Multi-Armed Bandits and LLM copy personalization. In the current synthetic scenario benchmark, a fixed-seed replay over $5{,}000$ generated transactions estimates a $3.00\%$ Average Order Value (AOV) uplift.
+An intelligent, edge-compatible hybrid recommendation engine for self-service kiosks that pairs offline transaction mining with dynamic promotion context, context-aware Multi-Armed Bandits, and LLM copy personalization. In the current synthetic partial-cart panel benchmark, a fixed-seed replay over $4{,}194$ eligible generated transactions estimates a $12.17\%$ Average Order Value (AOV) uplift.
 
 ---
 
@@ -17,11 +17,12 @@ I was inspired to build a smart, context-aware, localized recommender system spe
 The **KFC Kiosk Recommendation System** is an end-to-end recommender engine and simulator consisting of:
 
 1. **Offline Affinity Miner**: Analyzes historical transactions using association rule mining to extract frequent itemsets.
-2. **Context-Aware Online Reranker**: Adjusts base confidence scores using active store promotions and time-of-day category boosts.
-3. **Thompson Sampling Multi-Armed Bandit**: Updates context weights when feedback events are sent, replacing static parameters during live use and simulated backtest replays.
-4. **GenAI Personalized Copywriter**: Generate specific promotional copy and logical rationales using Gemini 2.5 Flash, with local Ollama support. Includes an **Offline Fallback Guardrail** that guarantees zero kiosk latency and continuous offline operations using a template-based copy generator if the LLM exceeds a $1.2\text{s}$ timeout limit.
-5. **Kiosk UI Terminal**: A responsive, single-page application that updates recommendations in real time as users add items to their carts.
-6. **Backtest Simulator**: Replays synthetic transactions to estimate recommender effectiveness against a static baseline.
+2. **Dynamic Promo Calendar**: Generates controlled daily sales from menu and synthetic order popularity, with 5-point discount tiers capped at 20%.
+3. **Context-Aware Online Reranker**: Adjusts base confidence scores using active store promotions, sale-ending urgency, and time-of-day category boosts.
+4. **Thompson Sampling Multi-Armed Bandit**: Updates context weights when feedback events are sent, replacing static parameters during live use and the conservative full-order simulation.
+5. **GenAI Personalized Copywriter**: Generate specific promotional copy and logical rationales using Gemini 2.5 Flash, with local Ollama support. Includes an **Offline Fallback Guardrail** that guarantees zero kiosk latency and continuous offline operations using a template-based copy generator if the LLM exceeds a $1.2\text{s}$ timeout limit.
+6. **Kiosk UI Terminal**: A responsive, single-page application that updates recommendations in real time as users add items to their carts.
+7. **Backtest Simulator**: Replays synthetic transactions to estimate recommender effectiveness against a static baseline.
 
 ## How we built it
 
@@ -32,6 +33,7 @@ graph TD
   UI["Kiosk UI (static/)"] -->|HTTP API| FastAPI["FastAPI Server (main.py)"]
   FastAPI --> Pipeline["Pipes & Filters Core"]
   Pipeline --> Filter1["Data Generator (generate_data.py)"]
+  Pipeline --> Filter1b["Dynamic Promo Engine (promo_engine.py)"]
   Pipeline --> Filter2["Offline Miner (affinity_engine.py)"]
   Pipeline --> Filter3["Online Reranker (recommender.py)"]
   Pipeline --> Filter4["MAB Weights Learner (bandit.py)"]
@@ -44,62 +46,41 @@ graph TD
 
 #### 1. Data Generation & Offline Association Mining
 
-- `generate_data.py` creates a stratified transaction log of $5{,}000$ synthetic orders with explicit co-occurrence assumptions across burgers, fried chicken, rice meals, pasta meals, popcorn/snack meals, group buckets, dessert-led baskets, and drink-led snack baskets.
-- `affinity_engine.py` runs Apriori/FP-Growth algorithms via `mlxtend` to generate support, confidence, and lift metrics, persisting the results to `affinity_rules.json`.
-- The UI returns recommendations for all tested cart states by combining mined association rules with a rule-based fallback. The latest mining run expanded unique rule consequents from 15 to 31 menu items; `_bmad-output/data/rule_coverage_report.md` records the before/after coverage.
+We generated 5,000 synthetic kiosk orders, mined item pairings with Apriori/FP-Growth, and stored the resulting support, confidence, and lift rules for runtime recommendations.
 
 #### 2. Dataset Assumptions
 
-The dataset is synthetic and generated with explicit co-occurrence assumptions. This is a synthetic scenario benchmark for demonstrating recommender mechanics, not real production sales proof.
-
-- $5{,}000$ synthetic orders are generated with a fixed random seed and explicit scenario strata.
-- Burger orders are biased toward fries and Pepsi.
-- Rice meals, pasta meals, popcorn/snack meals, buckets/group meals, dessert-led baskets, and drink-led snack baskets have hand-coded attachment probabilities.
-- The backtest uses simulated acceptance probabilities, not real customer purchases.
+The dataset is a synthetic scenario benchmark, not real production sales proof. It uses fixed, hand-coded basket assumptions to show how the recommendation system works. The headline benchmark simulates a kiosk moment where the customer has started a cart and the recommendation panel tries to recover held-out add-ons from the original synthetic order.
 
 #### 3. Context-Aware Rerank Formula
 
-The reranking filter ingests active cart items, active promotions, and the transaction timestamp to compute a dynamic multiplicative score:
-$$\text{Score} = \text{Base\_Confidence} \times (1 + \text{Promo\_Boost}) \times (1 + \text{Time\_Boost})$$
+The reranker combines mined confidence with promotion, time-of-day context, and sale-ending urgency:
+$$\text{Score} = \text{Base\_Confidence} \times (1 + \text{Promo\_Boost}) \times (1 + \text{Time\_Boost}) \times (1 + \text{Urgency\_Boost})$$
 
-- **Promo Boost**: Activates if an item matches a currently running promotion (e.g., free drink, dessert combo).
-- **Time Boost**: Activates if the item matches peak hour target food categories:
-  - **Lunch ($11\text{:}00 - 14\text{:}00$)**: Boosts `Burgers` and `Combos`.
-  - **Dinner ($17\text{:}00 - 21\text{:}00$)**: Boosts `Combos` and `Sides`.
+This lets the kiosk adjust recommendations for active deals, meal-time behavior, and offers close to ending without changing the offline rules.
 
 #### 4. Thompson Sampling Multi-Armed Bandit
 
-Instead of hardcoding static coefficients, we model the probability of a customer accepting a time or promotional recommendation as Beta distributions:
+We used Thompson Sampling so the kiosk can learn whether promotion-based or time-based boosts perform better:
 $$\theta_{\text{promo}} \sim \text{Beta}(\alpha_{\text{promo}}, \beta_{\text{promo}})$$
 $$\theta_{\text{time}} \sim \text{Beta}(\alpha_{\text{time}}, \beta_{\text{time}})$$
 
-During online operations and backtest replays:
-
-- Boost values are drawn using Thompson Sampling.
-- When recommendations are accepted or rejected, parameters are updated immediately:
-  $$\alpha_c \leftarrow \alpha_c + 1 \quad \text{if accepted}$$
-  $$\beta_c \leftarrow \beta_c + 1 \quad \text{if rejected}$$
-  where $c \in \{\text{promo}, \text{time}\}$ is the active context.
+Each accepted or rejected recommendation updates the relevant weight for future scoring.
 
 #### 5. GenAI Copy & Fallback
 
-Recommendations are enriched with localized, appetizing Vietnamese copy and statistical justifications (e.g., *"Được gợi ý vì 68% khách hàng mua kèm sản phẩm này"*).
-
-- **Primary Route**: Requests structured JSON from `gemini-2.5-flash` with a strict $1.2\text{s}$ timeout.
-- **Secondary Route**: If offline or timing out, a zero-dependency fallback generator returns standardized local templates:
-  - Copy: *"Hoàn thành bữa ăn! Thêm [item\_name] chỉ với [price]đ"*
-  - Rationale: *"Thường được mua kèm với các sản phẩm trong giỏ hàng."*
+The top recommendation gets Vietnamese GenAI copy through `gemini-2.5-flash`. If the model is slow or unavailable, the app immediately falls back to local Vietnamese templates.
 
 #### 6. Kiosk UI & FastAPI Backend
 
-- Single-page application built with responsive HTML5/CSS3/JavaScript featuring micro-interactions, dark-mode KFC accent branding, and real-time API integrations.
-- High-performance, asynchronous endpoints built with FastAPI.
+The demo uses a plain HTML/CSS/JavaScript kiosk UI backed by FastAPI endpoints for menu loading, recommendations, feedback, and backtesting.
 
 ---
 
 ## Challenges we ran into
 
 - **Cloud LLM Latency Guardrails**: Public APIs can experience sudden latency spikes, which can freeze kiosk screens. We mitigated this by setting a strict $1.2\text{s}$ request timeout and implementing the immediate local fallback system.
+- **Discount-Aware AOV Math**: Promotion psychology can make synthetic uplift look fake if discounts are counted at full price. We changed the backtest to add accepted promoted items at sale price, not original menu price.
 - **Thread-Safe Weights Persistence**: Running real-time feedback updates on a file-based JSON store can result in race conditions. We resolved this by implementing reentrant locking (`threading.RLock`) and writing updates atomically via temporary files using `os.replace`.
 - **Exploration vs. Exploitation Balance**: Online learning algorithms can initially deliver erratic suggestions. By initializing the MAB priors ($\alpha_{\text{promo}}=2.0, \beta_{\text{promo}}=8.0$ and $\alpha_{\text{time}}=1.5, \beta_{\text{time}}=8.5$) to align with baseline expectations ($+0.20$ promo boost, $+0.15$ time boost), the bandit converged smoothly from the very first transaction.
 
@@ -107,7 +88,7 @@ Recommendations are enriched with localized, appetizing Vietnamese copy and stat
 
 ## Accomplishments that we're proud of
 
-- **Synthetic Scenario Benchmark**: A fixed-seed Monte Carlo replay over $5{,}000$ synthetic transactions estimates a simulated **$3.00\%$ Average Order Value (AOV) uplift**, or **$+3{,}529\text{ VND}$ per transaction**, compared to the static baseline model. This is not real production sales proof.
+- **Synthetic Scenario Benchmark**: A fixed-seed partial-cart top-3 panel replay over $4{,}194$ eligible synthetic transactions estimates a simulated **$12.17\%$ Average Order Value (AOV) uplift**, or **$+9{,}527\text{ VND}$ per eligible transaction**, compared to the static one-item Pepsi baseline. A stricter full-order top-1 conservative check remains positive at **$1.82\%$** after discount-aware revenue accounting. This is not real production sales proof.
 - **Robust Offline Capability**: Demonstrated 100% system availability by integrating local Ollama LLM support and rule-based fallbacks to handle internet outages.
 - **Decoupled Architecture**: Strictly adhered to the Pipes and Filters architecture, keeping data generation, model training, online recommendation logic, and visual presentation fully modular.
 
@@ -123,7 +104,7 @@ Recommendations are enriched with localized, appetizing Vietnamese copy and stat
 
 ## What's next for KFC Kiosk Recommendation System
 
-- **Local SQLite Integration**: Migrate menu items, active promotions, and rules from flat CSV/JSON files into a localized SQLite database.
+- **Production Database Sync**: Implement automatic synchronization between local SQLite database and remote cloud-based PostgreSQL data warehouse.
 - **Deeper Bandit Contexts**: Transition from Beta-Binomial models to Contextual Bandits (e.g., LinUCB) to incorporate multi-dimensional features like local weather and basket size.
 - **Edge Deployment**: Package Ollama (`llama3.2:3b`) directly into local Docker containers to run copy generation locally on kiosk hardware.
 - **A/B Testing Infrastructure**: Implement user-bucket tracking to run live, side-by-side A/B tests.
@@ -148,4 +129,4 @@ Recommendations are enriched with localized, appetizing Vietnamese copy and stat
 
 - **Google Gemini API**: `gemini-2.5-flash` model for real-time structured JSON copywriting.
 - **Ollama**: Local `llama3.2:3b` integration for offline copy generation.
-- **SQLite**: Local database for structured storage (deferred migration path).
+- **SQLite**: Local database for structured storage (active local relational layer).

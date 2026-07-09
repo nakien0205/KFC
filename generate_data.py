@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import random
 from datetime import datetime, timedelta
+from promo_engine import generate_promo_calendar
 
 def infer_category(name):
     name_lower = str(name or "").lower()
@@ -126,17 +127,36 @@ def load_or_create_menu():
     print(f"Created menu.csv with {len(df_menu)} items.")
     return df_menu
 
-def generate_promotions():
+def generate_promotions(df_menu, df_orders):
     output_dir = "_bmad-output/data"
-    promotions = [
-        {"promo_id": "PROMO_001", "name": "Lunch Special Burger Combo", "discount_pct": 15, "start_date": "2026-06-01", "end_date": "2026-08-31"},
-        {"promo_id": "PROMO_002", "name": "Happy Bucket Discount", "discount_pct": 10, "start_date": "2026-07-01", "end_date": "2026-07-31"},
-        {"promo_id": "PROMO_003", "name": "Free Drink with Fried Chicken", "discount_pct": 100, "start_date": "2026-07-04", "end_date": "2026-07-06"},
-        {"promo_id": "PROMO_004", "name": "Dessert Delight", "discount_pct": 20, "start_date": "2026-05-01", "end_date": "2026-12-31"},
-    ]
+    promotions = generate_promo_calendar(
+        menu_items=df_menu,
+        orders=df_orders,
+        start_date=datetime(2026, 7, 1).date(),
+        days=14,
+        seed=42,
+    )
+    if not promotions:
+        promotions = [
+            {
+                "promo_id": "DYN_FALLBACK_20260706",
+                "name": "Fallback Daily Sale - Burger Zinger",
+                "discount_pct": 10,
+                "start_date": "2026-07-06",
+                "end_date": "2026-07-06",
+                "target_item": "Burger Zinger",
+                "target_category": "Burgers",
+                "discount_type": "percent",
+                "amount_off_vnd": 6000,
+                "sale_price": 50000,
+                "display_text": "Giảm 10%",
+                "is_dynamic": 1,
+            }
+        ]
     df_promo = pd.DataFrame(promotions)
     df_promo.to_csv(os.path.join(output_dir, "promotions.csv"), index=False)
     print(f"Created promotions.csv with {len(df_promo)} promos.")
+    return df_promo
 
 def generate_orders(df_menu):
     output_dir = "_bmad-output/data"
@@ -270,8 +290,9 @@ def generate_orders(df_menu):
     print(f"Created orders.csv with {len(df_orders)} items in {df_orders['order_id'].nunique()} stratified transactions.")
     for scenario_name, scenario_count in scenario_counts:
         print(f"  {scenario_name}: {scenario_count} orders")
+    return df_orders
 
 if __name__ == "__main__":
     df_menu = load_or_create_menu()
-    generate_promotions()
-    generate_orders(df_menu)
+    df_orders = generate_orders(df_menu)
+    generate_promotions(df_menu, df_orders)

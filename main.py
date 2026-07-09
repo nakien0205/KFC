@@ -30,21 +30,27 @@ AFFINITY_RULES = []
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     global MENU_ITEMS_DF, MENU_PRICE_LOOKUP, PROMOTIONS_LIST, AFFINITY_RULES
-    
+
     # Resolve paths relative to the directory containing main.py
     base_dir = os.path.dirname(os.path.abspath(__file__))
     data_dir = os.path.join(base_dir, "_bmad-output", "data")
     menu_path = os.path.join(data_dir, "menu.csv")
     promo_path = os.path.join(data_dir, "promotions.csv")
     rules_path = os.path.join(data_dir, "affinity_rules.json")
-    
+    db_path = os.path.join(data_dir, "kiosk.db")
+
     logger.info("Initializing in-memory cache on startup...")
-    
-    # 1. Load Menu
-    if os.path.exists(menu_path):
+
+    loaded_from_db = False
+    if os.path.exists(db_path):
+        import sqlite3
         try:
-            df = pd.read_csv(menu_path)
-            # Validate required columns
+            logger.info(f"Loading runtime data from SQLite database at {db_path}...")
+            conn = sqlite3.connect(db_path)
+
+            # 1. Load Menu
+            menu_query = "SELECT name, category, price, image FROM menu"
+            df = pd.read_sql_query(menu_query, conn)
             required_cols = {'name', 'category', 'price'}
             if required_cols.issubset(df.columns):
                 MENU_ITEMS_DF = df
@@ -54,42 +60,93 @@ async def lifespan(app: FastAPI):
                     except (ValueError, TypeError):
                         logger.warning(f"Invalid price value for item {row.get('name')}: {row.get('price')}")
                         MENU_PRICE_LOOKUP[row['name']] = 0.0
-                logger.info(f"Loaded {len(MENU_ITEMS_DF)} menu items successfully.")
+                logger.info(f"Loaded {len(MENU_ITEMS_DF)} menu items from SQLite successfully.")
             else:
-                logger.error(f"menu.csv is missing required columns: {required_cols - set(df.columns)}")
-        except Exception as e:
-            logger.error(f"Failed to load menu.csv: {e}")
-    else:
-        logger.error(f"menu.csv not found at: {menu_path}")
-            
-    # 2. Load Promotions
-    if os.path.exists(promo_path):
-        try:
-            promotions_df = pd.read_csv(promo_path)
+                raise ValueError(f"SQLite menu table is missing required columns: {required_cols - set(df.columns)}")
+
+            # 2. Load Promotions
+            promotions_df = pd.read_sql_query("SELECT * FROM promotions", conn)
             PROMOTIONS_LIST = promotions_df.to_dict(orient="records")
-            logger.info(f"Loaded {len(PROMOTIONS_LIST)} active promotions successfully.")
+            logger.info(f"Loaded {len(PROMOTIONS_LIST)} active promotions from SQLite successfully.")
+
+            # 3. Load Affinity Rules
+            cursor = conn.cursor()
+            cursor.execute("SELECT antecedents, consequents, support, confidence, lift FROM affinity_rules")
+            rules_rows = cursor.fetchall()
+            loaded_rules = []
+            for row in rules_rows:
+                loaded_rules.append({
+                    "antecedents": json.loads(row[0]),
+                    "consequents": json.loads(row[1]),
+                    "support": float(row[2]),
+                    "confidence": float(row[3]),
+                    "lift": float(row[4])
+                })
+            AFFINITY_RULES = loaded_rules
+            logger.info(f"Loaded {len(AFFINITY_RULES)} association rules from SQLite successfully.")
+
+            conn.close()
+            loaded_from_db = True
         except Exception as e:
-            logger.error(f"Failed to load promotions.csv: {e}")
-    else:
-        logger.error(f"promotions.csv not found at: {promo_path}")
-            
-    # 3. Load Affinity Rules
-    if os.path.exists(rules_path):
-        try:
-            with open(rules_path, "r", encoding="utf-8") as f:
-                rules_data = json.load(f)
-                if isinstance(rules_data, list):
-                    AFFINITY_RULES = rules_data
-                    logger.info(f"Loaded {len(AFFINITY_RULES)} association rules successfully.")
+            logger.error(f"Failed to load data from SQLite: {e}. Falling back to CSV/JSON files.")
+            # Clear cache to avoid partial state before fallback
+            MENU_ITEMS_DF = pd.DataFrame(columns=['name', 'category', 'price'])
+            MENU_PRICE_LOOKUP = {}
+            PROMOTIONS_LIST = []
+            AFFINITY_RULES = []
+
+    if not loaded_from_db:
+        logger.info("Initializing in-memory cache from CSV/JSON fallback...")
+        # 1. Load Menu
+        if os.path.exists(menu_path):
+            try:
+                df = pd.read_csv(menu_path)
+                # Validate required columns
+                required_cols = {'name', 'category', 'price'}
+                if required_cols.issubset(df.columns):
+                    MENU_ITEMS_DF = df
+                    for idx, row in df.iterrows():
+                        try:
+                            MENU_PRICE_LOOKUP[row['name']] = float(row['price'])
+                        except (ValueError, TypeError):
+                            logger.warning(f"Invalid price value for item {row.get('name')}: {row.get('price')}")
+                            MENU_PRICE_LOOKUP[row['name']] = 0.0
+                    logger.info(f"Loaded {len(MENU_ITEMS_DF)} menu items successfully.")
                 else:
-                    logger.error("affinity_rules.json is not a valid JSON array.")
-        except Exception as e:
-            logger.error(f"Failed to load affinity_rules.json: {e}")
-    else:
-        logger.error(f"affinity_rules.json not found at: {rules_path}")
-        
+                    logger.error(f"menu.csv is missing required columns: {required_cols - set(df.columns)}")
+            except Exception as e:
+                logger.error(f"Failed to load menu.csv: {e}")
+        else:
+            logger.error(f"menu.csv not found at: {menu_path}")
+
+        # 2. Load Promotions
+        if os.path.exists(promo_path):
+            try:
+                promotions_df = pd.read_csv(promo_path)
+                PROMOTIONS_LIST = promotions_df.to_dict(orient="records")
+                logger.info(f"Loaded {len(PROMOTIONS_LIST)} active promotions successfully.")
+            except Exception as e:
+                logger.error(f"Failed to load promotions.csv: {e}")
+        else:
+            logger.error(f"promotions.csv not found at: {promo_path}")
+
+        # 3. Load Affinity Rules
+        if os.path.exists(rules_path):
+            try:
+                with open(rules_path, "r", encoding="utf-8") as f:
+                    rules_data = json.load(f)
+                    if isinstance(rules_data, list):
+                        AFFINITY_RULES = rules_data
+                        logger.info(f"Loaded {len(AFFINITY_RULES)} association rules successfully.")
+                    else:
+                        logger.error("affinity_rules.json is not a valid JSON array.")
+            except Exception as e:
+                logger.error(f"Failed to load affinity_rules.json: {e}")
+        else:
+            logger.error(f"affinity_rules.json not found at: {rules_path}")
+
     yield
-    
+
     # Cleanup on shutdown (if any)
     logger.info("Shutting down KFC Kiosk Recommendation API.")
 
@@ -132,7 +189,7 @@ def recommend(request: RecommendRequest):
     # If cart_items is null/empty or timestamp is null/empty, return 200 OK with empty list
     if not request.cart_items or not request.timestamp:
         return []
-        
+
     try:
         candidates = rerank_recommendations(
             cart_items=request.cart_items,
@@ -144,23 +201,37 @@ def recommend(request: RecommendRequest):
     except Exception as e:
         logger.exception("Error in recommendation engine")
         raise HTTPException(status_code=500, detail=f"Recommendation engine error: {str(e)}")
-        
+
     if not candidates:
         return []
-        
+
     results = []
-    
+
     # Take top 5 candidates
     top_candidates = candidates[:5]
-    
+
     for idx, cand in enumerate(top_candidates):
         if not isinstance(cand, dict) or "name" not in cand or "score" not in cand:
             continue
-            
+
         name = cand["name"]
         score = cand["score"]
-        price = MENU_PRICE_LOOKUP.get(name, 0.0)
-        
+        original_price = MENU_PRICE_LOOKUP.get(name, 0.0)
+        price = float(cand.get("sale_price", original_price) or 0.0)
+        promotion_context = {
+            key: cand.get(key)
+            for key in (
+                "promo_id",
+                "promotion_name",
+                "discount_pct",
+                "discount_label",
+                "amount_off_vnd",
+                "sale_price",
+                "urgency",
+            )
+            if cand.get(key) is not None
+        }
+
         # Exactly one API call per recommendation event:
         # Call Gemini API only for the top candidate (idx == 0).
         # For the rest, fall back to local rule-based template.
@@ -168,13 +239,14 @@ def recommend(request: RecommendRequest):
             copy_data = generate_recommendation_copy(
                 item_name=name,
                 item_price=price,
-                cart_items=request.cart_items
+                cart_items=request.cart_items,
+                promotion_context=promotion_context
             )
             if not isinstance(copy_data, dict):
-                copy_data = generate_local_fallback(name, price)
+                copy_data = generate_local_fallback(name, price, promotion_context=promotion_context)
         else:
-            copy_data = generate_local_fallback(name, price)
-            
+            copy_data = generate_local_fallback(name, price, promotion_context=promotion_context)
+
         results.append(RecommendationResponse(
             name=name,
             price=price,
@@ -182,7 +254,7 @@ def recommend(request: RecommendRequest):
             copy=copy_data.get("copy", ""),
             rationale=copy_data.get("rationale", "")
         ))
-        
+
     return results
 
 class BacktestResponse(BaseModel):

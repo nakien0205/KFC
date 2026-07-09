@@ -1,5 +1,5 @@
 # generated: 2026-07-06T10:11:46+07:00
-# last_updated: 2026-07-07T08:56:00+07:00
+# last_updated: 2026-07-08T14:00:00+07:00
 # project: KFC RAG system
 # project_key: NOKEY
 # tracking_system: file-system
@@ -41,7 +41,7 @@
 # - Retrospective appends its action items to action_items; sprint-status surfaces open ones
 
 generated: 2026-07-06T10:11:46+07:00
-last_updated: 2026-07-07T08:56:00+07:00
+last_updated: 2026-07-08T14:00:00+07:00
 project: KFC RAG system
 project_key: NOKEY
 tracking_system: file-system
@@ -65,7 +65,15 @@ development_status:
   epic-4: done
   4-1-backtest-replay-logic-and-math-module: done
   4-2-fastapi-integration-for-api-backtest: done
+  4-3-partial-cart-top-k-panel-backtest: done
   epic-4-retrospective: optional
   epic-5: in-progress
   5-1-ollama-local-llm-integration: done
   5-2-dynamic-contextual-reranking-via-multi-armed-bandits: done
+  5-3-dynamic-promo-calendar-and-urgency-boost: review
+  epic-sqlite-layer: done
+  1-1-build-sqlite-catalog-and-promotion-store: done
+  1-2-store-orders-and-affinity-rules-in-sqlite: done
+  1-3-load-runtime-recommendations-from-sqlite: done
+  1-4-run-backtest-from-the-same-sqlite-dataset: done
+  1-5-document-and-verify-sqlite-data-flow: done

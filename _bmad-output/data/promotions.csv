@@ -1,5 +1,15 @@
-promo_id,name,discount_pct,start_date,end_date
-PROMO_001,Lunch Special Burger Combo,15,2026-06-01,2026-08-31
-PROMO_002,Happy Bucket Discount,10,2026-07-01,2026-07-31
-PROMO_003,Free Drink with Fried Chicken,100,2026-07-04,2026-07-06
-PROMO_004,Dessert Delight,20,2026-05-01,2026-12-31
+promo_id,name,discount_pct,start_date,end_date,target_item,target_category,discount_type,amount_off_vnd,sale_price,display_text,is_dynamic
+DYN_20260702_BURGERS,Burger Daily Sale - Burger Shrimp,5,2026-07-02,2026-07-02,Burger Shrimp,Burgers,percent,2000,43000,Giảm 5%,1
+DYN_20260703_COMBOS,Combo Daily Sale - Combo 2 Fried Chicken,5,2026-07-03,2026-07-03,Combo 2 Fried Chicken,Combos,percent,5000,86000,Giảm 5%,1
+DYN_20260704_BURGERS,Burger Daily Sale - Burger Zinger,10,2026-07-04,2026-07-04,Burger Zinger,Burgers,percent,6000,50000,Giảm 10%,1
+DYN_20260704_COMBOS,Combo Daily Sale - Combo Rice Fried Chicken,10,2026-07-04,2026-07-04,Combo Rice Fried Chicken,Combos,percent,6000,50000,Giảm 10%,1
+DYN_20260705_BURGERS,Burger Daily Sale - Roasted Fillet Chicken Burger,15,2026-07-05,2026-07-05,Roasted Fillet Chicken Burger,Burgers,percent,8000,48000,Giảm 15%,1
+DYN_20260706_BURGERS,Burger Daily Sale - Burger Zinger,15,2026-07-06,2026-07-06,Burger Zinger,Burgers,percent,8000,48000,Giảm 15%,1
+DYN_20260706_CHICKENS,Chicken Daily Sale - Nanban Popcorn Chicken Rice,15,2026-07-06,2026-07-06,Nanban Popcorn Chicken Rice,Sides,percent,6000,34000,Giảm 15%,1
+DYN_20260707_BURGERS,Burger Daily Sale - Burger Zinger,10,2026-07-07,2026-07-07,Burger Zinger,Burgers,percent,6000,50000,Giảm 10%,1
+DYN_20260708_COMBOS,Combo Daily Sale - Cheers Combo,5,2026-07-08,2026-07-08,Cheers Combo,Combos,percent,18000,351000,Giảm 5%,1
+DYN_20260712_BURGERS,Burger Daily Sale - Roasted Fillet Chicken Burger,20,2026-07-12,2026-07-12,Roasted Fillet Chicken Burger,Burgers,percent,11000,45000,Giảm 20%,1
+DYN_20260713_BURGERS,Burger Daily Sale - Burger Shrimp,15,2026-07-13,2026-07-13,Burger Shrimp,Burgers,percent,7000,38000,Giảm 15%,1
+DYN_20260713_CHICKENS,Chicken Daily Sale - 2 pcs Black Pepper & Lime Fried Chicken,20,2026-07-13,2026-07-13,2 pcs Black Pepper & Lime Fried Chicken,Sides,percent,16000,63000,Giảm 20%,1
+DYN_20260713_COMBOS,Combo Daily Sale - Combo Pasta Solo,20,2026-07-13,2026-07-13,Combo Pasta Solo,Combos,percent,14000,57000,Giảm 20%,1
+DYN_20260714_BURGERS,Burger Daily Sale - Burger Shrimp,10,2026-07-14,2026-07-14,Burger Shrimp,Burgers,percent,4000,41000,Giảm 10%,1

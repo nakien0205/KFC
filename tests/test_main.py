@@ -1,6 +1,7 @@
 import unittest
-from unittest.mock import patch, MagicMock
+from unittest.mock import patch, MagicMock, mock_open
 from fastapi.testclient import TestClient
+import pandas as pd
 import os
 import json
 
@@ -48,6 +49,39 @@ class TestMainAPI(unittest.TestCase):
             self.assertIn("rationale", item)
             self.assertNotIn(item["name"], payload["cart_items"])
             self.assertIsInstance(item["price"], float)
+
+    @patch('main.rerank_recommendations')
+    @patch('main.generate_recommendation_copy')
+    def test_recommend_endpoint_uses_sale_price_and_promo_context(self, mock_generate_copy, mock_rerank):
+        mock_rerank.return_value = [
+            {
+                "name": "Burger Zinger",
+                "score": 0.8,
+                "sale_price": 46000.0,
+                "discount_label": "Giảm 10.000đ",
+                "urgency": 0.8,
+            }
+        ]
+        mock_generate_copy.return_value = {
+            "copy": "Ưu đãi kiểm thử",
+            "rationale": "Khuyến mãi phù hợp."
+        }
+
+        response = self.client.post(
+            "/api/recommend",
+            json={
+                "cart_items": ["Pepsi"],
+                "timestamp": "2026-07-06T21:00:00+07:00"
+            },
+        )
+
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertEqual(data[0]["price"], 46000.0)
+        self.assertEqual(data[0]["copy"], "Ưu đãi kiểm thử")
+        call_kwargs = mock_generate_copy.call_args.kwargs
+        self.assertEqual(call_kwargs["item_price"], 46000.0)
+        self.assertEqual(call_kwargs["promotion_context"]["discount_label"], "Giảm 10.000đ")
 
     def test_recommend_endpoint_empty_cart(self):
         payload = {
@@ -170,6 +204,93 @@ class TestMainAPI(unittest.TestCase):
         self.assertEqual(data["status"], "success")
         self.assertIn("updated_weights", data)
         self.assertIn("alpha_promo", data["updated_weights"])
+
+class TestMainSQLiteLoading(unittest.TestCase):
+    @patch('sqlite3.connect')
+    @patch('os.path.exists')
+    def test_lifespan_sqlite_loading_success(self, mock_exists, mock_connect):
+        def side_effect(path):
+            if "kiosk.db" in path:
+                return True
+            return False
+        mock_exists.side_effect = side_effect
+
+        mock_conn = MagicMock()
+        mock_connect.return_value = mock_conn
+
+        menu_df = pd.DataFrame([
+            {"name": "SQLite Burger", "category": "Burgers", "price": 50000.0, "image": "img.png"}
+        ])
+        promo_df = pd.DataFrame([
+            {"promo_id": "P1", "name": "SQLite Promo", "discount_pct": 10.0, "start_date": "2026-07-01", "end_date": "2026-07-31"}
+        ])
+
+        def read_sql_side_effect(query, conn):
+            if "menu" in query:
+                return menu_df
+            elif "promotions" in query:
+                return promo_df
+            return pd.DataFrame()
+
+        mock_cursor = MagicMock()
+        mock_conn.cursor.return_value = mock_cursor
+        mock_cursor.fetchall.return_value = [
+            (json.dumps(["SQLite Burger"]), json.dumps(["Pepsi"]), 0.1, 0.8, 2.0)
+        ]
+
+        with patch('pandas.read_sql_query', side_effect=read_sql_side_effect):
+            with TestClient(app):
+                import main
+                self.assertEqual(len(main.MENU_ITEMS_DF), 1)
+                self.assertEqual(main.MENU_ITEMS_DF.iloc[0]["name"], "SQLite Burger")
+                self.assertEqual(main.MENU_PRICE_LOOKUP["SQLite Burger"], 50000.0)
+                self.assertEqual(len(main.PROMOTIONS_LIST), 1)
+                self.assertEqual(main.PROMOTIONS_LIST[0]["promo_id"], "P1")
+                self.assertEqual(len(main.AFFINITY_RULES), 1)
+                self.assertEqual(main.AFFINITY_RULES[0]["antecedents"], ["SQLite Burger"])
+                self.assertEqual(main.AFFINITY_RULES[0]["consequents"], ["Pepsi"])
+
+    @patch('sqlite3.connect')
+    @patch('os.path.exists')
+    def test_lifespan_sqlite_loading_fallback(self, mock_exists, mock_connect):
+        def side_effect(path):
+            if "kiosk.db" in path:
+                return True
+            if "menu.csv" in path or "promotions.csv" in path or "affinity_rules.json" in path:
+                return True
+            return False
+        mock_exists.side_effect = side_effect
+
+        mock_connect.side_effect = Exception("Connection failed")
+
+        fallback_menu = pd.DataFrame([
+            {"name": "CSV Burger", "category": "Burgers", "price": 45000.0}
+        ])
+        fallback_promo = pd.DataFrame([
+            {"promo_id": "P_CSV", "name": "CSV Promo", "discount_pct": 5.0, "start_date": "2026-07-01", "end_date": "2026-07-31"}
+        ])
+        fallback_rules = [
+            {"antecedents": ["CSV Burger"], "consequents": ["Pepsi"], "support": 0.05, "confidence": 0.6, "lift": 1.2}
+        ]
+
+        def read_csv_side_effect(path):
+            if "menu.csv" in path:
+                return fallback_menu
+            elif "promotions.csv" in path:
+                return fallback_promo
+            return pd.DataFrame()
+
+        with patch('pandas.read_csv', side_effect=read_csv_side_effect), \
+             patch('builtins.open', mock_open(read_data=json.dumps(fallback_rules))):
+            with TestClient(app):
+                import main
+                self.assertEqual(len(main.MENU_ITEMS_DF), 1)
+                self.assertEqual(main.MENU_ITEMS_DF.iloc[0]["name"], "CSV Burger")
+                self.assertEqual(main.MENU_PRICE_LOOKUP["CSV Burger"], 45000.0)
+                self.assertEqual(len(main.PROMOTIONS_LIST), 1)
+                self.assertEqual(main.PROMOTIONS_LIST[0]["promo_id"], "P_CSV")
+                self.assertEqual(len(main.AFFINITY_RULES), 1)
+                self.assertEqual(main.AFFINITY_RULES[0]["antecedents"], ["CSV Burger"])
 
 if __name__ == "__main__":
     unittest.main()
