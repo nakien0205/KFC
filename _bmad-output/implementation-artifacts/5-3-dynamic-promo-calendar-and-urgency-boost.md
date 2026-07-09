@@ -80,7 +80,7 @@ so that recommendations can use realistic promotion psychology without making un
 - Do not add customer identity or loyalty-history claims. The hackathon spec does not provide customer identity data, so this story implements store/menu-level adaptive promotion context only.
 - Do not change `/api/recommend` response shape unless tests, frontend, and `AGENTS.md` are updated. Prefer embedding sale framing in copy and using sale price in the existing `price` field for promoted recommendations.
 - Preserve one-external-call behavior: only the top recommendation can call the LLM; all other cards use local fallback copy.
-- Preserve Vietnamese customer-facing copy and dot-separated VND formatting through `format_price_vnd`.
+- Preserve English customer-facing copy and dot-separated VND formatting through `format_price_vnd`.
 - Backtest claims must stay aligned with rerun output and must remain framed as synthetic benchmark evidence.
 
 ### Current Files To Extend
@@ -117,7 +117,7 @@ GPT-5 Codex
 - Implemented a deterministic dynamic promo calendar with Gaussian-style day strength, weighted product selection, 5/10/15/20 percent discount tiers, amount-off framing, sale price calculation, and end-of-day urgency scoring.
 - Preserved legacy broad promotion matching while adding targeted promotion support through optional `target_item`, `target_category`, `discount_type`, `amount_off_vnd`, `sale_price`, `display_text`, and `is_dynamic` fields.
 - Updated recommendation scoring, copy generation, API response pricing, and backtest revenue math so active targeted promotions use sale context without adding a new API response shape.
-- Regenerated demo data and reran the benchmark. Current synthetic benchmark result: Hybrid Recommender AOV `87.822 VND`, baseline AOV `78.294 VND`, uplift `+9.527 VND` / `+12.17%`; conservative full-order top-1 uplift `+1.82%`.
+- Regenerated demo data and reran the benchmark after making order generation deterministic. Current synthetic benchmark result: Hybrid Recommender AOV `91.570 VND`, baseline AOV `83.136 VND`, uplift `+8.433 VND` / `+10.14%`; conservative full-order top-1 uplift `+1.82%`.
 - Review fix: blank/NaN `target_item` values no longer block category-targeted promotion matching.
 - Review fix: direct OpenRouter no-key fallback now preserves promotion context so sale copy is still shown.
 - Verification completed: `python generate_data.py`, `python affinity_engine.py`, `python init_db.py`, `python backtest.py`, and `python -m unittest discover -s tests -p "test_*.py"` all passed. The final full unit run passed `65` tests.

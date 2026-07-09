@@ -152,7 +152,7 @@ class TestRecommender(unittest.TestCase):
         local_promotions = [
             {
                 "promo_id": "DYN_20260706_BURGERS",
-                "name": "Giam 10.000d Burger Zinger hom nay",
+                "name": "Save 10.000 VND on Burger Zinger today",
                 "discount_pct": 20,
                 "start_date": "2026-07-06",
                 "end_date": "2026-07-06",
@@ -161,7 +161,7 @@ class TestRecommender(unittest.TestCase):
                 "discount_type": "amount",
                 "amount_off_vnd": 10000,
                 "sale_price": 46000,
-                "display_text": "Giảm 10.000đ",
+                "display_text": "Save 10.000 VND",
                 "is_dynamic": 1,
             }
         ]
@@ -178,7 +178,7 @@ class TestRecommender(unittest.TestCase):
         fries_rec = next(r for r in evening_recs if r["name"] == "French Fries")
 
         self.assertEqual(evening_burger["sale_price"], 46000)
-        self.assertEqual(evening_burger["discount_label"], "Giảm 10.000đ")
+        self.assertEqual(evening_burger["discount_label"], "Save 10.000 VND")
         self.assertGreater(evening_burger["urgency"], midday_burger["urgency"])
         self.assertGreater(evening_burger["score"], fries_rec["score"])
 
@@ -187,14 +187,14 @@ class TestRecommender(unittest.TestCase):
             "Burger Zinger",
             46000,
             promotion_context={
-                "discount_label": "Giảm 10.000đ",
+                "discount_label": "Save 10.000 VND",
                 "urgency": 0.75,
             },
         )
 
-        self.assertIn("Ưu đãi sắp kết thúc", res["copy"])
-        self.assertIn("Giảm 10.000đ", res["copy"])
-        self.assertIn("46.000đ", res["copy"])
+        self.assertIn("Sale ending soon", res["copy"])
+        self.assertIn("Save 10.000 VND", res["copy"])
+        self.assertIn("46.000 VND", res["copy"])
 
     def test_deduplication_highest_score(self):
         # If multiple rules point to the same consequents:
@@ -314,8 +314,8 @@ class TestRecommender(unittest.TestCase):
 
     def test_local_fallback_generator(self):
         res = generate_local_fallback("French Fries", 20000.0)
-        self.assertEqual(res["copy"], "Hoàn thành bữa ăn! Thêm French Fries chỉ với 20.000đ")
-        self.assertEqual(res["rationale"], "Thường được mua kèm với các sản phẩm trong giỏ hàng.")
+        self.assertEqual(res["copy"], "Complete your meal: add French Fries for only 20.000 VND.")
+        self.assertEqual(res["rationale"], "Often purchased with items in your cart.")
 
     @patch('requests.post')
     def test_gemini_success_path(self, mock_post):
@@ -329,7 +329,7 @@ class TestRecommender(unittest.TestCase):
                     "content": {
                         "parts": [
                             {
-                                "text": '{"copy": "Ăn kèm Khoai tây chiên cho trọn vị!", "rationale": "68% khách hàng mua kèm khoai tây chiên"}'
+                                "text": '{"copy": "Add French Fries to round out your meal.", "rationale": "68% of customers pair this with fries."}'
                             }
                         ]
                     }
@@ -339,9 +339,35 @@ class TestRecommender(unittest.TestCase):
         mock_post.return_value = mock_response
         
         res = generate_recommendation_copy("French Fries", 20000.0, ["Burger Zinger"], api_key="fake-key")
-        self.assertEqual(res["copy"], "Ăn kèm Khoai tây chiên cho trọn vị!")
-        self.assertEqual(res["rationale"], "68% khách hàng mua kèm khoai tây chiên")
+        self.assertEqual(res["copy"], "Add French Fries to round out your meal.")
+        self.assertEqual(res["rationale"], "68% of customers pair this with fries.")
         mock_post.assert_called_once()
+
+    @patch('requests.post')
+    def test_gemini_wrong_language_falls_back_to_english(self, mock_post):
+        from recommender import generate_recommendation_copy
+
+        mock_response = MagicMock()
+        mock_response.status_code = 200
+        mock_response.json.return_value = {
+            "candidates": [
+                {
+                    "content": {
+                        "parts": [
+                            {
+                                "text": '{"copy": "\\u0102n k\\u00e8m khoai t\\u00e2y chi\\u00ean", "rationale": "Kh\\u00e1ch th\\u01b0\\u1eddng mua k\\u00e8m"}'
+                            }
+                        ]
+                    }
+                }
+            ]
+        }
+        mock_post.return_value = mock_response
+
+        res = generate_recommendation_copy("French Fries", 20000.0, ["Burger Zinger"], api_key="fake-key")
+
+        self.assertEqual(res["copy"], "Complete your meal: add French Fries for only 20.000 VND.")
+        self.assertEqual(res["rationale"], "Often purchased with items in your cart.")
         
     @patch('requests.post')
     def test_gemini_timeout_fallback(self, mock_post):
@@ -351,8 +377,8 @@ class TestRecommender(unittest.TestCase):
         mock_post.side_effect = requests.exceptions.Timeout("Connection timed out")
         
         res = generate_recommendation_copy("French Fries", 20000.0, ["Burger Zinger"], api_key="fake-key")
-        self.assertEqual(res["copy"], "Hoàn thành bữa ăn! Thêm French Fries chỉ với 20.000đ")
-        self.assertEqual(res["rationale"], "Thường được mua kèm với các sản phẩm trong giỏ hàng.")
+        self.assertEqual(res["copy"], "Complete your meal: add French Fries for only 20.000 VND.")
+        self.assertEqual(res["rationale"], "Often purchased with items in your cart.")
         
     @patch('requests.post')
     def test_gemini_error_status_fallback(self, mock_post):
@@ -363,7 +389,7 @@ class TestRecommender(unittest.TestCase):
         mock_post.return_value = mock_response
         
         res = generate_recommendation_copy("French Fries", 20000.0, ["Burger Zinger"], api_key="fake-key")
-        self.assertEqual(res["copy"], "Hoàn thành bữa ăn! Thêm French Fries chỉ với 20.000đ")
+        self.assertEqual(res["copy"], "Complete your meal: add French Fries for only 20.000 VND.")
         
     @patch('requests.post')
     def test_gemini_missing_key_fallback(self, mock_post):
@@ -371,7 +397,7 @@ class TestRecommender(unittest.TestCase):
         # We patch os.environ to make sure GEMINI_API_KEY and USE_OLLAMA are missing/false
         with patch.dict('os.environ', {}, clear=True):
             res = generate_recommendation_copy("French Fries", 20000.0, ["Burger Zinger"], api_key=None)
-            self.assertEqual(res["copy"], "Hoàn thành bữa ăn! Thêm French Fries chỉ với 20.000đ")
+            self.assertEqual(res["copy"], "Complete your meal: add French Fries for only 20.000 VND.")
 
     @patch('requests.post')
     def test_gemini_non_string_cart_items(self, mock_post):
@@ -384,7 +410,7 @@ class TestRecommender(unittest.TestCase):
         with patch.dict('os.environ', {"USE_OLLAMA": "false"}):
             res = generate_recommendation_copy("French Fries", 20000.0, ["Burger Zinger", 123, None], api_key="fake-key")
             # Should gracefully return fallback copy
-            self.assertEqual(res["copy"], "Hoàn thành bữa ăn! Thêm French Fries chỉ với 20.000đ")
+            self.assertEqual(res["copy"], "Complete your meal: add French Fries for only 20.000 VND.")
 
     @patch('requests.post')
     def test_ollama_success_path(self, mock_post):
@@ -396,15 +422,15 @@ class TestRecommender(unittest.TestCase):
         mock_response.json.return_value = {
             "message": {
                 "role": "assistant",
-                "content": '{"copy": "Ăn kèm Khoai tây chiên cho trọn vị!", "rationale": "68% khách hàng mua kèm khoai tây chiên"}'
+                "content": '{"copy": "Add French Fries to round out your meal.", "rationale": "68% of customers pair this with fries."}'
             }
         }
         mock_post.return_value = mock_response
         
         with patch.dict('os.environ', {"USE_OLLAMA": "true"}):
             res = generate_recommendation_copy("French Fries", 20000.0, ["Burger Zinger"])
-            self.assertEqual(res["copy"], "Ăn kèm Khoai tây chiên cho trọn vị!")
-            self.assertEqual(res["rationale"], "68% khách hàng mua kèm khoai tây chiên")
+            self.assertEqual(res["copy"], "Add French Fries to round out your meal.")
+            self.assertEqual(res["rationale"], "68% of customers pair this with fries.")
 
     @patch('requests.post')
     def test_ollama_timeout_fallback(self, mock_post):
@@ -416,7 +442,7 @@ class TestRecommender(unittest.TestCase):
         
         with patch.dict('os.environ', {"USE_OLLAMA": "true"}):
             res = generate_recommendation_copy("French Fries", 20000.0, ["Burger Zinger"])
-            self.assertEqual(res["copy"], "Hoàn thành bữa ăn! Thêm French Fries chỉ với 20.000đ")
+            self.assertEqual(res["copy"], "Complete your meal: add French Fries for only 20.000 VND.")
 
     @patch('requests.post')
     def test_ollama_connection_failure_fallback(self, mock_post):
@@ -428,7 +454,7 @@ class TestRecommender(unittest.TestCase):
         
         with patch.dict('os.environ', {"USE_OLLAMA": "true"}):
             res = generate_recommendation_copy("French Fries", 20000.0, ["Burger Zinger"])
-            self.assertEqual(res["copy"], "Hoàn thành bữa ăn! Thêm French Fries chỉ với 20.000đ")
+            self.assertEqual(res["copy"], "Complete your meal: add French Fries for only 20.000 VND.")
 
     @patch('requests.post')
     def test_ollama_routing_no_gemini_key(self, mock_post):
@@ -440,7 +466,7 @@ class TestRecommender(unittest.TestCase):
         mock_response.json.return_value = {
             "message": {
                 "role": "assistant",
-                "content": '{"copy": "Ăn kèm Khoai tây chiên cho trọn vị!", "rationale": "68% khách hàng mua kèm khoai tây chiên"}'
+                "content": '{"copy": "Add French Fries to round out your meal.", "rationale": "68% of customers pair this with fries."}'
             }
         }
         mock_post.return_value = mock_response
@@ -448,7 +474,7 @@ class TestRecommender(unittest.TestCase):
         # Clear Gemini key from environment using patch.dict
         with patch.dict('os.environ', {}, clear=True):
             res = generate_recommendation_copy("French Fries", 20000.0, ["Burger Zinger"])
-            self.assertEqual(res["copy"], "Ăn kèm Khoai tây chiên cho trọn vị!")
+            self.assertEqual(res["copy"], "Add French Fries to round out your meal.")
             # Ensure the call hit the Ollama /api/chat URL and not Gemini
             call_url = mock_post.call_args[0][0]
             self.assertIn("/api/chat", call_url)
@@ -463,7 +489,7 @@ class TestRecommender(unittest.TestCase):
             "choices": [
                 {
                     "message": {
-                        "content": '{"copy": "Ăn kèm Khoai tây chiên giòn rụm!", "rationale": "Được gợi ý vì bạn thích Burger"}'
+                        "content": '{"copy": "Add crispy French Fries to your burger.", "rationale": "Suggested because it fits your burger order."}'
                     }
                 }
             ]
@@ -472,8 +498,8 @@ class TestRecommender(unittest.TestCase):
         
         with patch.dict('os.environ', {"OPENROUTER_API_KEY": "sk-or-v1-testkey"}):
             res = generate_recommendation_copy("French Fries", 20000.0, ["Burger Zinger"])
-            self.assertEqual(res["copy"], "Ăn kèm Khoai tây chiên giòn rụm!")
-            self.assertEqual(res["rationale"], "Được gợi ý vì bạn thích Burger")
+            self.assertEqual(res["copy"], "Add crispy French Fries to your burger.")
+            self.assertEqual(res["rationale"], "Suggested because it fits your burger order.")
             
             # Verify it hits OpenRouter endpoint
             call_url = mock_post.call_args[0][0]
@@ -492,8 +518,8 @@ class TestRecommender(unittest.TestCase):
         
         with patch.dict('os.environ', {"OPENROUTER_API_KEY": "sk-or-v1-testkey"}):
             res = generate_recommendation_copy("French Fries", 20000.0, ["Burger Zinger"])
-            self.assertEqual(res["copy"], "Hoàn thành bữa ăn! Thêm French Fries chỉ với 20.000đ")
-            self.assertEqual(res["rationale"], "Thường được mua kèm với các sản phẩm trong giỏ hàng.")
+            self.assertEqual(res["copy"], "Complete your meal: add French Fries for only 20.000 VND.")
+            self.assertEqual(res["rationale"], "Often purchased with items in your cart.")
 
     @patch('requests.post')
     def test_openrouter_error_status_fallback(self, mock_post):
@@ -505,7 +531,7 @@ class TestRecommender(unittest.TestCase):
         
         with patch.dict('os.environ', {"OPENROUTER_API_KEY": "sk-or-v1-testkey"}):
             res = generate_recommendation_copy("French Fries", 20000.0, ["Burger Zinger"])
-            self.assertEqual(res["copy"], "Hoàn thành bữa ăn! Thêm French Fries chỉ với 20.000đ")
+            self.assertEqual(res["copy"], "Complete your meal: add French Fries for only 20.000 VND.")
 
     def test_openrouter_no_key_preserves_sale_fallback_context(self):
         from recommender import generate_openrouter_recommendation_copy
@@ -516,13 +542,13 @@ class TestRecommender(unittest.TestCase):
                 46000,
                 ["Pepsi"],
                 promotion_context={
-                    "discount_label": "Giảm 10.000đ",
+                    "discount_label": "Save 10.000 VND",
                     "urgency": 0.8,
                 },
             )
 
-        self.assertIn("Ưu đãi sắp kết thúc", res["copy"])
-        self.assertIn("Giảm 10.000đ", res["copy"])
+        self.assertIn("Sale ending soon", res["copy"])
+        self.assertIn("Save 10.000 VND", res["copy"])
 
 if __name__ == "__main__":
     unittest.main()

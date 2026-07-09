@@ -3,6 +3,7 @@ import os
 import json
 import requests
 import logging
+import unicodedata
 from bandit import load_bandit_weights, get_bandit_boosts
 from promo_engine import (
     URGENCY_BOOST_CAP,
@@ -12,6 +13,10 @@ from promo_engine import (
 )
 
 logger = logging.getLogger("recommender")
+
+VIETNAMESE_DISCOUNT_PREFIX = "gi\u1ea3m "
+VIETNAMESE_DONG_SYMBOL = "\u0111"
+VIETNAMESE_DONG_SYMBOL_UPPER = "\u0110"
 
 DRINK_KEYWORDS = ("pepsi", "7up", "lipton")
 DESSERT_KEYWORDS = ("eggtart", "tart", "dessert")
@@ -80,6 +85,45 @@ def _safe_float(value, default=0.0):
         return float(value)
     except (TypeError, ValueError):
         return default
+
+def _contains_vietnamese_text(*values) -> bool:
+    text = " ".join(str(value or "") for value in values)
+    if VIETNAMESE_DONG_SYMBOL in text or VIETNAMESE_DONG_SYMBOL_UPPER in text:
+        return True
+    normalized = unicodedata.normalize("NFD", text)
+    return any("\u0300" <= char <= "\u036f" for char in normalized)
+
+def _copy_response_is_english(parsed: dict) -> bool:
+    copy_text = parsed.get("copy")
+    rationale_text = parsed.get("rationale")
+    return (
+        isinstance(copy_text, str)
+        and isinstance(rationale_text, str)
+        and not _contains_vietnamese_text(copy_text, rationale_text)
+        and VIETNAMESE_DONG_SYMBOL not in copy_text
+        and VIETNAMESE_DONG_SYMBOL not in rationale_text
+    )
+
+def _format_price_vnd_label(price: float) -> str:
+    return f"{format_price_vnd(price)} VND"
+
+def _normalize_discount_label(label) -> str:
+    text = str(label or "").strip()
+    if not text:
+        return ""
+
+    lower_text = text.lower()
+    if lower_text.startswith(VIETNAMESE_DISCOUNT_PREFIX):
+        value = text[len(VIETNAMESE_DISCOUNT_PREFIX):].strip()
+        if value.endswith("%"):
+            return f"{value} off"
+        value = value.replace(VIETNAMESE_DONG_SYMBOL, "").replace(VIETNAMESE_DONG_SYMBOL_UPPER, "").strip()
+        return f"Save {value} VND"
+
+    if text.endswith(VIETNAMESE_DONG_SYMBOL) or text.endswith(VIETNAMESE_DONG_SYMBOL_UPPER):
+        return text[:-1].strip() + " VND"
+
+    return text
 
 def _build_menu_records(menu_items):
     records = []
@@ -210,7 +254,7 @@ def _promotion_context_for_item(item_name, item_category, item_price, active_pro
         has_precise_target = bool(_clean_optional(promo.get("target_item")) or _clean_optional(promo.get("target_category")))
 
         if display_text:
-            context["discount_label"] = str(display_text)
+            context["discount_label"] = _normalize_discount_label(display_text)
         if sale_price is not None:
             context["sale_price"] = max(0.0, _safe_float(sale_price, item_price))
         if amount_off is not None:
@@ -416,14 +460,15 @@ def format_price_vnd(price: float) -> str:
 def generate_local_fallback(item_name: str, item_price: float, promotion_context: dict = None) -> dict:
     if isinstance(promotion_context, dict) and promotion_context.get("discount_label"):
         urgency = _safe_float(promotion_context.get("urgency"), 0.0)
-        prefix = "Ưu đãi sắp kết thúc" if urgency >= 0.5 else "Đang có ưu đãi"
+        prefix = "Sale ending soon" if urgency >= 0.5 else "Active deal"
+        discount_label = _normalize_discount_label(promotion_context["discount_label"])
         return {
-            "copy": f"{prefix}: {promotion_context['discount_label']} cho {item_name}, chỉ còn {format_price_vnd(item_price)}đ",
-            "rationale": "Được ưu tiên vì sản phẩm đang trong khuyến mãi phù hợp với giỏ hàng."
+            "copy": f"{prefix}: {discount_label} on {item_name}, now only {_format_price_vnd_label(item_price)}.",
+            "rationale": "Prioritized because this item has an active promotion that fits the cart."
         }
     return {
-        "copy": f"Hoàn thành bữa ăn! Thêm {item_name} chỉ với {format_price_vnd(item_price)}đ",
-        "rationale": "Thường được mua kèm với các sản phẩm trong giỏ hàng."
+        "copy": f"Complete your meal: add {item_name} for only {_format_price_vnd_label(item_price)}.",
+        "rationale": "Often purchased with items in your cart."
     }
 
 def _promotion_prompt_context(promotion_context):
@@ -431,7 +476,7 @@ def _promotion_prompt_context(promotion_context):
         return ""
     urgency_note = "Sale is ending soon." if _safe_float(promotion_context.get("urgency"), 0.0) >= 0.5 else "Sale is active."
     return (
-        f"Promotion: {promotion_context.get('discount_label')}.\n"
+        f"Promotion: {_normalize_discount_label(promotion_context.get('discount_label'))}.\n"
         f"Promotion urgency: {urgency_note}\n"
     )
 
@@ -447,20 +492,21 @@ def generate_ollama_recommendation_copy(item_name: str, item_price: float, cart_
     headers = {"Content-Type": "application/json"}
     
     try:
-        cart_str = ', '.join(map(str, cart_items)) if cart_items else 'Trống'
+        cart_str = ', '.join(map(str, cart_items)) if cart_items else 'Empty'
         prompt = (
             "You are a sales-driven copywriter for a premium KFC kiosk in Vietnam.\n"
-            "Generate a localized, highly engaging promotional copy (in Vietnamese) and a brief statistical rationale (in Vietnamese) "
+            "Generate localized, highly engaging promotional copy in English and a brief statistical rationale in English "
             "for recommending a candidate item based on the customer's current cart items.\n\n"
             f"Candidate Item: {item_name}\n"
-            f"Price: {format_price_vnd(item_price)}đ\n"
+            f"Price: {_format_price_vnd_label(item_price)}\n"
             f"Current Cart: {cart_str}\n\n"
             f"{_promotion_prompt_context(promotion_context)}"
             "Rules:\n"
             "1. Promotional copy must be appetizing, concise, and encourage adding the item (maximum 2 sentences).\n"
             "2. Rationale must provide a simple reason why the item was suggested. Keep it short and natural.\n"
-            "3. Output MUST be in Vietnamese.\n"
-            "4. Follow the JSON schema exactly: {\"copy\": \"...\", \"rationale\": \"...\"}"
+            "3. Output MUST be in English. Do not use Vietnamese words, Vietnamese diacritics, or the Vietnamese dong currency symbol.\n"
+            "4. Use \"VND\" for prices.\n"
+            "5. Follow the JSON schema exactly: {\"copy\": \"...\", \"rationale\": \"...\"}"
         )
         
         payload = {
@@ -480,7 +526,7 @@ def generate_ollama_recommendation_copy(item_name: str, item_price: float, cart_
             data = response.json()
             content = data.get("message", {}).get("content", "")
             parsed = json.loads(content)
-            if isinstance(parsed.get("copy"), str) and isinstance(parsed.get("rationale"), str):
+            if _copy_response_is_english(parsed):
                 return {
                     "copy": parsed["copy"],
                     "rationale": parsed["rationale"]
@@ -515,20 +561,21 @@ def generate_openrouter_recommendation_copy(item_name: str, item_price: float, c
     model = os.environ.get("OPENROUTER_MODEL", "google/gemini-2.5-flash")
     
     try:
-        cart_str = ', '.join(map(str, cart_items)) if cart_items else 'Trống'
+        cart_str = ', '.join(map(str, cart_items)) if cart_items else 'Empty'
         prompt = (
             "You are a sales-driven copywriter for a premium KFC kiosk in Vietnam.\n"
-            "Generate a localized, highly engaging promotional copy (in Vietnamese) and a brief statistical rationale (in Vietnamese) "
+            "Generate localized, highly engaging promotional copy in English and a brief statistical rationale in English "
             "for recommending a candidate item based on the customer's current cart items.\n\n"
             f"Candidate Item: {item_name}\n"
-            f"Price: {format_price_vnd(item_price)}đ\n"
+            f"Price: {_format_price_vnd_label(item_price)}\n"
             f"Current Cart: {cart_str}\n\n"
             f"{_promotion_prompt_context(promotion_context)}"
             "Rules:\n"
             "1. Promotional copy must be appetizing, concise, and encourage adding the item (maximum 2 sentences).\n"
             "2. Rationale must provide a simple reason why the item was suggested. Keep it short and natural.\n"
-            "3. Output MUST be in Vietnamese.\n"
-            "4. Follow the JSON schema exactly: {\"copy\": \"...\", \"rationale\": \"...\"}"
+            "3. Output MUST be in English. Do not use Vietnamese words, Vietnamese diacritics, or the Vietnamese dong currency symbol.\n"
+            "4. Use \"VND\" for prices.\n"
+            "5. Follow the JSON schema exactly: {\"copy\": \"...\", \"rationale\": \"...\"}"
         )
         
         payload = {
@@ -549,7 +596,7 @@ def generate_openrouter_recommendation_copy(item_name: str, item_price: float, c
             data = response.json()
             content = data['choices'][0]['message']['content']
             parsed = json.loads(content)
-            if "copy" in parsed and "rationale" in parsed:
+            if _copy_response_is_english(parsed):
                 return {
                     "copy": parsed["copy"],
                     "rationale": parsed["rationale"]
@@ -606,20 +653,21 @@ def generate_recommendation_copy(item_name: str, item_price: float, cart_items: 
     headers = {"Content-Type": "application/json"}
     
     try:
-        cart_str = ', '.join(map(str, cart_items)) if cart_items else 'Trống'
+        cart_str = ', '.join(map(str, cart_items)) if cart_items else 'Empty'
         prompt = (
             "You are a sales-driven copywriter for a premium KFC kiosk in Vietnam.\n"
-            "Generate a localized, highly engaging promotional copy (in Vietnamese) and a brief statistical rationale (in Vietnamese) "
+            "Generate localized, highly engaging promotional copy in English and a brief statistical rationale in English "
             "for recommending a candidate item based on the customer's current cart items.\n\n"
             f"Candidate Item: {item_name}\n"
-            f"Price: {format_price_vnd(item_price)}đ\n"
+            f"Price: {_format_price_vnd_label(item_price)}\n"
             f"Current Cart: {cart_str}\n\n"
             f"{_promotion_prompt_context(promotion_context)}"
             "Rules:\n"
             "1. Promotional copy must be appetizing, concise, and encourage adding the item (maximum 2 sentences).\n"
             "2. Rationale must provide a simple reason why the item was suggested. Keep it short and natural.\n"
-            "3. Output MUST be in Vietnamese.\n"
-            "4. Follow the JSON schema exactly."
+            "3. Output MUST be in English. Do not use Vietnamese words, Vietnamese diacritics, or the Vietnamese dong currency symbol.\n"
+            "4. Use \"VND\" for prices.\n"
+            "5. Follow the JSON schema exactly."
         )
         
         payload = {
@@ -650,7 +698,7 @@ def generate_recommendation_copy(item_name: str, item_price: float, cart_items: 
             data = response.json()
             text_content = data['candidates'][0]['content']['parts'][0]['text']
             parsed = json.loads(text_content)
-            if "copy" in parsed and "rationale" in parsed:
+            if _copy_response_is_english(parsed):
                 return {
                     "copy": parsed["copy"],
                     "rationale": parsed["rationale"]

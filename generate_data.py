@@ -44,8 +44,8 @@ def choose(items):
     return random.choice(items) if items else None
 
 def add_if_present(order_items, item):
-    if item:
-        order_items.add(item)
+    if item and item not in order_items:
+        order_items.append(item)
 
 def add_optional(order_items, items, probability):
     if random.random() < probability:
@@ -149,7 +149,7 @@ def generate_promotions(df_menu, df_orders):
                 "discount_type": "percent",
                 "amount_off_vnd": 6000,
                 "sale_price": 50000,
-                "display_text": "Giảm 10%",
+                "display_text": "10% off",
                 "is_dynamic": 1,
             }
         ]
@@ -224,7 +224,7 @@ def generate_orders(df_menu):
     for scenario_name, scenario_count in scenario_counts:
         for _ in range(scenario_count):
             order_id = f"TXN_{txn_idx:05d}"
-            order_items = set()
+            order_items = []
 
             if scenario_name == "burger_meal":
                 add_if_present(order_items, choose(burgers))
@@ -272,7 +272,7 @@ def generate_orders(df_menu):
                 all_items = df_menu['name'].tolist()
                 sampled = random.sample(all_items, min(num_items, len(all_items)))
                 for item in sampled:
-                    order_items.add(item)
+                    add_if_present(order_items, item)
 
             if not order_items:
                 add_if_present(order_items, choose(mains or df_menu['name'].tolist()))

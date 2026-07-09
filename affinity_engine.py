@@ -141,8 +141,8 @@ def mine_affinity():
         rules = rules.sort_values(by=["confidence", "support", "lift"], ascending=False)
         for idx, row in rules.iterrows():
             rules_list.append({
-                "antecedents": list(row["antecedents"]),
-                "consequents": list(row["consequents"]),
+                "antecedents": sorted(row["antecedents"]),
+                "consequents": sorted(row["consequents"]),
                 "support": float(row["support"]),
                 "confidence": float(row["confidence"]),
                 "lift": float(row["lift"]),

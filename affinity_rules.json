@@ -28,8 +28,8 @@
     },
     {
         "antecedents": [
-            "Garlic Butter Shake Fries",
-            "Burger Shrimp"
+            "Burger Shrimp",
+            "Garlic Butter Shake Fries"
         ],
         "consequents": [
             "Pepsi No Sugar"
@@ -42,8 +42,8 @@
     },
     {
         "antecedents": [
-            "Cheese Shake Fries",
-            "Burger Yo (Chicken)"
+            "Burger Yo (Chicken)",
+            "Cheese Shake Fries"
         ],
         "consequents": [
             "Pepsi No Sugar"
@@ -56,8 +56,8 @@
     },
     {
         "antecedents": [
-            "Pepsi",
-            "Burger Zinger"
+            "Burger Zinger",
+            "Pepsi"
         ],
         "consequents": [
             "Garlic Butter Shake Fries"
@@ -109,8 +109,8 @@
     },
     {
         "antecedents": [
-            "Roasted Fillet Chicken Burger",
-            "Pepsi Zero"
+            "Pepsi Zero",
+            "Roasted Fillet Chicken Burger"
         ],
         "consequents": [
             "Cheese Shake Fries"
@@ -137,8 +137,8 @@
     },
     {
         "antecedents": [
-            "Garlic Butter Shake Fries",
-            "Burger Zinger"
+            "Burger Zinger",
+            "Garlic Butter Shake Fries"
         ],
         "consequents": [
             "Pepsi"
@@ -1349,8 +1349,8 @@
     },
     {
         "antecedents": [
-            "Pepsi",
-            "Garlic Butter Shake Fries"
+            "Garlic Butter Shake Fries",
+            "Pepsi"
         ],
         "consequents": [
             "Burger Zinger"

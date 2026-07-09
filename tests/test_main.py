@@ -29,8 +29,8 @@ class TestMainAPI(unittest.TestCase):
     @patch('main.generate_recommendation_copy')
     def test_recommend_endpoint_success(self, mock_generate_copy):
         mock_generate_copy.return_value = {
-            "copy": "Gợi ý kiểm thử",
-            "rationale": "Không gọi mạng trong test."
+            "copy": "Test recommendation",
+            "rationale": "No network calls during test."
         }
         payload = {
             "cart_items": ["Burger Zinger"],
@@ -58,13 +58,13 @@ class TestMainAPI(unittest.TestCase):
                 "name": "Burger Zinger",
                 "score": 0.8,
                 "sale_price": 46000.0,
-                "discount_label": "Giảm 10.000đ",
+                "discount_label": "Save 10.000 VND",
                 "urgency": 0.8,
             }
         ]
         mock_generate_copy.return_value = {
-            "copy": "Ưu đãi kiểm thử",
-            "rationale": "Khuyến mãi phù hợp."
+            "copy": "Test sale offer",
+            "rationale": "Promotion matches the cart."
         }
 
         response = self.client.post(
@@ -78,10 +78,10 @@ class TestMainAPI(unittest.TestCase):
         self.assertEqual(response.status_code, 200)
         data = response.json()
         self.assertEqual(data[0]["price"], 46000.0)
-        self.assertEqual(data[0]["copy"], "Ưu đãi kiểm thử")
+        self.assertEqual(data[0]["copy"], "Test sale offer")
         call_kwargs = mock_generate_copy.call_args.kwargs
         self.assertEqual(call_kwargs["item_price"], 46000.0)
-        self.assertEqual(call_kwargs["promotion_context"]["discount_label"], "Giảm 10.000đ")
+        self.assertEqual(call_kwargs["promotion_context"]["discount_label"], "Save 10.000 VND")
 
     def test_recommend_endpoint_empty_cart(self):
         payload = {
@@ -114,7 +114,7 @@ class TestMainAPI(unittest.TestCase):
                     "content": {
                         "parts": [
                             {
-                                "text": '{"copy": "Ngon tuyệt! Ăn kèm Khoai tây chiên nhé!", "rationale": "Thường được mua kèm Burger Zinger"}'
+                                "text": '{"copy": "Great match! Add French Fries to round out your meal.", "rationale": "Often purchased with Burger Zinger."}'
                             }
                         ]
                     }
@@ -133,8 +133,8 @@ class TestMainAPI(unittest.TestCase):
             self.assertEqual(response.status_code, 200)
             data = response.json()
             self.assertTrue(len(data) > 0)
-            self.assertEqual(data[0]["copy"], "Ngon tuyệt! Ăn kèm Khoai tây chiên nhé!")
-            self.assertEqual(data[0]["rationale"], "Thường được mua kèm Burger Zinger")
+            self.assertEqual(data[0]["copy"], "Great match! Add French Fries to round out your meal.")
+            self.assertEqual(data[0]["rationale"], "Often purchased with Burger Zinger.")
 
     def test_serve_index_html(self):
         response = self.client.get("/")

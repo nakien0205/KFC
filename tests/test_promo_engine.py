@@ -31,7 +31,7 @@ class TestPromoEngine(unittest.TestCase):
         self.assertEqual(view["amount_off_vnd"], 50000)
         self.assertEqual(view["sale_price"], 199000)
         self.assertEqual(view["discount_type"], "amount")
-        self.assertEqual(view["display_text"], "Giảm 50.000đ")
+        self.assertEqual(view["display_text"], "Save 50.000 VND")
 
     def test_generated_discounts_use_allowed_tiers_and_max_20(self):
         menu = pd.DataFrame([

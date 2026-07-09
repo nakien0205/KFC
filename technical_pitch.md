@@ -2,11 +2,11 @@
 
 ## 30-Second Technical Summary
 
-This project is a hybrid recommendation engine for a KFC self-service kiosk. It combines offline association-rule mining, dynamic daily promotions, context-aware reranking, a lightweight Thompson Sampling bandit, and AI-generated Vietnamese recommendation copy with a local fallback.
+This project is a hybrid recommendation engine for a KFC self-service kiosk. It combines offline association-rule mining, dynamic daily promotions, context-aware reranking, a lightweight Thompson Sampling bandit, and AI-generated English recommendation copy with a local fallback.
 
 The goal is simple: when a customer adds food to the cart, the kiosk should recommend useful add-ons without suggesting items already in the cart, without freezing if an AI API is slow, and without needing a heavy production database for the demo.
 
-The current benchmark is a synthetic scenario benchmark, not real production sales proof. In a fixed-seed partial-cart replay over 4,194 eligible generated carts, the hybrid top-3 recommendation panel estimates a 12.17% Average Order Value uplift, about +9,527 VND per eligible transaction, compared with a static Pepsi baseline.
+The current benchmark is a synthetic scenario benchmark, not real production sales proof. In a fixed-seed partial-cart replay over 4,194 eligible generated carts, the hybrid top-3 recommendation panel estimates a 10.14% Average Order Value uplift, about +8,433 VND per eligible transaction, compared with a static Pepsi baseline.
 
 ## System Flow
 
@@ -28,7 +28,7 @@ The offline part generates or loads menu data, creates synthetic order baskets, 
 
 The promo engine creates deterministic daily sale rows instead of relying only on a static promo list. It uses a Gaussian-style day weighting where Monday and Sunday are stronger sale days, while mid-week is weaker. It also uses item popularity from generated orders, so promoted products are selected from products that actually appear in the synthetic basket history.
 
-Generated discount percentages are limited to 5%, 10%, 15%, or 20%, with 20% as the max. For higher-value products, the system can frame the same discount as an amount-off message, for example "Giảm 50.000đ", when that is clearer than a percentage.
+Generated discount percentages are limited to 5%, 10%, 15%, or 20%, with 20% as the max. For higher-value products, the system can frame the same discount as an amount-off message, for example "Save 50.000 VND", when that is clearer than a percentage.
 
 ## Recommendation Logic
 
@@ -67,7 +67,7 @@ This is intentionally lightweight. It fits the kiosk demo because it can learn f
 
 ## AI Copy and Fallback
 
-The recommendation is not only an item name. The system also returns Vietnamese copy and a short rationale.
+The recommendation is not only an item name. The system also returns English copy and a short rationale.
 
 The primary path calls Gemini 2.5 Flash for structured JSON copy. There is also local Ollama support. If the AI route fails, times out, or is unavailable, the system immediately falls back to local template copy.
 
@@ -102,8 +102,8 @@ The default benchmark is now a partial-cart replay. It anchors each eligible syn
 The current fixed-seed simulation reports:
 
 - 4,194 eligible partial-cart transactions
-- +12.17% simulated AOV uplift
-- about +8,941 VND per eligible transaction
+- +10.14% simulated AOV uplift
+- about +8,433 VND per eligible transaction
 - +1.82% on the conservative full-order top-1 check after discount-aware sale-price accounting
 
 I would be careful not to call this real revenue proof. It is evidence that the mechanics work in a controlled synthetic scenario. The next step would be real kiosk logs or an A/B test.

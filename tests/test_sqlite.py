@@ -32,7 +32,7 @@ class TestSQLiteInitialization(unittest.TestCase):
                 "discount_type": "amount",
                 "amount_off_vnd": 13000,
                 "sale_price": 72000,
-                "display_text": "Giảm 13.000đ",
+                "display_text": "Save 13.000 VND",
                 "is_dynamic": 1,
             }
         ])
@@ -94,7 +94,7 @@ class TestSQLiteInitialization(unittest.TestCase):
 
         cursor.execute("SELECT target_item, discount_type, amount_off_vnd, sale_price, display_text, is_dynamic FROM promotions WHERE promo_id='PROMO_001';")
         promo_row = cursor.fetchone()
-        self.assertEqual(promo_row, ("Burger Zinger", "amount", 13000.0, 72000.0, "Giảm 13.000đ", 1))
+        self.assertEqual(promo_row, ("Burger Zinger", "amount", 13000.0, 72000.0, "Save 13.000 VND", 1))
 
         cursor.execute("SELECT COUNT(*) FROM orders;")
         orders_count = cursor.fetchone()[0]

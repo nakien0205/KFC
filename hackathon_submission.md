@@ -2,7 +2,7 @@
 
 ## Elevator Pitch
 
-An intelligent, edge-compatible hybrid recommendation engine for self-service kiosks that pairs offline transaction mining with dynamic promotion context, context-aware Multi-Armed Bandits, and LLM copy personalization. In the current synthetic partial-cart panel benchmark, a fixed-seed replay over $4{,}194$ eligible generated transactions estimates a $12.17\%$ Average Order Value (AOV) uplift.
+An intelligent, edge-compatible hybrid recommendation engine for self-service kiosks that pairs offline transaction mining with dynamic promotion context, context-aware Multi-Armed Bandits, and LLM copy personalization. In the current synthetic partial-cart panel benchmark, a fixed-seed replay over $4{,}194$ eligible generated transactions estimates a $10.14\%$ Average Order Value (AOV) uplift.
 
 ---
 
@@ -69,7 +69,7 @@ Each accepted or rejected recommendation updates the relevant weight for future 
 
 #### 5. GenAI Copy & Fallback
 
-The top recommendation gets Vietnamese GenAI copy through `gemini-2.5-flash`. If the model is slow or unavailable, the app immediately falls back to local Vietnamese templates.
+The top recommendation gets English GenAI copy through `gemini-2.5-flash`. If the model is slow, unavailable, or returns the wrong language, the app immediately falls back to local English templates.
 
 #### 6. Kiosk UI & FastAPI Backend
 
@@ -88,7 +88,7 @@ The demo uses a plain HTML/CSS/JavaScript kiosk UI backed by FastAPI endpoints f
 
 ## Accomplishments that we're proud of
 
-- **Synthetic Scenario Benchmark**: A fixed-seed partial-cart top-3 panel replay over $4{,}194$ eligible synthetic transactions estimates a simulated **$12.17\%$ Average Order Value (AOV) uplift**, or **$+9{,}527\text{ VND}$ per eligible transaction**, compared to the static one-item Pepsi baseline. A stricter full-order top-1 conservative check remains positive at **$1.82\%$** after discount-aware revenue accounting. This is not real production sales proof.
+- **Synthetic Scenario Benchmark**: A fixed-seed partial-cart top-3 panel replay over $4{,}194$ eligible synthetic transactions estimates a simulated **$10.14\%$ Average Order Value (AOV) uplift**, or about **$+8{,}433\text{ VND}$ per eligible transaction**, compared to the static one-item Pepsi baseline. A stricter full-order top-1 conservative check remains positive at **$1.82\%$** after discount-aware revenue accounting. This is not real production sales proof.
 - **Robust Offline Capability**: Demonstrated 100% system availability by integrating local Ollama LLM support and rule-based fallbacks to handle internet outages.
 - **Decoupled Architecture**: Strictly adhered to the Pipes and Filters architecture, keeping data generation, model training, online recommendation logic, and visual presentation fully modular.
 

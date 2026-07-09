@@ -142,7 +142,7 @@ def format_price_vnd_text(price):
         value = int(round(float(price)))
     except (TypeError, ValueError):
         return str(price)
-    return f"{value:,}".replace(",", ".") + "đ"
+    return f"{value:,}".replace(",", ".") + " VND"
 
 
 def build_discount_view(price, discount_pct):
@@ -165,10 +165,10 @@ def build_discount_view(price, discount_pct):
 
     if amount_off >= 20000:
         discount_type = "amount"
-        display_text = f"Giảm {format_price_vnd_text(amount_off)}"
+        display_text = f"Save {format_price_vnd_text(amount_off)}"
     else:
         discount_type = "percent"
-        display_text = f"Giảm {normalized_pct}%"
+        display_text = f"{normalized_pct}% off"
 
     return {
         "discount_pct": normalized_pct,

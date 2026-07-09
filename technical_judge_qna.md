@@ -10,11 +10,11 @@ Each scenario has hand-coded attachment probabilities. For example, burger baske
 
 I should be clear that this is still synthetic data. It is useful for testing the mechanics of the recommender, but it is not a substitute for real kiosk sales logs.
 
-## 2. How do you know the reported 12.17% AOV uplift is meaningful?
+## 2. How do you know the reported 10.14% AOV uplift is meaningful?
 
-I treat the 12.17% uplift as a synthetic benchmark result, not as production proof.
+I treat the 10.14% uplift as a synthetic benchmark result, not as production proof.
 
-The default backtest uses a fixed-seed partial-cart replay. It starts each eligible synthetic order with one anchor item, hides the remaining add-ons, and tests whether the top-3 recommendation panel can recover held-out items from that same order. In the current run, it evaluates 4,194 eligible carts and estimates about +9,527 VND per eligible transaction, or +12.17% AOV uplift, against a static Pepsi baseline.
+The default backtest uses a fixed-seed partial-cart replay. It starts each eligible synthetic order with one anchor item, hides the remaining add-ons, and tests whether the top-3 recommendation panel can recover held-out items from that same order. In the current run, it evaluates 4,194 eligible carts and estimates about +8,433 VND per eligible transaction, or +10.14% AOV uplift, against a static Pepsi baseline.
 
 I also keep a stricter full-order top-1 benchmark. That conservative check is smaller, but still positive at +1.82% after accepted promoted items are counted at sale price.
 
@@ -78,9 +78,9 @@ But I would not claim this fully solves sparse or biased feedback. In production
 
 I would also separate real acceptance from noisy signals like accidental taps.
 
-## 10. How is AI-generated Vietnamese copy controlled for quality, speed, and safety?
+## 10. How is AI-generated English copy controlled for quality, speed, and safety?
 
-The AI call asks for structured JSON with Vietnamese copy and rationale. The system enforces a strict timeout for the Gemini path and falls back to local template copy if the call fails, times out, or returns bad output.
+The AI call asks for structured JSON with English copy and rationale. The system enforces a strict timeout for the Gemini path and falls back to local English template copy if the call fails, times out, returns bad output, or returns the wrong language.
 
 The FastAPI recommendation endpoint also limits external generation to the top recommendation. Lower-ranked recommendations use local fallback copy. That keeps latency bounded.
 
@@ -88,7 +88,7 @@ For production, I would add stronger content filters and approval rules, but the
 
 ## 11. What is the kiosk user experience when the AI service is unavailable?
 
-The kiosk still works. The recommender returns local Vietnamese template copy and a rationale instead of waiting for the AI service.
+The kiosk still works. The recommender returns local English template copy and a rationale instead of waiting for the AI service.
 
 The customer can still see recommendations, add items, and continue checkout. The AI layer improves copy quality, but it is not required for the kiosk to function.
 

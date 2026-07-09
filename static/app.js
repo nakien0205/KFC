@@ -32,9 +32,9 @@
   function formatVND(price) {
     try {
       const val = Math.round(Number(price));
-      return val.toLocaleString('vi-VN').replace(/,/g, '.') + 'đ';
+      return val.toLocaleString('en-US').replace(/,/g, '.') + ' VND';
     } catch {
-      return price + 'đ';
+      return price + ' VND';
     }
   }
 
@@ -148,8 +148,8 @@
     if (cart.length === 0) {
       cartList.innerHTML =
         '<div class="empty-cart-message">Your cart is empty. Select your favorite items to start!</div>';
-      cartSubtotal.textContent = '0đ';
-      cartTotal.textContent = '0đ';
+      cartSubtotal.textContent = '0 VND';
+      cartTotal.textContent = '0 VND';
       checkoutBtn.classList.add('disabled');
       return;
     }
@@ -165,7 +165,7 @@
         '</div>' +
         '<div class="cart-item-actions">' +
           '<span class="price-mono cart-item-price">' + formatVND(item.price * item.quantity) + '</span>' +
-          '<button class="cart-remove-btn" data-name="' + escapeHTML(item.name) + '" aria-label="Xóa">×</button>' +
+          '<button class="cart-remove-btn" data-name="' + escapeHTML(item.name) + '" aria-label="Remove">×</button>' +
         '</div>';
 
       var removeBtn = row.querySelector('.cart-remove-btn');
