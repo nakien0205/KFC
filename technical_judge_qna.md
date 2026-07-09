@@ -16,6 +16,8 @@ I treat the 10.14% uplift as a synthetic benchmark result, not as production pro
 
 The default backtest uses a fixed-seed partial-cart replay. It starts each eligible synthetic order with one anchor item, hides the remaining add-ons, and tests whether the top-3 recommendation panel can recover held-out items from that same order. In the current run, it evaluates 4,194 eligible carts and estimates about +8,433 VND per eligible transaction, or +10.14% AOV uplift, against a static Pepsi baseline.
 
+I also ran a panel-size sensitivity check on the same data. Top-4 reaches +12.62%, and top-5 reaches +14.50%. I do not use those as the default claim because a kiosk panel with too many choices can overwhelm the customer. I use them to explain the tradeoff: more visible recommendations recover more add-ons in the synthetic replay, while top-3 is the cleaner user experience.
+
 I also keep a stricter full-order top-1 benchmark. That conservative check is smaller, but still positive at +1.82% after accepted promoted items are counted at sale price.
 
 What this proves is that the pipeline can create measurable lift inside the synthetic scenario. What it does not prove is that real customers would behave the same way.
@@ -27,6 +29,8 @@ The baseline is intentionally simple. It suggests a common default item, current
 The headline benchmark compares that one-item baseline against the hybrid recommender's top-3 panel during partial-cart replay. The hybrid recommender is more dynamic because it uses association rules, active promotions, sale-ending urgency, time-of-day context, and bandit-updated context weights.
 
 This is a reasonable first baseline for a hackathon demo, but I would add more baselines next, such as top-selling add-ons by category, promotion-only ranking, and random add-ons, to make the evaluation stronger.
+
+If asked why I do not simply show five recommendations to claim +14.50%, my answer is that I do not want to optimize only the benchmark. The real product goal is a small, useful kiosk panel. The top-5 number is evidence of headroom, not the default design choice.
 
 ## 4. How do you prevent recommending items already in the cart?
 

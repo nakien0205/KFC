@@ -2,7 +2,7 @@
 
 ## Elevator Pitch
 
-An intelligent, edge-compatible hybrid recommendation engine for self-service kiosks that pairs offline transaction mining with dynamic promotion context, context-aware Multi-Armed Bandits, and LLM copy personalization. In the current synthetic partial-cart panel benchmark, a fixed-seed replay over $4{,}194$ eligible generated transactions estimates a $10.14\%$ Average Order Value (AOV) uplift.
+An intelligent, edge-compatible hybrid recommendation engine for self-service kiosks that pairs offline transaction mining with dynamic promotion context, context-aware Multi-Armed Bandits, and LLM copy personalization. In the current synthetic partial-cart top-3 panel benchmark, a fixed-seed replay over $4{,}194$ eligible generated transactions estimates a $10.14\%$ Average Order Value (AOV) uplift, with panel-size sensitivity reaching $12.62\%$ at top-4 and $14.50\%$ at top-5.
 
 ---
 
@@ -88,7 +88,7 @@ The demo uses a plain HTML/CSS/JavaScript kiosk UI backed by FastAPI endpoints f
 
 ## Accomplishments that we're proud of
 
-- **Synthetic Scenario Benchmark**: A fixed-seed partial-cart top-3 panel replay over $4{,}194$ eligible synthetic transactions estimates a simulated **$10.14\%$ Average Order Value (AOV) uplift**, or about **$+8{,}433\text{ VND}$ per eligible transaction**, compared to the static one-item Pepsi baseline. A stricter full-order top-1 conservative check remains positive at **$1.82\%$** after discount-aware revenue accounting. This is not real production sales proof.
+- **Synthetic Scenario Benchmark**: A fixed-seed partial-cart top-3 panel replay over $4{,}194$ eligible synthetic transactions estimates a simulated **$10.14\%$ Average Order Value (AOV) uplift**, or about **$+8{,}433\text{ VND}$ per eligible transaction**, compared to the static one-item Pepsi baseline. A panel-size sensitivity check on the same generated data reaches **$12.62\%$** with top-4 and **$14.50\%$** with top-5, but top-3 remains the preferred kiosk UX because too many choices can overwhelm customers. A stricter full-order top-1 conservative check remains positive at **$1.82\%$** after discount-aware revenue accounting. This is not real production sales proof.
 - **Robust Offline Capability**: Demonstrated 100% system availability by integrating local Ollama LLM support and rule-based fallbacks to handle internet outages.
 - **Decoupled Architecture**: Strictly adhered to the Pipes and Filters architecture, keeping data generation, model training, online recommendation logic, and visual presentation fully modular.
 

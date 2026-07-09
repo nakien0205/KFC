@@ -6,7 +6,7 @@ This project is a hybrid recommendation engine for a KFC self-service kiosk. It 
 
 The goal is simple: when a customer adds food to the cart, the kiosk should recommend useful add-ons without suggesting items already in the cart, without freezing if an AI API is slow, and without needing a heavy production database for the demo.
 
-The current benchmark is a synthetic scenario benchmark, not real production sales proof. In a fixed-seed partial-cart replay over 4,194 eligible generated carts, the hybrid top-3 recommendation panel estimates a 10.14% Average Order Value uplift, about +8,433 VND per eligible transaction, compared with a static Pepsi baseline.
+The current benchmark is a synthetic scenario benchmark, not real production sales proof. In a fixed-seed partial-cart replay over 4,194 eligible generated carts, the hybrid top-3 recommendation panel estimates a 10.14% Average Order Value uplift, about +8,433 VND per eligible transaction, compared with a static Pepsi baseline. A sensitivity check shows that a larger panel can lift the synthetic result further, but I keep top-3 as the default because four or five recommendations can become noisy for a kiosk user.
 
 ## System Flow
 
@@ -105,6 +105,16 @@ The current fixed-seed simulation reports:
 - +10.14% simulated AOV uplift
 - about +8,433 VND per eligible transaction
 - +1.82% on the conservative full-order top-1 check after discount-aware sale-price accounting
+
+Panel-size sensitivity on the same generated data:
+
+| Recommendation panel | Synthetic AOV uplift | Approx. VND per eligible transaction |
+| --- | ---: | ---: |
+| Top-3 default kiosk panel | +10.14% | +8,433 VND |
+| Top-4 sensitivity check | +12.62% | +10,494 VND |
+| Top-5 sensitivity check | +14.50% | +12,053 VND |
+
+I would not lead with the top-4 or top-5 numbers as the main UX. They are useful for explaining the revenue/usability tradeoff to judges: more visible choices recover more held-out add-ons in the synthetic replay, but the demo intentionally uses a smaller default panel to avoid overwhelming the customer.
 
 I would be careful not to call this real revenue proof. It is evidence that the mechanics work in a controlled synthetic scenario. The next step would be real kiosk logs or an A/B test.
 
