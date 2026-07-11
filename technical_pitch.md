@@ -69,7 +69,7 @@ When feedback says a recommendation was accepted, the matching context alpha inc
 
 This is intentionally lightweight. It fits the kiosk demo because it can learn from feedback without requiring a large ML serving stack.
 
-## AI Copy and Fallback
+## AI Copy and Fallbacks
 
 The recommendation is not only an item name. The system also returns English copy and a short rationale.
 
