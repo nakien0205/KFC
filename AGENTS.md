@@ -68,7 +68,7 @@ The app serves the UI at `/` and static assets from `/static`.
 - If changing recommendation scoring, update `tests/test_recommender.py` and run the full unittest suite.
 - If changing synthetic data, dynamic promotion generation, SQLite initialization, or affinity mining, run `python generate_data.py`, `python affinity_engine.py`, `python init_db.py`, `python backtest.py`, and the tests.
 - If changing API response shapes, update `tests/test_main.py`, the static frontend, and this file.
-- `generate_data.py` imports `numpy`, but `requirements.txt` does not currently list it directly. Add it if you touch dependency setup.
+- NumPy is explicitly declared in `requirements.txt`. Dependency work must keep the full rebuild/test chain runnable.
 - SQLite is implemented as the primary local relational data store. `kiosk.db` holds `menu`, `promotions`, `orders`, and `affinity_rules` tables.
 - The customer site uses a separate `customer.db` (default `_bmad-output/data/customer.db`, override with `CUSTOMER_DB_PATH`) for users, hashed sessions, completed orders, and order items. Never add it to `init_db.py` or allow tests to use the default path.
 - Customer passwords must be Argon2id hashes; sessions must store only token hashes and be delivered in `HttpOnly`, `SameSite=Lax` cookies. Checkout prices and user IDs are always server-derived.

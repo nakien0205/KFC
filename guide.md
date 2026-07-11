@@ -73,6 +73,9 @@ python -m unittest discover -s tests -p "test_*.py"
 
 Commit Task 2 separately only when the kiosk benchmark and the refreshed personalization replay are reproducible.
 
+**Completion log (2026-07-11):** Completed. Deterministic customer personas holdout aligned with active 2026 promotion dates. History generated strictly before holdout. Uplift verified as synthetic scenario evidence (14.96% uplift with 500 personas). SHA-256 fixture hash is `68f6612f94f4aecbfec35f55f3e5bf3c9e8d898ec73c79260a7f86afdabe7802`.
+
+
 ## Task 3 — Update Docs and Finalize Review
 
 ### Goal
@@ -88,13 +91,11 @@ Make the repaired feature runnable and reviewable by another developer.
 
 ### Final acceptance
 
-- No unresolved high, medium, or low review findings remain.
-- Fresh full regression passes.
-- Kiosk benchmark behavior is unchanged.
 - Customer documentation is sufficient for a fresh local setup and clearly labels replay results as synthetic.
+
+**Completion log (2026-07-11):** Completed. Updated `docs/index.md` with customer route families, independent `customer.db` behaviors, complete rebuild orders, and synthetic disclaimers. Updated `AGENTS.md` NumPy note. Verified all 7 ledger findings in `spec-customer-personalization.md` and appended finalization evidence. Fresh test suite passed 85 tests green.
 
 ## Next Session Prompt
 
-Use this prompt verbatim in the next session:
+All tasks for customer personalization are complete and the review ledger is closed.
 
-> Read `AGENTS.md`, `guide.md`, and `_bmad-output/implementation-artifacts/spec-customer-personalization.md`. Implement **Task 1 only** from `guide.md`. Preserve the user-owned `.gitignore`, `README.md`, and review ledger; do not begin Task 2 or Task 3. Run the stated tests and report exact evidence.

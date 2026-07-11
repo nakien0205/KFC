@@ -1,6 +1,6 @@
 # Project Documentation Index
 
-Generated: 2026-07-07
+Generated: 2026-07-11
 
 ## Project Overview
 
@@ -74,37 +74,73 @@ Install dependencies in the active Python environment:
 pip install -r requirements.txt
 ```
 
-Generate or refresh local data:
+### Complete Rebuild & Replay Flow
+
+To reproduce the entire data generation, mining, initialization, kiosk benchmarking, customer persona generation, and customer replay benchmark, run the following commands in this exact order:
 
 ```powershell
 python generate_data.py
 python affinity_engine.py
 python init_db.py
+python backtest.py
 python generate_customer_personas.py
 python personalization_backtest.py
-```
-
-Run tests:
-
-```powershell
 python -m unittest discover -s tests -p "test_*.py"
 ```
 
-Run the app:
+### Kiosk Benchmark vs. Customer Replay
 
-```powershell
-uvicorn main:app --reload
-```
+1. **Global Kiosk Benchmark (`backtest.py`)**:
+   - Evaluates general hybrid recommender performance on global historical orders.
+   - Operates on the SQLite database `_bmad-output/data/kiosk.db`.
 
-Then open `http://127.0.0.1:8000/`.
+2. **Customer Personalization Replay (`personalization_backtest.py`)**:
+   - Replays 500 deterministic repeat-customer personas to evaluate personalization against the general hybrid recommender.
+   - **Crucial Warning:** The customer personalization replay results are **synthetic scenario evidence** only and must *never* be interpreted as real customer-sales proof.
+   - **Replay Metrics (Latest Fresh Run):**
+     - Eligible customer count: 500
+     - General hybrid AOV: 118,908.00 VND
+     - Personalized AOV: 136,692.00 VND
+     - Absolute change: +17,784.00 VND
+     - Percentage uplift: +14.96%
 
-The kiosk remains at `/`. The authenticated customer experience is at `/customer`.
+---
+
+## Customer Personalization Experience
+
+The customer-personalization feature extends the kiosk with user authentication, custom order histories, and personal offers.
+
+### Customer Route Family
+
+- **Static Pages:**
+  - `GET /customer` — Customer portal landing page
+  - `GET /customer/login` — Combined login and registration page
+  - `GET /customer/app` — Protected customer ordering workspace (requires active authenticated session)
+
+- **API Endpoints:**
+  - `POST /api/customer/register` — Create a new customer account
+  - `POST /api/customer/login` — Authenticate and start a new session (cookie-based)
+  - `POST /api/customer/logout` — Terminate current session
+  - `GET /api/customer/session` — Retrieve profile of the currently logged-in customer
+  - `GET /api/customer/orders` — List completed orders for the authenticated customer
+  - `POST /api/customer/checkout` — Save a new order and invalidate/redeem any active offer
+  - `POST /api/customer/recommend` — Fetch personalized recommendations and deterministic personal offers
+
+### Customer Database (`customer.db`)
+
+- **State Isolation:** All customer state (accounts, sessions, order histories, issued offers) is stored in a separate SQLite database.
+- **Default Path:** `_bmad-output/data/customer.db`
+- **Override Path:** Set the `CUSTOMER_DB_PATH` environment variable.
+- **Initialization:** Created and initialized automatically at startup. The global kiosk build script `init_db.py` **never** creates, modifies, or rebuilds the customer database.
+- **Testing:** Unit tests must configure a temporary `CUSTOMER_DB_PATH` override (e.g. using a temporary directory) to avoid writing to the production database.
+
+---
 
 ## Notes For Future Agents
 
 - Read [AGENTS.md](../AGENTS.md) before changing code.
-- Do not assume the dependency manifest is complete; `generate_data.py` imports `numpy`, but `requirements.txt` currently omits it.
+- NumPy is explicitly declared in `requirements.txt`.
 - Treat `_bmad-output/data/` as runtime data, not throwaway scratch files.
 - Preserve local fallback behavior for all LLM paths.
 - Dynamic promotions keep required fields plus optional targeting fields; accepted promoted recommendations use sale price in backtest AOV math.
-- Customer state is isolated in `_bmad-output/data/customer.db`; set `CUSTOMER_DB_PATH` for test or deployment overrides. It must never be rebuilt by `init_db.py`. Customer offers are issued and redeemed in that store, not trusted from a browser-supplied price.
+

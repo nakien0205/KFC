@@ -2,7 +2,7 @@
 
 ## Elevator Pitch
 
-An intelligent, edge-compatible hybrid recommendation engine for self-service kiosks that pairs offline transaction mining with dynamic promotion context, context-aware Multi-Armed Bandits, and LLM copy personalization. In the current synthetic partial-cart top-3 panel benchmark, a fixed-seed replay over $4{,}194$ eligible generated transactions estimates a $10.14\%$ Average Order Value (AOV) uplift, with panel-size sensitivity reaching $12.62\%$ at top-4 and $14.50\%$ at top-5.
+An intelligent, edge-compatible hybrid recommendation engine for self-service kiosks that pairs offline transaction mining with dynamic promotion context, context-aware Multi-Armed Bandits, and LLM copy personalization. It also includes a separate authenticated customer ordering site with history-aware recommendations and one deterministic complementary offer after cold start. In the current synthetic partial-cart top-3 kiosk-panel benchmark, a fixed-seed replay over $4{,}194$ eligible generated transactions estimates a $10.14\%$ Average Order Value (AOV) uplift, with panel-size sensitivity reaching $12.62\%$ at top-4 and $14.50\%$ at top-5.
 
 ---
 
@@ -23,6 +23,7 @@ The **KFC Kiosk Recommendation System** is an end-to-end recommender engine and 
 5. **GenAI Personalized Copywriter**: Generate specific promotional copy and logical rationales using Gemini 2.5 Flash, with local Ollama support. Includes an **Offline Fallback Guardrail** that guarantees zero kiosk latency and continuous offline operations using a template-based copy generator if the LLM exceeds a $1.2\text{s}$ timeout limit.
 6. **Kiosk UI Terminal**: A responsive, single-page application that updates recommendations in real time as users add items to their carts.
 7. **Backtest Simulator**: Replays synthetic transactions to estimate recommender effectiveness against a static baseline.
+8. **Customer Personalization Site**: Keeps accounts, opaque sessions, order histories, and one-time offers in a separate SQLite database. It uses the general hybrid result for the first three completed orders, then combines current cart, global affinity, and that customer's own history.
 
 ## How we built it
 
@@ -75,6 +76,8 @@ The top recommendation gets English GenAI copy through `gemini-2.5-flash`. If th
 
 The demo uses a plain HTML/CSS/JavaScript kiosk UI backed by FastAPI endpoints for menu loading, recommendations, feedback, and backtesting.
 
+The customer experience is a separate route family at `/customer`; the original kiosk remains at `/`. Customer passwords are Argon2id hashes, sessions are opaque `HttpOnly` cookies, and checkout prices and offer redemption are validated on the server. Customer state is stored separately from the rebuildable kiosk database.
+
 ---
 
 ## Challenges we ran into
@@ -89,6 +92,7 @@ The demo uses a plain HTML/CSS/JavaScript kiosk UI backed by FastAPI endpoints f
 ## Accomplishments that we're proud of
 
 - **Synthetic Scenario Benchmark**: A fixed-seed partial-cart top-3 panel replay over $4{,}194$ eligible synthetic transactions estimates a simulated **$10.14\%$ Average Order Value (AOV) uplift**, or about **$+8{,}433\text{ VND}$ per eligible transaction**, compared to the static one-item Pepsi baseline. A panel-size sensitivity check on the same generated data reaches **$12.62\%$** with top-4 and **$14.50\%$** with top-5, but top-3 remains the preferred kiosk UX because too many choices can overwhelm customers. A stricter full-order top-1 conservative check remains positive at **$1.82\%$** after discount-aware revenue accounting. This is not real production sales proof.
+- **Customer Policy Evidence**: A separate deterministic replay of 500 synthetic repeat-customer personas compares the global-hybrid policy with global promotions against the history-aware customer policy with a personal offer. It reports **118,908 VND** general-hybrid AOV versus **136,692 VND** customer-policy AOV: **+17,784 VND** or **14.96%**. This validates the replayable customer policy only; it does not isolate history's effect, is not real sales proof, and must not be added to the kiosk benchmark.
 - **Robust Offline Capability**: Demonstrated 100% system availability by integrating local Ollama LLM support and rule-based fallbacks to handle internet outages.
 - **Decoupled Architecture**: Strictly adhered to the Pipes and Filters architecture, keeping data generation, model training, online recommendation logic, and visual presentation fully modular.
 

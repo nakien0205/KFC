@@ -22,6 +22,18 @@ I also keep a stricter full-order top-1 benchmark. That conservative check is sm
 
 What this proves is that the pipeline can create measurable lift inside the synthetic scenario. What it does not prove is that real customers would behave the same way.
 
+## 2a. What does the 14.96% customer-personalization result mean?
+
+It is a separate synthetic replay, not an additional kiosk uplift. I generate 500 deterministic customer personas with 8–24 earlier orders and one strictly later held-out order. The replay compares a global-hybrid policy with the customer policy: history-aware ranking plus a personal offer that replaces the global promotion. The latest run is 118,908 VND general-hybrid AOV versus 136,692 VND customer-policy AOV: +17,784 VND or 14.96%.
+
+That demonstrates a repeatable bundled-policy experiment; it does not isolate the causal effect of purchase history alone. It does not prove that real customers would produce 14.96% more revenue, and I would not add it to the kiosk's 10.14% result. Real validation still needs consented purchase data and an A/B test.
+
+## 2b. Is the customer site really separate and safe to demonstrate?
+
+Yes. The kiosk remains at `/`; the customer flow begins at `/customer` and protects its ordering page with a login session. Customer accounts, sessions, order histories, and issued offers live in a separate `customer.db`, so rebuilding kiosk data cannot delete them. Passwords are stored as Argon2id hashes, sessions are opaque and delivered in `HttpOnly`, `SameSite=Lax` cookies, and checkout prices are derived on the server.
+
+For a new account, the app deliberately uses the customer route's global-signal fallback until it has three completed orders. Only then does it add that customer's history to the current-cart and global-affinity ranking, and an eligible cart may receive one deterministic complementary offer. That avoids pretending we know a new customer's preferences.
+
 ## 3. What is the baseline recommender you compare against?
 
 The baseline is intentionally simple. It suggests a common default item, currently Pepsi, based on item support in the synthetic orders.

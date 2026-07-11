@@ -4,6 +4,8 @@ A local hackathon demo for a smarter KFC self-service kiosk.
 
 The app recommends add-ons while a customer builds a cart. It uses synthetic order history, association rules, active promotions, time-of-day context, and lightweight feedback learning to rank recommendations. The top recommendation can also get AI-generated copy, but the app still works without any API key because it falls back to local template copy.
 
+It now has two separate experiences: the original public kiosk at `/`, and an authenticated customer site at `/customer`. The customer site keeps its own order history and may issue one deterministic complementary offer after three completed orders; it does not change the kiosk's behaviour or data store.
+
 This is a demo and simulation project. The benchmark uses generated synthetic orders, not real KFC sales data.
 
 ## What It Shows
@@ -13,6 +15,7 @@ This is a demo and simulation project. The benchmark uses generated synthetic or
 - Promotion-aware pricing and recommendation copy.
 - A local SQLite data layer for menu, promotions, orders, and rules.
 - A synthetic backtest that compares the hybrid recommender with a static baseline.
+- A separate authenticated customer ordering site with Argon2id password hashes, opaque `HttpOnly` sessions, isolated customer data, and server-validated one-time offers.
 - Safe fallback behavior when Gemini, OpenRouter, or Ollama is unavailable.
 
 ## Current Benchmark
@@ -28,6 +31,8 @@ The current local backtest reports:
 
 These numbers are useful for judging the demo mechanics. They are not production sales proof.
 
+The separate customer-personalization replay uses 500 deterministic synthetic personas, each with earlier purchase history and one later held-out order. Its latest run reports 118,908 VND general-hybrid AOV versus 136,692 VND customer-policy AOV: +17,784 VND or +14.96%. It measures the bundled customer policy—history-aware ranking plus a personal offer replacing the global promotion—not the effect of history alone. This is separate synthetic scenario evidence, not a result to add to the kiosk's 10.14% benchmark and not a claim about real customer sales.
+
 ## How It Works
 
 ```text
@@ -39,6 +44,10 @@ generate_data.py + promo_engine.py
   -> _bmad-output/data/kiosk.db
   -> main.py + recommender.py
   -> static kiosk UI
+
+customer_store.py + personalization.py
+  -> _bmad-output/data/customer.db
+  -> /customer authenticated ordering UI
 ```
 
 Main pieces:
@@ -51,6 +60,9 @@ Main pieces:
 - `affinity_engine.py` - association rule mining.
 - `init_db.py` - SQLite database setup.
 - `backtest.py` - synthetic AOV backtest.
+- `customer_store.py` - isolated customer accounts, hashed sessions, orders, and one-time offers.
+- `personalization.py` - customer-history ranking and deterministic complementary offers.
+- `generate_customer_personas.py` and `personalization_backtest.py` - reproducible customer-personalization evidence.
 - `static/` - plain HTML, CSS, and JavaScript kiosk UI.
 - `tests/` - unittest coverage.
 
@@ -80,6 +92,14 @@ http://127.0.0.1:8000/
 
 Use the UI by adding menu items to the cart. The recommendation panel updates from the backend.
 
+For the customer experience, open:
+
+```text
+http://127.0.0.1:8000/customer
+```
+
+Create an account, then sign in and use the protected ordering page. The first three completed orders use the customer route's global-signal cold-start fallback; later eligible carts can receive one deterministic complementary offer. Customer accounts and history are stored separately in `_bmad-output/data/customer.db`; rebuilding kiosk data does not delete them.
+
 ## Rebuild The Local Data
 
 The repo includes generated demo data. To refresh it:
@@ -95,6 +115,15 @@ Run the synthetic benchmark:
 ```powershell
 python backtest.py
 ```
+
+Run the separate customer fixture and replay:
+
+```powershell
+python generate_customer_personas.py
+python personalization_backtest.py
+```
+
+`init_db.py` rebuilds only kiosk data. To use another location for customer state, set `CUSTOMER_DB_PATH` before starting the app.
 
 Run tests:
 
