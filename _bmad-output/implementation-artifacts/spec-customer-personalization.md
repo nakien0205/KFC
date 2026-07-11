@@ -126,3 +126,13 @@ Customer ranking begins with the existing `rerank_recommendations` result so glo
 
 - Replay tests cover determinism, chronological hold-out separation, panel validation, and effective prices.
   [`tests/test_customer_personas.py:28`](../../tests/test_customer_personas.py#L28)
+
+### Review Findings
+
+- [ ] [Review][Patch] Server-issued personal offers use a client-controlled date, so an authenticated customer can request future dates until a 20% tier appears [main.py:449] — derive the offer date from trusted server time and prevent parallel active offers for the same eligible context. **Severity: high.**
+- [ ] [Review][Patch] The personalization replay's 2025 hold-outs never overlap the 2026 promotion calendar, so its published general-hybrid comparison does not exercise the promotion condition it labels [generate_customer_personas.py:88] — align the deterministic evaluation dates with a controlled promotion calendar before reporting uplift. **Severity: high.**
+- [ ] [Review][Patch] Cold-start results omit active global promotions instead of using the promised general-hybrid fallback [personalization.py:223] — pass the active global promotions during cold start, while keeping personal offers unavailable until three completed orders. **Severity: medium.**
+- [ ] [Review][Patch] Applying a personal offer leaves the cart and total at menu price, and raising the offered item's quantity leaves an invalid offer ID selected [static/customer/app.js:64] — model the active offer's effective price in cart state and clear it when the cart no longer satisfies one-target-item redemption. **Severity: medium.**
+- [ ] [Review][Patch] Replay accepts panel sizes above the general reranker's five-result limit, comparing unequal-sized panels [personalization_backtest.py:112] — reject values above five or parameterize both ranking paths with the same limit. **Severity: medium.**
+- [ ] [Review][Patch] The customer ordering UI does not render the shared menu images required by the feature spec [static/customer/app.js:49] — render each menu item's existing image field with an accessible fallback. **Severity: low.**
+- [ ] [Review][Patch] Dependency setup adds Argon2 but still omits the direct numpy requirement [requirements.txt:1] — declare numpy explicitly as required by the project contract. **Severity: low.**

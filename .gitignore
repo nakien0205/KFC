@@ -137,3 +137,5 @@ _bmad/
 
 # Duplicate local image source; served assets live in static/images/
 images/
+
+docs
