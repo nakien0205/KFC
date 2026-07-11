@@ -5,6 +5,7 @@ from __future__ import annotations
 import json
 import hashlib
 import os
+from datetime import datetime
 from typing import Any, Dict, Iterable, List, Optional
 
 from backtest import DEFAULT_BANDIT_WEIGHTS, _recommended_price, _select_anchor_cart
@@ -13,6 +14,7 @@ from recommender import rerank_recommendations
 
 
 DEFAULT_PANEL_SIZE = 3
+MAX_PANEL_SIZE = 5
 
 
 def default_report_path() -> str:
@@ -66,6 +68,44 @@ def _accepted_value(recommendations: Iterable[Dict[str, Any]], held_out_items: I
     return value
 
 
+def _parse_replay_timestamp(timestamp: Any) -> Optional[datetime]:
+    if not isinstance(timestamp, str) or not timestamp.strip():
+        return None
+    try:
+        return datetime.fromisoformat(timestamp.replace("Z", "+00:00"))
+    except (TypeError, ValueError):
+        return None
+
+
+def _active_promotion_count(promotions: Optional[Iterable[Dict[str, Any]]], timestamp: Any) -> int:
+    """Count valid calendar promotions active on a replay timestamp's UTC date."""
+    timestamp_dt = _parse_replay_timestamp(timestamp)
+    if timestamp_dt is None:
+        return 0
+    timestamp_date = timestamp_dt.date()
+    time_minutes = timestamp_dt.hour * 60 + timestamp_dt.minute
+    is_lunch = 11 * 60 <= time_minutes <= 14 * 60
+    is_dinner = 17 * 60 <= time_minutes <= 21 * 60
+
+    active_count = 0
+    for promotion in promotions or []:
+        if not isinstance(promotion, dict):
+            continue
+        try:
+            start_date = datetime.strptime(str(promotion.get("start_date", "")), "%Y-%m-%d").date()
+            end_date = datetime.strptime(str(promotion.get("end_date", "")), "%Y-%m-%d").date()
+        except (TypeError, ValueError):
+            continue
+        if start_date <= timestamp_date <= end_date:
+            promotion_name = str(promotion.get("name") or "").lower()
+            if "lunch" in promotion_name and not is_lunch:
+                continue
+            if "dinner" in promotion_name and not is_dinner:
+                continue
+            active_count += 1
+    return active_count
+
+
 def _metrics(
     general_totals: List[float],
     personalized_totals: List[float],
@@ -109,8 +149,8 @@ def run_personalization_backtest(
     This is a synthetic replay only. The hold-out basket provides the acceptance
     targets but is never sent to the personalized history profile.
     """
-    if not isinstance(panel_size, int) or isinstance(panel_size, bool) or panel_size < 1:
-        raise ValueError("panel_size must be a positive integer.")
+    if not isinstance(panel_size, int) or isinstance(panel_size, bool) or not 1 <= panel_size <= MAX_PANEL_SIZE:
+        raise ValueError(f"panel_size must be an integer from 1 through {MAX_PANEL_SIZE}.")
     artifact_path = os.path.abspath(persona_path or os.path.join(
         os.path.dirname(os.path.abspath(__file__)), "_bmad-output", "data", "customer_personas.json"
     ))
@@ -122,10 +162,11 @@ def run_personalization_backtest(
     prices = runtime_inputs["menu_price_lookup"]
     categories = runtime_inputs["menu_category_lookup"]
     affinity_rules = runtime_inputs["affinity_rules"]
-    promotions = runtime_inputs.get("promotions_list", [])
+    promotions = runtime_inputs.get("promotions_list") or []
     general_totals: List[float] = []
     personalized_totals: List[float] = []
     skipped = 0
+    active_promotion_persona_count = 0
 
     for index, persona in enumerate(artifact["personas"]):
         if not isinstance(persona, dict):
@@ -143,9 +184,10 @@ def run_personalization_backtest(
             skipped += 1
             continue
         timestamp = str(holdout.get("completed_at") or "")
-        if not timestamp:
+        if _parse_replay_timestamp(timestamp) is None:
             skipped += 1
             continue
+        has_active_promotion = _active_promotion_count(promotions, timestamp) > 0
         anchor_value = sum(float(prices.get(item, 0.0)) for item in cart)
         general = rerank_recommendations(
             cart_items=cart,
@@ -167,16 +209,25 @@ def run_personalization_backtest(
         )
         general_totals.append(anchor_value + _accepted_value(general, held_out_items, prices))
         personalized_totals.append(anchor_value + _accepted_value(personalized, held_out_items, prices))
+        if has_active_promotion:
+            active_promotion_persona_count += 1
 
     result = _metrics(general_totals, personalized_totals, len(general_totals), skipped, panel_size)
+    active_promotion_coverage = (
+        round(active_promotion_persona_count / len(general_totals), 4) if general_totals else 0.0
+    )
     result.update(
         {
-            "benchmark": "synthetic held-out repeat-customer top-three replay",
+            "benchmark": f"synthetic scenario evidence: held-out repeat-customer top-{panel_size} replay",
+            "evidence_type": "synthetic scenario evidence",
+            "real_customer_sales_proof": False,
             "persona_seed": artifact.get("seed"),
             "fixture_sha256": fixture_sha256,
             "holdout_used_as_history": False,
             "timestamp_policy": "Each held-out order's completed_at timestamp",
             "general_promotion_treatment": "Current global promotion calendar",
+            "active_promotion_persona_count": active_promotion_persona_count,
+            "active_promotion_coverage": active_promotion_coverage,
             "personalized_promotion_treatment": "One server-validated personal offer replaces global daily promotions",
             "bandit_weights": dict(DEFAULT_BANDIT_WEIGHTS),
         }
