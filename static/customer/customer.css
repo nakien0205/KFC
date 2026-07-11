@@ -95,8 +95,23 @@ body.customer-auth {
 .customer-app .customer-recommendation .tile-rationale { margin: 0; }
 .customer-app .customer-recommendation .tile-footer { padding-top: .75rem; border-top: 1px solid var(--border-soft); }
 .customer-app .customer-recommendation .tile-footer .tile-rationale:only-child { max-width: 100%; }
+.customer-app .customer-aov-evidence { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; margin: 0 0 2rem; padding: 1.25rem; border: 1px solid var(--border-soft); background: linear-gradient(135deg, #fff 0%, #fff7f8 100%); box-shadow: 6px 6px 0 rgba(228, 0, 43, .06); }
+.customer-app .customer-aov-copy { min-width: 0; }
+.customer-app .customer-aov-eyebrow { margin: 0 0 .35rem; color: var(--brand-red); font-size: .7rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.customer-app .customer-aov-heading { margin: 0; color: var(--typography-black); font-size: 1.1rem; }
+.customer-app .customer-aov-status { min-height: 1.3em; margin: .45rem 0 0; color: var(--typography-muted); font-size: .85rem; line-height: 1.35; }
+.customer-app .customer-aov-disclaimer { max-width: 39rem; margin: .35rem 0 0; color: var(--typography-muted); font-size: .75rem; line-height: 1.35; }
+.customer-app .customer-aov-metrics { display: grid; min-width: min(100%, 23rem); grid-template-columns: repeat(3, minmax(6.25rem, 1fr)); gap: .5rem; }
+.customer-app .customer-aov-metric { display: grid; gap: .3rem; padding: .65rem; border: 1px solid var(--border-soft); background: rgba(255, 255, 255, .8); }
+.customer-app .customer-aov-metric-label { color: var(--typography-muted); font-size: .67rem; font-weight: 700; line-height: 1.25; text-transform: uppercase; }
+.customer-app .customer-aov-metric-value { color: var(--typography-black); font-size: .78rem; line-height: 1.25; white-space: nowrap; }
 
 .customer-kiosk-container.left-sidebar-collapsed .customer-sidebar-account { display: none; }
+
+@media (max-width: 1200px) {
+  .customer-app .customer-aov-evidence { align-items: stretch; flex-direction: column; }
+  .customer-app .customer-aov-metrics { width: 100%; min-width: 0; }
+}
 
 @media (max-width: 768px) {
   .customer-app .customer-sidebar-account { display: none; }
@@ -106,4 +121,5 @@ body.customer-auth {
   .customer-landing .customer-nav,
   .customer-auth .customer-nav { padding: 0 20px; }
   .customer-nav-actions { gap: 12px; }
+  .customer-app .customer-aov-metrics { grid-template-columns: 1fr; }
 }

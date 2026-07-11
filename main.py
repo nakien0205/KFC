@@ -371,6 +371,44 @@ class CustomerRecommendationResponse(RecommendationResponse):
     promotion: Optional[dict] = None
 
 
+class CustomerAovSimulationResponse(BaseModel):
+    general_hybrid_aov: float
+    personalized_aov: float
+    absolute_change: float
+    percentage_uplift: float
+    eligible_customer_count: int
+    skipped_customer_count: int
+    panel_size: int
+    benchmark: str
+    evidence_type: str
+    real_customer_sales_proof: bool
+    persona_seed: Optional[int] = None
+    fixture_sha256: str
+    holdout_used_as_history: bool
+    timestamp_policy: str
+    general_promotion_treatment: str
+    active_promotion_persona_count: int
+    active_promotion_coverage: float
+    personalized_promotion_treatment: str
+
+
+def _customer_aov_replay_inputs():
+    """Keep the customer replay aligned with the catalog already served by this app."""
+    menu_records = MENU_ITEMS_DF.to_dict(orient="records")
+    menu_category_lookup = {}
+    for row in menu_records:
+        name = str(row.get("name") or "").strip()
+        if name:
+            menu_category_lookup[name] = str(row.get("category") or "")
+    return {
+        "menu_records": menu_records,
+        "menu_price_lookup": dict(MENU_PRICE_LOOKUP),
+        "menu_category_lookup": menu_category_lookup,
+        "promotions_list": list(PROMOTIONS_LIST),
+        "affinity_rules": list(AFFINITY_RULES),
+    }
+
+
 def _customer_offer_date() -> str:
     """Return the trusted UTC date used to identify a browser-issued offer."""
     return datetime.now(timezone.utc).date().isoformat()
@@ -416,6 +454,41 @@ def logout_customer(request: Request):
 @app.get("/api/customer/session")
 def customer_session(request: Request):
     return {"customer": _current_customer(request)}
+
+
+@app.get("/api/customer/aov-simulation", response_model=CustomerAovSimulationResponse)
+def customer_aov_simulation(request: Request):
+    _current_customer(request)
+    try:
+        from personalization_backtest import run_personalization_backtest
+
+        results = run_personalization_backtest(inputs=_customer_aov_replay_inputs())
+        return CustomerAovSimulationResponse(
+            general_hybrid_aov=results["general_hybrid_aov"],
+            personalized_aov=results["personalized_aov"],
+            absolute_change=results["absolute_change"],
+            percentage_uplift=results["percentage_uplift"],
+            eligible_customer_count=results["eligible_customer_count"],
+            skipped_customer_count=results["skipped_customer_count"],
+            panel_size=results["panel_size"],
+            benchmark=results["benchmark"],
+            evidence_type=results["evidence_type"],
+            real_customer_sales_proof=results["real_customer_sales_proof"],
+            persona_seed=results.get("persona_seed"),
+            fixture_sha256=results["fixture_sha256"],
+            holdout_used_as_history=results["holdout_used_as_history"],
+            timestamp_policy=results["timestamp_policy"],
+            general_promotion_treatment=results["general_promotion_treatment"],
+            active_promotion_persona_count=results["active_promotion_persona_count"],
+            active_promotion_coverage=results["active_promotion_coverage"],
+            personalized_promotion_treatment=results["personalized_promotion_treatment"],
+        )
+    except Exception:
+        logger.exception("Error during customer AOV simulation")
+        raise HTTPException(
+            status_code=500,
+            detail="Customer AOV simulation is temporarily unavailable.",
+        )
 
 
 @app.get("/api/customer/orders")

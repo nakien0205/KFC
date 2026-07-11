@@ -6,6 +6,7 @@
   var category = 'All';
   var timer;
   var recommendationVersion = 0;
+  var aovSimulationVersion = 0;
   var activeOfferId = null;
   var activeOfferTarget = null;
   var activeOfferSalePrice = null;
@@ -18,9 +19,23 @@
   var status = document.getElementById('checkout-status');
   var recommendationStatus = document.getElementById('recommendation-status');
   var recommendations = document.getElementById('recommendations');
+  var aovSimulationStatus = document.getElementById('aov-simulation-status');
+  var aovSimulationMetrics = document.getElementById('aov-simulation-metrics');
 
   function money(value) {
     return Math.round(Number(value) || 0).toLocaleString('en-US').replace(/,/g, '.') + ' VND';
+  }
+
+  function signedMoney(value) {
+    var amount = Number(value);
+    if (!Number.isFinite(amount)) return '0 VND';
+    return (amount < 0 ? '−' : '+') + money(Math.abs(amount));
+  }
+
+  function signedPercent(value) {
+    var amount = Number(value);
+    if (!Number.isFinite(amount)) return '0.00%';
+    return (amount < 0 ? '−' : '+') + Math.abs(amount).toFixed(2) + '%';
   }
 
   function escapeText(value) {
@@ -173,6 +188,67 @@
     timer = setTimeout(fetchRecommendations, 250);
   }
 
+  function addAovMetric(label, value) {
+    var metric = document.createElement('div');
+    metric.className = 'customer-aov-metric';
+    var metricLabel = document.createElement('span');
+    metricLabel.className = 'customer-aov-metric-label';
+    metricLabel.textContent = label;
+    var metricValue = document.createElement('strong');
+    metricValue.className = 'customer-aov-metric-value price-mono';
+    metricValue.textContent = value;
+    metric.appendChild(metricLabel);
+    metric.appendChild(metricValue);
+    aovSimulationMetrics.appendChild(metric);
+  }
+
+  function renderAovSimulation(simulation) {
+    if (!aovSimulationStatus || !aovSimulationMetrics) return;
+    var generalAov = Number(simulation && simulation.general_hybrid_aov);
+    var personalizedAov = Number(simulation && simulation.personalized_aov);
+    var absoluteChange = Number(simulation && simulation.absolute_change);
+    var uplift = Number(simulation && simulation.percentage_uplift);
+    var panelSize = Number(simulation && simulation.panel_size);
+    var eligibleCount = Number(simulation && simulation.eligible_customer_count);
+    if (!Number.isFinite(generalAov) || !Number.isFinite(personalizedAov) ||
+      !Number.isFinite(absoluteChange) || !Number.isFinite(uplift) ||
+      !Number.isInteger(panelSize) || !Number.isInteger(eligibleCount) ||
+      !simulation || simulation.evidence_type !== 'synthetic scenario evidence' ||
+      simulation.real_customer_sales_proof !== false || simulation.holdout_used_as_history !== false) {
+      throw new Error('Invalid customer AOV simulation response.');
+    }
+    aovSimulationStatus.textContent = 'Held-out repeat-customer top-' + panelSize +
+      ' replay across ' + eligibleCount + ' eligible synthetic scenarios.';
+    aovSimulationMetrics.replaceChildren();
+    addAovMetric('General-hybrid AOV', money(generalAov));
+    addAovMetric('Personalized-policy AOV', money(personalizedAov));
+    addAovMetric('Policy change', signedMoney(absoluteChange) + ' · ' + signedPercent(uplift));
+    aovSimulationMetrics.hidden = false;
+  }
+
+  async function loadAovSimulation() {
+    if (!aovSimulationStatus || !aovSimulationMetrics) return;
+    var version = ++aovSimulationVersion;
+    aovSimulationStatus.textContent = 'Loading synthetic replay evidence…';
+    aovSimulationMetrics.hidden = true;
+    try {
+      var response = await fetch('/api/customer/aov-simulation');
+      if (version !== aovSimulationVersion) return;
+      if (response.status === 401) {
+        location.assign('/customer/login');
+        return;
+      }
+      if (!response.ok) throw new Error('Customer AOV simulation is unavailable.');
+      var simulation = await response.json();
+      if (version !== aovSimulationVersion) return;
+      renderAovSimulation(simulation);
+    } catch (err) {
+      if (version !== aovSimulationVersion) return;
+      aovSimulationMetrics.hidden = true;
+      aovSimulationStatus.textContent = 'Simulation unavailable. Ordering is still available.';
+    }
+  }
+
   function renderRecommendations(rows) {
     recommendationStatus.textContent = rows[0].cold_start
       ? 'Cold start: complete three orders to unlock personal offers.'
@@ -180,6 +256,7 @@
     recommendations.innerHTML = rows.map(function (row, index) {
       var offer = '';
       var action = '';
+      var menuItem = menu.find(function (candidate) { return candidate.name === row.name; });
       if (row.promotion && row.promotion.type === 'personal') {
         offer = '<p class="offer">' + escapeText(row.promotion.display_text) + ' personal offer · ' +
           money(row.promotion.sale_price) + '</p>';
@@ -190,6 +267,14 @@
       } else if (row.promotion && row.promotion.type === 'global') {
         offer = '<p class="offer">' + escapeText(row.promotion.display_text || 'Active promotion') + ' · ' +
           money(row.price) + '</p>';
+        var normalPriceLabel = menuItem && Number.isFinite(Number(menuItem.price))
+          ? money(menuItem.price)
+          : 'menu price';
+        action = '<button class="add-to-cart-btn-mini add-recommendation" type="button" data-name="' +
+          escapeText(row.name) + '">Add at ' + normalPriceLabel + ' <span class="icon-circle">+</span></button>';
+      } else {
+        action = '<button class="add-to-cart-btn-mini add-recommendation" type="button" data-name="' +
+          escapeText(row.name) + '">Add <span class="icon-circle">+</span></button>';
       }
       var badge = index === 0 ? '<span class="badge badge-hero">⭐ TOP RECOMMENDATION</span>' : '<span class="badge">SUGGESTED</span>';
       return '<article class="double-bezel bento-tile customer-recommendation ' + (index === 0 ? 'col-span-2' : '') + ' card-enter" style="animation-delay:' +
@@ -205,6 +290,12 @@
           target_item: button.dataset.offerTarget,
           sale_price: button.dataset.offerSalePrice
         });
+      });
+    });
+    recommendations.querySelectorAll('.add-recommendation').forEach(function (button) {
+      button.addEventListener('click', function () {
+        var item = menu.find(function (candidate) { return candidate.name === button.dataset.name; });
+        add(item);
       });
     });
   }
@@ -301,6 +392,7 @@
       }
       var profile = await session.json();
       document.getElementById('customer-email').textContent = profile.customer.email;
+      loadAovSimulation();
       var response = await fetch('/api/menu');
       if (!response.ok) throw new Error('Menu unavailable');
       menu = await response.json();
@@ -313,6 +405,7 @@
   }
 
   document.getElementById('logout-button').addEventListener('click', async function () {
+    aovSimulationVersion++;
     await fetch('/api/customer/logout', { method: 'POST' });
     location.assign('/customer');
   });
