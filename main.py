@@ -300,7 +300,7 @@ def recommend(request: RecommendRequest):
     results = []
 
     # Take top 5 candidates
-    top_candidates = candidates[:5]
+    top_candidates = candidates[:3]
 
     for idx, cand in enumerate(top_candidates):
         if not isinstance(cand, dict) or "name" not in cand or "score" not in cand:
@@ -533,7 +533,7 @@ def customer_recommend(request: Request, recommendation_request: RecommendReques
         customer_orders=order_history,
         active_promotions=PROMOTIONS_LIST,
         offer_date=_customer_offer_date(),
-        limit=5,
+        limit=3,
     )
     if not candidates:
         return []
