@@ -133,6 +133,16 @@ body {
 
 .kiosk-header {
     margin-bottom: 2rem;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.kiosk-customer-link {
+    text-decoration: none;
+    white-space: nowrap;
 }
 
 .headline-title {

@@ -46,11 +46,22 @@ class TestCustomerAPI(unittest.TestCase):
         return response
 
     def test_pages_registration_auth_and_customer_isolation(self):
-        self.assertEqual(self.client.get("/customer").status_code, 200)
-        self.assertEqual(self.client.get("/customer/login").status_code, 200)
+        kiosk_page = self.client.get("/")
+        self.assertEqual(kiosk_page.status_code, 200)
+        self.assertIn('href="/customer"', kiosk_page.text)
+
+        customer_landing = self.client.get("/customer")
+        self.assertEqual(customer_landing.status_code, 200)
+        self.assertIn('href="/"', customer_landing.text)
+
+        customer_login = self.client.get("/customer/login")
+        self.assertEqual(customer_login.status_code, 200)
+        self.assertIn('href="/"', customer_login.text)
         self.assertEqual(self.client.get("/customer/app", follow_redirects=False).status_code, 303)
         self._register()
-        self.assertEqual(self.client.get("/customer/app").status_code, 200)
+        customer_app = self.client.get("/customer/app")
+        self.assertEqual(customer_app.status_code, 200)
+        self.assertIn('href="/"', customer_app.text)
         self._checkout()
         self.assertEqual(len(self.client.get("/api/customer/orders").json()["orders"]), 1)
 
