@@ -13,6 +13,18 @@ RULES = [
     {"antecedents": ["Burger Zinger"], "consequents": ["French Fries"], "support": 0.2, "confidence": 0.8, "lift": 1.5},
     {"antecedents": ["Burger Zinger"], "consequents": ["Pepsi"], "support": 0.2, "confidence": 0.7, "lift": 1.3},
 ]
+GLOBAL_PROMOTIONS = [
+    {
+        "promo_id": "COLD_FRIES",
+        "name": "French Fries offer",
+        "discount_pct": 10,
+        "start_date": "2026-07-01",
+        "end_date": "2026-07-31",
+        "target_item": "French Fries",
+        "display_text": "Save 10% on French Fries",
+        "is_dynamic": 1,
+    }
+]
 HISTORY = [
     {"id": 1, "completed_at": "2026-01-01T12:00:00+00:00", "items": [{"name": "Burger Zinger"}, {"name": "French Fries"}]},
     {"id": 2, "completed_at": "2026-01-08T12:00:00+00:00", "items": [{"name": "Burger Zinger"}, {"name": "Pepsi"}]},
@@ -47,6 +59,23 @@ class TestCustomerPersonalization(unittest.TestCase):
             build_personal_offer("customer-1", HISTORY, ["Burger Zinger"], offer_row, "2026-07-06"),
             build_personal_offer("customer-1", HISTORY, ["Burger Zinger"], offer_row, "2026-07-06"),
         )
+
+    def test_cold_start_uses_global_promotion_metadata_without_personal_offer(self):
+        results = customer_recommendations(
+            "customer-1",
+            ["Burger Zinger"],
+            "2026-07-06T12:00:00Z",
+            MENU,
+            RULES,
+            HISTORY[:2],
+            active_promotions=GLOBAL_PROMOTIONS,
+        )
+
+        promoted = next(row for row in results if row.get("promotion"))
+        self.assertTrue(promoted["cold_start"])
+        self.assertEqual(promoted["promotion"]["type"], "global")
+        self.assertNotIn("offer_id", promoted["promotion"])
+        self.assertEqual(promoted["price"], promoted["promotion"]["sale_price"])
 
 
 if __name__ == "__main__":

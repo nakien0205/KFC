@@ -371,6 +371,11 @@ class CustomerRecommendationResponse(RecommendationResponse):
     promotion: Optional[dict] = None
 
 
+def _customer_offer_date() -> str:
+    """Return the trusted UTC date used to identify a browser-issued offer."""
+    return datetime.now(timezone.utc).date().isoformat()
+
+
 @app.post("/api/customer/register")
 def register_customer(credentials: CustomerCredentialsRequest, http_request: Request):
     store = _active_customer_store()
@@ -453,6 +458,8 @@ def customer_recommend(request: Request, recommendation_request: RecommendReques
         menu_items=MENU_ITEMS_DF,
         affinity_rules=AFFINITY_RULES,
         customer_orders=order_history,
+        active_promotions=PROMOTIONS_LIST,
+        offer_date=_customer_offer_date(),
         limit=5,
     )
     if not candidates:
@@ -461,16 +468,23 @@ def customer_recommend(request: Request, recommendation_request: RecommendReques
     results = []
     for index, candidate in enumerate(candidates):
         promotion = candidate.get("promotion") if isinstance(candidate.get("promotion"), dict) else None
-        if promotion:
-            promotion = store.issue_personal_offer(customer["id"], promotion)
+        if promotion and promotion.get("type") == "personal":
+            try:
+                promotion = store.issue_personal_offer(customer["id"], promotion)
+            except CustomerStoreError as exc:
+                raise HTTPException(
+                    status_code=409,
+                    detail="Your personal offer changed. Please refresh recommendations.",
+                ) from exc
         promotion_context = None
         if promotion:
             promotion_context = {
                 "discount_pct": promotion.get("discount_pct"),
                 "amount_off_vnd": promotion.get("amount_off_vnd"),
                 "sale_price": promotion.get("sale_price"),
-                "discount_label": promotion.get("display_text"),
-                "promotion_name": "Personal offer",
+                "discount_label": promotion.get("display_text") or promotion.get("discount_label"),
+                "promotion_name": promotion.get("promotion_name") or "Personal offer",
+                "urgency": promotion.get("urgency"),
             }
         item_price = float(candidate.get("price", 0.0) or 0.0)
         if index == 0:

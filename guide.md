@@ -37,6 +37,8 @@ Close the two customer-runtime review findings and the dependency gap without ch
 
 Commit Task 1 separately only after the full suite passes. Do not modify benchmark dates or generated persona data in this task.
 
+**Completion log (2026-07-11):** Completed. Focused customer, personalization, and offline browser-script tests passed; the final full suite passed 83 tests after the required code review.
+
 ## Task 2 — Repair Replay Fairness and Evidence
 
 ### Goal

@@ -3,6 +3,7 @@ import sqlite3
 import tempfile
 import unittest
 from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime, timezone
 
 from customer_store import (
     CustomerStore,
@@ -79,6 +80,93 @@ class TestCustomerStore(unittest.TestCase):
                 customer["id"], [{"name": "Pepsi", "quantity": 0}], CATALOG
             )
         self.assertEqual(len(self.store.list_completed_orders(customer["id"])), 2)
+
+    def test_only_current_unredeemed_personal_offer_can_be_redeemed(self):
+        customer = self.store.register_user("offers@example.test", "long-secret")
+        first_offer = {
+            "offer_id": "personal-first",
+            "target_item": "Pepsi",
+            "discount_pct": 10,
+            "amount_off_vnd": 1900,
+            "sale_price": 17100,
+            "display_text": "Save 1.900 VND",
+            "request_date": "2026-07-11",
+        }
+        second_offer = {
+            **first_offer,
+            "offer_id": "personal-second",
+            "target_item": "Burger Zinger",
+            "discount_pct": 20,
+            "amount_off_vnd": 17000,
+            "sale_price": 68000,
+            "display_text": "Save 17.000 VND",
+        }
+
+        first = self.store.issue_personal_offer(customer["id"], first_offer)
+        self.assertEqual(self.store.issue_personal_offer(customer["id"], first_offer), first)
+        second = self.store.issue_personal_offer(customer["id"], second_offer)
+        reactivated = self.store.issue_personal_offer(customer["id"], first_offer)
+        self.assertEqual(reactivated, first)
+
+        connection = sqlite3.connect(self.path)
+        try:
+            current_count = connection.execute(
+                """
+                SELECT COUNT(*) FROM customer_offers
+                WHERE user_id = ? AND redeemed_order_id IS NULL AND expires_at > ?
+                """,
+                (customer["id"], datetime.now(timezone.utc).isoformat()),
+            ).fetchone()[0]
+        finally:
+            connection.close()
+        self.assertEqual(current_count, 1)
+
+        with self.assertRaises(CustomerStoreError):
+            self.store.create_completed_order(
+                customer["id"], [{"name": second["target_item"], "quantity": 1}], CATALOG, offer_id=second["offer_id"]
+            )
+        redeemed = self.store.create_completed_order(
+            customer["id"], [{"name": first["target_item"], "quantity": 1}], CATALOG, offer_id=first["offer_id"]
+        )
+        self.assertEqual(redeemed["total_vnd"], first["sale_price"])
+
+    def test_concurrent_offer_contexts_leave_only_one_active_offer(self):
+        customer = self.store.register_user("concurrent-offers@example.test", "long-secret")
+        offers = [
+            {
+                "offer_id": "personal-concurrent-pepsi",
+                "target_item": "Pepsi",
+                "discount_pct": 10,
+                "amount_off_vnd": 1900,
+                "sale_price": 17100,
+                "display_text": "Save 1.900 VND",
+                "request_date": "2026-07-11",
+            },
+            {
+                "offer_id": "personal-concurrent-burger",
+                "target_item": "Burger Zinger",
+                "discount_pct": 20,
+                "amount_off_vnd": 17000,
+                "sale_price": 68000,
+                "display_text": "Save 17.000 VND",
+                "request_date": "2026-07-11",
+            },
+        ]
+        with ThreadPoolExecutor(max_workers=2) as executor:
+            list(executor.map(lambda offer: self.store.issue_personal_offer(customer["id"], offer), offers))
+
+        connection = sqlite3.connect(self.path)
+        try:
+            current_count = connection.execute(
+                """
+                SELECT COUNT(*) FROM customer_offers
+                WHERE user_id = ? AND redeemed_order_id IS NULL AND expires_at > ?
+                """,
+                (customer["id"], datetime.now(timezone.utc).isoformat()),
+            ).fetchone()[0]
+        finally:
+            connection.close()
+        self.assertEqual(current_count, 1)
 
 
 if __name__ == "__main__":

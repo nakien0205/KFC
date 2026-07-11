@@ -5,6 +5,7 @@ from unittest.mock import patch
 
 from fastapi.testclient import TestClient
 
+import main
 from main import app
 
 
@@ -113,6 +114,74 @@ class TestCustomerAPI(unittest.TestCase):
             ).status_code,
             400,
         )
+
+    def test_future_client_timestamp_uses_trusted_server_offer_date(self):
+        self._register()
+        for _ in range(3):
+            self._checkout()
+
+        with patch("main._customer_offer_date", return_value="2026-07-11"), patch(
+            "main.generate_recommendation_copy", return_value={"copy": "Test", "rationale": "Test"}
+        ):
+            response = self.client.post(
+                "/api/customer/recommend",
+                json={"cart_items": ["Burger Zinger"], "timestamp": "2036-12-31T12:00:00Z"},
+            )
+
+        self.assertEqual(response.status_code, 200)
+        offer = next(row["promotion"] for row in response.json() if row.get("promotion"))
+        self.assertEqual(offer["type"], "personal")
+        self.assertEqual(offer["request_date"], "2026-07-11")
+
+    def test_cold_start_preserves_global_promotion_without_personal_offer(self):
+        self._register()
+        promotion = {
+            "promo_id": "COLD_FRIES",
+            "name": "French Fries offer",
+            "discount_pct": 10,
+            "start_date": "2026-07-01",
+            "end_date": "2026-07-31",
+            "target_item": "French Fries",
+            "display_text": "Save 10% on French Fries",
+            "is_dynamic": 1,
+        }
+        with patch.object(main, "PROMOTIONS_LIST", [promotion]), patch(
+            "main.generate_recommendation_copy", return_value={"copy": "Test", "rationale": "Test"}
+        ):
+            response = self.client.post(
+                "/api/customer/recommend",
+                json={"cart_items": ["Burger Zinger"], "timestamp": "2026-07-06T12:00:00Z"},
+            )
+
+        self.assertEqual(response.status_code, 200)
+        global_row = next(row for row in response.json() if row.get("promotion"))
+        self.assertTrue(global_row["cold_start"])
+        self.assertEqual(global_row["promotion"]["type"], "global")
+        self.assertNotIn("offer_id", global_row["promotion"])
+        base_price = float(
+            main.MENU_ITEMS_DF.loc[main.MENU_ITEMS_DF["name"] == "French Fries", "price"].iloc[0]
+        )
+        self.assertLess(global_row["price"], base_price)
+        self.assertEqual(
+            self.client.get("/api/customer/orders").json()["orders"], [],
+        )
+
+    def test_concurrent_offer_change_returns_retryable_response(self):
+        self._register()
+        for _ in range(3):
+            self._checkout()
+        with patch.object(
+            main._active_customer_store(),
+            "issue_personal_offer",
+            side_effect=main.CustomerStoreError("Personal offer is no longer available."),
+        ), patch("main.generate_recommendation_copy", return_value={"copy": "Test", "rationale": "Test"}):
+            response = self.client.post(
+                "/api/customer/recommend",
+                json={"cart_items": ["Burger Zinger"], "timestamp": "2026-07-06T12:00:00Z"},
+            )
+
+        self.assertEqual(response.status_code, 409)
+        self.assertIn("refresh recommendations", response.json()["detail"].lower())
 
 
 if __name__ == "__main__":

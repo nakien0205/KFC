@@ -30,6 +30,15 @@ def _parse_timestamp_date(timestamp: Any) -> Optional[str]:
         return None
 
 
+def _parse_offer_date(offer_date: Any) -> Optional[str]:
+    if not isinstance(offer_date, str) or not offer_date.strip():
+        return None
+    try:
+        return datetime.fromisoformat(f"{offer_date.strip()}T00:00:00+00:00").date().isoformat()
+    except (TypeError, ValueError):
+        return None
+
+
 def _menu_records(menu_items: Any) -> List[Dict[str, Any]]:
     if isinstance(menu_items, list):
         source = menu_items
@@ -201,12 +210,14 @@ def customer_recommendations(
     menu_items: Any,
     affinity_rules: Iterable[Dict[str, Any]],
     customer_orders: Iterable[Dict[str, Any]],
+    active_promotions: Optional[Iterable[Dict[str, Any]]] = None,
+    offer_date: Optional[str] = None,
     limit: int = 5,
 ) -> List[Dict[str, Any]]:
     """Rank a cart using general affinity plus completed personal history only.
 
-    The customer path deliberately supplies no global promotions: its single offer is
-    created below from a stable per-customer hash instead of the kiosk sale calendar.
+    Cold-start customers retain the shared global promotion-aware hybrid result.
+    Mature customers instead receive one deterministic personal offer.
     """
     if not isinstance(cart_items, list) or not cart_items:
         return []
@@ -219,10 +230,11 @@ def customer_recommendations(
     prices = {item["name"]: item["price"] for item in menu_records}
     order_history = [order for order in customer_orders if isinstance(order, dict)]
     cold_start = completed_order_count(order_history) < MIN_COMPLETED_ORDERS
+    global_promotions = list(active_promotions or []) if cold_start else []
 
     general_candidates = rerank_recommendations(
         cart_items=normalised_cart,
-        active_promotions=[],
+        active_promotions=global_promotions,
         affinity_rules=list(affinity_rules or []),
         menu_items=menu_records,
         timestamp=timestamp,
@@ -236,10 +248,34 @@ def customer_recommendations(
         name = str(recommendation.get("name") or "").strip()
         if not name or name in cart_set or name not in prices:
             continue
+        global_promotion = None
+        promotion_keys = (
+            "promo_id",
+            "promotion_name",
+            "discount_pct",
+            "discount_label",
+            "amount_off_vnd",
+            "sale_price",
+            "urgency",
+        )
+        if cold_start and any(recommendation.get(key) is not None for key in promotion_keys):
+            global_promotion = {
+                "type": "global",
+                **{key: recommendation[key] for key in promotion_keys if recommendation.get(key) is not None},
+            }
+            global_promotion["display_text"] = (
+                str(global_promotion.get("discount_label") or global_promotion.get("promotion_name") or "Active promotion")
+            )
+        effective_price = recommendation.get("sale_price", prices[name])
+        try:
+            effective_price = float(effective_price)
+        except (TypeError, ValueError):
+            effective_price = float(prices[name])
         candidates[name] = {
             "name": name,
-            "price": prices[name],
+            "price": effective_price,
             "global_score": float(recommendation.get("score", 0.0) or 0.0),
+            "promotion": global_promotion,
         }
 
     # Once history is sufficient, let personal signals surface catalog items the
@@ -265,15 +301,16 @@ def customer_recommendations(
                 + _complement_score(name, category, normalised_cart, categories)
             )
         score = candidate["global_score"] + personal_score
-        results.append(
-            {
-                "name": name,
-                "price": float(candidate["price"]),
-                "score": round(score, 6),
-                "personalization_reason": _reason_for_candidate(name, profile, cold_start),
-                "cold_start": cold_start,
-            }
-        )
+        result = {
+            "name": name,
+            "price": float(candidate["price"]),
+            "score": round(score, 6),
+            "personalization_reason": _reason_for_candidate(name, profile, cold_start),
+            "cold_start": cold_start,
+        }
+        if candidate.get("promotion"):
+            result["promotion"] = candidate["promotion"]
+        results.append(result)
 
     results.sort(key=lambda item: (-item["score"], item["name"]))
     results = results[: max(0, int(limit))]
@@ -291,13 +328,13 @@ def customer_recommendations(
         None,
     )
     offer = None
-    if offer_index is not None:
+    if not cold_start and offer_index is not None:
         offer = build_personal_offer(
             user_identifier=user_identifier,
             customer_orders=order_history,
             cart_items=normalised_cart,
             candidate=results[offer_index],
-            request_date=_parse_timestamp_date(timestamp) or "",
+            request_date=_parse_offer_date(offer_date) or _parse_timestamp_date(timestamp) or "",
         )
     if offer and offer_index is not None:
         results[offer_index]["price"] = float(offer["sale_price"])

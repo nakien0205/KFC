@@ -5,4 +5,5 @@ requests
 pandas
 mlxtend
 scikit-learn
+numpy
 argon2-cffi

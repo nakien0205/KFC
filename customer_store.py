@@ -307,30 +307,73 @@ class CustomerStore:
 
         connection = self._connect()
         try:
+            connection.execute("BEGIN IMMEDIATE")
             issued_at = _utc_now()
+            issued_at_text = _as_utc_text(issued_at)
             expires_at = datetime.combine(
                 (issued_at + timedelta(days=1)).date(), datetime.min.time(), tzinfo=timezone.utc
             )
+            expires_at_text = _as_utc_text(expires_at)
+            existing = connection.execute(
+                "SELECT user_id, redeemed_order_id FROM customer_offers WHERE id = ?", (offer_id,)
+            ).fetchone()
+            if existing is not None and int(existing["user_id"]) != int(user_id):
+                raise CustomerStoreError("Personal offer is invalid.")
+            if existing is not None and existing["redeemed_order_id"] is not None:
+                raise CustomerStoreError("Personal offer is no longer available.")
+
+            # A different request context must not leave the previous offer redeemable.
             connection.execute(
                 """
-                INSERT OR IGNORE INTO customer_offers
-                    (id, user_id, target_item, discount_pct, amount_off_vnd, sale_price,
-                     display_text, request_date, expires_at, created_at)
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                UPDATE customer_offers
+                SET expires_at = ?
+                WHERE user_id = ? AND id != ? AND redeemed_order_id IS NULL AND expires_at > ?
                 """,
-                (
-                    offer_id,
-                    int(user_id),
-                    target_item,
-                    discount_pct,
-                    amount_off,
-                    sale_price,
-                    display_text,
-                    request_date,
-                    _as_utc_text(expires_at),
-                    _as_utc_text(issued_at),
-                ),
+                (issued_at_text, int(user_id), offer_id, issued_at_text),
             )
+            if existing is None:
+                connection.execute(
+                    """
+                    INSERT INTO customer_offers
+                        (id, user_id, target_item, discount_pct, amount_off_vnd, sale_price,
+                         display_text, request_date, expires_at, created_at)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (
+                        offer_id,
+                        int(user_id),
+                        target_item,
+                        discount_pct,
+                        amount_off,
+                        sale_price,
+                        display_text,
+                        request_date,
+                        expires_at_text,
+                        issued_at_text,
+                    ),
+                )
+            else:
+                # Re-activate the deterministic unredeemed offer if its context becomes current again.
+                connection.execute(
+                    """
+                    UPDATE customer_offers
+                    SET target_item = ?, discount_pct = ?, amount_off_vnd = ?, sale_price = ?,
+                        display_text = ?, request_date = ?, expires_at = ?, created_at = ?
+                    WHERE id = ? AND user_id = ? AND redeemed_order_id IS NULL
+                    """,
+                    (
+                        target_item,
+                        discount_pct,
+                        amount_off,
+                        sale_price,
+                        display_text,
+                        request_date,
+                        expires_at_text,
+                        issued_at_text,
+                        offer_id,
+                        int(user_id),
+                    ),
+                )
             row = connection.execute(
                 """
                 SELECT id, target_item, discount_pct, amount_off_vnd, sale_price,
@@ -338,8 +381,12 @@ class CustomerStore:
                 FROM customer_offers
                 WHERE id = ? AND user_id = ? AND redeemed_order_id IS NULL AND expires_at > ?
                 """,
-                (offer_id, int(user_id), _as_utc_text(_utc_now())),
+                (offer_id, int(user_id), issued_at_text),
             ).fetchone()
+            connection.commit()
+        except Exception:
+            connection.rollback()
+            raise
         finally:
             connection.close()
         if row is None:
