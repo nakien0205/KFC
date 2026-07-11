@@ -21,6 +21,9 @@ Generated: 2026-07-07
 - **Synthetic data generator:** [`generate_data.py`](../generate_data.py)
 - **Affinity miner:** [`affinity_engine.py`](../affinity_engine.py)
 - **Backtest harness:** [`backtest.py`](../backtest.py)
+- **Customer store:** [`customer_store.py`](../customer_store.py) - Isolated accounts, sessions, and completed orders.
+- **Customer personalization:** [`personalization.py`](../personalization.py) - History-aware ranking and complementary offers; issued offers are server-validated and redeemable once.
+- **Persona generator and replay:** [`generate_customer_personas.py`](../generate_customer_personas.py), [`personalization_backtest.py`](../personalization_backtest.py)
 - **Tests:** [`test_main.py`](../tests/test_main.py), [`test_recommender.py`](../tests/test_recommender.py), [`test_promo_engine.py`](../tests/test_promo_engine.py), [`test_bandit.py`](../tests/test_bandit.py), [`test_backtest.py`](../tests/test_backtest.py)
 
 ## Generated Documentation
@@ -51,6 +54,10 @@ KFC/
 |-- affinity_engine.py              # Association rule mining
 |-- init_db.py                      # SQLite database initialization
 |-- backtest.py                     # AOV uplift simulation
+|-- customer_store.py               # Customer accounts, sessions, and order history
+|-- personalization.py              # Customer-only ranking and personal offer logic
+|-- generate_customer_personas.py   # Deterministic repeat-customer fixture generator
+|-- personalization_backtest.py     # General versus personal synthetic AOV replay
 |-- static/                         # Plain frontend assets and served images
 |-- _bmad-output/data/              # SQLite DB and source CSV/JSON files
 |-- _bmad-output/specs/             # Product spec and stack context
@@ -73,6 +80,8 @@ Generate or refresh local data:
 python generate_data.py
 python affinity_engine.py
 python init_db.py
+python generate_customer_personas.py
+python personalization_backtest.py
 ```
 
 Run tests:
@@ -89,6 +98,8 @@ uvicorn main:app --reload
 
 Then open `http://127.0.0.1:8000/`.
 
+The kiosk remains at `/`. The authenticated customer experience is at `/customer`.
+
 ## Notes For Future Agents
 
 - Read [AGENTS.md](../AGENTS.md) before changing code.
@@ -96,3 +107,4 @@ Then open `http://127.0.0.1:8000/`.
 - Treat `_bmad-output/data/` as runtime data, not throwaway scratch files.
 - Preserve local fallback behavior for all LLM paths.
 - Dynamic promotions keep required fields plus optional targeting fields; accepted promoted recommendations use sale price in backtest AOV math.
+- Customer state is isolated in `_bmad-output/data/customer.db`; set `CUSTOMER_DB_PATH` for test or deployment overrides. It must never be rebuilt by `init_db.py`. Customer offers are issued and redeemed in that store, not trusted from a browser-supplied price.

@@ -4,18 +4,23 @@ from fastapi.testclient import TestClient
 import pandas as pd
 import os
 import json
+import tempfile
 
 from main import app
 
 class TestMainAPI(unittest.TestCase):
     def setUp(self):
         # Patch weights path to a temporary file so tests don't overwrite production weights
-        import tempfile
         import bandit
         self.temp_dir = tempfile.TemporaryDirectory()
         self.temp_weights_path = os.path.join(self.temp_dir.name, "temp_bandit_weights.json")
         self.weights_patcher = patch('bandit.WEIGHTS_PATH', self.temp_weights_path)
         self.weights_patcher.start()
+        self.customer_db_patcher = patch.dict(
+            os.environ,
+            {"CUSTOMER_DB_PATH": os.path.join(self.temp_dir.name, "customer.db")},
+        )
+        self.customer_db_patcher.start()
 
         # TestClient as context manager ensures lifespan startup and shutdown run
         self.client_context = TestClient(app)
@@ -23,6 +28,7 @@ class TestMainAPI(unittest.TestCase):
 
     def tearDown(self):
         self.client_context.__exit__(None, None, None)
+        self.customer_db_patcher.stop()
         self.weights_patcher.stop()
         self.temp_dir.cleanup()
 
@@ -206,9 +212,10 @@ class TestMainAPI(unittest.TestCase):
         self.assertIn("alpha_promo", data["updated_weights"])
 
 class TestMainSQLiteLoading(unittest.TestCase):
+    @patch('main.CustomerStore')
     @patch('sqlite3.connect')
     @patch('os.path.exists')
-    def test_lifespan_sqlite_loading_success(self, mock_exists, mock_connect):
+    def test_lifespan_sqlite_loading_success(self, mock_exists, mock_connect, mock_customer_store):
         def side_effect(path):
             if "kiosk.db" in path:
                 return True
@@ -250,9 +257,10 @@ class TestMainSQLiteLoading(unittest.TestCase):
                 self.assertEqual(main.AFFINITY_RULES[0]["antecedents"], ["SQLite Burger"])
                 self.assertEqual(main.AFFINITY_RULES[0]["consequents"], ["Pepsi"])
 
+    @patch('main.CustomerStore')
     @patch('sqlite3.connect')
     @patch('os.path.exists')
-    def test_lifespan_sqlite_loading_fallback(self, mock_exists, mock_connect):
+    def test_lifespan_sqlite_loading_fallback(self, mock_exists, mock_connect, mock_customer_store):
         def side_effect(path):
             if "kiosk.db" in path:
                 return True

@@ -70,11 +70,16 @@ The app serves the UI at `/` and static assets from `/static`.
 - If changing API response shapes, update `tests/test_main.py`, the static frontend, and this file.
 - `generate_data.py` imports `numpy`, but `requirements.txt` does not currently list it directly. Add it if you touch dependency setup.
 - SQLite is implemented as the primary local relational data store. `kiosk.db` holds `menu`, `promotions`, `orders`, and `affinity_rules` tables.
+- The customer site uses a separate `customer.db` (default `_bmad-output/data/customer.db`, override with `CUSTOMER_DB_PATH`) for users, hashed sessions, completed orders, and order items. Never add it to `init_db.py` or allow tests to use the default path.
+- Customer passwords must be Argon2id hashes; sessions must store only token hashes and be delivered in `HttpOnly`, `SameSite=Lax` cookies. Checkout prices and user IDs are always server-derived.
+- Customer personalization starts only after three completed orders. Its one complementary offer is deterministic per user/history/cart/date, excludes cart items, and uses the existing 5/10/15/20% discount tiers. Persist each issued offer server-side; checkout may redeem it once only for exactly one target item at the stored effective sale price.
+- Keep customer fixtures and personalization replay data separate from global `orders.csv`, `kiosk.db`, and `backtest.py` so the kiosk benchmark remains comparable.
 
 ## Frontend Rules
 
 - The frontend is plain HTML/CSS/JavaScript under `static/`; there is no package manager or build step.
 - Keep API calls aligned with `main.py`: `/api/menu`, `/api/recommend`, `/api/backtest`, and `/api/recommend/feedback`.
+- Customer assets live in `static/customer/` and call the customer-only API family. Do not add the kiosk backtest modal to the customer experience.
 - Do not move image assets or rename menu item images unless you also update generated menu data and frontend references.
 
 ## Reference

@@ -1,0 +1,22 @@
+{
+  "absolute_change": 15430.0,
+  "bandit_weights": {
+    "alpha_promo": 2.0,
+    "alpha_time": 1.5,
+    "beta_promo": 8.0,
+    "beta_time": 8.5
+  },
+  "benchmark": "synthetic held-out repeat-customer top-three replay",
+  "eligible_customer_count": 500,
+  "fixture_sha256": "2becd5fe861cf9a294253594ab0a693ec99a5e9e232175de8b1ce1b275b89286",
+  "general_hybrid_aov": 114676.0,
+  "general_promotion_treatment": "Current global promotion calendar",
+  "holdout_used_as_history": false,
+  "panel_size": 3,
+  "percentage_uplift": 13.46,
+  "persona_seed": 20260711,
+  "personalized_aov": 130106.0,
+  "personalized_promotion_treatment": "One server-validated personal offer replaces global daily promotions",
+  "skipped_customer_count": 0,
+  "timestamp_policy": "Each held-out order's completed_at timestamp"
+}

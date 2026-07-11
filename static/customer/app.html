@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>KFC | For you</title>
+  <link rel="stylesheet" href="/static/customer/customer.css">
+</head>
+<body class="customer-app">
+  <header class="customer-nav"><a class="brand" href="/customer/app">KFC</a><div class="account"><span id="customer-email"></span><button class="text-link" id="logout-button" type="button">Sign out</button></div></header>
+  <main class="order-shell">
+    <section class="menu-section"><p class="eyebrow">ORDER FOR YOU</p><h1>Today's menu</h1><div class="category-tabs" id="category-tabs"></div><div class="menu-grid" id="menu-grid"></div></section>
+    <aside class="side-panel">
+      <section class="panel-card"><h2>Your cart</h2><div id="cart-list" class="cart-list"></div><p class="cart-total">Total <strong id="cart-total">0 VND</strong></p><button class="button primary full" id="checkout-button" type="button" disabled>Save completed order</button><p class="status" id="checkout-status" aria-live="polite"></p></section>
+      <section class="panel-card"><h2>Recommended for you</h2><p class="recommendation-status" id="recommendation-status">Add items to your cart to see picks.</p><div id="recommendations" class="recommendations"></div></section>
+    </aside>
+  </main>
+  <script src="/static/customer/app.js"></script>
+</body>
+</html>

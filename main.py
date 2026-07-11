@@ -1,13 +1,14 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
-from pydantic import BaseModel
+from fastapi.responses import FileResponse, JSONResponse, RedirectResponse
+from pydantic import BaseModel, Field
 from typing import List, Optional
 import os
 import json
 import logging
 import pandas as pd
 from contextlib import asynccontextmanager
+from datetime import datetime, timezone
 
 from recommender import (
     rerank_recommendations,
@@ -15,6 +16,14 @@ from recommender import (
     generate_local_fallback
 )
 from bandit import update_bandit_weights
+from customer_store import (
+    CustomerStore,
+    CustomerStoreError,
+    DuplicateCustomerError,
+    InvalidCredentialsError,
+    resolve_customer_db_path,
+)
+from personalization import customer_recommendations
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -26,10 +35,12 @@ MENU_ITEMS_DF = pd.DataFrame(columns=['name', 'category', 'price'])
 MENU_PRICE_LOOKUP = {}
 PROMOTIONS_LIST = []
 AFFINITY_RULES = []
+CUSTOMER_STORE = None
+CUSTOMER_SESSION_COOKIE = "customer_session"
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    global MENU_ITEMS_DF, MENU_PRICE_LOOKUP, PROMOTIONS_LIST, AFFINITY_RULES
+    global MENU_ITEMS_DF, MENU_PRICE_LOOKUP, PROMOTIONS_LIST, AFFINITY_RULES, CUSTOMER_STORE
 
     # Resolve paths relative to the directory containing main.py
     base_dir = os.path.dirname(os.path.abspath(__file__))
@@ -40,6 +51,16 @@ async def lifespan(app: FastAPI):
     db_path = os.path.join(data_dir, "kiosk.db")
 
     logger.info("Initializing in-memory cache on startup...")
+
+    # The authenticated customer flow owns a separate database. It never enters
+    # the kiosk rebuild pipeline or changes the kiosk's runtime data contracts.
+    try:
+        CUSTOMER_STORE = CustomerStore(resolve_customer_db_path())
+        CUSTOMER_STORE.initialize()
+        logger.info("Initialized customer account store at %s.", CUSTOMER_STORE.db_path)
+    except Exception:
+        CUSTOMER_STORE = None
+        logger.exception("Failed to initialize the customer account store.")
 
     loaded_from_db = False
     if os.path.exists(db_path):
@@ -163,6 +184,77 @@ app.mount("/static", StaticFiles(directory=static_dir), name="static")
 def read_index():
     return FileResponse(os.path.join(static_dir, "index.html"))
 
+
+def _customer_cookie_options(request: Request):
+    return {
+        "httponly": True,
+        "samesite": "lax",
+        "secure": (
+            request.url.scheme == "https"
+            or os.environ.get("CUSTOMER_COOKIE_SECURE", "").strip().lower() in {"1", "true", "yes"}
+        ),
+        "path": "/",
+    }
+
+
+def _active_customer_store() -> CustomerStore:
+    if CUSTOMER_STORE is None:
+        raise HTTPException(status_code=503, detail="Customer accounts are temporarily unavailable.")
+    return CUSTOMER_STORE
+
+
+def _current_customer(request: Request):
+    token = request.cookies.get(CUSTOMER_SESSION_COOKIE)
+    customer = _active_customer_store().get_session_user(token)
+    if customer is None:
+        raise HTTPException(status_code=401, detail="Sign in to continue.")
+    return customer
+
+
+def _catalog_for_customer_checkout():
+    catalog = {}
+    for row in MENU_ITEMS_DF.to_dict(orient="records"):
+        name = str(row.get("name") or "").strip()
+        if not name:
+            continue
+        catalog[name] = {
+            "price": row.get("price"),
+            "category": row.get("category", ""),
+        }
+    return catalog
+
+
+def _set_customer_session(response: JSONResponse, request: Request, token: str, expires_at: str):
+    expires = datetime.fromisoformat(expires_at)
+    max_age = max(0, int((expires - datetime.now(timezone.utc)).total_seconds()))
+    response.set_cookie(
+        key=CUSTOMER_SESSION_COOKIE,
+        value=token,
+        max_age=max_age,
+        **_customer_cookie_options(request),
+    )
+
+
+@app.get("/customer")
+def read_customer_landing():
+    return FileResponse(os.path.join(static_dir, "customer", "index.html"))
+
+
+@app.get("/customer/login")
+def read_customer_login():
+    return FileResponse(os.path.join(static_dir, "customer", "login.html"))
+
+
+@app.get("/customer/app")
+def read_customer_app(request: Request):
+    try:
+        _current_customer(request)
+    except HTTPException as exc:
+        if exc.status_code == 401:
+            return RedirectResponse(url="/customer/login", status_code=303)
+        raise
+    return FileResponse(os.path.join(static_dir, "customer", "app.html"))
+
 @app.get("/api/menu")
 def get_menu():
     """Return cached menu items as a list of {name, category, price, image} objects."""
@@ -255,6 +347,155 @@ def recommend(request: RecommendRequest):
             rationale=copy_data.get("rationale", "")
         ))
 
+    return results
+
+
+class CustomerCredentialsRequest(BaseModel):
+    email: str
+    password: str
+
+
+class CustomerCheckoutLine(BaseModel):
+    name: str
+    quantity: int = Field(ge=1, le=99)
+
+
+class CustomerCheckoutRequest(BaseModel):
+    cart_items: List[CustomerCheckoutLine]
+    offer_id: Optional[str] = None
+
+
+class CustomerRecommendationResponse(RecommendationResponse):
+    personalization_reason: str
+    cold_start: bool
+    promotion: Optional[dict] = None
+
+
+@app.post("/api/customer/register")
+def register_customer(credentials: CustomerCredentialsRequest, http_request: Request):
+    store = _active_customer_store()
+    try:
+        customer = store.register_user(credentials.email, credentials.password)
+        token, expires_at = store.create_session(customer["id"], rotate_existing=True)
+    except DuplicateCustomerError as exc:
+        raise HTTPException(status_code=409, detail=str(exc)) from exc
+    except CustomerStoreError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    response = JSONResponse({"customer": customer})
+    _set_customer_session(response, http_request, token, expires_at)
+    return response
+
+
+@app.post("/api/customer/login")
+def login_customer(credentials: CustomerCredentialsRequest, http_request: Request):
+    store = _active_customer_store()
+    try:
+        customer = store.authenticate(credentials.email, credentials.password)
+        # Rotating revokes prior opaque tokens for this customer before setting a new one.
+        token, expires_at = store.create_session(customer["id"], rotate_existing=True)
+    except InvalidCredentialsError as exc:
+        raise HTTPException(status_code=401, detail="Invalid email or password.") from exc
+    response = JSONResponse({"customer": customer})
+    _set_customer_session(response, http_request, token, expires_at)
+    return response
+
+
+@app.post("/api/customer/logout", status_code=204)
+def logout_customer(request: Request):
+    _active_customer_store().revoke_session(request.cookies.get(CUSTOMER_SESSION_COOKIE))
+    response = Response(status_code=204)
+    response.delete_cookie(CUSTOMER_SESSION_COOKIE, path="/")
+    return response
+
+
+@app.get("/api/customer/session")
+def customer_session(request: Request):
+    return {"customer": _current_customer(request)}
+
+
+@app.get("/api/customer/orders")
+def customer_order_history(request: Request):
+    customer = _current_customer(request)
+    return {"orders": _active_customer_store().list_completed_orders(customer["id"])}
+
+
+@app.post("/api/customer/checkout")
+def customer_checkout(request: Request, checkout: CustomerCheckoutRequest):
+    customer = _current_customer(request)
+    cart_items = [
+        line.model_dump() if hasattr(line, "model_dump") else line.dict()
+        for line in checkout.cart_items
+    ]
+    try:
+        order = _active_customer_store().create_completed_order(
+            user_id=customer["id"],
+            cart_items=cart_items,
+            catalog=_catalog_for_customer_checkout(),
+            offer_id=checkout.offer_id,
+        )
+    except CustomerStoreError as exc:
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    return {"order": order}
+
+
+@app.post("/api/customer/recommend", response_model=List[CustomerRecommendationResponse])
+def customer_recommend(request: Request, recommendation_request: RecommendRequest):
+    customer = _current_customer(request)
+    # This edge contract intentionally mirrors /api/recommend and avoids copy/offers.
+    if not recommendation_request.cart_items or not recommendation_request.timestamp:
+        return []
+    store = _active_customer_store()
+    order_history = store.list_completed_orders(customer["id"])
+    candidates = customer_recommendations(
+        user_identifier=customer["id"],
+        cart_items=recommendation_request.cart_items,
+        timestamp=recommendation_request.timestamp,
+        menu_items=MENU_ITEMS_DF,
+        affinity_rules=AFFINITY_RULES,
+        customer_orders=order_history,
+        limit=5,
+    )
+    if not candidates:
+        return []
+
+    results = []
+    for index, candidate in enumerate(candidates):
+        promotion = candidate.get("promotion") if isinstance(candidate.get("promotion"), dict) else None
+        if promotion:
+            promotion = store.issue_personal_offer(customer["id"], promotion)
+        promotion_context = None
+        if promotion:
+            promotion_context = {
+                "discount_pct": promotion.get("discount_pct"),
+                "amount_off_vnd": promotion.get("amount_off_vnd"),
+                "sale_price": promotion.get("sale_price"),
+                "discount_label": promotion.get("display_text"),
+                "promotion_name": "Personal offer",
+            }
+        item_price = float(candidate.get("price", 0.0) or 0.0)
+        if index == 0:
+            copy_data = generate_recommendation_copy(
+                item_name=candidate["name"],
+                item_price=item_price,
+                cart_items=recommendation_request.cart_items,
+                promotion_context=promotion_context,
+            )
+            if not isinstance(copy_data, dict):
+                copy_data = generate_local_fallback(candidate["name"], item_price, promotion_context=promotion_context)
+        else:
+            copy_data = generate_local_fallback(candidate["name"], item_price, promotion_context=promotion_context)
+        results.append(
+            CustomerRecommendationResponse(
+                name=candidate["name"],
+                price=item_price,
+                score=float(candidate.get("score", 0.0) or 0.0),
+                copy=copy_data.get("copy", ""),
+                rationale=copy_data.get("rationale", ""),
+                personalization_reason=candidate.get("personalization_reason", ""),
+                cold_start=bool(candidate.get("cold_start")),
+                promotion=promotion,
+            )
+        )
     return results
 
 class BacktestResponse(BaseModel):
