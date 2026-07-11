@@ -4,17 +4,64 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>KFC | For you</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Geist+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/style.css">
   <link rel="stylesheet" href="/static/customer/customer.css">
 </head>
 <body class="customer-app">
-  <header class="customer-nav"><a class="brand" href="/customer/app">KFC</a><div class="account"><span id="customer-email"></span><a class="text-link" href="/">Kiosk demo</a><button class="text-link" id="logout-button" type="button">Sign out</button></div></header>
-  <main class="order-shell">
-    <section class="menu-section"><p class="eyebrow">ORDER FOR YOU</p><h1>Today's menu</h1><div class="category-tabs" id="category-tabs"></div><div class="menu-grid" id="menu-grid"></div></section>
-    <aside class="side-panel">
-      <section class="panel-card"><h2>Your cart</h2><div id="cart-list" class="cart-list"></div><p class="cart-total">Total <strong id="cart-total">0 VND</strong></p><button class="button primary full" id="checkout-button" type="button" disabled>Save completed order</button><p class="status" id="checkout-status" aria-live="polite"></p></section>
-      <section class="panel-card"><h2>Recommended for you</h2><p class="recommendation-status" id="recommendation-status">Add items to your cart to see picks.</p><div id="recommendations" class="recommendations"></div></section>
+  <div class="noise-overlay"></div>
+
+  <div class="kiosk-container customer-kiosk-container">
+    <aside class="sidebar" id="customer-left-sidebar">
+      <button class="sidebar-collapse-btn left-sidebar-toggle" id="customer-toggle-left-sidebar" type="button" aria-expanded="true" aria-label="Collapse menu sidebar" title="Collapse menu sidebar">&lt;</button>
+      <div class="brand-header">
+        <div class="brand-stripes" aria-hidden="true"><span></span><span></span><span></span></div>
+        <span class="brand-title">KFC For You</span>
+      </div>
+      <nav class="category-nav customer-category-nav" id="category-tabs" aria-label="Menu categories"></nav>
+      <div class="customer-sidebar-account">
+        <p class="customer-sidebar-label">Ordering as</p>
+        <p class="customer-email" id="customer-email"></p>
+        <a class="customer-sidebar-link" href="/">Kiosk demo <span aria-hidden="true">↗</span></a>
+        <button class="customer-sidebar-action" id="logout-button" type="button">Sign out</button>
+      </div>
     </aside>
-  </main>
+
+    <main class="main-content">
+      <header class="kiosk-header">
+        <div>
+          <h1 class="headline-title">Today’s menu</h1>
+          <p class="subtitle-text">Your favourites and personal offers are ready when you are.</p>
+        </div>
+      </header>
+      <section class="menu-grid" id="menu-grid" aria-live="polite"></section>
+    </main>
+
+    <aside class="checkout-sidebar" id="customer-right-sidebar">
+      <button class="sidebar-collapse-btn right-sidebar-toggle" id="customer-toggle-right-sidebar" type="button" aria-expanded="true" aria-label="Collapse cart sidebar" title="Collapse cart sidebar">&gt;</button>
+      <section class="double-bezel cart-container">
+        <div class="card-inner">
+          <h2 class="section-title">Your Cart</h2>
+          <div class="cart-items-list" id="cart-list"></div>
+          <div class="cart-totals">
+            <div class="totals-row"><span>Subtotal</span><span class="price-mono" id="cart-subtotal">0 VND</span></div>
+            <div class="totals-row bold"><span>Total</span><span class="price-mono" id="cart-total">0 VND</span></div>
+          </div>
+          <button class="btn-pill checkout-btn width-100 disabled" id="checkout-button" type="button" disabled>Save completed order <span class="icon-circle">↗</span></button>
+          <p class="customer-checkout-status" id="checkout-status" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section class="recommendations-wrapper">
+        <h2 class="section-title">Recommended For You</h2>
+        <p class="customer-recommendation-status" id="recommendation-status" aria-live="polite">Add items to your cart to see picks.</p>
+        <div class="bento-grid" id="recommendations"></div>
+      </section>
+    </aside>
+  </div>
+
   <script src="/static/customer/app.js"></script>
 </body>
 </html>

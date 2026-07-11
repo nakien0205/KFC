@@ -1237,3 +1237,61 @@ body {
         transition: none;
     }
 }
+
+/* Recommendation cards must own their rationale and action at every height. */
+.bento-tile {
+    min-width: 0;
+}
+
+.bento-tile .card-inner {
+    height: auto;
+}
+
+.tile-hero-layout {
+    grid-template-columns: minmax(0, 1fr) 92px;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+        "main aside"
+        "footer footer";
+    height: auto;
+    min-height: 0;
+    align-content: start;
+}
+
+.tile-hero-main {
+    grid-area: main;
+    min-width: 0;
+}
+
+.tile-hero-aside {
+    grid-area: aside;
+    align-self: start;
+}
+
+.tile-hero-layout .tile-footer {
+    grid-area: footer;
+    min-width: 0;
+    margin-top: .75rem;
+    padding-top: .75rem;
+    border-top: 1px solid var(--border-soft);
+    flex-wrap: wrap;
+}
+
+.tile-hero-layout .tile-rationale {
+    min-width: 0;
+    flex: 1 1 12rem;
+}
+
+.tile-hero-layout .add-to-cart-btn-mini {
+    flex: 0 0 auto;
+}
+
+@media (max-width: 768px) {
+    .tile-hero-layout {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "main"
+            "aside"
+            "footer";
+    }
+}

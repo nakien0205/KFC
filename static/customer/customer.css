@@ -1,2 +1,109 @@
-:root{--red:#e4002b;--ink:#1d1d1f;--paper:#f7f4ee;--line:#ded8ce;--muted:#716c64}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:var(--ink);background:var(--paper)}.customer-nav{height:72px;padding:0 clamp(24px,5vw,84px);display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(29,29,31,.1);background:#fff}.brand{font-weight:900;font-size:1.8rem;color:var(--red);text-decoration:none;letter-spacing:-.08em}.text-link,.switch-mode{color:var(--ink);background:transparent;border:0;font:inherit;text-decoration:underline;cursor:pointer}.customer-nav-actions{display:flex;align-items:center;gap:16px}.hero{min-height:calc(100vh - 72px);padding:clamp(80px,15vh,170px) clamp(24px,12vw,200px);background:radial-gradient(circle at 80% 10%,#ffd9df 0,transparent 27%),var(--paper)}.eyebrow{color:var(--red);font-size:.75rem;font-weight:800;letter-spacing:.16em;margin:0 0 14px}.hero h1,.auth-card h1,.menu-section h1{font-size:clamp(3rem,8vw,7.5rem);line-height:.9;letter-spacing:-.08em;margin:0}.hero h1 em{font-family:Georgia,serif;font-weight:400}.hero-copy{font-size:1.2rem;line-height:1.5;max-width:480px;margin:32px 0}.hero-actions{display:flex;gap:12px;flex-wrap:wrap}.button{display:inline-block;border:0;border-radius:999px;padding:14px 21px;text-decoration:none;font-weight:700;cursor:pointer;font-size:1rem}.primary{background:var(--red);color:#fff}.primary:disabled{background:#a9a4a0;cursor:not-allowed}.secondary{background:#fff;color:var(--ink);border:1px solid var(--ink)}.privacy-note{color:var(--muted);margin-top:40px;font-size:.85rem;max-width:440px}.auth-shell{display:grid;place-items:center;min-height:calc(100vh - 72px);padding:32px}.auth-card{width:min(100%,460px);background:#fff;border:1px solid var(--line);padding:clamp(28px,6vw,56px);box-shadow:10px 10px 0 #e8e0d5}.auth-card h1{font-size:3.2rem;margin-bottom:14px}.auth-card label{display:grid;gap:8px;font-size:.9rem;font-weight:700;margin-top:20px}.auth-card input{width:100%;border:1px solid var(--line);border-radius:8px;padding:13px;font:inherit}.full{width:100%;margin-top:24px}.switch-mode{display:block;margin:20px auto 0}.form-error,.status{color:#ad0020;min-height:1.2em;font-size:.9rem}.customer-app{background:#f5f3ef}.account{display:flex;gap:16px;align-items:center;font-size:.9rem}.order-shell{display:grid;grid-template-columns:minmax(0,1fr) minmax(320px,390px);gap:32px;padding:36px clamp(20px,5vw,84px)}.menu-section h1{font-size:3.7rem;margin-bottom:25px}.category-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:22px}.tab{background:#fff;border:1px solid var(--line);border-radius:999px;padding:8px 13px;cursor:pointer}.tab.active{background:var(--ink);color:#fff}.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:16px}.menu-card,.panel-card{background:#fff;border:1px solid var(--line);padding:18px}.menu-card h3{font-size:1rem;margin:0 0 16px}.menu-card p{color:var(--muted);margin:0 0 13px}.menu-card footer{display:flex;justify-content:space-between;align-items:center;gap:8px}.add{border:0;background:var(--ink);color:#fff;border-radius:999px;padding:8px 12px;cursor:pointer}.side-panel{display:grid;align-content:start;gap:18px}.panel-card h2{font-size:1.3rem;margin:0 0 16px}.cart-list{display:grid;gap:10px}.cart-row{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);padding-bottom:10px}.cart-row button{border:0;background:transparent;color:var(--red);cursor:pointer}.cart-total{display:flex;justify-content:space-between;font-size:1.1rem}.recommendation-status{color:var(--muted);font-size:.9rem}.recommendations{display:grid;gap:12px}.recommendation{border-left:4px solid var(--red);background:#f8f6f2;padding:12px}.recommendation h3,.recommendation p{margin:0 0 7px}.offer{color:var(--red);font-size:.85rem;font-weight:700}.reason{font-size:.83rem;color:var(--muted)}@media(max-width:850px){.order-shell{grid-template-columns:1fr}.side-panel{grid-row:1}.menu-section h1{font-size:3rem}}@media(max-width:480px){.account span{display:none}.customer-nav{padding:0 20px}.customer-nav-actions{gap:12px}.order-shell{padding:24px 16px}.menu-grid{grid-template-columns:repeat(2,1fr)}}
-.menu-image{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;margin:0 0 14px;background:#eee8df}.menu-image-fallback{display:grid;place-items:center;color:var(--muted);font-size:.8rem;text-align:center;padding:12px}
+/* Customer landing and authentication pages keep their own quiet treatment. */
+body.customer-landing,
+body.customer-auth {
+  margin: 0;
+  min-height: 100vh;
+  color: #1d1d1f;
+  background: #f7f4ee;
+  font-family: Arial, sans-serif;
+}
+
+.customer-landing *,
+.customer-auth * { box-sizing: border-box; }
+
+.customer-landing .customer-nav,
+.customer-auth .customer-nav {
+  height: 72px;
+  padding: 0 clamp(24px, 5vw, 84px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(29, 29, 31, .1);
+  background: #fff;
+}
+
+.customer-landing .brand,
+.customer-auth .brand {
+  color: #e4002b;
+  font-size: 1.8rem;
+  font-weight: 900;
+  letter-spacing: -.08em;
+  text-decoration: none;
+}
+
+.customer-landing .text-link,
+.customer-auth .text-link,
+.customer-auth .switch-mode {
+  color: #1d1d1f;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.customer-nav-actions { display: flex; align-items: center; gap: 16px; }
+
+.customer-landing .hero {
+  min-height: calc(100vh - 72px);
+  padding: clamp(80px, 15vh, 170px) clamp(24px, 12vw, 200px);
+  background: radial-gradient(circle at 80% 10%, #ffd9df 0, transparent 27%), #f7f4ee;
+}
+
+.eyebrow { margin: 0 0 14px; color: #e4002b; font-size: .75rem; font-weight: 800; letter-spacing: .16em; }
+.customer-landing .hero h1,
+.customer-auth .auth-card h1 { margin: 0; font-size: clamp(3rem, 8vw, 7.5rem); line-height: .9; letter-spacing: -.08em; }
+.customer-landing .hero h1 em { font-family: Georgia, serif; font-weight: 400; }
+.hero-copy { max-width: 480px; margin: 32px 0; font-size: 1.2rem; line-height: 1.5; }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.customer-landing .button,
+.customer-auth .button { display: inline-block; border: 0; border-radius: 999px; padding: 14px 21px; font-size: 1rem; font-weight: 700; text-decoration: none; cursor: pointer; }
+.customer-landing .primary,
+.customer-auth .primary { background: #e4002b; color: #fff; }
+.customer-auth .primary:disabled { background: #a9a4a0; cursor: not-allowed; }
+.customer-landing .secondary { border: 1px solid #1d1d1f; background: #fff; color: #1d1d1f; }
+.privacy-note { max-width: 440px; margin-top: 40px; color: #716c64; font-size: .85rem; }
+
+.auth-shell { display: grid; min-height: calc(100vh - 72px); padding: 32px; place-items: center; }
+.auth-card { width: min(100%, 460px); padding: clamp(28px, 6vw, 56px); border: 1px solid #ded8ce; background: #fff; box-shadow: 10px 10px 0 #e8e0d5; }
+.customer-auth .auth-card h1 { margin-bottom: 14px; font-size: 3.2rem; }
+.auth-card label { display: grid; gap: 8px; margin-top: 20px; font-size: .9rem; font-weight: 700; }
+.auth-card input { width: 100%; padding: 13px; border: 1px solid #ded8ce; border-radius: 8px; font: inherit; }
+.customer-auth .full { width: 100%; margin-top: 24px; }
+.customer-auth .switch-mode { display: block; margin: 20px auto 0; }
+.form-error { min-height: 1.2em; color: #ad0020; font-size: .9rem; }
+
+/* The signed-in customer page intentionally shares the kiosk shell and motion. */
+.customer-app .customer-sidebar-account { width: 100%; margin-top: auto; padding-top: 2rem; }
+.customer-app .customer-sidebar-label { margin: 0 0 .25rem; color: var(--typography-muted); font-size: .72rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.customer-app .customer-email { margin: 0 0 1rem; overflow-wrap: anywhere; font-size: .85rem; font-weight: 600; }
+.customer-app .customer-sidebar-link,
+.customer-app .customer-sidebar-action { display: flex; width: 100%; align-items: center; justify-content: space-between; padding: .65rem 0; border: 0; border-top: 1px solid var(--border-soft); background: transparent; color: var(--typography-black); font: inherit; font-size: .9rem; text-align: left; text-decoration: none; cursor: pointer; }
+.customer-app .customer-sidebar-action { border-bottom: 1px solid var(--border-soft); }
+.customer-app .customer-sidebar-link:hover,
+.customer-app .customer-sidebar-action:hover { color: var(--brand-red); }
+.customer-app .customer-category-nav .category-item { width: 100%; border: 0; background: transparent; font-family: inherit; text-align: left; cursor: pointer; }
+.customer-app .customer-category-nav .category-item.active { background-color: var(--brand-red); color: #fff; }
+.customer-app .menu-card-category { margin: .35rem 0 0; color: var(--typography-muted); font-size: .85rem; }
+.customer-app .menu-card .card-item-title { margin-bottom: 0; }
+.customer-app .card-image-wrapper .menu-image-fallback { display: grid; width: 100%; height: 100%; place-items: center; padding: 1rem; color: var(--typography-muted); font-size: .85rem; text-align: center; }
+.customer-app .customer-checkout-status { min-height: 1.2em; margin: .75rem 0 0; color: #ad0020; font-size: .85rem; line-height: 1.35; }
+.customer-app .customer-recommendation-status { margin: -0.5rem 0 1rem; color: var(--typography-muted); font-size: .85rem; line-height: 1.35; }
+.customer-app .customer-recommendation .card-inner { min-height: 0; }
+.customer-app .customer-recommendation .tile-copy { margin-bottom: .5rem; }
+.customer-app .customer-recommendation .offer { margin: 0 0 .75rem; color: var(--brand-red); font-size: .8rem; font-weight: 700; line-height: 1.35; }
+.customer-app .customer-recommendation .tile-rationale { margin: 0; }
+.customer-app .customer-recommendation .tile-footer { padding-top: .75rem; border-top: 1px solid var(--border-soft); }
+.customer-app .customer-recommendation .tile-footer .tile-rationale:only-child { max-width: 100%; }
+
+.customer-kiosk-container.left-sidebar-collapsed .customer-sidebar-account { display: none; }
+
+@media (max-width: 768px) {
+  .customer-app .customer-sidebar-account { display: none; }
+}
+
+@media (max-width: 480px) {
+  .customer-landing .customer-nav,
+  .customer-auth .customer-nav { padding: 0 20px; }
+  .customer-nav-actions { gap: 12px; }
+}

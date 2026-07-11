@@ -12,6 +12,7 @@
   var grid = document.getElementById('menu-grid');
   var tabs = document.getElementById('category-tabs');
   var cartList = document.getElementById('cart-list');
+  var subtotal = document.getElementById('cart-subtotal');
   var total = document.getElementById('cart-total');
   var checkout = document.getElementById('checkout-button');
   var status = document.getElementById('checkout-status');
@@ -35,7 +36,7 @@
   function renderTabs() {
     var categories = ['All'].concat(Array.from(new Set(menu.map(function (item) { return item.category; }))));
     tabs.innerHTML = categories.map(function (name) {
-      return '<button class="tab ' + (name === category ? 'active' : '') + '" data-category="' +
+      return '<button class="category-item ' + (name === category ? 'active' : '') + '" type="button" data-category="' +
         escapeText(name) + '">' + escapeText(name) + '</button>';
     }).join('');
     tabs.querySelectorAll('button').forEach(function (button) {
@@ -49,10 +50,12 @@
 
   function renderMenu() {
     var visible = category === 'All' ? menu : menu.filter(function (item) { return item.category === category; });
-    grid.innerHTML = visible.map(function (item) {
-      return '<article class="menu-card">' + menuImage(item) + '<h3>' + escapeText(item.name) + '</h3><p>' +
-        escapeText(item.category) + '</p><footer><strong>' + money(item.price) +
-        '</strong><button class="add" data-name="' + escapeText(item.name) + '">Add +</button></footer></article>';
+    grid.innerHTML = visible.map(function (item, index) {
+      return '<article class="double-bezel menu-card card-enter" style="animation-delay:' + (index * 40) + 'ms">' +
+        '<div class="card-inner">' + menuImage(item) + '<h3 class="card-item-title">' + escapeText(item.name) +
+        '</h3><p class="menu-card-category">' + escapeText(item.category) + '</p><div class="card-footer"><strong class="price-text">' +
+        money(item.price) + '</strong><button class="btn-pill add" type="button" data-name="' + escapeText(item.name) +
+        '">Add <span class="icon-circle">+</span></button></div></div></article>';
     }).join('');
     grid.querySelectorAll('.add').forEach(function (button) {
       button.addEventListener('click', function () {
@@ -76,11 +79,11 @@
     var image = typeof item.image === 'string' ? item.image.trim() : '';
     var itemName = escapeText(item.name);
     if (image) {
-      return '<img class="menu-image" src="/static/images/' + encodeURIComponent(image) +
-        '" alt="Photo of ' + itemName + '" data-item-name="' + itemName + '">';
+      return '<div class="card-image-wrapper"><img class="menu-image card-item-image" src="/static/images/' + encodeURIComponent(image) +
+        '" alt="Photo of ' + itemName + '" data-item-name="' + itemName + '"></div>';
     }
-    return '<div class="menu-image menu-image-fallback" role="img" aria-label="No image available for ' +
-      itemName + '">No image available</div>';
+    return '<div class="card-image-wrapper"><div class="menu-image menu-image-fallback" role="img" aria-label="No image available for ' +
+      itemName + '">No image available</div></div>';
   }
 
   function clearActiveOffer() {
@@ -130,23 +133,32 @@
   function renderCart() {
     validateActiveOffer();
     if (!cart.length) {
-      cartList.innerHTML = '<p class="recommendation-status">Your cart is empty.</p>';
+      cartList.innerHTML = '<div class="empty-cart-message">Your cart is empty. Select your favourite items to start!</div>';
+      subtotal.textContent = '0 VND';
       total.textContent = '0 VND';
-      checkout.disabled = true;
+      setCheckoutEnabled(false);
       return;
     }
     cartList.innerHTML = cart.map(function (item) {
-      return '<div class="cart-row"><span>' + escapeText(item.name) + ' × ' + item.quantity + '</span><span>' +
-        money(effectiveItemPrice(item) * item.quantity) + ' <button data-remove="' + escapeText(item.name) +
-        '" aria-label="Remove ' + escapeText(item.name) + '">×</button></span></div>';
+      return '<div class="cart-item-row card-enter"><div class="cart-item-info"><span class="cart-item-name">' +
+        escapeText(item.name) + '</span><span class="cart-item-qty badge">' + item.quantity + '</span></div><div class="cart-item-actions"><span class="price-mono cart-item-price">' +
+        money(effectiveItemPrice(item) * item.quantity) + '</span><button class="cart-remove-btn" type="button" data-remove="' + escapeText(item.name) +
+        '" aria-label="Remove ' + escapeText(item.name) + '">×</button></div></div>';
     }).join('');
     cartList.querySelectorAll('[data-remove]').forEach(function (button) {
       button.addEventListener('click', function () { remove(button.dataset.remove); });
     });
-    total.textContent = money(cart.reduce(function (sum, item) {
+    var cartTotal = money(cart.reduce(function (sum, item) {
       return sum + effectiveItemPrice(item) * item.quantity;
     }, 0));
-    checkout.disabled = false;
+    subtotal.textContent = cartTotal;
+    total.textContent = cartTotal;
+    setCheckoutEnabled(true);
+  }
+
+  function setCheckoutEnabled(enabled) {
+    checkout.disabled = !enabled;
+    if (checkout.classList) checkout.classList.toggle('disabled', !enabled);
   }
 
   function queueRecommendations() {
@@ -165,11 +177,13 @@
     recommendationStatus.textContent = rows[0].cold_start
       ? 'Cold start: complete three orders to unlock personal offers.'
       : 'Based on your completed orders.';
-    recommendations.innerHTML = rows.map(function (row) {
+    recommendations.innerHTML = rows.map(function (row, index) {
       var offer = '';
+      var action = '';
       if (row.promotion && row.promotion.type === 'personal') {
         offer = '<p class="offer">' + escapeText(row.promotion.display_text) + ' personal offer · ' +
-          money(row.promotion.sale_price) + '</p><button class="add apply-offer" data-offer-id="' +
+          money(row.promotion.sale_price) + '</p>';
+        action = '<button class="add-to-cart-btn-mini apply-offer" type="button" data-offer-id="' +
           escapeText(row.promotion.offer_id) + '" data-offer-target="' +
           escapeText(row.promotion.target_item) + '" data-offer-sale-price="' +
           escapeText(row.promotion.sale_price) + '">Add offer +</button>';
@@ -177,9 +191,12 @@
         offer = '<p class="offer">' + escapeText(row.promotion.display_text || 'Active promotion') + ' · ' +
           money(row.price) + '</p>';
       }
-      return '<article class="recommendation"><h3>' + escapeText(row.name) + '</h3><p>' +
-        escapeText(row.copy) + '</p>' + offer + '<p class="reason">' +
-        escapeText(row.personalization_reason) + '</p></article>';
+      var badge = index === 0 ? '<span class="badge badge-hero">⭐ TOP RECOMMENDATION</span>' : '<span class="badge">SUGGESTED</span>';
+      return '<article class="double-bezel bento-tile customer-recommendation ' + (index === 0 ? 'col-span-2' : '') + ' card-enter" style="animation-delay:' +
+        (index * 60) + 'ms"><div class="card-inner"><div class="tile-header">' + badge + '<span class="price-mono">' +
+        money(row.price) + '</span></div><h3 class="tile-item-title">' + escapeText(row.name) + '</h3><p class="tile-copy">' +
+        escapeText(row.copy) + '</p>' + offer + '<div class="tile-footer"><p class="tile-rationale">' +
+        escapeText(row.personalization_reason) + '</p>' + action + '</div></div></article>';
     }).join('');
     recommendations.querySelectorAll('.apply-offer').forEach(function (button) {
       button.addEventListener('click', function () {
@@ -249,7 +266,7 @@
 
   async function checkoutOrder() {
     status.textContent = '';
-    checkout.disabled = true;
+    setCheckoutEnabled(false);
     try {
       var response = await fetch('/api/customer/checkout', {
         method: 'POST',
@@ -271,7 +288,7 @@
     } catch (err) {
       status.style.color = '#ad0020';
       status.textContent = err.message || 'Unable to save order.';
-      checkout.disabled = false;
+      setCheckoutEnabled(true);
     }
   }
 
@@ -300,6 +317,28 @@
     location.assign('/customer');
   });
   checkout.addEventListener('click', checkoutOrder);
+  setupSidebarToggles();
+
+  function setupSidebarToggles() {
+    var container = document.querySelector ? document.querySelector('.customer-kiosk-container') : null;
+    var left = document.getElementById('customer-toggle-left-sidebar');
+    var right = document.getElementById('customer-toggle-right-sidebar');
+
+    function toggle(button, className, collapseLabel, expandLabel, collapseTitle, expandTitle) {
+      if (!button || !container) return;
+      button.addEventListener('click', function () {
+        var expanded = button.getAttribute('aria-expanded') !== 'true';
+        container.classList.toggle(className, !expanded);
+        button.textContent = expanded ? collapseLabel : expandLabel;
+        button.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+        button.setAttribute('aria-label', expanded ? collapseTitle : expandTitle);
+        button.setAttribute('title', expanded ? collapseTitle : expandTitle);
+      });
+    }
+
+    toggle(left, 'left-sidebar-collapsed', '<', '>', 'Collapse menu sidebar', 'Expand menu sidebar');
+    toggle(right, 'right-sidebar-collapsed', '>', '<', 'Collapse cart sidebar', 'Expand cart sidebar');
+  }
   if (window.__CUSTOMER_APP_TEST__) {
     window.__customerAppTestHooks = {
       add: add,
